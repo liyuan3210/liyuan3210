@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>地址解析</title>
+	<meta name="keywords" content="java,智能解析,地址智能解析,省市区智能解析" />
+    <meta name="description" content="地址智能解析">
+    <meta name="author" content="liyuan">
+    <script type="text/javascript" src="plugs/js/jquery-1.12.3.min.js"></script>
+    <script>
+        function loadData(){
+			var detail = $("#detail").val();
+			//alert('detail:'+detail.length);
+			if(detail.length>0){
+				$.ajax({
+					url: "https://proxy.liyuan3210.com:10802/adr/resolveAddress?address="+detail,
+					type:"POST",
+					dataType:"json",
+					timeout:10000,
+					success:function(data){
+						//alert('解析结果:'+data);
+						$("#province").html(data.data.province);
+						$("#city").html(data.data.city);
+						$("#county").html(data.data.county);
+						$("#name").html(data.data.name);
+						$("#phone").html(data.data.phone);
+						$("#detailAddress").html(data.data.detail);
+						//$("#result").append(JSON.stringify(data)+"<br />");
+						//console.log(JSON.stringify(data));
+					},
+					error:function(e){
+						$("#result").append(e.statusText+"<br />");
+					}
+				});
+			}else{
+				alert('请输入有效的地址信息.');
+			}
+        }
+        $(function(){
+            $("#host").append("origin:"+window.location.origin);
+        });
+    </script>
+</head>
+<body>
+<button onclick="loadData()">地址解析</button>
+<input id="detail"style="width:600px" />
+<div id="host" ></div>
+省:<span id="province" style="padding-left:30px;color:red"></span><br>
+市:<span id="city" style="padding-left:30px;color:red"></span><br>
+区:<span id="county" style="padding-left:30px;color:red"></span><br>
+姓名:<span id="name" style="padding-left:30px;color:red"></span><br>
+电话:<span id="phone" style="padding-left:30px;color:red"></span><br>
+详细:<span id="detailAddress" style="padding-left:30px;color:red"></span><br>
+<div id="result" style="height:200px;width:100%"></div>
+</body>
+</html>

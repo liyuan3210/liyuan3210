@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>cors test page</title>
+    <script type="text/javascript" src="../../../plugs/js/jquery-1.12.3.min.js"></script>
+    <script>
+        function loadData(){
+            $.ajax({
+                url: "https://proxy.liyuan3210.com:56369/api/queryList",
+                type:"POST",
+                dataType:"json",
+                timeout:10000,
+                success:function(data){
+                    $("#result").append(JSON.stringify(data)+"<br />");
+                    console.log(JSON.stringify(data));
+                },
+                error:function(e){
+                    $("#result").append(e.statusText+"<br />");
+                }
+            });
+        }
+        $(function(){
+            $("#host").append("origin:"+window.location.origin);
+        });
+    </script>
+</head>
+<body>
+<button onclick="loadData()">onclick</button>
+<div id="host"></div>
+<div id="result" style="height:200px;width:100%"></div>
+</body>
+</html>
