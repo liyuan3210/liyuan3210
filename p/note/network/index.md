@@ -4,11 +4,11 @@
 
 [1.ipv4寻址](ipv4-subNetwork.md)
 
-2.子网划分和超网（CIDR）,VLSM
+[2.子网划分和超网（CIDR）,VLSM](ipv4-subNetwork.md)
 
 3.dhcp , dns , 网关
 
-4.网络OSI七层参考及数据包请求过程
+[4.网络OSI七层参考及数据包请求过程](osi-proccess.md)
 
 5.防火墙（iptables）
 
