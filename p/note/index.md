@@ -1,4 +1,6 @@
 # 笔记首页
+## 一．技术栈
+
 [1.UI](ui/index.md) 前端
 
 [2.JAVA](java/index.md)java核心
@@ -15,7 +17,7 @@
 
 [HANDLE...](hardware/index.md)
 
-## 工具(官网下载/安装)
+## 二．工具(官网下载/安装)
 
 [vnote:](https://vnote.readthedocs.io)树形目录管理及编辑
 
