@@ -11,7 +11,7 @@
 
 [5.NETWORK](network/index.md)网络
 
-[6.DCS](dcs/index.md)分布式
+[6.DCS](dcs/index.md)大数据，分布式
 
 [7.HARDWARE](hardware/index.md)硬件
 
