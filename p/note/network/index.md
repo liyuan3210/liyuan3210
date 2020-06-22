@@ -2,7 +2,7 @@
 
 ## 一．基础知识
 
-1.ipv4寻址
+[1.ipv4寻址](ipv4-subNetwork.md)
 
 2.子网划分和超网（CIDR）,VLSM
 
