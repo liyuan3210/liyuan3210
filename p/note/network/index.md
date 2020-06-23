@@ -4,7 +4,7 @@
 
 [1.ipv4寻址与子网划分](ipv4-subNetwork.md)
 
-２.dhcp , dns , 网关
+2.dhcp , dns , 网关
 
 [3.网络OSI七层参考及数据包请求过程](osi-proccess.md)
 
@@ -12,7 +12,13 @@
 
 5.防火墙（iptables）
 
-课程：https://www.bilibili.com/video/av91392644?p=1
+​		课程：https://www.bilibili.com/video/av91392644?p=1
+
+## 二．方案实现
+
+1.LVS的DR模型搭建
+
+2.keepalived的LVS高可用搭建
 
 ## 课程
 
@@ -21,8 +27,6 @@
 https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html 
 
 https://v.qq.com/detail/6/60rnvzj96f8c5u3.html 
-
-
 
 windows server2012虚拟机克隆安装问题 
 
