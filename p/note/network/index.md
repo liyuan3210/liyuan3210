@@ -2,13 +2,13 @@
 
 ## 一．基础知识
 
-[1.ipv4寻址](ipv4-subNetwork.md)
+[1.ipv4寻址与子网划分](ipv4-subNetwork.md)
 
-[2.子网划分和超网（CIDR）,VLSM](ipv4-subNetwork.md)
+２.dhcp , dns , 网关
 
-3.dhcp , dns , 网关
+[3.网络OSI七层参考及数据包请求过程](osi-proccess.md)
 
-[4.网络OSI七层参考及数据包请求过程](osi-proccess.md)
+[4.LVS的DR,TUN,NAT模型推导](lvs-dr-tun-nat.md)
 
 5.防火墙（iptables）
 
