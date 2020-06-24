@@ -15,7 +15,7 @@
 
 [7.HARDWARE](hardware/index.md)硬件
 
-[HANDLE...](hardware/index.md)
+[8.HANDLE...](handle/index.md)常用的手册,助手
 
 ## 二．工具(官网下载/安装)
 
