@@ -27,7 +27,7 @@
 
 1.硬件,OS方案
 
-2.grub
+[2.grub](plan/grub.md)
 
 [3.android连调adb](plan/android-adb.md)
 
