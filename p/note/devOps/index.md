@@ -2,11 +2,11 @@
 
 ## 一．运维基础
 
-1.gitlab
-
 1.docker
 
-2.kubernetes
+[2.kubernetes](kubernetes/index.md)
+
+3.gitlab
 
 ## 二．方案
 
