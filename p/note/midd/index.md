@@ -2,7 +2,7 @@
 
 ## 一．部件列表
 
-[1.mysql](mysql/index.md)
+[1.db(mysql)](db/index.md)
 
 2.redis
 

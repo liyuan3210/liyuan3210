@@ -117,20 +117,18 @@ dpkg -l | grep ^rc| awk '{print $2}' | sudoxargsdpkg -P
     4. 配置数据库实例(配置文件)
        在解压后的support-files文件夹里面找到my-medium.cnf模板，基础上添加修改如下项目
        注意：如果要创建并同时启动mysql多个实例库，my-medium.cnf路径与名称不能相同
-       1.socket(修改)    = /tmp/mysql.sock：(如果要创建并同时启动mysql多个实例库，mysql.sock路径与名称也不能相同)
-       2.basedir=D:\\soft\\mysql-5.5.19-win32\\mysql-5.5.19-win32    (数据库跟目录，通常就是mysql的安装目录)
-       3.datadir=D:\\soft\\mysql-5.5.19-win32\\mysql-5.5.19-win32\\data （要创建新mysql库的地址，不同实例目录就不同）
-       4.port(修改)    = 3306    (要同时启动多个mysql实例，端口不能重复)
-       5.bind-address=0.0.0.0 ([mysqld]下面,支持远程登录)
-       6.修改字符编码为utf8
+       1>.socket(修改)    = /tmp/mysql.sock：(如果要创建并同时启动mysql多个实例库，mysql.sock路径与名称也不能相同)
+       2>.basedir=D:\\soft\\mysql-5.5.19-win32\\mysql-5.5.19-win32    (数据库跟目录，通常就是mysql的安装目录)
+       3>.datadir=D:\\soft\\mysql-5.5.19-win32\\mysql-5.5.19-win32\\data （要创建新mysql库的地址，不同实例目录就不同）
+       4>.port(修改)    = 3306    (要同时启动多个mysql实例，端口不能重复)
+       5>.bind-address=0.0.0.0 ([mysqld]下面,支持远程登录)
+       6>.修改字符编码为utf8
            [client] 
            default-character-set=utf8 
            [mysqld] 
            character-set-server=utf8
            [mysql] 
            default-character-set=utf8 
-    
-    
     5.初始化数据表(初始化,创建一个mysql数据库实例)
         必须先创建好mysql配置文件，与新mysql库实例的文件夹才能执行如下语句。
         cd进入解压后的mysql根目录（必须cd进入mysql这个相对路径）
