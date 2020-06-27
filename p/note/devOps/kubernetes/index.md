@@ -87,6 +87,6 @@ pod网络三种访问方式
 
 harbor（仓库）
 
-软路由安装：openwrt-koolshare + ssr插件（科学上网）：http://firmware.koolshare.cn/LEDE_X64_fw867/
+软路由安装：见network模块的软路由(openwrt-koolshare + ssr插件)
 
 https://www.bilibili.com/video/BV1w4411y7Go?p=11
