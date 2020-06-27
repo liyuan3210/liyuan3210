@@ -14,11 +14,21 @@
 
 ​		课程：https://www.bilibili.com/video/av91392644?p=1
 
-## 二．方案实现
+## 二．应用方案
 
-1.LVS的DR模型搭建
+[1.内网穿透（grok , frp）](plan/frp-ngrok.md)
 
-2.keepalived的LVS高可用搭建
+[2.vpn网络（openvpn ）](plan/vpn-openvpn.md)
+
+[3.vpn网络（pptpd）](plan/vpn-pptpd.md)
+
+[4.squid（服务器代理）](plan/squid.md)
+
+5.LVS的DR模型及搭建
+
+6.keepalived的LVS高可用搭建
+
+[7.软路由](plan/soft-route.md)
 
 ## 课程
 
@@ -35,15 +45,3 @@ sysprep(sid重新封装，双击sysprep，选择`通用`，点击`确定`)
 ## 问题
 
 [集线器，交换机，路由器区别](hub-switch-router.md)？？？
-
-## 二．应用方案
-
-[1.内网穿透（grok , frp）](plan/frp-ngrok.md)
-
-[2.vpn网络（openvpn ）](plan/vpn-openvpn.md)
-
-[3.vpn网络（pptpd）](plan/vpn-pptpd.md)
-
-[4.squid（服务器代理）](plan/squid.md)
-
-5.LVS的DR模型及搭建
