@@ -10,7 +10,7 @@
 
 [4.LVS的DR,TUN,NAT模型推导](lvs-dr-tun-nat.md)
 
-5.防火墙（iptables）
+[5.iptables（防火墙）](iptables.md)
 
 ​		课程：https://www.bilibili.com/video/av91392644?p=1
 
@@ -38,10 +38,12 @@ sysprep(sid重新封装，双击sysprep，选择`通用`，点击`确定`)
 
 ## 二．应用方案
 
-1.内网穿透（grok , frp）
+[1.内网穿透（grok , frp）](plan/frp-ngrok.md)
 
-2.vpn网络（openvpn , pptpd）
+[2.vpn网络（openvpn ）](plan/vpn-openvpn.md)
 
-3.squid（服务器代理）
+[3.vpn网络（pptpd）](plan/vpn-pptpd.md)
 
-4.LVS的DR模型及搭建
+[4.squid（服务器代理）](plan/squid.md)
+
+5.LVS的DR模型及搭建
