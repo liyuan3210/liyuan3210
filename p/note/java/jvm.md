@@ -78,7 +78,33 @@ nppd或ideal插件（有很多工具）
 
 在idea使用：选中class文件->view->show bytecode with jclasslab
 
+#### 2.5格式定义
+
+![](img/jvm-format-2.4.png)
+
+参考jvm官方文档.
+
+x86是基于寄存器的，jvm是基于栈的，不同的体系
+
+#### 2.6jvm汇编指令
+
+???
+
 ### 3.内存加载过程
+
+3.1类加载初始化
+
+![](img/jvm-3.1.png)
+
+3.2类加载器
+
+![](img/jvm-3.2.png)
+
+双亲委派，为了安全(防止自己定义覆盖java核心类型)
+
+3.3类加载器范围
+
+3.4自定义加载器
 
 
 
