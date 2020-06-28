@@ -8,10 +8,8 @@
 
 [3.内存加载过程](memory-load.md)
 
-4.jmm内存模型
+[4.jmm内存模型](jvm-jmm.md)
 
-5.运行时内存结构
+[5.运行时内存结构 / jvm常用指令](jvm-runtime.md)
 
-6.jvm常用指令
-
-7.jvm调优实战
+6.jvm调优实战
