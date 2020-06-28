@@ -15,6 +15,8 @@ initializing
 	调用静态代码块赋初始值
 ```
 
+＇T01_ClassLoadingProcedure＇
+
 ## 3.2类加载器
 
 ![](img/jvm-3.2.png)
@@ -40,7 +42,9 @@ com.liyuan3210.jvm.classloader.T03_ClassLoaderScope
 
 T05_LoadClassByHand
 
-T06_MSBClassLoader
+T06_MSBClassLoader	自定义加载
+
+T11_ClassReloading1，T12_ClassReloading2　自定义重新load(实现热部署)
 
 ## other:
 

@@ -2,7 +2,7 @@
 
 ## 一．基础知识
 
-[1.jvm](jvm.md)
+[1.jvm](jvm/index.md)
 
 2.多线程高并发
 
