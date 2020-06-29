@@ -16,6 +16,6 @@
 	1.telnet连接？
 	
 H2-3s
-http://www.chinadsl.net/forum.php?		mod=viewthread&tid=165314&ordertype=2
+http://www.chinadsl.net/forum.php?mod=viewthread&tid=165314&ordertype=2
 ```
 
