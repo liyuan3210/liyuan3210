@@ -12,4 +12,7 @@
 
 [5.运行时内存结构 / jvm常用指令](jvm-runtime.md)
 
-6.jvm调优实战
+[6.jvm调优实战-理论](gc-tuning-start.md)
+
+7.1jvm调优实战-1
+
