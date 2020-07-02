@@ -101,9 +101,11 @@ jstat -gc 动态观察gc情况 / 阅读GC日志发现频繁GC / arthas观察 / j
 
 3. java -Xms20M -Xmx20M -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError com.mashibing.jvm.gc.T15_FullGC_Problem01
 
-4. 使用MAT / jhat /jvisualvm 进行dump文件分析 https://www.cnblogs.com/baihuitestsoftware/articles/6406271.htmljhat -J-mx512M xxx.dump [http://192.168.17.11:7000](http://192.168.17.11:7000/) 拉到最后：找到对应链接 可以使用OQL查找特定问题对象
+4. 使用MAT / jhat /jvisualvm 进行dump文件分析 https://www.cnblogs.com/baihuitestsoftware/articles/6406271.html
 
-5. 找到代码的问题
+5. jhat -J-mx512M xxx.dump [http://192.168.17.11:7000](http://192.168.17.11:7000/) 拉到最后：找到对应链接 可以使用OQL查找特定问题对象
+
+6. 找到代码的问题
 
 ## 3.如何监控jvm（测试上线之前使用）
 
