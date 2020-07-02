@@ -1,5 +1,14 @@
 # gc垃圾回收理论
 
+
+
+示例源码：
+
+```
+https://github.com/liyuan3210/java/jvm
+com.liyuan3210.jvm.gc
+```
+
 除epsilon（调试） ，zgc，shenandoah之外的gc都是分代模型
 
 ⬇

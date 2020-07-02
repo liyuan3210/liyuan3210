@@ -14,5 +14,7 @@
 
 [6.jvm调优实战-理论](gc-tuning-start.md)
 
-7.1jvm调优实战-1
+[7.1jvm调优实战-1](gc-tuning-1.md)
+
+[7.2jvm调优实战-2](gc-tuning-2.md)
 

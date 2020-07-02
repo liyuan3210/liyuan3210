@@ -1,6 +1,6 @@
-# 1.gc调优
+# gc调优1
 
-试验用程序：
+## 一．jvm调优hello world
 
 ```java
 import java.util.List;
@@ -53,3 +53,22 @@ public class HelloGC {
 
 
 heap dump部分:
+
+## 二．jvm调优概念及目标
+
+### 调优前的基础概念：
+
+1. 吞吐量：用户代码时间 /（用户代码执行时间 + 垃圾回收时间）
+2. 响应时间：STW越短，响应时间越好
+
+所谓调优，首先确定，追求啥？吞吐量优先，还是响应时间优先？还是在满足一定的响应时间的情况下，要求达到多大的吞吐量...
+
+问题：
+
+科学计算，吞吐量。数据挖掘，thrput。吞吐量优先的一般：（PS + PO）
+
+响应时间：网站 GUI API （1.8 G1）
+
+### 设定日志参数:
+
+java -Xloggc:/opt/xxx/logs/xxx-xxx-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCCause HelloGC
