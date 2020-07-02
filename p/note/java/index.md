@@ -1,5 +1,7 @@
 # java介绍
 
+## [环境安装](env/index.md)
+
 ## 一．基础知识
 
 [1.jvm](jvm/index.md)
