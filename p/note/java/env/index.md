@@ -83,6 +83,26 @@ https://www.jetbrains.com/idea/
 https://blog.csdn.net/flyingdream123/article/details/77622421/
 https://jingyan.baidu.com/article/afd8f4debd60f434e286e91f.html
 ```
+## 四.git
+
+linux install:
+
+```
+ubuntu:
+sudo apt-get install git
+centos:
+sudo yum install git
+```
+
+windows install:
+
+```
+https://gitforwindows.org(https://git-for-windows.github.io)
+或
+https://git-scm.com
+下载
+```
+
 ## [other](other.md)
 
 ```
