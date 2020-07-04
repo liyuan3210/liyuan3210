@@ -14,7 +14,7 @@ com.liyuan3210.juc.c00
 
 com.liyuan3210.juc.c01
 
-synchronized的底层实现:
+synchronized锁升级过程:
 
 ```
 JDK早期的 重量级 - OS
@@ -23,7 +23,7 @@ JDK早期的 重量级 - OS
     （文章）我就是厕所所长 （一 二）
 
 sync (Object)
-
+锁四种状态升级
 只有一个线程markword记录这个线程ID （偏向锁）
 如果线程争用：升级为 （自旋锁）
 10次以后：升级为（重量锁） - 向OS申请资源
@@ -39,9 +39,11 @@ sync (Object)
 ```
 线程可见性
 指令重排序
+
+volatile尽量修饰简单类型值，不要修饰Object（成员变量改变观察不到）引用值
 ```
 
-## 4.AtomicXXX实现CAS:
+## 4.AtomicXXX(底层实现CAS):
 
 代码:com.liyuan3210.juc.c01.T15.T01_AtomicInteger
 
@@ -62,7 +64,7 @@ object对象指向引用发生改变（需要加version号来解决）
 
 ```
 
-Unsafe(cas实现)
+## 5.CAS(底层实现Unsafe)
 
 代码:com.liyuan3210.juc.c01.T15.HelloUnsafe
 
@@ -73,7 +75,7 @@ Unsafe(cas实现)
 CAS相关操作
 ```
 
-AtomicLong,synchronized,LongAdder对比
+## AtomicLong,synchronized,LongAdder对比
 
 代码：com.liyuan3210.juc.c01.T15.T02_AtomicVsSyncVsLongAdder
 

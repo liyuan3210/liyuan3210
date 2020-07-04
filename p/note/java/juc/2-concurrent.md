@@ -51,3 +51,8 @@ AQS就是CAS???
 ```
 
 ## 7.Exchanger（只能两个线程数据交换，线程通信，多个线程???）
+
+## 8.LockSupport（park停止线程，unpark退出线程）
+
+unsafe方法实现
+
