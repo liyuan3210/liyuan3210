@@ -28,8 +28,6 @@ AQS就是CAS???
 实际限流会用Guava RateLimiter
 ```
 
-
-
 ## 4.Phaser（分阶段并发）
 
 
@@ -55,4 +53,10 @@ AQS就是CAS???
 ## 8.LockSupport（park停止线程，unpark退出线程）
 
 unsafe方法实现
+
+## 9.上面同步工具实现原理(底层实现AQS[AbstractQueuedSynchronizer])
+
+底层AQS实现原理CAS
+
+
 

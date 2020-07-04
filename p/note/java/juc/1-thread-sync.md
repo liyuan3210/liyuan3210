@@ -49,12 +49,12 @@ volatile尽量修饰简单类型值，不要修饰Object（成员变量改变观
 
 ```
 AtomicXXX实现原理CAS(无锁优化，自旋锁)
-.Compare and Set
-.cas(V，Expected,NewValue)
-if V==E
-V=New
-otherwise try again or fail
-CPU原语支持
+.Compare and Set 比较和设置
+.cas(V，Expected,NewValue) 要改的值，期望值，新值
+if V（要改的值）==E（期望值）
+V=New 相等设置新值
+otherwise try again or fail	//否则再次尝试
+CPU原语支持			//cas底层unsafe
 ．ABA问题
 A 1.0
 B 2.0
