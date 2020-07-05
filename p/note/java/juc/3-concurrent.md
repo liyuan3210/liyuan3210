@@ -43,11 +43,9 @@ Callback Function
 普通属性原子操作，比反射快，直接操作二进制码
 ```
 
-3.3TheadLocal
+## 4.RefType And TheadLocal
 
-3.4WeakReference
-
-java引用有四种，强软弱虚
+java四种‘强软弱虚’引用
 
 ```
 强引用：值为null后内存会进行回收（一般new出来的都是强引用）
