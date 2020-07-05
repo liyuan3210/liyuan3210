@@ -18,3 +18,5 @@
 
 [7.2jvm调优实战-2](gc-tuning-2.md)
 
+[8.G1介绍，三色标记算法](gc-tuning-3.md)
+

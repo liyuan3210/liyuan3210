@@ -55,7 +55,7 @@ G1逻辑分代，物理不分
 
 3.parNew + cms	(可以搭配调整，不打段应用并行回收，但问题较多)
 
-浮动垃圾过会出发stw,切换成serial old(等待时间会非常慢)浮动垃圾
+浮动垃圾过多会触发stw,切换成serial old(等待时间会非常慢)浮动垃圾
 
 ![](img/jvm-cms-thread.png)
 
