@@ -45,7 +45,7 @@ Callback Function
 
 ## 4.RefType And TheadLocal
 
-java四种‘强软弱虚’引用
+java四种引用‘强软弱虚’
 
 ```
 强引用：值为null后内存会进行回收（一般new出来的都是强引用）

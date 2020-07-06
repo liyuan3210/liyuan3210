@@ -1,4 +1,4 @@
-# 四.容器Queue
+# 四.Collection,Map并发容器
 
 ![](img/collection-map.jpeg)
 
@@ -48,7 +48,7 @@ CopyOnWriteList		写时候加索，读的时候不加索。使用在写少读多
 Queue
 	CocurrentLinkedQueue 	//concurrentArrayQueue,内部加锁队列,offer(添加结果返回值表示),add(不成功会报异常) | poll（取出值并移除），peek（只取出）
 	BlockingQueue			//阻塞队列
-		LinkedBQ	//无界队列 put(内存满了就阻塞)，take（为空就阻塞）
+		LinkedBQ	//无界队列 put(满了就阻塞)，take（为空就阻塞）
 		ArrayBQ		//有界队列	put(满了就阻塞)，
 		TransferQueue	//transfer('data')是阻塞（确认数据已取走），另一个线程take后才往下走，多个生产对应多个消费线程基于SynchronusQueue
 		SynchronusQueue	 //同步数据交换，put阻塞，消费线程take后才往下走，1对1线程
@@ -87,4 +87,3 @@ BlockingQueue 阻塞队列
 
 ```
 
-## 
