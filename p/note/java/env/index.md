@@ -51,6 +51,9 @@ groovy helloworld.groovy
 
 3.实例功能概要
 https://www.jianshu.com/p/e8dec95c4326
+
+idea执行groovy方法
+Tools -> groovy console
 ```
 
 
@@ -58,11 +61,54 @@ https://www.jianshu.com/p/e8dec95c4326
 
 ## maven:
 
-http://maven.apache.org/ 	见->maven.txt
+### 1.安装配置
+
+	前提:
+		安装jdk,并配置JAVA_HOME环境变量
+	1.官网:http://maven.apache.org
+	2.下载并解压:apache-maven-xxx-bin.zip
+	3.环境变量配置
+		M2_HOME:D:\soft\apache-maven-3.5.0
+		PATH:%M2_HOME%\bin
+	4.验证安装:mvn -v
+[1>.maven常用操作](maven.md)
+
+[2>.上传jar至本地/中央仓库](maven-upload-center.md)
+
+[3>.私服创建](maven-server.md)
 
 ## gradle:
 
-https://gradle.org/ 		见->gradle.txt
+### 1.gradle安装配置
+
+官网 ：https://gradle.org
+
+下载二进制包：https://services.gradle.org/distributions/gradle-6.5.1-bin.zip
+
+解压并配置环境变量：
+
+> GRADLE_HOME=D:\soft\dev\gradle-5.6.3 	
+>
+> PATH=%GRADLE_HOME%\bin
+
+使用本地maven仓库(非必)
+
+>环境变量配置：GRADLE_USER_HOME=D:\soft\dev\mvnRepo
+>
+>项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库mavenCentral() 找) 	
+>
+>	repositories {
+>		mavenLocal()
+>		mavenCentral() 	
+>	}
+
+
+
+验证安装：
+
+> gradle -v
+
+[1>.gradle使用](gradle.md)
 
 ## 三.IDE
 
