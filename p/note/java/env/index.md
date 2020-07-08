@@ -1,21 +1,19 @@
 # 环境安装
 
-## 一.jdk
+## 一.jdk安装
 
-```
+### 1.oracle jdk
+
 oracle jdk收费,openjdk免费
 oracle jdk 与 openjdk从11后保持一致
 oracle jdk 8(2019年1月以后jdk8需要购买许可)后面版本需要购买许可,(JDK 8 u201 和 JDK 8 u202 仍可免费使用)
 openjdk 免费版本(6个月更新一个版本)
 
-下载官网:https://www.oracle.com/
+```
+官网:https://www.oracle.com/
 	添加:JAVA_HOME=D:\soft\java\jdk8
 	编辑:Path=;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin
 	添加:CLASSPATH=.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
-	
-openjdk(开源免费):
-	http://openjdk.java.net/
-	https://blog.csdn.net/lanwp5302/article/details/86612197
 	
 jdk9后的安装(不需要配置CLASSPATH与rt.jar,tools.jar)
 	https://github.com/msbbigdata/javase/blob/master/note/JDK12的安装搭建.md
@@ -23,45 +21,38 @@ jdk9后的安装(不需要配置CLASSPATH与rt.jar,tools.jar)
 	bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
 ```
 
-### groovy语言:
+### 2.open jdk
 
 ```
-官网:
-http://www.groovy-lang.org
+openjdk(开源免费):
+	官网:https://www.oracle.com
+	主页:http://openjdk.java.net
+	https://blog.csdn.net/lanwp5302/article/details/86612197
+```
 
-1>.安装配置jdk(解压安装)
-groovy是基于jdk的,所以要先安装配置好jdk
-配置JAVA_HOME
-配置path
+### 3.groovy语言
 
-2>.安装配置groovy(解压安装)
-下载
-https://groovy.apache.org/download.html
-http://www.groovy-lang.org/download.html
-配置GROOVY_HOME
-配置path
+```
+官网: http://www.groovy-lang.org
+前提:
+	安装配置好jdk
+	groovy是基于jdk的,所以要先安装配置好jdk
+	配置好JAVA_HOME,path环境变量
+	
+1>.下载并解压apache-groovy-sdk-3.0.4.zip
+配置GROOVY_HOME,path
 
-3>.编写运行hello word程序
-新建helloworld.groovy文件,内容如下
-def name='World'; println "Hello $name!"
+2>验证
+groovy　-v
 
-控制台运行
-groovy helloworld.groovy
-groovy helloworld.groovy
-
-3.实例功能概要
-https://www.jianshu.com/p/e8dec95c4326
-
-idea执行groovy方法
-Tools -> groovy console
+问题：
+apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？？
 ```
 
 
 ## 二.BuildTools
 
-## maven:
-
-### 1.安装配置
+### 1.maven
 
 	前提:
 		安装jdk,并配置JAVA_HOME环境变量
@@ -71,15 +62,13 @@ Tools -> groovy console
 		M2_HOME:D:\soft\apache-maven-3.5.0
 		PATH:%M2_HOME%\bin
 	4.验证安装:mvn -v
-[1>.maven常用操作](maven.md)
+[maven常用操作](maven.md)
 
-[2>.上传jar至本地/中央仓库](maven-upload-center.md)
+[上传jar至本地/中央仓库](maven-upload-center.md)
 
-[3>.私服创建](maven-server.md)
+[私服创建](maven-server.md)
 
-## gradle:
-
-### 1.gradle安装配置
+### 2.gradle
 
 官网 ：https://gradle.org
 
@@ -108,11 +97,11 @@ Tools -> groovy console
 
 > gradle -v
 
-[1>.gradle使用](gradle.md)
+[gradle使用](gradle.md)
 
 ## 三.IDE
 
-### eclipse:
+### 1.eclipse
 
 https://www.eclipse.org/
 
@@ -121,7 +110,7 @@ Eclipse IDE for Java EE Developers : java web开发
 Eclipse IDE for C/C++ Developers : c/c++ gcc环境
 ```
 
-### idea:
+### 2.idea
 
 https://www.jetbrains.com/idea/
 
@@ -131,7 +120,7 @@ https://jingyan.baidu.com/article/afd8f4debd60f434e286e91f.html
 ```
 ## 四.git
 
-linux install:
+### 1.linux install
 
 ```
 ubuntu:
@@ -140,7 +129,7 @@ centos:
 sudo yum install git
 ```
 
-windows install:
+### 2.windows install
 
 ```
 https://gitforwindows.org(https://git-for-windows.github.io)
