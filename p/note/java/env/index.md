@@ -80,6 +80,12 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 >
 > PATH=%GRADLE_HOME%\bin
 
+GRADLE_HOME=/home/liyuan/soft/gradle-6.5.1
+
+GRADLE_USER_HOME=/home/liyuan/soft/gradleRepo
+
+PATH=$GRADLE_HOME/bin
+
 使用本地maven仓库(非必)
 
 >环境变量配置：GRADLE_USER_HOME=D:\soft\dev\mvnRepo

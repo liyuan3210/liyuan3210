@@ -1,5 +1,9 @@
 # gradle使用
 
+gradle视频教程 	
+
+https://www.bilibili.com/video/av31574438/?p=1
+
 ## 一．gradle安装
 
 官网 ：https://gradle.org
