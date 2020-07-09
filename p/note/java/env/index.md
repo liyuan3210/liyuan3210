@@ -80,21 +80,18 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 >
 > PATH=%GRADLE_HOME%\bin
 
-GRADLE_HOME=/home/liyuan/soft/gradle-6.5.1
+使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录),
 
-GRADLE_USER_HOME=/home/liyuan/soft/gradleRepo
+环境变量配置(非必)：
 
-PATH=$GRADLE_HOME/bin
-
-使用本地maven仓库(非必)
-
->环境变量配置：GRADLE_USER_HOME=D:\soft\dev\mvnRepo
+>GRADLE_USER_HOME=D:\soft\dev\mvnRepo
 >
 >项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库mavenCentral() 找) 	
 >
 >	repositories {
 >		mavenLocal()
->		mavenCentral() 	
+>		maven { url'http://maven.aliyun.com/nexus/content/groups/public/' }	//阿里仓库代理
+>		jcenter()
 >	}
 
 

@@ -4,58 +4,29 @@ gradle视频教程
 
 https://www.bilibili.com/video/av31574438/?p=1
 
-## 一．gradle安装
-
-官网 ：https://gradle.org
-
-下载二进制包：https://services.gradle.org/distributions/gradle-6.5.1-bin.zip
-
-解压并配置环境变量：
-
-> GRADLE_HOME=D:\soft\dev\gradle-5.6.3 	
->
-> PATH=%GRADLE_HOME%\bin
-
-使用本地maven仓库(非必)
-
->环境变量配置：GRADLE_USER_HOME=D:\soft\dev\mvnRepo
->
->项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库mavenCentral() 找) 	
->
->	repositories {
->		mavenLocal()
->		mavenCentral() 	
->	}
-
-
-
-验证安装：
-
-> gradle -v
-
 ## 二．配置介绍
 
-1.默认安装本地jar缓存目录在当前用户目录.gradle下
+1.配置阿里代理
 
-2 .项目构建文件build.gradle
+repositories {
+	mavenLocal()
+	maven { url'http://maven.aliyun.com/nexus/content/groups/public/' }
+	jcenter()
+}
+
+2 .哪些项目文件不能删除(提交git)
+
+```
+src					//源码
+build.gradle		//项目依赖配置
+settings.gradle		//全局配置
+```
 
 3.全局配置类似setting.xml
 
->环境变量配置：GRADLE_USER_HOME=D:\soft\dev\mvnRepo
->
->项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库找) 	
->
->	repositories {
->		mavenLocal()
-> 		mavenCentral() 	
->	}
-> 
+> ???
 
-4.全局配置类似setting.xml
-
-???
-
-## 三.创建聚合项目
+## 二.创建聚合项目
 
 1.idea创建web项目
 
@@ -71,10 +42,26 @@ https://www.bilibili.com/video/av31574438/?p=1
 
 http://ddrv.cn/a/263902
 
-## 四.使用命令创建项目
+## 四.常用命令
 
-https://www.cnblogs.com/xingyunblog/p/10428178.html  
+### 1.使用命令创建项目
 
 gradle init 	
 
+https://www.cnblogs.com/xingyunblog/p/10428178.html  
+
 配置 https://www.cnblogs.com/doublegi/p/5956575.html
+
+### 2.使用命令清理，打包项目
+
+gradle clean build	//清理并打包
+
+gradle build -x test	//跳过测试 
+
+## 问题
+
+1.图解idea不能新建JavaClass和Package解决办法(要选中java目录才行)
+
+https://blog.csdn.net/qq_36838191/article/details/80918200
+
+https://www.jb51.net/article/142791.htm
