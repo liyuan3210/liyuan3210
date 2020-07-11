@@ -1,9 +1,27 @@
 # english
 
-资源:
+## 资源:
 
 http://www.tingroom.com/
 
-blibli
+## blibli零基础语法入门50课
 
 https://www.bilibili.com/video/BV1Rs411b7pk?from=search&seid=18004709688712620455
+
+## app背单词工具
+
+https://www.zhihu.com/question/20108974/answer/956684763?utm_source=wechat_session
+
+@有道背单词
+
+## 四六级托福雅思区别？
+
+https://baijiahao.baidu.com/s?id=1650899912471893925&wfr=spider&for=pc
+
+@托福9K+单词量
+
+## 一.语法及基础
+
+
+
+## 二.单词量
