@@ -20,8 +20,18 @@ https://baijiahao.baidu.com/s?id=1650899912471893925&wfr=spider&for=pc
 
 @托福9K+单词量
 
+## 资源地址
+
+1.http://www.duolingo.cn/　多邻国 
+
+2.https://www.ted.com/	演讲
+
 ## 一.语法及基础
 
-
+grammar
 
 ## 二.单词量
+
+word
+
+## 三．try see docment and listen short viod
