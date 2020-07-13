@@ -14,7 +14,7 @@
 
 [5.spring](spring/index.md)
 
-6.netty
+[6.netty](netty/index.md)
 
 ## 二．系统方案
 
