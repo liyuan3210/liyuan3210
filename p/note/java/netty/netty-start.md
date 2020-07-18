@@ -26,9 +26,9 @@ https://blog.csdn.net/KingCat666/article/details/77685608
 ２）用户自定义定时任务
 ３）非当前Reactor线程调用Channel各种方法？？？
 
-#### 4.4异步FutureListener机制
+#### 4.异步FutureListener机制
 
-## 4.5服务程序http入门（过滤指定资源）
+## 5.服务程序http入门（过滤指定资源）
 
 浏览器每一次请求刷新产生不同的pipeline
 
@@ -39,4 +39,26 @@ ch.pipeline().addFirst(new XXXHandler());
 ```
 
 pipeline 和　channelPipeline???
+
+EventLoop组件
+
+### 6.unpooled类buffer使用???
+
+### 7.群聊系统实现.(思考点对点私聊实现???)
+
+### 8.心跳机制实例
+
+### 9.websock
+
+### 10. google protoBuff编码解码(效率高解决跨语言问题)
+
+### 11.入站与出站机制
+
+编码器，解码器了解
+
+添加log4j支持（方便查看调试日志）
+
+### 12.tcp粘包拆包解决方案
+
+
 
