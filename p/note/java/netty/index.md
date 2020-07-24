@@ -14,11 +14,15 @@ https://www.bilibili.com/video/BV1DJ411m7NR?from=search&seid=1792025567539850242
 
 [1.bio,nio,aio介绍](bio-nio-aio.md)
 
+三种io方式
+
 [2.nio入门](nio.md)
+
+buffer	channel	selector梳理？？？
 
 [3.netty入门](netty-start.md)
 
-
+netty核心及类关系？？？
 
 
 

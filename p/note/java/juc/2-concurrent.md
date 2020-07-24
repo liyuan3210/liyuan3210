@@ -10,7 +10,7 @@ com.liyuan3210.juc.c02
 ## 1.ReentrantLock
 
 ```
-ReentrantLo实现：
+ReentrantLock实现：
 
 理论实现：
 cas vs synchronized

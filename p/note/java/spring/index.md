@@ -32,7 +32,7 @@ https://github.com/liyuan3210/java/spring/simple
 
 核心模块：https://spring.io/projects/spring-framework
 
-参考手册，参考API见官网
+
 
 github：https://github.com/spring-projects/spring-framework
 

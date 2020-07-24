@@ -48,7 +48,7 @@ EventLoop组件
 
 ### 8.心跳机制实例
 
-### 9.websock
+### 9.websocket
 
 ### 10. google protoBuff编码解码(效率高解决跨语言问题)
 
@@ -60,5 +60,4 @@ EventLoop组件
 
 ### 12.tcp粘包拆包解决方案
 
-
-
+接收端接收数据时按照指定长度进行读取

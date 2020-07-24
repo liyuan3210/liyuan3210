@@ -1,5 +1,37 @@
 # rocketmq
 
+##　一．安装
+
+2m-2s-async:2主2从异步
+
+2m-2s-sync:2主2从同步
+
+2m-noslave:2主没有从
+
+ ## 二．架构
+
+### 消息模式：
+
+1.DefaultMQPushConsumer (push)
+
+2.DefaultMQPullConsumer (pull)
+
+rocketmq push与pull???
+
+### 消息类型：
+
+1.普通消息
+
+2.顺序消息（实现有序消费）
+
+3.事物消息
+
+4.订阅消息(消费端)
+
+
+
+
+
 ```
 官网:http://rocketmq.apache.org/
 

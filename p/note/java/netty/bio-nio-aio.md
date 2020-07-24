@@ -42,3 +42,11 @@ Buffer（多个缓冲区）
 ·netty只关心linux实现,NIO实现
 ```
 
+## 三种io方式:
+
+1.FileOutputStream	基础普通io
+
+2.BufferedOutputStream  buffer文件IO
+
+3.FileChannel nio文件io（NIO文件读取）
+
