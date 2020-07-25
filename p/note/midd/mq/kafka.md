@@ -1,5 +1,88 @@
 # kafka
 
+## 1.kafka架构图
+
+![](img/kafka-1.png)
+
+## 2.kafka版本及包：
+
+1.kafka_2.11-0.11.0.2.tgz	2.11表示scala版本，11.0.2是kafka版本
+
+2.kafka-manageer-1.3.3.15 与　kafkaOffsetMontor-assemtbly-0.46
+
+配置：config/server.properties
+
+启动：bin/kafka-server-start.sh -daemon config/server.properties
+
+## 3.基础命令：
+
+1.查看当前所有topic
+
+bin/kafka-topics.sh --zookeeper ip:2128 --list
+
+2.创建topic
+
+bin/kafka-topics.sh --zookeeper ip:2128 --create --topic first --partitions 3 --replication-factor 2
+
+3.删除topic
+
+bin/kafka-topics.sh --zookeeper ip:2128  --delete --topic first
+
+4.查看topic详情
+
+bin/kafka-topics.sh --zookeeper ip:2128 --describe --topic first
+
+查看partitiong 与　replication还有 Isr???
+
+ＩＳＲ　：和Leader保持同步的副本集合
+
+5.发送消息
+
+bin/kafka-console-producer.sh --broker-list ip:9092（可以有多个） --topic first
+
+6.消费消息
+
+bin/kafka-console-consumer.sh  --topic first --bootstrap-server  --broker-list ip:9092   --from-beginning(可无，从头消费)
+
+7.修改分区数(partitions只能递增不能递减)
+
+bin/kafka-topics.sh --zookeeper ip:2128 --alter --topic first --partitions 6
+
+## 4.运行流程及存储机制：
+
+![](img/kafka-2.png)
+
+![](img/kafka-3.png)
+
+## 5.分区：
+
+分区原因：方便集群扩展，提高并发
+![](img/kafka-2.png)![](img/kafka-4.png)
+
+## 6.可靠性和ISR：
+
+![](img/kafka-5.png)
+
+![](img/kafka-6.png)
+
+ACKS:
+
+​			acks=0:broker一旦收到消息就返回ack（有丢数据风险）
+
+​			acks=1:leader落盘成功后返回ack（有丢数据风险）
+
+​			acks=-1:等待leader,follower都落盘成功后返回ack（有数据重复，在所有同步完成后，在返回ack之前leader发生故障，会产生数据重复问题）
+
+LEO,HW:
+
+​				为了保证leader与follower数据同步(不管数据缺少与重复)，当leader挂掉后，重新选举到leader后，follower同步时会截取ＨＷ后面的数据
+
+Exactly once(保证数据的唯一性):
+
+​			生产者加上enable.idempotence属性设置为true(kafka会自动设置acks为－１)
+
+
+
 ```
 http://kafka.apache.org
 下载kafka_2.12-0.11.0.1.tgz解压安装
