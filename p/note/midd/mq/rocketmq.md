@@ -1,5 +1,19 @@
 # rocketmq
 
+## 教程
+
+1.入门：
+
+https://www.bilibili.com/video/BV1Qt411g76Z?from=search&seid=14846928329453188554
+
+链接: https://pan.baidu.com/s/1IyXOl4l-5n_Q9y3fo0DTHw 提取码: 7ccd
+
+2.深入详细：
+
+https://www.bilibili.com/video/BV1L4411y7mn?from=search&seid=14846928329453188554
+
+链接：https://pan.baidu.com/s/1Qc75ABjrNMqNqF4f92YZeQ  提取码：jfeq
+
 ##　一．安装
 
 2m-2s-async:2主2从异步

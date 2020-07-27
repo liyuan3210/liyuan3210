@@ -1,5 +1,15 @@
 # kafka
 
+## 教程：
+
+1.https://www.bilibili.com/video/BV1AA411q7PK?from=search&seid=17071775111906625549
+
+链接:https://pan.baidu.com/s/1uCeXe4STWN2lpct9HO2nMQ  密码:9dbo
+
+2.https://www.bilibili.com/video/BV1a4411B7V9?from=search&seid=17071775111906625549
+
+链接: https://pan.baidu.com/s/17XOeCBYdyfNqWJPxb_dMsA 提取码: 5sp9
+
 ## 1.kafka架构图
 
 ![](img/kafka-1.png)

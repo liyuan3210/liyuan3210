@@ -6,7 +6,7 @@
 
 [2.redis](redis.md)
 
-[3.mq(rocketmq)](mq/index.md)
+[3.mq(rocketmq,kafka)](mq/index.md)
 
 [4.nginx](nginx.md)
 
