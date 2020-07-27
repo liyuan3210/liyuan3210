@@ -79,7 +79,19 @@ LEO,HW:
 
 Exactly once(保证数据的唯一性):
 
-​			生产者加上enable.idempotence属性设置为true(kafka会自动设置acks为－１)
+​			生产者加上enable.idempotence属性设置为true(kafka会自动设置acks为-1)
+
+## 7.consumer消费方式
+
+kafka消费采取pull模式，因为push模式很难适应消费速率不同的消费者，因为发消息是由broker决定的
+
+pull不足，如果kafka没有数据，消费者可能陷入循环中，一直返回空数据．正对这点kafka的消费数据时会传入一个timeout参数（如果没有数据可消费会等待一下再返回）
+
+kafka消费策略：
+
+　	．roundrobin（轮循）默认
+
+​		．range	(范围)可能导致消费不均匀
 
 
 
