@@ -1,5 +1,27 @@
 # rabbitmq
 
+## 教程
+
+https://www.bilibili.com/video/BV17A411e7a2?from=search&seid=3735503603434484308
+
+https://www.bilibili.com/video/BV1dE411K7MG?from=search&seid=3735503603434484308
+
+## 一．模块
+
+1.AMQP（rabbitmq协议实现），JMS
+
+2.集群模型
+
+3.rabbitmq概念
+
+4.消息模型
+
+5.持久化
+
+
+
+
+
 ```
 http://www.erlang.org
 下载安装(运行环境):
