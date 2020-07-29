@@ -18,7 +18,7 @@
 
 ## 二．系统方案
 
-1.微服务
+1.尚硅谷2020最新版SpringCloud(H版&alibaba)
 
 https://www.bilibili.com/video/BV18E411x7eT?p=1
 
@@ -26,5 +26,7 @@ https://www.bilibili.com/video/BV18E411x7eT?p=1
 .微服务登录授权方案
 ```
 
+2.分布式事务
 
+https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
 
