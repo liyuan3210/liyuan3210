@@ -18,5 +18,7 @@
 
 [7.2jvm调优实战-2](gc-tuning-2.md)
 
+[7.3jvm调优参数配置](gc-tuning-args-config.md)
+
 [8.G1介绍，三色标记算法](gc-tuning-3.md)
 
