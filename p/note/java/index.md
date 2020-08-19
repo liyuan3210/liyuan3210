@@ -22,11 +22,10 @@
 
 https://www.bilibili.com/video/BV18E411x7eT?p=1
 
-```
-.微服务登录授权方案
-```
-
-2.分布式事务
+2.微服务分布式事务
 
 https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
 
+3.微服务登录授权方案
+
+https://www.bilibili.com/video/BV1VE411h7aL?from=search&seid=12553764359441323749
