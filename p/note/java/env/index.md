@@ -11,13 +11,13 @@ openjdk 免费版本(6个月更新一个版本)
 
 ```
 官网:https://www.oracle.com/
-	添加:JAVA_HOME=D:\soft\java\jdk8
-	编辑:Path=;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin
-	添加:CLASSPATH=.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
+    export JAVA_HOME=/data/soft/jre1.8.0_162
+    export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+    export PATH=$JAVA_HOME/bin:$PATH
 	
 jdk9后的安装(不需要配置CLASSPATH与rt.jar,tools.jar)
 	https://github.com/msbbigdata/javase/blob/master/note/JDK12的安装搭建.md
-	jlink命令生成jre:
+jlink命令生成jre:
 	bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
 ```
 
@@ -150,6 +150,10 @@ https://gitforwindows.org(https://git-for-windows.github.io)
 https://git-scm.com
 下载
 ```
+
+## 五.vscode
+
+https://code.visualstudio.com/
 
 ## [other](other.md)
 
