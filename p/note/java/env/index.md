@@ -67,11 +67,15 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 	https://www.cnblogs.com/feson/p/12405577.html
 	添加配置(../apache-maven-3.6.3/conf/settings.xml)：
 	 <mirror>
-	          <id>nexus-aliyun</id>
-	          <mirrorOf>central</mirrorOf>
-	          <name>Nexus aliyun</name>
-	          <url>http://maven.aliyun.com/nexus/content/groups/public</url> 
-	      </mirror>
+	     <id>nexus-aliyun</id>
+	     <mirrorOf>central</mirrorOf>
+	     <name>Nexus aliyun</name>
+	     <url>http://maven.aliyun.com/nexus/content/groups/public</url> 
+	 </mirror>
+	指定仓库存储位置:
+	<settings>
+		<localRepository>D:\soft\dev\maven-repository</localRepository>
+	</settings>
 [maven常用操作](maven.md)
 
 [上传jar至本地/中央仓库](maven-upload-center.md)
