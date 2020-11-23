@@ -8,6 +8,8 @@
 
 3.gitlab
 
+4.mysql,redis,nginx
+
 ## 二．方案
 
 1.个人网络平台方案
