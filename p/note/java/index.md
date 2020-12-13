@@ -33,3 +33,5 @@ https://www.bilibili.com/video/BV1VE411h7aL?from=search&seid=1255376435944132374
 4.spring security
 
 https://www.bilibili.com/video/BV15a411A7kP?from=search&seid=7599475529802441512
+
+[spring security +jwt还有shiro](oauth.md)

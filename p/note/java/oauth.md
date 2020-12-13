@@ -22,7 +22,47 @@ XSS	跨站点脚本攻击，流量攻击（黑掉足够多的站点,通过<scrip
 
 CSRF	伪装请求(可以跨过需要登录的站点，利用本地已登录账号进行调用里面的api)
 
-三．shiro与spring security
+三．spring security(shiro与spring security)
+
+shiro与spring security
+
+shiro轻量级框架，spring security重量级框架
+
+3.1spring security集成入门
+
+​		1>.spring boot项目添加依赖
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+​		2>.编写controller
+
+​		启动默认用户user,默认密码在控制台(Using generated security password: aa1672de-e829-4dfe-992d-84228ffc804a)
+
+3.2spring security原理
+
+​		1>.spring security本质是一个过滤器链
+
+​		2>.过滤器如何加载
+
+​			spring boot对spring security实现自动化加载、
+
+​			默认过滤器DelegatingFilterProxy
+
+​		3>.两个重要接口
+
+​			UserDetailsService(数据库查用户名与密码)
+
+​			PasswordEncoder(对密码进行加密)
+
+过滤器UsernamePasswordAuthenticationFilter
+
+（继承此类，重写attemptAuthentication）,
+
+成功会调用successfulAuthentication，失败会调用unsuccessfulAuthentication
+
+​		
 
 四．jwt使用
 
