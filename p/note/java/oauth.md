@@ -62,7 +62,15 @@ shiro轻量级框架，spring security重量级框架
 
 成功会调用successfulAuthentication，失败会调用unsuccessfulAuthentication
 
-​		
+3.3.设置用户名和密码三种方式
+
+​		第一种通过配置文件，第二种通过配置类（继承WebSecurityConfigurerAdapter类实现configure方法），第三种自定义编写实现类(在第二种方法基础上，实现UserDetailsService接口)
+
+3.4自定义登陆配置
+
+3.5基于角色或权限访问控制
+
+
 
 四．jwt使用
 
