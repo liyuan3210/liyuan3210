@@ -39,6 +39,9 @@ sudo apt-get install notepadqq	//安装
 
 ## 三.新闻事件
 
+[2020.12.12：红帽停止centos8维护](https://blog.csdn.net/weixin_40787712/article/details/111087380)
+
 [2020.12.09：Docker 的第二次死亡](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2651056444&idx=1&sn=5bae19652a7cfbb41a9b97d52e7e14e1&chksm=bdbe116f8ac9987911ad0c3930224aa8e8cbb450f13f920914ba981f886f18be240930bdfc4e&mpshare=1&srcid=1211hYlAf9yY3uQzNbtkh9RK&sharer_sharetime=1607646239134&sharer_shareid=f0873e5f0f6628e98cc9802ff41cd253&scene=2&subscene=2&clicktime=1607941347&enterid=1607941347&ascene=2&devicetype=android-28&version=27001539&nettype=WIFI&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=Aa03qbJiUGtLjDLR50YzxHc%3D&pass_ticket=mVWrUNGU3Y9KumxAk0idO%2BizCXMz6ZH1M6Mz32HvN%2BoNjM4zwl8Ukqr9ySixIJEc&wx_header=1)
 
-[2020.12.12：红帽停止centos8维护](https://blog.csdn.net/weixin_40787712/article/details/111087380)
+
+
