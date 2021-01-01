@@ -1,6 +1,8 @@
 # 运维
 
-### [unix与linux](unix-linux-introduce.md)
+[环境规划](env_plan.md)
+
+[unix与linux发行版](unix-linux-introduce.md)
 
 ## 一．运维基础
 
@@ -12,8 +14,14 @@
 
 4.mysql,redis,nginx
 
+[5.samba,nfs_win](samba-nfs_win.md)
+
+[6.vmware_virtualbox_network](vmware_virtualbox_network.md)
+
+[7.httpd_php_phpmyadmin](httpd_php_phpmyadmin.md)
+
 ## 二．方案
 
-1.linux远程桌面连接
+[1.linux远程桌面连接](linux_remote_desktop.md)
 
-2.KVM桥接
+[2.KVM桥接](linux_kvm.md)
