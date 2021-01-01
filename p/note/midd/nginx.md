@@ -330,3 +330,72 @@ nginx http代理https
 	https://www.haproxy.org/
 ```
 
+## 四.推流配置
+
+推流模块
+
+https://github.com/arut/nginx-rtmp-module
+
+一。nginx安装
+
+https://blog.csdn.net/wq892373445/article/details/103969999
+
+推流安装
+
+https://www.cnblogs.com/wintertone/p/13235802.html（包括已安装nginx，安装模块）
+
+https://www.cnblogs.com/boonya/p/7910967.html
+
+
+
+nginx卸载安装
+
+https://www.cnblogs.com/ryanzheng/p/11263031.html
+
+安装环境
+
+yum -y install make gcc
+
+安装必须
+
+yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel
+
+
+
+安装配置
+
+./configure --prefix=/home/liyuan/soft/nginx  --add-module=/home/liyuan/soft/nginx-rtmp-module-1.2.1  --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
+
+
+
+**问题:**
+
+nginx-rtmp-module-1.2.1/ngx_rtmp_eval.c:160:17: error: this statement may fa
+
+https://blog.csdn.net/yga_airspace/article/details/106576678
+
+./configure后面添加 --with-cc-opt="-Wimplicit-fallthrough=0"
+
+
+
+nginx已安装的怎么配置???
+
+
+
+**nginx配置：**
+
+```
+rtmp {
+    server {
+        listen 1935;
+        chunk_size 4000;
+        application hls {
+            live on;
+            hls on;
+            hls_path /home/liyuan/soft/nginx/hls;
+            hls_fragment 5s;
+        }
+    }
+}
+```
+
