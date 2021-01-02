@@ -48,7 +48,7 @@ GNU(一个自由的操作系统)与FSF(自由软件基金)
 
 ## 二.linux:
 linux为了兼容unix，参照了POSIX标准，linux通常指linux内核
-Linux = gnu	+	linux kerne
+Linux = gnu	+	linux kernel
 
 **linux内核1994年1.0发布**
 
@@ -59,16 +59,16 @@ Linux = gnu	+	linux kerne
 | redhat家族    |                   |                                                   |
 |               | redhat enterprise | 企业版（收费）                                    |
 |               | fedora            | 红包上游版本                                      |
-|               | centos            | 红帽下游版本稳定                                  |
+|               | centos            | 红帽下游版本，稳定                                |
 |               | rockylinux        | centos替代品                                      |
 |               |                   |                                                   |
 | debian家族    |                   |                                                   |
 |               | debian            |                                                   |
-|               | ubuntu            |                                                   |
+|               | ubuntu            | debian的分支                                      |
 |               |                   |                                                   |
 | suse家族      |                   |                                                   |
 |               | suse              | 企业版(收费)                                      |
-|               | openSUSE          | 社区开源版                                        |
+|               | openSUSE          | 德国人系统，社区开源版                            |
 |               |                   |                                                   |
 | archlinux家族 |                   |                                                   |
 |               | archlinux         | linux高度定制化(主要基于二进制),2002年3月11日发行 |
