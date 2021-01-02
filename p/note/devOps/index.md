@@ -2,8 +2,6 @@
 
 [环境规划](env_plan.md)
 
-[unix与linux发行版](unix-linux-introduce.md)
-
 ## 一．运维基础
 
 [1.docker](docker/index.md)

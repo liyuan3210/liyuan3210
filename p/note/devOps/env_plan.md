@@ -1,6 +1,5 @@
-# 环境规划
+# 环境规划：
 
-```
 1.linux查看登录信息
 https://www.jianshu.com/p/f060ecca9c81
 
@@ -10,13 +9,14 @@ window service2012 clock watchdog timeout
 3.seo优化
 https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 
-一.操作系统
-	1.linux(推荐)
-		服务器:centos(推荐)
-			https://www.centos.org/
-		桌	面:ubuntu(推荐)
-			https://ubuntu.com/
-			
+### 一）.操作系统
+​	1.linux(推荐)
+​		服务器:centos(推荐)
+​			https://www.centos.org/
+​		桌	面:ubuntu(推荐)
+​			https://ubuntu.com/
+​			
+
 	2.windows(当前)
 		服务器:windows_server_2012
 		桌	面:windows7,windows10
@@ -48,20 +48,22 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 			linux下可以直接使用dd命令写入ios镜像
 			fdisk -lh	//查看u盘物理路径(/dev/sdb)
 			dd if=/home/xxx/xxx.iso of=/dev/sdb
-		
-二.虚拟机
-	1.linux(基于linux内核的KVM)：
-	
+
+### 二）.虚拟机
+​	1.linux(基于linux内核的KVM)：
+​	
+
 	2.windows(基于windows内核的Hyper-V)：
 	
 	3.OS系统之上的
 		1>.VMware-workstation
 		2>.virtualbox
-		
-三.存储
-	RAID,mdadm,LVM(存储管理)
-	https://mck.baidu.com/v2309244-151568-556501.html
-	
+
+### 三）.存储
+​	RAID,mdadm,LVM(存储管理)
+​	https://mck.baidu.com/v2309244-151568-556501.html
+​	
+
 	1.硬件Raid
 		raid0：条带(将数据分布式存储在阵列数据盘上,读写性能高,没有冗余能力,最少2个硬盘(2N偶数个))
 		raid1：镜像(将数据分布式镜像拷贝到其它盘上,硬盘利用率只有50%,最少2个硬盘)
@@ -91,22 +93,111 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 		 也支持Raid功能,包括常用的LVM（logical volume manager）
 	3.逻辑区扩容LVM
 		逻辑区动态扩容,不停机情况动态扩容
-四.网络
-	3.ip子网划分?
-	chain_block?
-	
-	
-五.资源托管
-	1.代码
-		github
-		gitee
-	2.js库 
-		npm
-	3.jar库
-		maven
-	4.docker镜像
-		阿里云
-		腾讯云
-	5.有道云 / 百度云
-```
+### 四）.网络
+​	3.ip子网划分?
+​	chain_block?
+​	
 
+### 五）.资源托管
+
+​	1.代码
+​		github
+​		gitee
+​	2.js库 
+​		npm
+​	3.jar库
+​		maven
+​	4.docker镜像
+​		阿里云
+​		腾讯云
+​	5.有道云 / 百度云
+
+# unix与linux介绍：
+
+### 一.unix两大分支
+
+| system V家族                                                 | bsd家族                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| A/UX  ▪ AIX （IBM） ▪ HP-UX  ▪ IRIX  ▪ LynxOS  ▪ SCO OpenServer  ▪ Tru64  ▪ Xenix  ▪Solaris(SUN) ▪ OS/2 | BSD/OS  ▪ FreeBSD  ▪ NetBSD ▪ NEXTSTEP  ▪Mac OS X  ▪ iOS ▪ OpenBSD  ▪ SUN OS （sun） ▪ OpenSolaris |
+
+**unix诞生于1969年**
+
+| bsd发行版 | 描述       |
+| --------- | ---------- |
+| FreeBSD   | 侧重稳定   |
+| OpenBSD   | 侧重安全   |
+| NetBSD    | 侧重多平台 |
+| Mac OS    | 苹果系统   |
+| BSD / OS  | ???        |
+|           |            |
+|           |            |
+
+1.BSD家族大观：FreeBSD、OpenBSD、NetBSD
+
+https://blog.csdn.net/sahusoft/article/details/3195594
+
+2.为什么要使用BSD系统
+
+https://www.linuxprobe.com/why-use-bsd.html
+
+**bsd安装软件源方法：**
+
+​		1.package(bsd通常用这种)
+
+​		2.ports
+
+https://blog.csdn.net/zhangdaisylove/article/details/46379947
+
+http://blog.chinaunix.net/uid-29727170-id-4509832.html
+
+## GNU项目
+
+建立一个自由开放的unix操作系统(操作系统应用层软件集)
+
+unix与linux跑的应用大部分都可以相互移植，因为都遵循了POSIX标准
+
+GNU(一个自由的操作系统)与FSF(自由软件基金)
+
+**1983年发起的自由软件集协作计划**
+
+### 二.linux
+
+linux为了兼容unix，参照了POSIX标准，linux通常指linux内核
+Linux = gnu	+	linux kernel
+
+**linux内核1994年1.0发布**
+
+## 常见linux发行版：
+
+| 家族          | 发行版            | 描述                                                  |
+| ------------- | ----------------- | ----------------------------------------------------- |
+| redhat家族    |                   |                                                       |
+|               | redhat enterprise | 企业版（收费）                                        |
+|               | fedora            | 红包上游版本                                          |
+|               | centos            | 红帽下游版本，稳定                                    |
+|               | rockylinux        | centos替代品                                          |
+|               |                   |                                                       |
+| suse家族      |                   |                                                       |
+|               | suse              | 企业版(收费)                                          |
+|               | openSUSE          | 德国人系统，社区开源版                                |
+|               |                   |                                                       |
+| debian家族    |                   |                                                       |
+|               | debian            | 开源社区                                              |
+|               | ubuntu            | debian的分支                                          |
+|               |                   |                                                       |
+| archlinux家族 |                   |                                                       |
+|               | archlinux         | linux高度定制化(主要基于二进制定制),2002年3月11日发行 |
+|               |                   |                                                       |
+| gentoo        |                   | linux高度定制化(主要基于源码定制)，2002年3月31日发行  |
+| Slackware     |                   | 古老的linux发行版，简洁，安全，稳定                   |
+| PCLinuxOS     |                   | ？？？                                                |
+|               |                   |                                                       |
+|               |                   |                                                       |
+
+1.archlinux gentoo选择
+
+https://www.cnblogs.com/huapox/archive/2012/03/01/3299990.html
+
+https://blog.csdn.net/neyes/article/details/6129027/
+
+2.手动做LFS	???
