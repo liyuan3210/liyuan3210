@@ -1,4 +1,4 @@
-# 马士兵课堂
+# 一.马士兵课堂
 
 官网：
 
@@ -92,3 +92,48 @@ head tail | 管道
 vm.dirty内核设置？？？
 ```
 
+
+
+#### 区块链
+
+入门课程eos
+
+https://www.bilibili.com/video/av79054667?p=1
+
+区块链发展1.0至3.0
+
+https://baijiahao.baidu.com/s?id=1607673651921555611&wfr=spider&for=pc
+
+#### k8s
+
+https://www.bilibili.com/video/BV1ib411Y7zz?p=3
+
+# 二.视频课程
+
+视频学习网站:
+	https://ke.qq.com/
+	http://www.bjsxt.com/
+	http://edu.51cto.com/
+
+	区块链课程
+		http://i.youku.com/i/UMzUxMzkxMDc2/videos?spm=a2hzp.8244740.0.0
+		http://www.zpedu.org/Info-neirongye-430_127.html
+		https://www.bilibili.com/video/av31087889/?p=1
+		https://www.yitaifang.com/	//区块链
+		https://blog.csdn.net/wjx342529/article/details/70148987
+		区块链黄埔军校
+			http://www.hainayunfan.com
+	
+	人工智能
+		https://study.163.com/course/introduction/1005692008.htm
+		
+	linux内核
+		https://ke.qq.com/course/167847
+		linux binutils
+			https://www.crifan.com/files/doc/docbook/binutils_intro/release/html/binutils_intro.html
+			
+	张孝祥视频
+		http://www.icoolxue.com/album/show/38/
+	
+	p2p理论
+		https://www.bilibili.com/video/av25760470/?redirectFrom=h5

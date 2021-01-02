@@ -2,20 +2,17 @@
 
 ## 一．列表
 
-[1.马士兵课堂](mashibing.md)
+[1.马士兵课堂(课堂)](mashibing.md)
 
-## 历史
+[2.new(新点)](new.md)
 
-#### 区块链
+[3.面试](interview.md)
 
-入门课程eos
+4.utuntu与ios常用桌面软件安装
 
-https://www.bilibili.com/video/av79054667?p=1
+5.linux服务器常用命令
 
-区块链发展1.0至3.0
+6.windows_server服务器常用操作
 
-https://baijiahao.baidu.com/s?id=1607673651921555611&wfr=spider&for=pc
+7.开发平台
 
-#### k8s
-
-https://www.bilibili.com/video/BV1ib411Y7zz?p=3
