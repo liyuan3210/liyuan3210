@@ -122,15 +122,15 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 
 **unix诞生于1969年**
 
-| bsd发行版 | 描述       |
-| --------- | ---------- |
-| FreeBSD   | 侧重稳定   |
-| OpenBSD   | 侧重安全   |
-| NetBSD    | 侧重多平台 |
-| Mac OS    | 苹果系统   |
-| BSD / OS  | ???        |
-|           |            |
-|           |            |
+| bsd发行版     | 描述                |
+| ------------- | ------------------- |
+| FreeBSD       | 侧重稳定            |
+| OpenBSD       | 侧重安全            |
+| NetBSD        | 侧重多平台          |
+| DragonFly BSD | 2001年发起的bsd项目 |
+| Mac OS        | 苹果系统            |
+| BSD / OS      | ???                 |
+|               |                     |
 
 1.BSD家族大观：FreeBSD、OpenBSD、NetBSD
 
