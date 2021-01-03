@@ -594,8 +594,9 @@ http://www.runoob.com/regexp/regexp-tutorial.html
 ```
 
 # tomcat_jetty 
-<div id="tomcat_jetty"></div>
-```
+
+<div id="tomcat_jetty"/>
+
 tomcat
 下载官网:http://tomcat.apache.org/(建议下载tar.gz包)
 
@@ -639,10 +640,10 @@ https配置:
 	  maxThreads="150" SSLEnabled="true" 
 	keystoreFile="D:\tomcat.keystore"  keystorePass="123456">
 	</Connector>
-
+	
 	高版本 RFC 7230 and RFC 3986 问题
 	java.lang.IllegalArgumentException: Invalid character found in the request target. The valid characters are defined in RFC 7230 and RFC 3986
-
+	
 	tomcat-8.0.36以后的高的版本tomcat对url参数进行了严格的校验,需要对参数进行编码.
 
 ----------------------------------------------------------------------------------------------------
@@ -678,3 +679,5 @@ kill -9 29070
 nohup ./startWebLogic.sh &
 ```
 
+
+```
