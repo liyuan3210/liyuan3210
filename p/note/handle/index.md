@@ -18,3 +18,8 @@
 
 [8.其它开发平台](dev_platform.md)
 
+[9.git使用](git_use.md)
+
+[10.ssh免密登录及openssh](ssh_openssh.md)
+
+[11.gpg加解密](gpg_use.md)

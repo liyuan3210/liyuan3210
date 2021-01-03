@@ -8,7 +8,7 @@
 
 [2.kubernetes](kubernetes/index.md)
 
-3.gitlab
+[3.gitlab](gitlab_install.md)
 
 4.mysql,redis,nginx
 
@@ -17,6 +17,8 @@
 [6.vmware_virtualbox_network](vmware_virtualbox_network.md)
 
 [7.httpd_php_phpmyadmin](httpd_php_phpmyadmin.md)
+
+[8.subversion（svn）](subversion_install.md)
 
 ## 二．方案
 

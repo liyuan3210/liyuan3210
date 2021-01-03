@@ -4,6 +4,12 @@
 
 https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=14589942077200278934
 
+## kubernetes安装
+
+[1.kubeadm安装](k8s_kubeadm_install.md)
+
+[2.kubenetes,etcd,flannel手动安装](k8s_etcd_flannel_install.md)
+
 ## 一．基础
 
 ## 1.技能点

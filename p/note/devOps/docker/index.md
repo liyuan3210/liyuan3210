@@ -1,8 +1,542 @@
 # docker
 
-## 一．基础
+## 一．docker安装
 
-1.docker底层基础构成及介绍
+```
+官网：https://www.docker.com
+	有两个版本
+	ce社区版与ee企业版
+-----------------------------------------------------一部分-----------------------------------------------
+windows安装
+	https://github.com/boot2docker
+	包含如下组件：
+	1.virtualbox
+	2.msys-git
+	3.boot2docker 
+	4.Linux 镜像
+	5.Boot2Docker 的管理工具
 
-2.docker安装
+一.ubuntu server16.04.3安装:
+	发行版:xenial
+	进入目录:pool/stable/ and choose amd64
+
+官方安装步骤:
+	https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/
+
+	apt-get update	//更新
+
+	apt-get install \	//安装插件
+		apt-transport-https \
+		ca-certificates \
+		curl \
+		software-properties-common
+
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -	//添加key
+
+	apt-key fingerprint 0EBFCD88	//查看
+
+	add-apt-repository \	//添加机型支持
+	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	   $(lsb_release -cs) \
+	   stable"
+
+	apt-get update	//更新
+
+	apt-get install docker-ce	//安装 or docker-ce=<VERSION> "18.02.0-ce"	?
+
+安装deb(如果要安装指定版本deb,请先运行下面命令):
+	https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/
+	运行安装:
+	dpkg -i docker-ce_17.12.1_ce-0_ubuntu_amd64.deb
+
+	安装
+	apt-get -f install
+
+	当要以非root用户可以直接运行docker时,执行如下命令
+	sudo usermod -aG docker yourName
+	
+	安装deb包
+	sudo dpkg -i docker-ce_18.09.4~3-0~ubuntu-bionic_amd64.deb docker-ce-cli_18.09.4~3-0~ubuntu-bionic_amd64.deb containerd.io_1.2.5-1_amd64.deb 
+
+私有仓库搭建registry
+	https://docs.docker.com/registry/#basic-commands	//官方安装步骤
+
+	获取镜像
+	docker pull registry:2
+
+	docker run -d -p 5000:5000 -v /var/lib/registry:/var/lib/registry --restart=always --name registry registry:2
+	-v 宿主机目录:容器目录
+
+	浏览器查看
+	http://192.168.127.130:5000/v2/_catalog
+
+	查看hw仓库tag
+	http://192.168.127.130:5000/v2/hw/tags/list
+	
+	删除仓库镜像(官方是不建议删除的,因为会导致依赖的容器无法运行):
+	直接进入/var/lib/registry/docker/registry/v2/repositories目录,
+	删除仓库名即可
+	
+	获取digest值
+	curl -I -X GET http://192.168.127.130:5000/v2/hw/manifests/latest
+
+	curl -X DELETE http://192.168.127.130:5000/v2/hw/manifests/sha256:9abfef7f7c24a0ea1a7736b90a180d1d1ff8c880aa37205ded5541e004f6f04b
+
+	相同问题解决方法
+	http://www.itkeyword.com/doc/5815940265600701490/why-cant-i-delete-a-layer-in-my-private-docker-registryv2
+	
+	私有仓库搭建
+	https://www.linuxidc.com/Linux/2017-02/141054.htm
+
+docker客户端配置:
+	registry服务端默认开启的是http访问,而客户端默认访问是https:
+	需要在客户端/etc/docker/daemon.json添加如下内容(没有此文件需要新增)
+	{ "insecure-registries":["192.168.127.130:5000"] }
+	然后重启客户端服务
+	/etc/init.d/docker restart
+	
+	ubuntu下docker配置文件
+	vi /etc/default/docker
+	
+	测试运行hello-world
+	sudo docker run hello-world
+
+	ubuntu默认安装目录：
+	/var/lib/docker
+
+启动/停止docker后台服务
+	service docker start
+	service docker stop
+
+docker安装(old)?
+	wget -qO- https://get.docker.com/ | sh	//貌似下载不了,获取最新docker安装包
+
+	当要以非root用户可以直接运行docker时,执行如下命令
+	sudo usermod -aG docker yourName
+
+二.镜像管理:
+在线查看镜像网站
+https://hub.docker.com
+
+	docker login	//登录
+
+镜像上传:
+	docker tag ubuntu:16.04.3 192.168.209.132:5000/ubuntu:v1 //修改为规范的镜像
+	docker push 192.168.209.132:5000/ubuntu:v1	//推送
+
+列出镜像
+docker images
+
+获取一个镜像
+docker pull ubuntu:16.04
+
+删除镜像
+docker rmi ubuntu:16.04
+
+查找镜像
+docker search ubuntu
+
+加载镜像
+http://blog.csdn.net/u014166319/article/details/62043802
+
+http://download.csdn.net/download/yunfwe/10219648
+完整的apt支持。使用方式：docker load -i ubuntu_16.04.3-image.tar.gz
+
+docker镜像导入导出(save,load,export,import)
+https://blog.csdn.net/ncdx111/article/details/79878098
+
+docker镜像保存(从仓库保存)
+	示例 
+	docker save -o nginx.tar nginx:latest 
+	或 
+	docker save > nginx.tar nginx:latest 
+	
+示例 
+	docker import nginx-test.tar nginx:imp 
+	或 
+	cat nginx-test.tar | docker import - nginx:imp
+
+利用iso文件创建镜像
+https://www.jianshu.com/p/f8f851318165
+
+ubuntu下iso制作docker镜像
+http://www.latelee.org/using-gnu-linux/ubuntu-debootstrap.html
+
+http://blog.csdn.net/kongxx/article/details/52618517
+
+docker官方ubuntu镜像文件下载
+https://hub.docker.com/_/ubuntu/
+
+ngrok镜像代理:
+	./ngrok http 5000
+	docker pull 225b2f48.ngrok.io/ubuntu:v1
+	
+	
+问题
+docker load -i centos-7-x86_64-docker.tar.xz
+open /var/lib/docker/tmp/docker-import-957113588/dev/json: no such file or directory
+这个tar包缺少docker所需要的一些json文件，它只包含了layer.tar这个文件夹，缺少json这个文件夹
+
+执行下面就可以了
+cat centos-7-x86_64-docker.tar.xz | docker import - centos-7-x86_64
+
+docker images
+
+```
+
+## 二.docker命令使用
+
+```
+一.容器
+	容器中运行应用程序
+	sudo docker run ubuntu:15.10 /bin/echo "Hello world" //创建容器并进入
+
+	交互式容器
+	docker run --name demo1 -i -t ubuntu:15.10 /bin/bash	//创建容器并进入,命名容器demo1
+	docker run --name demo1 -it ubuntu:15.10 /bin/bash		//-i -t 可以合并写成 -it
+	docker run --h //自定义容器主机名
+	退出：exit或CTRL+D
+
+	启动容器(后台)
+	docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+	-d表示后台运行
+	2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63
+
+	docker run --name testweb2 -e MYNAME=liyuan3210 -d 192.168.10.23:5000/testweb:V1 /bin/bash
+
+	docker run --name testweb2 -e MYNAME=liyuan3210 -e MYPWD=123456 -d 192.168.10.23:5000/testweb:V1 /bin/bash
+
+	测试
+	curl http://[continer IP]
+
+4.查看容器
+	docker ps	//查看启动的容器
+	docker ps -a //查看所有容器
+
+	查看进程号
+	docker  top [contianer ID/contianer name]
+
+	执行命令
+	docker exec [contianer ID/contianer name]
+	docker exec -it [contianer ID/contianer name] sh   #交互式操作
+
+5.查看容器输出
+	docker logs 2b1b7a428627
+	docker logs -f
+	docker logs --tail <number>
+
+6.容器操作
+	docker attach 2b1b7a428627 //进入前台容器,后台ctrl+p+q	
+
+	docker inspect 2b1b7a428627	//查看容器信息
+	docker version
+	docker info
+
+	docker stop amazing_cori  //停止容器
+	docker  start  amazing_cori  //启动容器
+	docker  restart  amazing_cori  //重启动容器
+	docker run --restart=always [image] [cmd] //自启动
+	docker pause [contianer ID/contianer name]	//暂停
+	docker unpause [contianer ID/contianer name] //恢复
+
+	docker run -e var1=1234 -e var2=2123 -it docker.io/busybox sh	//容器参数？
+	docker -p 3306:3316	 //容器与宿主机端口转换?
+
+容器与宿主机之间相互cp文件
+	docker cp [path/container path] [container path/path]
+
+查看容器修改
+	docker diff [contianer ID/contianer name]
+
+移除容器
+	docker rm amazing_cori
+	docker rm -f amazing_cori	//删除正在运行的容器
+	docker rm 'docker ps -a -q' [contianer ID/contianer name]	//删除所有容器?
+
+Docker 网络类型
+	birdge=vm的nat  容器网络通过nat方式传输
+	host 容器网络使用宿主机网络
+	none 容器无网络
+	container 容器网络复制其他容器
+
+实例:
+	docker run --network host
+	以host方式启动容器
+	docker run --network container:[name]
+	以container方式启动容器
+
+	docker run --network none
+	以无网络方式启动容器
+	
+	docker network create --driver bridge --subnet [ip/mask] --gateway [ip] [name]	//创建一个网络
+	docker network ls	//显示所有网络
+	
+--link  #容器做地址链接
+	 docker run --link [name]:[alias] 
+	Ex:
+	docker run  --link con1:web -it docker.io/busybox sh
+		
+	-p  #容器与宿主机端口映射
+		docker run -p  [hostport]:[containerport]
+	Ex:
+		docker run -p 8080:80 -d docker.io/nginx  
+		
+二.Dockerfile构建
+dockerfile
+	docker build -t 192.168.127.130:5000/centos:v1 ./
+	
+	
+数据库db(参考公司课程里面的db实例)
+
+1.构建镜像
+docker build -t 127.0.0.1:5000/centos:db_v1 ./
+
+2.运行构建镜像的容器
+docker run --name db1 -e MYPWD=ly123 -e MYDB=pro -e MYUSER=adm -e USERPWD=123 -it 127.0.0.1:5000/centos:db_v1 /bin/bash
+
+
+三.硬件限制:
+	cpu限制
+	docker run -it --cpu-period --cpu-quota
+	Ex: 限制使用0.5核cpu (cpu-quota/cpu-period)
+	 docker run -it --cpu-period=100000 --cpu-quota=50000 docker.io/busybox sh
+
+	mem限制
+	docker run  -m
+	docker run -it -m 100M docker.io/busybox sh
+
+四.公司培训:
+	wget http://10.20.202.161/busybox.tar
+
+	配置 yum 源
+	cd /etc/yum.repos.d && for r in *.repo; do mv $r $r.bak;done
+
+	wget http://mirrors.aliyun.com/repo/Centos-7.repo
+	yum clean all
+	yum makecache 
+	yum install docker -y
+
+	yum install docker
+	systemctl start docker
+	systemctl enable docker
+
+	公司:https://10.19.105.102/svn/Public/10微服务培训
+
+
+	查看文件实际引用大小
+	du -sh file
+-----------------------------------------------二部分-----------------------------------------------------
+安全
+	秘钥
+		创建密钥
+			mkdir /certs
+			openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
+			注意servername配置，案例中将使用”certs.yunda.com”
+			
+		使用密钥
+			REGISTRY_HTTP_ADDR=0.0.0.0:443 
+			REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt 
+			REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+			
+		客户端配置
+			cd /etc/docker/certs.d/
+			mkdir certs.yunda.com
+			cp /certs/domain.crt certs.yunda.com/ca.crt
+			重要：目录名需要与之前配置主机名一致
+			
+		Ex:
+		docker run -d --restart=always --name=registry -v /certs:/certs -v /var/lib/registry:/var/lib/registry -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -p 443:443 registry
+
+	认证
+		创建认证文件
+			htpasswd -Bbn [username] [password] >> [file]
+			安装httpd
+			Ex:
+			mkdir auth
+			htpasswd -Bbn user1 user1passwd >> auth/htpasswd
+			
+		使用认证文件
+			认证类型：
+			REGISTRY_AUTH=htpasswd
+			认证描述信息
+			REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+			认证文件
+			REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
+
+		Ex:
+		docker run -d --restart=always --name=registry -v /certs:/certs -v /var/lib/registry:/var/lib/registry -v /root/auth/:/auth -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -p 443:443 registry
+		
+		客户端配置:
+			docker login certs.yunda.com
+			docker [push|pull]
+
+存储驱动:
+	Aufs (目前支持ubuntu/debian)
+	devicemapper [centos默认]
+	Overlay 
+	Btrfs  (suse)
+	zfs
+	
+	Device Mapper是一个基于kernel的框架，它增强了很多Linux上的高级卷管理技术。Docker的devicemapper驱动在镜像和容器管理上，利用了该框架的超配和快照功能。
+	商业支持的Docker Engine（CS-Engine）建议在RHEL和CentOS上使用devicemapper存储驱动。
+	
+	两大特性
+	Snapshot快照/Cow (copy on write) 写时复制
+	allocate-on-demand 用时分配
+	
+	cow
+	基于一个image启动多个Container，如果为每个Container都去分配一个image一样的文件系统，那么将会占用大量的磁盘空间。而CoW技术可以让所有的容器共享image的文件系统，所有数据都从image中读取，只有当要对文件进行写操作时，才从image里把要写的文件复制到自己的文件系统进行修改。
+
+	allocate-on-demand 用时分配
+	只有在要新写入一个文件时才分配空间，这样可以提高存储资源的利用率。比如启动一个容器，并不会为这个容器预分配一些磁盘空间，而是当有新文件写入时，才按需分配新空间。
+
+	查看当前容器存储
+		[root@certs ~]# losetup  -a
+		[root@certs ~]# lsblk 
+		[root@certs ~]# dmsetup ls --tree
+		[root@certs ~]# docker inspect [containerID]
+
+	使用direct-lvm(动态扩容机制)
+		pvcreate /dev/sdb
+		vgcreate docker /dev/sdb
+		lvcreate --wipesignatures y -n thinpool docker -l 90%VG 
+		lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG  
+		lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta
+	
+	使用direct-lvm
+		mkdir -p /etc/lvm/profile/
+		cat <<EOF > /etc/lvm/profile/docker-thinpool.profile
+		activation {
+		thin_pool_autoextend_threshold=80
+		thin_pool_autoextend_percent=20
+		}
+		EOF
+		
+	使用direct-lvm
+	lvchange --metadataprofile docker-thinpool docker/thinpool
+	/etc/docker/daemon.json
+	{
+	    "storage-driver": "devicemapper",
+	    "storage-opts": [ 
+	        "dm.thinpooldev=/dev/mapper/docker-thinpool",
+	        "dm.fs=ext4"
+	    ]
+	}
+
+日志驱动
+	开源免费的:
+		syslog
+		journald
+		Json-file
+		fluentd
+
+	商业级
+	Google cloud
+	Splunk/elk
+	ETW
+	
+	详细介绍：
+	syslog本地日志
+		docker run -d docker.io/busybox /bin/sh -c "while true ; do date ; sleep 1;  done”
+		docker logs [containerID]
+		docker logs -f [containerID]
+		[root@certs html]# tail /var/log/messages -f //查看所有的
+		
+	远程syslog日志:
+		--log-driver=syslog
+		--log-opt syslog-address=[tcp|udp]://[ip]:[port]
+
+		Ex:
+		docker run -d --log-driver=syslog --log-opt syslog-address=tcp://192.168.10.21:514 docker.io/busybox /bin/sh -c "while true ; do date ; sleep 1;  done"
+		
+		远程主机配置
+		[root@localhost ~]# vi /etc/rsyslog.conf 
+		$ModLoad imtcp
+		$InputTCPServerRun 514
+
+		[root@localhost ~]# systemctl  restart rsyslog
+		[root@localhost ~]# tail /var/log/messages  -f
+		
+	Fluentd日志:
+		Fluentd可用收到收集并转发日志，经常与一些经典工具组合使用
+			客户端应用>Fluentd>elasticsearch>kibana
+			Fluentd+elasticsearch+kibana
+
+			docker load -i elasticsearch.tar
+			docker load -i fluentd-es.tar 
+			docker load -i kibana.tar
+		
+		Fluentd日志格式
+			docker run -d -p 9200:9200 --name elasticsearch docker.io/elasticsearch
+			docker run -d -p 5601:5601 --name kibana --link elasticsearch:elasticsearch docker.io/kibana
+			mkdir /fluentd/conf
+			vi /fluentd/conf/fluent.conf
+			
+		
+		运行:
+		docker run -d -p 24224:24224 -p 24224:24224/udp -v /fluentd/conf:/fluentd/etc --name fluentd --link elasticsearch:elasticsearch docker.io/fluent/fluentd-es
+
+		运行客户端测试
+		docker run -d --log-driver=fluentd --log-opt fluentd-address=localhost:24224 --log-opt tag="busybox" --link fluentd:fluentd  docker.io/busybox  /bin/sh -c "while true ; do date ; sleep 1 ; done”
+
+		打开浏览器访问
+		http://localhost:5601
+		
+		
+		docker run -d -p 24224:24224 -p 24224:24224/udp -v /fluentd/conf:/fluentd/etc --name fluentd --link elasticsearch:elasticsearch docker.io/fluent/fluentd-es
+		docker run -d --log-driver=fluentd --log-opt fluentd-address=localhost:24224 --log-opt tag="busybox" --link fluentd:fluentd  docker.io/busybox  /bin/sh -c "while true ; do date ; sleep 1 ; done"
+		
+Compose定义运行复杂一系列docker命令
+
+	安装
+	curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+	chmod +x /usr/local/bin/docker-compose
+	docker-compose -v
+	
+docker-compose基本参数
+	--version 查看版本
+	-f 使用非docker-compose.yml命名的yaml文件
+	up -d后台启动服务
+	start/stop 停止/启动docker-compose容器
+	rm 删除docker-compose容器
+	ps 查看docker-compose正在运行的容器
+	相关语法 请参考
+	https://docs.docker.com/compose/compose-file/compose-file-v2/#compose-and-docker-compatibility-matrix
+	
+	
+
+灵雀云产品培训
+	http://52.175.9.161:28090
+	alauda/alauda
+	
+	http://10.19.156.111:28090/
+	账号：alauda
+	用户名: dev001
+	密码: 1qaz!QAZ
+
+	容器管理平台
+	业内建议使用Kubernetes
+	https://www.kubernetes.org.cn/3546.html
+	
+	https://www.kubernetes.org.cn/doc-25
+
+	HAProxy与Nginx
+	https://www.jianshu.com/p/d436a3e73d2f
+
+	https://github.com/kevinzwf
+
+	https://github.com/testalauda
+
+	52.175.12.30
+	
+	安装:
+	docker pull jenkins
+	docker run -p 8080:8080 -p 5000:5000 -d -v /var/jenkins_home jenkins
+-----------------------------------------------三部分-----------------------------------------------------
+配置中心
+https://github.com/ctripcorp/apollo
+
+搜索
+ElasticSearch/Kibana
+```
 
