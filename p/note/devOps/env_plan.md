@@ -130,6 +130,8 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 | DragonFly BSD | 2001年发起的bsd项目 |
 | Mac OS        | 苹果系统            |
 | BSD / OS      | ???                 |
+| minix         | 基于微内核unix系统  |
+|               |                     |
 |               |                     |
 
 1.BSD家族大观：FreeBSD、OpenBSD、NetBSD
