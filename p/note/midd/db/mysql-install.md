@@ -183,6 +183,14 @@ dpkg -l | grep ^rc| awk '{print $2}' | sudoxargsdpkg -P
     2.数据到导出
     	mysqldump -t pro -u adm -pxxx >/home/liyuan/soft/pro_data.sql
     	
+    定时shell脚本备份语句：
+    mysqldump --opt -d --databases home_doctor -u hdoctor -h 124.70.215.181 -P3316 -p'xxx' >"$basePath/db/homeDoctor/$YY/$MM/table_$time.sql"
+    mysqldump -t home_doctor --ignore-table=home_doctor.sys_log -u hdoctor -h 124.70.215.181 -P3316 -p'xxx' > "$basePath/db/homeDoctor/$YY/$MM/data_$time.sql"
+    
+    #mysqldump -t home_doctor -u hdoctor -h 124.70.215.181 -P3316 -p'xxx' --tables jh_balance jh_order \
+    #jh_package \
+    #jh_order_details > "$basePath/db/homeDoctor/$YY/$MM/data_$time.sql"
+    	
     //多实例，指定mysql端口登录
     mysql -h 192.168.174.4 -u root -P 3307 -p
     
