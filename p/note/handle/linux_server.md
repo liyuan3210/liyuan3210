@@ -1,6 +1,6 @@
 # linux服务器常用命令
 
-[wget_curl_awk_grep](#wget_curl_awk_grep)
+[wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
 [周志磊(马士兵教育)经典linux命令演示](#mashibing)
 
 ```
