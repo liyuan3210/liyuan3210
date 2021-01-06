@@ -54,45 +54,6 @@ email:li.yuan3210@163.com
 pwd:adm123456
 ```
 
-### 周志磊笔记
-
-```
-IO实操：
-df			//查看磁盘设备
-/boot目录挂载										//增加磁盘可以覆盖挂载
-
-dd if=/dev/zero of=mydisk.img bs=1048576 count=100		//生成虚拟文件系统
-/////////dd 文件备份？？？
-losetup /dev/loop0 mydisk.img							//挂载到环形设备上
-mke2fs /dev/loop0									//格式化
-df		//没有的
-mount -t ext2 /dev/loop0 /mnt/ooxx			//添加到df下面
-
-cp /bin/bash bin	//拷贝bash程序
-ldd bash 	//查看bash程序启动需要的动态链接库
-cp /lib64/{libtinfo.so.5,aaa,xxx}		//拷贝文件
-chroot ./							//当前目录为根目录启动
-echo $$							//打印当前bash进程id
-
-
-
-lsof -op $$		//当前bash进程打开了哪些文件
-exec 8< ooxx.txt   //8文件描述符
-cd /proc/$$/fd	//进入文件描述符，记录文件信息
-read a 0<& 8		//8表示文件描述符id
-echo $a
-
-输入输出重定向
-ls ./
-ls ./ 1> ~/ls.out	//输出重定向
-head tail | 管道
-
-父子进程
---------------------------------------
-vm.dirty内核设置？？？
-```
-
-
 
 #### 区块链
 
