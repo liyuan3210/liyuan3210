@@ -1,5 +1,19 @@
 # docker
 
+课程：
+
+https://www.bilibili.com/video/BV18b411K7q7?from=search&seid=3006540982052779079
+
+**二进制安装：**
+
+https://docs.docker.com/engine/install/binaries/#install-static-binaries
+
+配置selinux
+
+https://blog.csdn.net/java0506/article/details/108600504
+
+
+
 ## 一．docker安装
 
 ```
@@ -192,12 +206,38 @@ docker images
 	sudo docker run ubuntu:15.10 /bin/echo "Hello world" //创建容器并进入
 
 	交互式容器
+	docker run -it centos 	//--name可省略
 	docker run --name demo1 -i -t ubuntu:15.10 /bin/bash	//创建容器并进入,命名容器demo1
 	docker run --name demo1 -it ubuntu:15.10 /bin/bash		//-i -t 可以合并写成 -it
 	docker run --h //自定义容器主机名
 	退出：exit或CTRL+D
+		 ctrl+P+Q	（容器不停止退出）
+		 批量删除镜像，容器
 
 	启动容器(后台)
+	docker run -d centos 	//后台启动过，生成hash容器id，并立刻退出(docker后台运行必须要有个前台进程)
+		docker run -d centos /bin/bash -c "while true; do echo hello world; sleep 3; done"
+	查看容器日志	docker logs -f -t --tail 容器id
+		docker run -it centos /bin/bash	//`/bin/bash`可以不用添加
+	查看容器运行进程：
+		docker top 4a3adf
+	查看容器内部细节
+		docker inspect 4a3adf
+	进入正在运行容器并以命令交互
+		docker attach 4a3adf	//进入容器,貌似只有用-it创建的容器才可以这样进去
+		docker exec -t 4a3adf ls -l /	//直接拿出容器命令执行结果
+				docker exec -it 4a3adf /bin/bash	//有点类似attach,但非-it创建的容器都可以进去
+	从容器内拷贝文件到主机
+	docker cp 4a3adf:/tmp/yum.log /yum.log
+	
+	
+	4a3956f3f1ac
+	
+	docker exec -it 4a3956f3f1ac /bin/bash
+	
+	
+	
+	
 	docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 	-d表示后台运行
 	2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63
@@ -208,6 +248,7 @@ docker images
 
 	测试
 	curl http://[continer IP]
+	
 
 4.查看容器
 	docker ps	//查看启动的容器
