@@ -231,12 +231,23 @@ docker images
 	docker cp 4a3adf:/tmp/yum.log /yum.log
 	
 	
-	4a3956f3f1ac
+	docker run -it -p 8080:8080 centos
+		-p 暴露端口:docker内部端口
+		-P	随机端口
+	docker run -it centos	//打印日志,加-d可以后台启动
 	
-	docker exec -it 4a3956f3f1ac /bin/bash
+	基于容器副本制作成一个新的镜像
+	docker commit -m="描述信息" -a="作者" 容器id 要创建镜像名称:标签
 	
 	
 	
+	容器数据卷（目录自动创建）：
+		命令行
+		docker run -it -v /宿主机绝对路径目录:/容器内路径目录 镜像名称
+		dockerfile命令指定：
+			VOLUME ["/data1","/data2"]
+			有个宿主机有个默认目录(使用inspect查看):/var/lib/docker/volumes/
+			
 	
 	docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 	-d表示后台运行
