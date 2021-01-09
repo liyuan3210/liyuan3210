@@ -218,7 +218,7 @@ docker images
 	docker run -d centos 	//后台启动过，生成hash容器id，并立刻退出(docker后台运行必须要有个前台进程)
 		docker run -d centos /bin/bash -c "while true; do echo hello world; sleep 3; done"
 	查看容器日志	docker logs -f -t --tail 容器id
-		docker run -it centos /bin/bash	//`/bin/bash`可以不用添加
+		docker run -it centos /bin/bash	//`/bin/bash`可以不用添加，因为镜像dockerfile里面默认就有了
 	查看容器运行进程：
 		docker top 4a3adf
 	查看容器内部细节
@@ -242,11 +242,51 @@ docker images
 	
 	
 	容器数据卷（目录自动创建）：
+		dockerfile文件名称dockerfile2
+		FROM centos
+		VOLUME ["/data1","/data2"]
+		CMD echho "finished,------success"
+		CMD /bin/bash
+		
+		docker build -f dockerfile2 -t ly/centos .
+		
 		命令行
 		docker run -it -v /宿主机绝对路径目录:/容器内路径目录 镜像名称
 		dockerfile命令指定：
 			VOLUME ["/data1","/data2"]
 			有个宿主机有个默认目录(使用inspect查看):/var/lib/docker/volumes/
+			
+		数据卷容器(容器间传递共享)--volumes-from
+			启动一个父容器,在data2里面新增内容
+			docker run -it --name dc01 ly/centos
+			新建dco2容器继承dc01
+			docker run -it --name dc02 --volumes-from dco1 ly/centos
+			新建dco3容器继承dc01
+			docker run -it --name dc03 --volumes-from dco1 ly/centos	
+			
+			父类，子类 文件修改都会相互同步.
+			删除父，子容器，也不会影响关联的容器
+			
+			
+			
+		dockerfile解析
+			每条指令都会创建一个新的镜像层
+		指令集
+			FROM 基础镜像
+			MAINTAINER 作者+作者邮箱
+			RUN 容器构建时需要运行的命令
+			EXPOSE 暴露端口号
+			WORKDIR 登录docker时的工作目录
+			EVN 用来构建过程中设置环境变量
+			COPY 直接拷贝 
+			ADD(类似COPY,但比COPY强大) 拷贝+自解压缩
+			VOLUME 容器数据卷
+			CMD(与RUN类似) 指定容器运行时要运行的命令，只有最后一个生效，会被docker run 之后参数替换
+			ENTRYPOINT(与CMD类似) CMD，但docker run 之后参数替换，但ENTRYPOINT会被追加
+			ONBUILD 当构建一个被继承的dockerfile时运行命令，父镜像在被子集成后父镜像的onbuild被触发
+			
+			
+			
 			
 	
 	docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
