@@ -16,19 +16,11 @@ https://blog.csdn.net/java0506/article/details/108600504
 
 ## 一.docker安装
 
-## 二.docker镜像操作
-
-## 三.docker容器操作
-
-## 四.dockerfile
-
-
-
 ```
 官网：https://www.docker.com
 	有两个版本
 	ce社区版与ee企业版
------------------------------------------------------一部分-----------------------------------------------
+	
 windows安装
 	https://github.com/boot2docker
 	包含如下组件：
@@ -37,146 +29,137 @@ windows安装
 	3.boot2docker 
 	4.Linux 镜像
 	5.Boot2Docker 的管理工具
-
-一.ubuntu server16.04.3安装:
-	发行版:xenial
-	进入目录:pool/stable/ and choose amd64
-
-官方安装步骤:
-	https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/
-
-	apt-get update	//更新
-
-	apt-get install \	//安装插件
-		apt-transport-https \
-		ca-certificates \
-		curl \
-		software-properties-common
-
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -	//添加key
-
-	apt-key fingerprint 0EBFCD88	//查看
-
-	add-apt-repository \	//添加机型支持
-	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-	   $(lsb_release -cs) \
-	   stable"
-
-	apt-get update	//更新
-
-	apt-get install docker-ce	//安装 or docker-ce=<VERSION> "18.02.0-ce"	?
-
-安装deb(如果要安装指定版本deb,请先运行下面命令):
-	https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/
-	运行安装:
-	dpkg -i docker-ce_17.12.1_ce-0_ubuntu_amd64.deb
-
-	安装
-	apt-get -f install
-
-	当要以非root用户可以直接运行docker时,执行如下命令
-	sudo usermod -aG docker yourName
 	
-	安装deb包
-	sudo dpkg -i docker-ce_18.09.4~3-0~ubuntu-bionic_amd64.deb docker-ce-cli_18.09.4~3-0~ubuntu-bionic_amd64.deb containerd.io_1.2.5-1_amd64.deb 
-
-私有仓库搭建registry
+一.yum方式安装
+	https://docs.docker.com/engine/install/centos/
+	1.添加docker安装yum源
+        $ sudo yum install -y yum-utils
+        $ sudo yum-config-manager \
+            --add-repo \
+            https://download.docker.com/linux/centos/docker-ce.rep
+            
+    2.查看指定docker版本
+    	$ yum list docker-ce --showduplicates | sort -r
+    	
+    3.安装docker指定版本
+    	$ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    	
+   	4.启动服务/自启
+   		$ sudo systemctl start docker
+   	5.验证
+		$ sudo docker run hello-world
+   	6.反安装
+   		$ sudo yum remove docker-ce docker-ce-cli containerd.io
+   		$ sudo rm -rf /var/lib/docker
+    
+二.二进制安装
+	https://docs.docker.com/engine/install/binaries/
+	1.下载二级制包并解压
+		$ tar xzvf /path/to/<FILE>.tar.gz
+	2.拷贝安装到/usr/bin/
+		$ sudo cp docker/* /usr/bin/
+	3.启动docker服务
+		$ sudo dockerd &
+   	4.验证
+		$ sudo docker run hello-world
+		
+三.镜像私服安装registry
 	https://docs.docker.com/registry/#basic-commands	//官方安装步骤
+	https://docs.docker.com/registry/deploying/
+	1.启动并注册
+        $ docker pull registry:2
+        $ docker run -d -p 5000:5000 -v /var/lib/registry:/var/lib/registry --restart=always --name registry registry:2
+            -v 宿主机目录:容器目
+    2.验证与测试
+    	浏览器查看
+		http://192.168.127.130:5000/v2/_catalog
 
-	获取镜像
-	docker pull registry:2
-
-	docker run -d -p 5000:5000 -v /var/lib/registry:/var/lib/registry --restart=always --name registry registry:2
-	-v 宿主机目录:容器目录
-
-	浏览器查看
-	http://192.168.127.130:5000/v2/_catalog
-
-	查看hw仓库tag
-	http://192.168.127.130:5000/v2/hw/tags/list
+		查看hw仓库tag
+		http://192.168.127.130:5000/v2/hw/tags/list
 	
-	删除仓库镜像(官方是不建议删除的,因为会导致依赖的容器无法运行):
-	直接进入/var/lib/registry/docker/registry/v2/repositories目录,
-	删除仓库名即可
+		删除仓库镜像(官方是不建议删除的,因为会导致依赖的容器无法运行):
+			直接进入/var/lib/registry/docker/registry/v2/repositories目录,
+			删除仓库名即可
+			
+        获取digest值
+        curl -I -X GET http://192.168.127.130:5000/v2/hw/manifests/latest
+
+        curl -X DELETE http://192.168.127.130:5000/v2/hw/manifests/sha256:9abfef7f7c24a0ea1a7736b90a180d1d1ff8c880aa37205ded5541e004f6f04b
+
+        相同问题解决方法
+            http://www.itkeyword.com/doc/5815940265600701490/why-cant-i-delete-a-layer-in-my-private-docker-registryv2
+
+        私有仓库搭建
+        	https://www.linuxidc.com/Linux/2017-02/141054.htm
+        	
+四.客户端配置文件（加速器配置）
+	1.加速器配置(centos)
+        腾讯加速地址:https://mirror.ccs.tencentyun.com
+        vi /etc/docker/daemon.json
+        {
+          "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"]
+        }
 	
-	获取digest值
-	curl -I -X GET http://192.168.127.130:5000/v2/hw/manifests/latest
+        配置后重启
+        systemctl restart docker
 
-	curl -X DELETE http://192.168.127.130:5000/v2/hw/manifests/sha256:9abfef7f7c24a0ea1a7736b90a180d1d1ff8c880aa37205ded5541e004f6f04b
+	2.ubuntu配置
+		registry服务端默认开启的是http访问,而客户端默认访问是https:
+        需要在客户端/etc/docker/daemon.json添加如下内容(没有此文件需要新增)
+        { "insecure-registries":["192.168.127.130:5000"] }
+        然后重启客户端服务
+        /etc/init.d/docker restart
 
-	相同问题解决方法
-	http://www.itkeyword.com/doc/5815940265600701490/why-cant-i-delete-a-layer-in-my-private-docker-registryv2
+        ubuntu下docker配置文件
+        	vi /etc/default/docker
+
+        ubuntu默认安装目录：
+        	/var/lib/docker
+
+        启动/停止docker后台服务
+            service docker start
+            service docker stop
+```
+
+## 二.docker镜像管理
+
+```
+一.常用命令
+	docker images					//显示所有镜像
+	docker pull nginx 				//拉取nginx镜像
+	docker rmi hello-world			//删除一个镜像,直接删除(docker rmi hello-world -f)
+	docker search nginx				//查找镜像
 	
-	私有仓库搭建
-	https://www.linuxidc.com/Linux/2017-02/141054.htm
+二.镜像导入导出
+    http://blog.csdn.net/u014166319/article/details/62043802
 
-docker客户端配置:
-	registry服务端默认开启的是http访问,而客户端默认访问是https:
-	需要在客户端/etc/docker/daemon.json添加如下内容(没有此文件需要新增)
-	{ "insecure-registries":["192.168.127.130:5000"] }
-	然后重启客户端服务
-	/etc/init.d/docker restart
-	
-	ubuntu下docker配置文件
-	vi /etc/default/docker
-	
-	测试运行hello-world
-	sudo docker run hello-world
+    http://download.csdn.net/download/yunfwe/10219648
+    完整的apt支持。使用方式：docker load -i ubuntu_16.04.3-image.tar.gz
 
-	ubuntu默认安装目录：
-	/var/lib/docker
+    docker镜像导入导出(save,load,export,import)
+    https://blog.csdn.net/ncdx111/article/details/79878098
 
-启动/停止docker后台服务
-	service docker start
-	service docker stop
+    docker镜像保存(从仓库保存)
+        示例 
+        docker save -o nginx.tar nginx:latest 
+        或 
+        docker save > nginx.tar nginx:latest 
 
-docker安装(old)?
-	wget -qO- https://get.docker.com/ | sh	//貌似下载不了,获取最新docker安装包
+    示例 
+        docker import nginx-test.tar nginx:imp 
+        或 
+        cat nginx-test.tar | docker import - nginx:imp
+		
+三.镜像上传
 
-	当要以非root用户可以直接运行docker时,执行如下命令
-	sudo usermod -aG docker yourName
 
-二.镜像管理:
-在线查看镜像网站
+1.docker在线查看镜像网站
 https://hub.docker.com
-
 	docker login	//登录
 
 镜像上传:
 	docker tag ubuntu:16.04.3 192.168.209.132:5000/ubuntu:v1 //修改为规范的镜像
 	docker push 192.168.209.132:5000/ubuntu:v1	//推送
-
-列出镜像
-docker images
-
-获取一个镜像
-docker pull ubuntu:16.04
-
-删除镜像
-docker rmi ubuntu:16.04
-
-查找镜像
-docker search ubuntu
-
-加载镜像
-http://blog.csdn.net/u014166319/article/details/62043802
-
-http://download.csdn.net/download/yunfwe/10219648
-完整的apt支持。使用方式：docker load -i ubuntu_16.04.3-image.tar.gz
-
-docker镜像导入导出(save,load,export,import)
-https://blog.csdn.net/ncdx111/article/details/79878098
-
-docker镜像保存(从仓库保存)
-	示例 
-	docker save -o nginx.tar nginx:latest 
-	或 
-	docker save > nginx.tar nginx:latest 
-	
-示例 
-	docker import nginx-test.tar nginx:imp 
-	或 
-	cat nginx-test.tar | docker import - nginx:imp
 
 利用iso文件创建镜像
 https://www.jianshu.com/p/f8f851318165
@@ -193,7 +176,6 @@ ngrok镜像代理:
 	./ngrok http 5000
 	docker pull 225b2f48.ngrok.io/ubuntu:v1
 	
-	
 问题
 docker load -i centos-7-x86_64-docker.tar.xz
 open /var/lib/docker/tmp/docker-import-957113588/dev/json: no such file or directory
@@ -203,8 +185,16 @@ open /var/lib/docker/tmp/docker-import-957113588/dev/json: no such file or direc
 cat centos-7-x86_64-docker.tar.xz | docker import - centos-7-x86_64
 
 docker images
-
 ```
+
+
+
+## 三.docker容器操作
+
+## 四.dockerfile
+
+
+
 
 ## 二.docker命令使用
 
