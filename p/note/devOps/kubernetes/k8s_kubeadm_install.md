@@ -29,6 +29,8 @@
 二.安装主节点
 	阿里云yum镜像源：
 		https://developer.aliyun.com/mirror/
+	腾讯云镜像源：
+		https://mirrors.cloud.tencent.com/
 	1.安装docker
 		yum install -y yum-utils device-mapper-persistent-data lvm2	//用到就装
 		yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
