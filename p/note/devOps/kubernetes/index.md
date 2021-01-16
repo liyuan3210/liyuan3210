@@ -2,13 +2,27 @@
 
 ## 网课
 
+(尚硅谷new)
+
+https://www.bilibili.com/video/BV1GT4y1A756?from=search&seid=4051004465499992104	
+
+(尚硅谷old)
+
 https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=14589942077200278934
+
+https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=4051004465499992104
+
+dashboard安装
+
+https://www.bilibili.com/video/BV1PJ411h7Sw?from=search&seid=4051004465499992104
 
 ## kubernetes安装
 
 [1.kubeadm安装](k8s_kubeadm_install.md)
 
 [2.kubenetes,etcd,flannel手动安装](k8s_etcd_flannel_install.md)
+
+[3.k8s核心](k8s_core_cmd.md)
 
 ## 一．基础
 
