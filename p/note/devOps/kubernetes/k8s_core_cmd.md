@@ -798,6 +798,220 @@ LoadBalancer功能更加强大？？？
 
 ### 五．配置管理secret,configMap
 
+**secret:**
+
+作用：加密数据存在etcd里面，让pod容器以挂载volume方式进行访问
+
+场景：凭证
+
+base64编码linux脚本：echo -n 'admin' | base64
+
+```
+# 创建secret加密
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: MWYyZDFlMmU2N2Rm
+  
+# 以上面内容创建secret.yaml
+$ kubectl create -f secret.yaml
+# 查看
+$ kubectl get secret
+```
+
+两种方式使用:
+
+1）.以变量形式挂载到容器中
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+
+# 上面内容，创建文件secret-var.yaml
+$ kubect apply -f secret-var.yaml
+# 查看pod
+$ kubectl get pods
+# 进入pod,并验证
+$ kubectl exec -it mypod bash
+$ echo $SECRET_USERNAME			//进入pod执行
+$ echo $SECRET_PASSWORD			//进入pod执行
+```
+
+2）.以volume方式进行访问
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+
+# 如果用变量形式挂载，需要先删除mypod
+$ kubect delete -f secret-val.yaml
+# 根据上面内容创建 secret-vl.yaml,并创建发布
+$ kubect apply -f secret-vl.yaml
+# 查看pod
+$ kubectl get pods
+# 进入pod,并验证
+$ kubectl exec -it mypod bash
+# 进入容器后查看/etc/foo
+$ cat password
+$ cat username
+```
+
+**ConfigMap:**
+
+跟secret一样，但是不是加密的数据
+
+场景：配置文件
+
+可以先删掉secret与mypod
+
+$ kubectl delete secret --all	//这是都删掉
+
+$ kubectl delete Pod --all	//这是都删掉
+
+```
+# 新建redis.properties配置文件
+redis.host=127.0.0.1
+redis.port=6379
+redis.password=123456
+
+# 创建configMap
+$ kubectl create configmap redis-config --from-file=redis.properties
+# 查看
+$ kubectl get cm
+# 查看详细
+$ kubectl describe cm redis-config
+```
+
+两种方式使用：
+
+1）volume方式挂载到容器
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["/bin/sh","-c","cat /etc/config/redis.properties"]
+      volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: redis-config
+  restartPolicy: Never
+  
+# 上面内容创建cm.yaml文件
+$ kubectl apply -f cm.yaml
+# 查看pod
+$ kubectl get pods
+# 查看日志
+$ kubectl logs mypod
+```
+
+2）以变量形式挂载到pod容器中
+
+做了上面首先要删除
+
+kubectl delete -f cm.yaml
+
+步骤：
+
+​		1>创建yaml,声明变量信息 configmap创建
+​		2>以变量挂载
+
+声明变量信息：
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfig
+  namespace: default
+data:
+  special.level: info
+  special.type: hello
+
+# 上面内容创建myconfig.yaml文件
+$ kubectl apply -f myconfig.yaml
+# 查看pod
+$ kubectl get cm
+```
+容器验证
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["/bin/sh","-c","echo $(LEVEL) $(TYPE)"]
+      env:
+        - name: LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: myconfig
+              key: special.level
+        - name: TYPE
+          valueFrom:
+            configMapKeyRef:
+              name: myconfig
+              key: special.type
+  restartPolicy: Never
+  
+# 上面文件保存为config-var.yaml并发布
+$ kubectl apply -f config-var.yaml
+# 查看
+$ kubectl get pods
+# 查看cm
+$ kubectl get cm
+# 通过日志查看
+$ kubectl logs mypod
+```
+
+
+
 ### 六．集群安全机制RBAC
 
 ### 七．Ingress
