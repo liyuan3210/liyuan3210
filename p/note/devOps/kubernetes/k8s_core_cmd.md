@@ -383,11 +383,94 @@ spec:
 
 ４．污点和污点容忍
 
+nodeSelector和nodeAffinity：pod调度到某些节点上，pod属性，调度时候实现
 
+Taint污点：节点不做普通分配调度，是节点属性
 
+应用场景：
 
+```
+１．专用节点
+２．配置特点硬件节点
+３．基于Taint驱逐
+```
+
+查看污点:
+
+```
+$ kubectl describe node node1 | grep Taint
+    污点值有：
+    *NoSchedule:一定不被调度
+    *PreferNoSchdule:尽量不被调度
+    *NoExecute:不会调度，并且还会驱逐Node已有pod
+```
+
+为节点添加污点: 
+
+kubectl taint node [node] key=value:污点三个值
+
+```
+打污点前
+$ kubectl create deployment web --image=nginx	//创建一个pod
+$ kubectl scale deployment web --replicas=5		//扩５个
+$ kubectl get pods -o wide	//查看pod分配节点情况,平均分配
+删除pod
+$ kubectl delete deployment web
+
+1.打污点:
+$ kubectl taint node node1 env_role=yes:NoSchedule	//添加污点
+$ kubectl describe node node1 | grep Taint	//查看
+打污点前后验证
+$ kubectl create deployment web --image=nginx	//创建一个pod
+$ kubectl scale deployment web --replicas=5		//扩５个
+$ kubectl get pods -o wide	//查看pod分配节点情况,平均分配
+
+2.删除污点：
+kubectl taint node node1 env_role:NoSchedule-
+
+3.污点容忍（即便接是NoSchedule，也可以被调度）：
+spec:
+  tolerations:
+  - key: "key"			//值env_role
+    operator: "Equal"
+    value: "value"		//值yes
+    effect: "NoSchedule"
+  containers:
+  - name: webdemo
+    image: nginx
+
+```
 
 ### 三．controller介绍
+
+什么是controller:
+
+```
+在集群上管理和运行容器的对象
+*确保预期的pod副本数量
+
+*无状态应用部署
+*有状态应用部署
+
+*确保所有node运行同一个pod
+
+*一次性和定时任务
+
+
+
+Pod和Controller关系:
+	需要在pod上打label标签，控制器上也要打上相同标签(selector)
+	pod和controller之间通过label标签建立关系,pod通过controller实现应用的运维，比如伸缩．滚动升级等等
+```
+
+常见控制器deployment应用场景：
+
+```
+*部署无状态应用
+*管理pod和replicaSet
+*部署，滚动升级等功能
+应用场景:web服务,微服务
+```
 
 ### 四.service介绍
 
