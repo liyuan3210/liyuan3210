@@ -472,7 +472,266 @@ Pod和Controller关系:
 应用场景:web服务,微服务
 ```
 
-### 四.service介绍
+（1）deployment部署无状态应用：
+
+```
+# 生成文件
+$ kubectl create deployment web --image=nginx --dry-run -o yaml > web.yaml
+# 根据yaml部署应用
+$ kubectl apply -f web.yaml
+# 查看
+$ kubectl get pods -o wide
+# 对外发布（暴露对外端口号）
+$ kubectl expose deployment web --port=80 --type=NodePort --target-port=80 --name=web1  -o yaml > web1.yaml
+# 根据yaml部署应用
+$ kubectl apply -f web1.yaml
+# 查看状态及对外访问端口号
+$ kubectl get pods,svc -o wide
+
+#通过节点访问
+http://NodePort:port
+```
+
+（2）升级回滚，弹性伸缩
+
+升级回滚：
+
+```
+# 首先基于上面web.yaml修改nginx镜像版本为1.14,还有副本数
+# kubectl create deployment web --image=nginx --dry-run -o yaml > web.yaml
+$ kubectl apply -f web.yaml
+# 查看启动状态
+$ kubectl get pods -o wide
+# 通过命令docker images查看其它节点nginx镜像版本
+$ docker images
+
+# 1.版本升级
+# nginx 升级版本
+$ kubectl set image deployment web nginx=nginx:1.15
+# 查看升级状态
+$ kubectl rollout status deployment web
+
+# 2.版本回退
+# 查看历史版本
+$ kubectl rollout history deployment web
+# 版本回退两种方式
+$ kubectl rollout undo deployment web //回退上一版本
+$ kubectl rollout undo deployment web --to-revision=2 //回退指定版本,根据history查看revison指定
+```
+
+弹性伸缩：
+
+```
+$ kubectl scale deployment web --replicas=10
+
+```
+
+（3）部署有状态应用
+
+无状态特点：
+
+```
+*认为每个pod都一样的
+*没有顺序要求
+*不用考虑在哪个node运行
+*随意进行伸缩和扩展
+```
+
+有状态特点：
+
+```
+*上面因素都需要考虑到
+*让每个pod独立的，保持pod启动顺序和唯一性
+*唯一的网络标识符，持久存储
+*有序，比如mysql
+```
+
+应用部署：
+
+无头service，ClusterIp:none,
+
+SatefulSet部署有状态
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-statefulset
+  namespace: default
+spec:
+  serviceName: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        prots:
+        - containerPort: 80
+        
+#执行：
+$ kubectl apply -f sts.yaml
+
+# 查看pod
+$ kubectl get pods
+# 使用唯一名称
+nginx-statefulset-0
+nginx-statefulset-1
+nginx-statefulset-2
+
+# 查看service
+$ kubectl get svc	//CLUSTER-IP值为None
+
+```
+
+deployment和statefueset区别:有身份的(唯一标识)
+
+* 根据主机名+按照一定规则生成域名
+* 每个pod有唯一主机名
+* 唯一域名：
+  * 格式：主机名称 . service名称 . 名称空间 . svc . cluster . local
+  * 实例：nginx-statefulset-0.nginx.default.svc.cluster .local
+
+
+
+（4）DaemonSet,确保所有node运行同一个pod（守护进程）
+
+场景：在每个node上运行一个Pod,新加入的node也同样运行在一个pod里面
+
+实例：在每个node节点安装数据采集工具
+
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-test
+  labels:
+    app: filebeat
+spec:
+  selector:
+    matchLabels:
+      app: filebeat
+  template:
+    metadata:
+      labels:
+        app: filebeat
+    spec:
+      containers:
+      - name: logs
+        image: nginx
+        ports:
+        - containerPort: 80
+        valueMounts:
+        - name varlog
+          mountPath: /tmp/log
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+
+# 部署前需要删掉
+$ kubectl delete statefulset --all	//删掉statefulset
+$ kubectl delete svc nginx	//删除service
+# 部署
+$ kubectl apply -f ds.yaml
+# 查看
+$ kubectl get pods
+# 进入到某一个pod里面查看
+$ kubectl exec -it ds-test-cbk6v bash
+```
+
+（5）一次任务和定时任务
+
+
+
+### 四.srvice介绍 
+
+定义一组pod访问规则：
+
+```
+service解决的问题
+1.防止pod失联，因为pod的ip是不断变化的（服务发现）
+2.定义一组pod访问策略(负载均衡)
+
+pod和service关系
+根据label和selector建立关系的
+
+service对外有一个ip叫vip
+
+```
+
+常见service类型：
+
+```
+查看service类型：
+$ kubectl expose --help
+常见类型有：
+ClusterIP(Default)：集群内部使用
+NodePort：对外暴露访问时候
+LoadBalancer：对外访问应用使用，公有云
+```
+
+service演示：
+
+```
+# 首先基于上面web.yaml，发布应用，kubectl get pods查看
+# kubectl create deployment web --image=nginx --dry-run -o yaml > web.yaml
+$ kubectl apply -f web.yaml
+# 基于pod上面导出service
+$ kubectl expose deployment web --port=80 --target-port=80 --dry-run -o yaml > service1.yaml
+
+# 查看service（创建默认ClusterIP类型，集群内部可以访问）
+$ kubectl get svc
+
+# 修改上面service1.yaml文件
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web
+  name: web1	//名字改一下
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web
+  type: NodePort	//添加的
+status:
+  loadBalancer: {}
+
+# 执行发布
+$ kubectl apply -f service1.yaml
+
+# 查看,通过任何节点及端口可以访问
+$ kubectl get svc
+```
+
+LoadBalancer功能更加强大？？？
+
+
 
 ### 五．配置管理secret,configMap
 
