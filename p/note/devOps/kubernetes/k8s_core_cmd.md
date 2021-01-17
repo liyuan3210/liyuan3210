@@ -662,6 +662,69 @@ $ kubectl exec -it ds-test-cbk6v bash
 
 （5）一次任务和定时任务
 
+一次任务job：
+
+```
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: perl
+        command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4	//失败后重启4次,默认是6次
+
+# 1.上面文件保存job.yaml,发布
+$ kubectl create -f job.yaml
+# 2.查看,完成一次status为completed
+$ kubectl get pods -o wide
+
+# 3.查看job
+$ kubectl get jobs
+
+# 4.查看结果
+$ kubectl logs pi-qpqff
+# 5.删除job
+$ kubectl delete -f job.jaml
+```
+
+定时任务cronjob：
+
+```
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  template:
+    spec:
+      containers:
+      - name: hello
+        image: busybox
+        args:
+        - /bin/sh
+        - -c
+        - date; echo Hello from the Kubernetes cluster   
+      restartPolicy: OnFailure
+      
+# 1.保存上面文件为cronjob.yaml
+$ kubectl apply -f conjob.yaml
+# 2.查看,每执行一次多一个hello-1258374537-wkn79，completed
+$ kubectl get pods -o wide
+# 3.查看job执行情况
+$ kubectl get cronjobs
+# 4.查看结果
+$ kubectl logs hello-1258374537-wkn79
+# 5.删除？？？
+
+```
+
 
 
 ### 四.srvice介绍 
