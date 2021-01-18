@@ -12,7 +12,7 @@ https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=1458994207720027893
 
 https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=4051004465499992104
 
-dashboard安装
+dashboard安装，证书可用年限修改(k8s默认是1年)
 
 https://www.bilibili.com/video/BV1PJ411h7Sw?from=search&seid=4051004465499992104
 
