@@ -1014,6 +1014,89 @@ $ kubectl logs mypod
 
 ### 六．集群安全机制RBAC
 
+认证 -> 鉴权(授权) -> 准入控制
+
+进行访问时候，需要经过apiserver做统一协调
+
+RBAC鉴权:
+
+```
+规划(资源[pod,node...],权限[create,get...])
+↑
+↑
+↑
+角色（Role ClusterRole）<---[角色绑定]--->主体(user group,serviceaccount)
+
+*角色：
+role:特定命名空间访问权限
+clusterRole:所有命名空间访问权限
+
+*角色绑定：
+roleBinding:角色绑定到主体
+ClusterRoleBinding:集群角色绑定到主体
+
+*主体
+user:用户
+group:用户组
+serviceAccount:服务账号
+
+```
+
+实际操作：
+
+```
+1.创建命名空间
+$ kubectl create ns roledemo
+$ kubectl get ns	//查看命名空间
+
+2.在创建的命名空间创建pod
+$ kubectl run nginx --image=nginx -n roledemo
+
+3.创建角色
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: roledemo
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get","watch","list"]
+  
+# 上面内容创建rbac-role.yaml
+$ kubectl apply -f rbac-role.yaml
+# 查看roledemo命名空间角色
+$ kubectl get role -n roledemo
+
+4.创建角色绑定
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: roledemo
+  name: read-pods
+subjects:
+- kind: User
+  name: mary # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role # this must be Role or ClusterRole
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+  
+# 上面内容创建rbac-rolebinding.yaml
+$ kubectl apply -f rbac-rolebinding.yaml
+# 查看
+$ kubectl get role,rolebinding -n roledemo
+
+5.使用证书识别身份
+视频里面有个脚本rabc-user.sh,需要ca-config.json,ca.csr,ca-csr.json,ca-key.pem，ca.pem。
+执行后会生成一个mary-kubeconfig.
+$ kubectl get pods -n roledemo	//可以查看
+$ kubectl get svc -n roledemo	//报No resources found in roledemo namespace
+
+建议在二进制搭建集群后再操作
+```
+
 ### 七．Ingress
 
 ### 八．Helm
