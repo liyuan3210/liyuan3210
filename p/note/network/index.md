@@ -44,4 +44,14 @@ sysprep(sid重新封装，双击sysprep，选择`通用`，点击`确定`)
 
 ## 问题
 
-[集线器，交换机，路由器区别](hub-switch-router.md)？？？
+[1.集线器，交换机，路由器区别](hub-switch-router.md)？？？
+
+2.ssh连接报错:ssh: Could not resolve hostname 15256m136e.imwork.net: Temporary failure in name resolution
+
+在有的机器上可以正常连接，有的机器不可以，报上面问题，解决办法如下：
+
+​			2.1>在能够连接的机器ping域名15256m136e.imwork.net，得到域名实际指向ip（103.46.128.45）
+
+​			2.2>在不能正常连接的机器配置一下hosts
+
+​						103.46.128.45 15256m136e.imwork.net
