@@ -12,10 +12,6 @@ https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=1458994207720027893
 
 https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=4051004465499992104
 
-dashboard安装，证书可用年限修改(k8s默认是1年)
-
-https://www.bilibili.com/video/BV1PJ411h7Sw?from=search&seid=4051004465499992104
-
 ## kubernetes安装
 
 [1.kubeadm安装](k8s_kubeadm_install.md)
@@ -23,6 +19,10 @@ https://www.bilibili.com/video/BV1PJ411h7Sw?from=search&seid=4051004465499992104
 [2.kubenetes,etcd,flannel手动安装](k8s_etcd_flannel_install.md)
 
 [3.k8s核心](k8s_core_cmd.md)
+
+###### 4.dashboard安装，证书可用年限修改(k8s默认是1年)
+
+https://www.bilibili.com/video/BV1PJ411h7Sw?from=search&seid=4051004465499992104
 
 ## 一．基础
 
