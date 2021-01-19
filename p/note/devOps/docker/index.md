@@ -591,40 +591,22 @@ docker-compose基本参数
 	相关语法 请参考
 	https://docs.docker.com/compose/compose-file/compose-file-v2/#compose-and-docker-compatibility-matrix
 	
+--------------------------	
 	
-
-灵雀云产品培训
-	http://52.175.9.161:28090
-	alauda/alauda
-	
-	http://10.19.156.111:28090/
-	账号：alauda
-	用户名: dev001
-	密码: 1qaz!QAZ
-
 	容器管理平台
 	业内建议使用Kubernetes
 	https://www.kubernetes.org.cn/3546.html
-	
 	https://www.kubernetes.org.cn/doc-25
 
 	HAProxy与Nginx
 	https://www.jianshu.com/p/d436a3e73d2f
 
+	培训老师github
 	https://github.com/kevinzwf
-
 	https://github.com/testalauda
 
-	52.175.12.30
-	
 	安装:
 	docker pull jenkins
 	docker run -p 8080:8080 -p 5000:5000 -d -v /var/jenkins_home jenkins
------------------------------------------------三部分-----------------------------------------------------
-配置中心
-https://github.com/ctripcorp/apollo
-
-搜索
-ElasticSearch/Kibana
 ```
 
