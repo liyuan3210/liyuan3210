@@ -191,19 +191,9 @@ docker images
 
 ## 三.docker容器操作
 
-## 四.dockerfile
-
-
-
-
-## 二.docker命令使用
-
 ```
-一.容器
-	容器中运行应用程序
-	sudo docker run ubuntu:15.10 /bin/echo "Hello world" //创建容器并进入
-
-	交互式容器
+一.基础命令
+交互式容器
 	docker run -it centos 	//--name可省略
 	docker run --name demo1 -i -t ubuntu:15.10 /bin/bash	//创建容器并进入,命名容器demo1
 	docker run --name demo1 -it ubuntu:15.10 /bin/bash		//-i -t 可以合并写成 -it
@@ -237,9 +227,8 @@ docker images
 	基于容器副本制作成一个新的镜像
 	docker commit -m="描述信息" -a="作者" 容器id 要创建镜像名称:标签
 	
-	
-	
-	容器数据卷（目录自动创建）：
+二.容器数据卷
+容器数据卷（目录自动创建）：
 		dockerfile文件名称dockerfile2
 		FROM centos
 		VOLUME ["/data1","/data2"]
@@ -264,10 +253,12 @@ docker images
 			
 			父类，子类 文件修改都会相互同步.
 			删除父，子容器，也不会影响关联的容器
-			
-			
-			
-		dockerfile解析
+```
+
+## 四.dockerfile
+
+```
+dockerfile解析
 			每条指令都会创建一个新的镜像层
 		指令集
 			FROM 基础镜像
@@ -282,11 +273,18 @@ docker images
 			CMD(与RUN类似) 指定容器运行时要运行的命令，只有最后一个生效，会被docker run 之后参数替换
 			ENTRYPOINT(与CMD类似) CMD，但docker run 之后参数替换，但ENTRYPOINT会被追加
 			ONBUILD 当构建一个被继承的dockerfile时运行命令，父镜像在被子集成后父镜像的onbuild被触发
-			
-			
-			
-			
-	
+```
+
+
+
+
+## 二.docker命令使用
+
+```
+一.容器
+	容器中运行应用程序
+	sudo docker run ubuntu:15.10 /bin/echo "Hello world" //创建容器并进入
+
 	docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 	-d表示后台运行
 	2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63
