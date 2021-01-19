@@ -130,7 +130,7 @@ windows安装
 	docker rmi hello-world			//删除一个镜像,直接删除(docker rmi hello-world -f)
 	docker search nginx				//查找镜像
 	
-二.镜像导入导出
+二.镜像导出,导入
     http://blog.csdn.net/u014166319/article/details/62043802
 
     http://download.csdn.net/download/yunfwe/10219648
