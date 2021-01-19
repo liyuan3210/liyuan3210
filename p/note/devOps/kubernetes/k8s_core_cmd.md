@@ -1,5 +1,5 @@
 # k8s核心
-测试集群命令：
+#### 测试集群命令：
 
 kubectl get nodes	//查看节点
 
@@ -1099,11 +1099,415 @@ $ kubectl get svc -n roledemo	//报No resources found in roledemo namespace
 
 ### 七．Ingress
 
+NodePort缺陷：
+
+1.每个节点上都会起到端口，访问时候通过节点ip+端口访问
+
+2.一个端口使用一次，一个端口对应一个应用
+
+3.实际访问中都是使用域名，根据不同域名转到不同端口服务中
+
+
+
+Ingress流程：
+
+​			【Ingress入口】
+
+域名1	，						域名2
+
+​	↓										↓
+
+service							service
+
+​	↓										↓
+
+pod1,pod2					pod3,pod4
+
+
+
+Ingress和Pod关联：
+
+*pod和Ingress通过service关联
+
+*Ingress作为统一入口，由srevice关联一组pod
+
+
+
+使用Ingress:
+
+第一步：部署Ingress controller
+
+​			选择官方维护nginx控制器，实现部署
+
+​			1）创建nginx应用，暴露端口NodePort
+
+​			$ kubectl create deployment web --image=nginx
+
+​			$  kubectl get pods	//查看
+
+​			2）创建service
+
+​			$ kubectl expose deployment  web --port=80 --target-port=80 --type=NodePort
+
+​			$ kubectl get svc
+
+第二步：部署Ingress controlle
+
+​			下载Ingress控制器yaml文件，有个地方需要注意HostNetwork修改为true
+
+```
+表示对外暴露host网络
+...
+kind: Deployment		//191行
+...
+spec:
+...
+  template:
+	...
+    spec:
+      hostNetWork: true		//修改此处
+```
+
+​			# 上面文件命名为ingress-conyaml
+
+​			$ kubectl apply -f ingress-conyaml
+
+​			# 查看Ingress状态
+
+​			$ kubectl get pods -n ingress-nginx（-n 后面跟名称控制）
+
+第三步：创建Ingress规则
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  rules:
+  - host: example.ingressdemo.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: 80
+# 上面文件创建ingress-http.yaml,创建一下
+$ kubectl apply -f ingress-http.yaml
+# 查看ingress-nginx在哪个节点上，可以在节点上netstat -lntp查看监听端口
+$ kubectl get pods -n ingress-nginx -o wide
+```
+
+最后配置宿主机hosts文件，上面查到的ip指向定义的域名即可
+
+192.168.44.145  example.ingressdemo.com
+
+最后宿主机上访问：example.ingressdemo.com
+
 ### 八．Helm
+
+官网：
+
+https://helm.sh/
+
+
+
+Helm类似linux下的yum/apt，是k8s下的包管理工具
+
+
+
+Helm三个重要概念:
+
+1>helm：是一个命令行工具
+
+2>chart：把yaml进行打包，是yaml一个集合
+
+3>relesase：基于chart部署的实体，应用级别版本管理
+
+
+
+Helm版本比较：
+
+v2版本(老版本)，v3版本(新版本)，
+
+1> v3版本删除Tiller
+
+2>release可以在不同命名空间重用
+
+3>将chart推送到docker仓库中
+
+V3版本架构：
+
+Helm chart	--->   kube-config   --->  kube-apiserver  --->  [deployment，service，ingress]
+
+
+
+1.Helm安装：
+
+下载压缩文件，直接解压到linux下的/usr/bin目录下面即可
+
+```
+//添加仓库
+$ helm repo add 仓库名称[自定义] https://charts.helm.sh/stable
+//查看仓库
+$ helm repo list
+//更新源
+$ helm repo update
+//删除源
+$ helm repo remove 仓库名称[自定义]
+```
+
+2.快速使用
+
+```
+# 搜索应用
+$ helm search repo xxx/weave
+# 根据搜索内容进行安装
+$ helm install ui xxx/weave
+# 查看安装之后状态
+$ helm list
+$ helm status ui
+# 查看svc
+$ kubectl get svc	//ui-weave-scope
+$ kubect edit svc ui	//编辑service的yaml文件,对外暴露端口,把ClusterIp改为NodePort
+```
+
+3.自定义chart部署
+
+```
+#使用名称创建chart，基础模板
+$ helm create mychart
+
+charts	//空文件夹
+Chart.yaml	//当前chart属性配置信息
+templates	//自己写的文件放在templates里面,删掉里面文件
+values.yaml	//yaml文件可以使用的局变量
+
+# 在templates文件夹创建两个yaml文件，先删除里面文件rm -rf *
+# 生成deployment.yaml
+$ kubectl create deployment web1 --image=nginx --dry-run -o yaml > deployment.yaml
+
+# 生成service.yaml需要先创建上面控制器web1,然后才能执行下面的生成语句，（为了验证可以先生成service.yaml后在执行kubectl delete deployment web1删除）
+$ kubectl expose deployment web1 --port=80 --target-port=80 --type=NodePort --dry-run -o yaml > service.yaml
+
+# 开始安装mychart
+$ helm install web1 mychart
+
+# 应用升级(修改后)
+$ helm upgrade web1 mychart
+```
+
+4.动态传参使用模板
+
+values.yaml（配置全局变量）	------>		在templates具体自定义文件中取值
+
+把变的值提取出来放在values.yaml里面。
+
+
+
+在values.yaml中定义值,大体有这几个地方不同的,可以自定义值的：
+
+```
+image: nginx
+tag: 1.16
+label: nginx
+port: 80
+replicas: 1
+```
+
+
+
+在templates的yaml文件中使用values.yaml
+
+```
+通过表达式使用全局变量：
+* {{ .Values.变量名称}}
+* {{ .Release.Name}}	//动态名称
+例如：
+	apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: {{ .Release.Name}}-deply
+    spec:
+      containers:
+      - name: nginx
+        image: {{ .Values.image}}
+     ......
+
+# 修改完后可以尝试运行，没问题就打印yaml内容
+$ helm install --dry-run web2 mychart
+# 没问题就运行
+$ helm install web2 mychart
+```
+
+
 
 ### 九．持久化存储
 
+**1.nfs存储：**
+
+首先找一台服务器，安装nfs，设置挂载路径并启动服务
+
+```
+1>centos安装: 
+$ yum install -y nfs-utils
+
+2>设置挂载路径(没有需要创建nfs目录)vi /etc/exports：
+/data/nfs *(rw.no_root_squash)
+
+3>启动服务（nfs服务端）
+$  systemctl start nfs
+
+4>需要在k8s节点也安装nfs
+$ yum install -y nfs-utils
+```
+
+在k8s集群部署，使用nfs持久存储
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dep1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: wwwroot
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: wwwroot
+          nfs:
+            server: 192.168.44.134
+            path: /data/nfs
+
+# 上面文件生成nfs-nginx.yaml,并发布
+$ kubectl apply -f nfs-nginx.yaml
+# 查看日志
+$ kubectl get pods
+$ kubectl describe pod nginx-dep1-231341234-2342
+# 进入pod查看文件目录/usr/share/nginx/html
+$ kubectl exec -it nginx-dep1-231341234-2342 bash
+
+# 进入nfs服务器，在/data/nfs目录里面创建一个index.html文件
+# 再进入pod 查看文件目录/usr/share/nginx/html
+$ kubectl exec -it nginx-dep1-231341234-2342 bash
+
+# 对外暴露端口,在浏览器查看
+$ kubectl expose deployment nginx-dep1 --port=80 --target-port=80 --type=NodePort
+```
+
+**2.pv和pvc:**
+
+PV(持久化存储，对存储资源进行抽象，对外提供可以调用的地方，叫生产者)
+
+PVC(用户调用，不需要关心内部实现细节,叫消费者)
+
+实现流程：
+
+1.应用/容器部署(通过pvc绑定pv)
+
+2.定义pvc（绑定pv）
+
+3.定义pv(数据存储服务器ip，路径，专业人员做的),
 
 
 
+pv与pvc匹配模式
 
+1.容量(如50G)，2.权限(如读写)
+
+
+
+实例:
+
+首先删除nfs-nginx，$ kubectl delete -f nfs-nginx.yaml
+
+```
+作用：
+	1.应用/容器部署
+	2.定义pvc
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dep1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: wwwroot
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: wwwroot
+          persistentVolumeClaim:
+            claimName: my-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+      
+# 上面内容保存pvc.yaml文件,执行部署
+$ kubectl apply -f pvc.yaml
+```
+
+定义pv：
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /data/nfs
+    server: 192.168.44.134
+    
+# 上面内容保存pv.yaml文件,执行部署
+$ kubectl apply -f pv.yaml
+```
+
+查看pv,pvc：
+
+$ kubectl get pv,pvc
+
+进入容器查看验证：
+
+$ kubectl get pods	//查看pod
+
+$ kubectl exec -it nginx-dep1-231341234-2342 bash	//查看/usr/share/nginx/html目录
