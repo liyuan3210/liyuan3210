@@ -2,7 +2,35 @@
 
 ```
 kubeadm集群安装：
+	操作系统：centos7
+	docker：docker-ce-18.06.1.ce-3.el7
+	k8s:kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
 	
+没有的：
+	1.将桥接的IPV4流量传递到iptables的链
+cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system # 生效
+
+	2.只在master添加hosts
+	ip master
+	ip node1
+	......
+	
+	3.时间同步
+	yum install ntpdate -y
+	ntpdate time.windows.com
+	集群时间同步方案
+	https://www.jianshu.com/p/efed5853bb40
+	
+	4.flannel安装问题
+	https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+	下载不了解决办法：
+        1.先到云实例机器上ping域名raw.githubusercontent.com,得到151.101.228.133
+        2.然后配置/etc/hosts域名指向151.101.228.133 raw.githubusercontent.
+        3.配置好后wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 ### 一.kubeadm安装（二版）
