@@ -273,6 +273,10 @@ dockerfile解析
 			CMD(与RUN类似) 指定容器运行时要运行的命令，只有最后一个生效，会被docker run 之后参数替换
 			ENTRYPOINT(与CMD类似) CMD，但docker run 之后参数替换，但ENTRYPOINT会被追加
 			ONBUILD 当构建一个被继承的dockerfile时运行命令，父镜像在被子集成后父镜像的onbuild被触发
+			
+dockerfile构建语法：
+	$ docker build -t 新镜像名字:tag .
+	$ docker build -f dockerfile文件名字 -t mycentos:v1.0.0 .
 ```
 
 
