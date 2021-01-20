@@ -278,8 +278,10 @@ dockerfile解析
 			ADD(类似COPY,但比COPY强大) 拷贝+自解压缩
 			VOLUME 容器数据卷
 			CMD(与RUN类似) 指定容器运行时要运行的命令，只有最后一个生效，会被docker run 之后参数替换
-			ENTRYPOINT(与CMD类似) CMD，但docker run 之后参数替换，但ENTRYPOINT会被追加
-			ONBUILD 当构建一个被继承的dockerfile时运行命令，父镜像在被子集成后父镜像的onbuild被触发
+				使用CMD,docker run -it mycentos:v1 -i会报错
+			ENTRYPOINT(与CMD类似)但docker run -it mycentos:v1 -i 之后参-i参数会追加
+				使用CMD,docker run -it mycentos:v1 -i会把-i参数追加到命令里面
+            ONBUILD 当构建一个被继承的dockerfile时运行命令，父镜像在被子集成后父镜像的onbuild被触发
 			
 dockerfile构建语法：
 	$ docker build -t 新镜像名字:tag .

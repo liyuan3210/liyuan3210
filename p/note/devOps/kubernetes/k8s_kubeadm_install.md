@@ -1,5 +1,10 @@
 # kubeadm安装kubernetes
 
+```
+kubeadm集群安装：
+	
+```
+
 ### 一.kubeadm安装（二版）
 
 ```
