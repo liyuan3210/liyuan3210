@@ -23,7 +23,7 @@ sysctl --system # 生效
 	yum install ntpdate -y
 	ntpdate time.windows.com
 	集群时间同步方案
-	https://www.jianshu.com/p/efed5853bb40
+	https://www.cnblogs.com/liushui-sky/p/9203657.html
 	
 	4.flannel安装问题
 	https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
