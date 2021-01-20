@@ -12,8 +12,6 @@ https://docs.docker.com/engine/install/binaries/#install-static-binaries
 
 https://blog.csdn.net/java0506/article/details/108600504
 
-
-
 ## 一.docker安装
 
 ```
@@ -29,6 +27,12 @@ windows安装
 	3.boot2docker 
 	4.Linux 镜像
 	5.Boot2Docker 的管理工具
+	
+下面两种方式安装都要关闭SELinux
+		setenforce 0	(设置SELinux 成为permissive模式 临时关闭selinux的)
+		或
+		vi /etc/sysconfig/selinux
+		SELINUX=disabled		//修改SELINUX属性
 	
 一.yum方式安装
 	https://docs.docker.com/engine/install/centos/
@@ -130,64 +134,67 @@ windows安装
 	docker rmi hello-world			//删除一个镜像,直接删除(docker rmi hello-world -f)
 	docker search nginx				//查找镜像
 	
-二.镜像导出,导入
-    http://blog.csdn.net/u014166319/article/details/62043802
+二.镜像托管
+1.docker官网默认仓库登录
+docker在线查看镜像网站(官网)
+https://hub.docker.com登录密码
+仓库登录：
+docker login	//默认登录官网仓库,输入hub.docker.com登录密码
+仓库登出：
+docker logout
 
-    http://download.csdn.net/download/yunfwe/10219648
-    完整的apt支持。使用方式：docker load -i ubuntu_16.04.3-image.tar.gz
-
+2.阿里/腾讯镜像操作：
+	密码见www-dev
+	阿里:
+        https://cr.console.aliyun.com	//管理控制台
+        sudo docker login --username=liyuan3210 registry.cn-shanghai.aliyuncs.com	//仓库登录,私有拉取,push时需要密码，密码可以单独设置
+        docker tag nginx:latest registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/nginx:latest	//打tag
+        docker push registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/nginx:latest	//上传
+	
+	腾讯：
+        https://console.cloud.tencent.com/tke2	//管理控制台
+        sudo docker login --username=465049568 ccr.ccs.tencentyun.com	//仓库登录,私有拉取,push时需要密码，密码可以单独设置
+        docker tag centos:v1.0.0 ccr.ccs.tencentyun.com/liyuan3210-repo/centos:v2.0.0 //打tag
+        docker push ccr.ccs.tencentyun.com/liyuan3210-repo/centos:v2.0.0	//上传
+        
+三.镜像导出,导入
     docker镜像导入导出(save,load,export,import)
     https://blog.csdn.net/ncdx111/article/details/79878098
+     1.save与load(备份,导入images)
+         save:
+                示例 
+                docker save -o nginx.tar nginx:latest 
+                或 
+                docker save > nginx.tar nginx:latest 
+         load:
+                示例
+                docker load -i nginx.tar
+                或
+                docker load < nginx.tar
+        
+     2.export与import(备份导入容器)
+         export:
+                docker export -o nginx-test.tar nginx-test
+         import:
+                示例
+                docker import nginx-test.tar nginx:imp
+                或
+                cat nginx-test.tar | docker import - nginx:imp
+                
+     区别：
+     *export命令导出的tar文件略小于save命令导出的
+     *export命令是从容器（container）中导出tar文件，而save命令则是从镜像（images）中导出
+     *基于第二点，export导出的文件再import回去时，无法保留镜像所有历史（即每一层layer信息，不熟悉的可以去看Dockerfile），不能进行回滚操作；而save是依据镜像来的，所以导入时可以完整保留下每一层layer信息。如下图所示，nginx:latest是save导出load导入的，nginx:imp是export导出import导入的。
+     
+三.基于容器做镜像
+	docker commit -m="描述信息" -a="作者" 容器id 要创建镜像名称:标签
 
-    docker镜像保存(从仓库保存)
-        示例 
-        docker save -o nginx.tar nginx:latest 
-        或 
-        docker save > nginx.tar nginx:latest 
-
-    示例 
-        docker import nginx-test.tar nginx:imp 
-        或 
-        cat nginx-test.tar | docker import - nginx:imp
-		
-三.镜像上传
-
-
-1.docker在线查看镜像网站
-https://hub.docker.com
-	docker login	//登录
-
-镜像上传:
+四.镜像上传:
+	1.打tag
 	docker tag ubuntu:16.04.3 192.168.209.132:5000/ubuntu:v1 //修改为规范的镜像
-	docker push 192.168.209.132:5000/ubuntu:v1	//推送
-
-利用iso文件创建镜像
-https://www.jianshu.com/p/f8f851318165
-
-ubuntu下iso制作docker镜像
-http://www.latelee.org/using-gnu-linux/ubuntu-debootstrap.html
-
-http://blog.csdn.net/kongxx/article/details/52618517
-
-docker官方ubuntu镜像文件下载
-https://hub.docker.com/_/ubuntu/
-
-ngrok镜像代理:
-	./ngrok http 5000
-	docker pull 225b2f48.ngrok.io/ubuntu:v1
-	
-问题
-docker load -i centos-7-x86_64-docker.tar.xz
-open /var/lib/docker/tmp/docker-import-957113588/dev/json: no such file or directory
-这个tar包缺少docker所需要的一些json文件，它只包含了layer.tar这个文件夹，缺少json这个文件夹
-
-执行下面就可以了
-cat centos-7-x86_64-docker.tar.xz | docker import - centos-7-x86_64
-
-docker images
+	2.推送
+	docker push 192.168.209.132:5000/ubuntu:v1	//推送	
 ```
-
-
 
 ## 三.docker容器操作
 
@@ -280,9 +287,7 @@ dockerfile构建语法：
 ```
 
 
-
-
-## 二.docker命令使用
+## 五.docker命令使用
 
 ```
 一.容器
