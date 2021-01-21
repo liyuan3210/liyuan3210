@@ -2,11 +2,129 @@
 
 ### 一．创建多台虚拟机，安装linux操作系统
 
+docker版本：
+
+kubernetes版本：
+
+etcd版本：
+
 ### 二．操作系统初始化
+
+见kubeadm安装一样
 
 ### 三．为etcd和apiserver自签证书
 
+官方也可以申请，一般用自签证书即可(自己做的)，自签证书分两种：
+
+内部访问证书，外部访问证书
+
+https://www.jianshu.com/p/944f2003c829
+
+https://blog.51cto.com/liuzhengwei521/2120535?utm_source=oschina-app
+
+证书类型：cfssl与openssl
+
+```
+1、下载安装脚本
+wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+chmod +x cfssl_linux-amd64 cfssljson_linux-amd64 cfssl-certinfo_linux-amd64
+mv cfssl_linux-amd64 /usr/local/bin/cfssl
+mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
+
+2.etcd证书
+cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+
+server-csr.json文件内容：
+{
+    "CN": "etcd",
+    "hosts": [
+        "192.168.1.1",
+        "192.168.1.1"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "ShangHai",
+            "ST": "ShangHai"
+        }
+    ]
+}
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=www server-csr.json | cfssljson -bare server
+
+3.apiServer证书
+	自签证书怎么做(方法)：
+		1.添加可信任ip列表(常用方式)
+		2.携带ca证书发送
+3.1		
+kube-proxy-csr.json
+{
+    "CN": "system:kube-proxy",
+    "hosts": [],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "ShangHai",
+            "ST": "ShangHai",
+            "O": "k8s",
+            "OU": "System"
+        }
+    ]
+}
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
+profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
+
+3.2
+server-csr.json	//可信任ip列表
+{
+    "CN": "kubernetes",
+    "hosts": [
+        "10.0.0.1",
+        "127.0.0.1",
+        "kubernetes",
+        "kubernetes.default",
+        "kubernetes.default.svc",
+        "kubernetes.default.svc.cluster",
+        "kubernetes.default.svc.cluster.local",
+        "master IP",
+        "node1 IP",
+        "node2 IP"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "ShangHai",
+            "ST": "ShangHai",
+            "O": "k8s",
+            "OU": "System"
+        }
+    ]
+}
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
+profile=kubernetes server-csr.json | cfssljson -bare server	
+		
+
+```
+
+
+
 ### 四．部署etcd集群
+
+
 
 ### 五．部署master组件
 
