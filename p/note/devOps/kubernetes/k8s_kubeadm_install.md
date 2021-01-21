@@ -21,7 +21,8 @@ sysctl --system # 生效
 	
 	3.时间同步
 	yum install ntpdate -y
-	ntpdate time.windows.com
+	ntpdate time.windows.com	//同步时间
+	0 12 * * * * /usr/sbin/ntpdate 192.168.0.1	//定时器同步
 	集群时间同步方案
 	https://www.cnblogs.com/liushui-sky/p/9203657.html
 	
@@ -32,6 +33,138 @@ sysctl --system # 生效
         2.然后配置/etc/hosts域名指向151.101.228.133 raw.githubusercontent.
         3.配置好后wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
+
+### kubeadm安装（第三版）
+
+```
+节点介绍:
+	master
+	node1
+	node2
+版本介绍：
+	操作系统：centos7
+	docker：docker-ce-18.06.1.ce-3.el7
+	kubernetes：kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
+一.环境初始化
+	1>关闭防火墙(每个节点操作)
+		systemctl status firewalld.service	//查看防火墙状态
+		systemctl stop firewalld.service	//停止防火墙
+		systemctl disable firewalld.service	//禁止防火墙开机启动
+	2>关闭swap(每个节点操作)
+		swapoff -a	//临时关闭
+		永久关闭,把vi /etc/fstab文件中带有swap的行注释。
+		#/dev/mapper/centos-swap swap                    swap    defaults        0 0
+	3>关闭SELinux(每个节点操作)
+		setenforce 0	//临时关闭(设置SELinux 成为permissive模式 临时关闭selinux的)
+		vi /etc/sysconfig/selinux	//永久关闭,修改SELINUX属性为disabled
+		SELINUX=disabled
+	4>在master设置hosts配置(只配置master节点)
+        cat >> /etc/hosts << EOF
+        192.168.122.242 master
+        192.168.122.84 node1
+        192.168.122.177 node2
+        EOF
+	5>设置主机名称（在命名的各个节点执行）
+		hostnamectl set-hostname master
+		hostnamectl set-hostname node1
+		hostnamectl set-hostname node2
+	6>将桥接的IPV4流量传递到iptables的链(每个节点执行)
+        $ cat > /etc/sysctl.d/k8s.conf << EOF
+        net.bridge.bridge-nf-call-ip6tables = 1
+        net.bridge.bridge-nf-call-iptables = 1
+        EOF
+        $ sysctl --system
+    7>时间同步(每个节点执行)
+        yum install ntpdate -y
+        ntpdate time.windows.com	//同步时间
+        0 12 * * * * /usr/sbin/ntpdate 192.168.0.1	//定时器同步
+        集群时间同步方案
+        https://www.cnblogs.com/liushui-sky/p/9203657.html
+二.安装docker,kubernetes,kubeadm
+	1>安装docker(三节点都安装)
+        # step 1: 安装必要的一些系统工具
+        $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+        # Step 2: 添加软件源信息
+        $ sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+        # 查看版本
+        $ yum list docker-ce --showduplicates | sort -r
+        # 安装
+        $ yum -y install docker-ce-18.06.1.ce-3.el7
+     
+	docker服务自启,启动
+			systemctl enable docker
+			systemctl start docker
+			systemctl restart docker
+	配置仓库源(配置好后要重启docker)：
+       vi /etc/docker/daemon.json
+        {
+          "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"]
+        }
+	2>安装kubelet(三节点都安装)
+	配置源
+    cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    [kubernetes]
+    name=Kubernetes
+    baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+    enabled=1
+    gpgcheck=1
+    repo_gpgcheck=1
+    gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+    EOF
+
+    #setenforce 0
+    yum install -y kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
+    systemctl enable kubelet
+    #systemctl enable kubelet && systemctl start kubelet
+    
+    3>部署master节点
+    kubeadm init --image-repository registry.aliyuncs.com/google_containers --apiserver-advertise-address=192.168.122.242 --kubernetes-version=v1.18.0 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12
+    
+    获取加入节点token（下面ip写成master节点ip）
+    kubeadm join 192.168.122.242:6443 --token 0h0pa9.zhzc198p8zavc09c \
+    --discovery-token-ca-cert-hash sha256:d2f05949d9f62bddee3171e48fd895653f6fd7f0092718318975fc2dbef0e5e1
+    
+    主节点执行
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    
+    4>安装Flannel(quay.io/coreos/flannel镜像要每台机器单独导入)
+    https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+	下载不了解决办法：
+        1.先到云实例机器上ping域名raw.githubusercontent.com,得到151.101.228.133
+        2.然后配置/etc/hosts域名指向151.101.228.133 raw.githubusercontent.
+        3.配置好后wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+        
+         修改kube-flannel.yml文件:
+                        如果是使用自己阿里docker镜像源,kube-flannel.yml下载下来后应该配置如下两项:
+                    apiVersion: apps/v1
+                        kind: DaemonSet
+                        metadata:
+                          name: kube-flannel-ds-amd64
+                        ....
+                        spec:
+                              initContainers:
+                              - name: install-cni
+                                image: registry.cn-shanghai.aliyuncs.com/kubernetes-3210/flannel:v0.12.0-amd64	//前面修改为registry.cn-shanghai.aliyuncs.com/kubernetes-3210
+                                ...
+                              containers:
+                              - name: kube-flannel
+                                image: registry.cn-shanghai.aliyuncs.com/kubernetes-3210/flannel:v0.12.0-amd64	//前面修改为registry.cn-shanghai.aliyuncs.com/kubernetes-3210
+                                
+     镜像quay.io/coreos/flannel很难下载问题
+     	托管在阿里云里面
+							
+    5>部署node节点
+     kubeadm join 192.168.122.242:6443 --token 0h0pa9.zhzc198p8zavc09c \
+    --discovery-token-ca-cert-hash sha256:d2f05949d9f62bddee3171e48fd895653f6fd7f0092718318975fc2dbef
+				
+	6>部署验证
+		kubectl get nodes
+		
+```
+
+
 
 ### 一.kubeadm安装（二版）
 
@@ -48,13 +181,13 @@ sysctl --system # 生效
 		systemctl stop firewalld.service	//停止防火墙
 		systemctl disable firewalld.service	//禁止防火墙开机启动
 	4>.关闭swap？？？
-		swapoff -a
-		再把/etc/fstab文件中带有swap的行注释。
+		swapoff -a	//临时关闭
+		永久关闭,把/etc/fstab文件中带有swap的行注释。
 		#/dev/mapper/centos-swap swap                    swap    defaults        0 0
 	5>.关闭SELinux？？？
-		setenforce 0	(设置SELinux 成为permissive模式 临时关闭selinux的)
-		vi /etc/sysconfig/selinux
-		SELINUX=disabled		//修改SELINUX属性
+		setenforce 0	//临时关闭(设置SELinux 成为permissive模式 临时关闭selinux的)
+		vi /etc/sysconfig/selinux	//永久关闭,修改SELINUX属性为disabled
+		SELINUX=disabled
 	6>.设置主机名称
 		hostnamectl set-hostname master
 		hostnamectl set-hostname node1

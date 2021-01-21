@@ -6,8 +6,8 @@ kubectl get nodes	//查看节点
 kubectl get ns		//查看命名空间
 
 ```
-kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80 --type=NodePort
+kubectl create deployment mynginx --image=nginx  -o yaml --dry-run > web.yaml
+kubectl expose deployment mynginx --port=80 --type=NodePort -o yaml --dry-run > web.yaml
 kubectl get pod,svc
 访问地址：
 通过命令kubectl get pods -o wide查看在哪个节点,通过节点ip访问
