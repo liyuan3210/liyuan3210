@@ -16,7 +16,7 @@ https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=4051004465499992104
 
 [1.kubeadm安装](k8s_kubeadm_install.md)
 
-[2.kubenetes,etcd,flannel手动安装](k8s_etcd_flannel_install.md)
+[2.kubenetes二进制安装](k8s_binary_install.md)
 
 [3.k8s核心](k8s_core_cmd.md)
 
