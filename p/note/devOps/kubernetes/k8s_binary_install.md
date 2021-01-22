@@ -795,11 +795,31 @@ K6M4G7bjhk8A
 kubectl get node
 ```
 
-3.部署 CNI 网络
-
 ### 七．部署集群网络
 
+node节点操作：
 
+```
+https://github.com/containernetworking/plugins	//仓库
+
+下载CNI插件：wget https://github.com/containernetworking/plugins/releases/download/v0.9.0/cni-plugins-linux-amd64-v0.9.0.tgz
+
+先要创建几个目录：
+mkdir /opt/cni/bin /etc/cni/net.d -p
+
+解压
+tar cni-plugins-linux-amd64-v0.9.0.tgz -C /opt/cni/bin/
+```
+
+最后master节点操作：
+
+```
+$ kubectl apply -f kube-flannel.yml		//这个操作和kubeadm安装一样
+```
+
+
+
+------------------------------------------------------------------------------------------------------
 
 ### kubernetes手动安装etcd,flannel
 
