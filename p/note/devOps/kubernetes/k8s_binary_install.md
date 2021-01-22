@@ -515,14 +515,14 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 ```
-启动并设置开机启动：
+启动并设置开机启动（上面三个服务都做）：
 ```
 systemctl daemon-reload
 systemctl start kube-controller-manager
 systemctl enable kube-controller-manager
 ```
 
-6>验证
+6>验证（查看健康状态）
 
 ```
 $ kubectl get cs
@@ -594,7 +594,7 @@ systemctl start docker
 systemctl enable docker
 ```
 
-2.安装kubelet，kube-proxy
+**2.安装kubelet，kube-proxy**
 
 2.1>安装：
 
@@ -606,7 +606,54 @@ scp kubelet kube-proxy node:/opt/kubernetes/bin
 ```
 
 2.2>创建配置文件
+修改bootstrap.kubeconfig文件
 
+```
+#生成 bootstrap.kubeconfig 文件
+KUBE_APISERVER="https://192.168.31.71:6443" # apiserver IP:PORT
+TOKEN="c47ffb939f5ca36231d9e3121a252940" # 与 token.csv 里保持一致
+# 生成 kubelet bootstrap kubeconfig 配置文件
+kubectl config set-cluster kubernetes \
+--certificate-authority=/opt/kubernetes/ssl/ca.pem \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-credentials "kubelet-bootstrap" \
+--token=${TOKEN} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-context default \
+--cluster=kubernetes \
+--user="kubelet-bootstrap" \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+
+拷贝到配置文件路径：
+cp bootstrap.kubeconfig /opt/kubernetes/cfg
+```
+修改kube-proxy.kubeconfig
+```
+生成 kubeconfig 文件：
+KUBE_APISERVER="https://192.168.31.71:6443"
+kubectl config set-cluster kubernetes \
+--certificate-authority=/opt/kubernetes/ssl/ca.pem \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config set-credentials kube-proxy \
+--client-certificate=./kube-proxy.pem \
+--client-key=./kube-proxy-key.pem \
+--embed-certs=true \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config set-context default \
+--cluster=kubernetes \
+--user=kube-proxy \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+
+拷贝到配置文件指定路径：
+cp kube-proxy.kubeconfig /opt/kubernetes/cfg/
+```
+修改kubelet.conf
 ```
 cat > /opt/kubernetes/cfg/kubelet.conf << EOF
 KUBELET_OPTS="--logtostderr=false \\
@@ -627,7 +674,7 @@ EOF
 –cert-dir：kubelet 证书生成目录
 –pod-infra-container-image：管理 Pod 网络容器的镜像
 ```
-
+修改kubelet-config.yml
 ```
 cat > /opt/kubernetes/cfg/kubelet-config.yml << EOF
 kind: KubeletConfiguration
@@ -663,29 +710,7 @@ maxPods: 110
 EOF
 ```
 
-```
-#生成 bootstrap.kubeconfig 文件
-KUBE_APISERVER="https://192.168.31.71:6443" # apiserver IP:PORT
-TOKEN="c47ffb939f5ca36231d9e3121a252940" # 与 token.csv 里保持一致
-# 生成 kubelet bootstrap kubeconfig 配置文件
-kubectl config set-cluster kubernetes \
---certificate-authority=/opt/kubernetes/ssl/ca.pem \
---embed-certs=true \
---server=${KUBE_APISERVER} \
---kubeconfig=bootstrap.kubeconfig
-kubectl config set-credentials "kubelet-bootstrap" \
---token=${TOKEN} \
---kubeconfig=bootstrap.kubeconfig
-kubectl config set-context default \
---cluster=kubernetes \
---user="kubelet-bootstrap" \
---kubeconfig=bootstrap.kubeconfig
-kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
-
-拷贝到配置文件路径：
-cp bootstrap.kubeconfig /opt/kubernetes/cfg
-```
-
+kube-proxy.conf
 ```
 cat > /opt/kubernetes/cfg/kube-proxy.conf << EOF
 KUBE_PROXY_OPTS="--logtostderr=false \\
@@ -694,7 +719,7 @@ KUBE_PROXY_OPTS="--logtostderr=false \\
 --config=/opt/kubernetes/cfg/kube-proxy-config.yml"
 EOF
 ```
-
+kube-proxy-config.yaml
 ```
 cat > /opt/kubernetes/cfg/kube-proxy-config.yml << EOF
 kind: KubeProxyConfiguration
@@ -706,29 +731,6 @@ clientConnection:
 hostnameOverride: k8s-master
 clusterCIDR: 10.0.0.0/24
 EOF
-```
-
-```
-生成 kubeconfig 文件：
-KUBE_APISERVER="https://192.168.31.71:6443"
-kubectl config set-cluster kubernetes \
---certificate-authority=/opt/kubernetes/ssl/ca.pem \
---embed-certs=true \
---server=${KUBE_APISERVER} \
---kubeconfig=kube-proxy.kubeconfig
-kubectl config set-credentials kube-proxy \
---client-certificate=./kube-proxy.pem \
---client-key=./kube-proxy-key.pem \
---embed-certs=true \
---kubeconfig=kube-proxy.kubeconfig
-kubectl config set-context default \
---cluster=kubernetes \
---user=kube-proxy \
---kubeconfig=kube-proxy.kubeconfig
-kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
-
-拷贝到配置文件指定路径：
-cp kube-proxy.kubeconfig /opt/kubernetes/cfg/
 ```
 
 2.3>创建启动文件
@@ -763,7 +765,7 @@ WantedBy=multi-user.target
 EOF
 ```
 
-启动并设置开机启动
+启动并设置开机启动（上面两个服务都做）
 
 ```
 systemctl daemon-reload

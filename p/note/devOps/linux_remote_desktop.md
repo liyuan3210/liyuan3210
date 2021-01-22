@@ -59,6 +59,8 @@
 		
 		2.centos8
 			下面基本上全部介绍的都是centos安装配置tigervnc-server
+			问题(redhat 8.3 的VNC 配置与其他的redhat 版本不太一样)：
+			https://www.cnblogs.com/gaizhongfeng/p/14162596.html
 
 
 linux远程桌面连接
