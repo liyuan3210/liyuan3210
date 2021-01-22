@@ -519,7 +519,7 @@ $ kubectl create clusterrolebinding kubelet-bootstrap \
 
 
 
-
+3.部署 CNI 网络
 
 ### 七．部署集群网络
 
