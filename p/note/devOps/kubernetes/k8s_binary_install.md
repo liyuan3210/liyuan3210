@@ -2,11 +2,11 @@
 
 ### 一．创建多台虚拟机，安装linux操作系统
 
-docker版本：
+docker版本：v18.09.6
 
-kubernetes版本：
+kubernetes版本：v1.19.7
 
-etcd版本：
+etcd版本：v3.4.9
 
 ### 二．操作系统初始化
 
@@ -508,6 +508,18 @@ $ kubectl create clusterrolebinding kubelet-bootstrap \
 
 
 ### 六．部署node组件
+
+
+
+1.安装docker
+
+
+
+2.安装kubelete
+
+
+
+
 
 ### 七．部署集群网络
 
