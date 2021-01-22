@@ -206,6 +206,37 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kube
 ls server*pem	//查看
 ```
 
+3.kube-proxy证书(生成 kube-proxy.kubeconfig 文件)
+
+```
+cat > kube-proxy-csr.json<< EOF
+{
+	"CN": "system:kube-proxy",
+	"hosts": [],
+	"key": {
+		"algo": "rsa",
+		"size": 2048
+	},
+	"names": [{
+		"C": "CN",
+		"L": "ShangHai",
+		"ST": "ShangHai",
+		"O": "k8s",
+		"OU": "System"
+	}]
+}
+EOF
+
+# 生成证书
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
+profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
+
+# 查看
+ls kube-proxy*pem
+kube-proxy-key.pem kube-proxy.pem
+
+```
+
 
 
 ### 四．部署etcd集群
@@ -507,17 +538,238 @@ $ kubectl create clusterrolebinding kubelet-bootstrap \
 
 
 
-### 六．部署node组件
+### 六．部署node组件(每个node节点都要安装)
 
+**1.安装docker**
 
+下载并解压docker:
 
-1.安装docker
+wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz
 
+```
+$ tar tar zxvf docker-19.03.9.tgz
 
+$ mv docker/* /usr/bin
+```
 
-2.安装kubelete
+服务安装：
 
+```
+cat > docker.service << EOF
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service
+Wants=network-online.target
+[Service]
+Type=notify
+ExecStart=/usr/bin/dockerd
+ExecReload=/bin/kill -s HUP $MAINPID
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TimeoutStartSec=0
+Delegate=yes
+KillMode=process
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+[Install]
+WantedBy=multi-user.target
+EOF
+```
 
+```
+mkdir /etc/docker
+cat > /etc/docker/daemon.json << EOF
+{
+  "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"]
+}
+EOF
+```
+
+```
+systemctl daemon-reload
+systemctl start docker
+systemctl enable docker
+```
+
+2.安装kubelet，kube-proxy
+
+2.1>安装：
+
+```
+在所有 worker node 创建工作目录：
+$ mkdir -p /opt/kubernetes/{bin,cfg,ssl,logs}
+从master节点拷贝
+scp kubelet kube-proxy node:/opt/kubernetes/bin
+```
+
+2.2>创建配置文件
+
+```
+cat > /opt/kubernetes/cfg/kubelet.conf << EOF
+KUBELET_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--hostname-override=k8s-master \\
+--network-plugin=cni \\
+--kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \\
+--bootstrap-kubeconfig=/opt/kubernetes/cfg/bootstrap.kubeconfig \\
+--config=/opt/kubernetes/cfg/kubelet-config.yml \\
+--cert-dir=/opt/kubernetes/ssl \\
+--pod-infra-container-image=lizhenliang/pause-amd64:3.0"
+EOF
+描述：
+–hostname-override：显示名称，集群中唯一
+–network-plugin：启用 CNI –kubeconfig：空路径，会自动生成，后面用于连接 apiserver –bootstrap-kubeconfig：首次启动向 apiserver 申请证书
+–config：配置参数文件
+–cert-dir：kubelet 证书生成目录
+–pod-infra-container-image：管理 Pod 网络容器的镜像
+```
+
+```
+cat > /opt/kubernetes/cfg/kubelet-config.yml << EOF
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+address: 0.0.0.0
+port: 10250
+readOnlyPort: 10255
+cgroupDriver: cgroupfs
+clusterDNS:
+- 10.0.0.2
+clusterDomain: cluster.local
+failSwapOn: false
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    cacheTTL: 2m0s
+    enabled: true
+  x509:
+    clientCAFile: /opt/kubernetes/ssl/ca.pem
+authorization:
+  mode: Webhook
+  webhook:
+    cacheAuthorizedTTL: 5m0s
+    cacheUnauthorizedTTL: 30s
+evictionHard:
+imagefs.available: 15%
+memory.available: 100Mi
+nodefs.available: 10%
+nodefs.inodesFree: 5%
+maxOpenFiles: 1000000
+maxPods: 110
+EOF
+```
+
+```
+#生成 bootstrap.kubeconfig 文件
+KUBE_APISERVER="https://192.168.31.71:6443" # apiserver IP:PORT
+TOKEN="c47ffb939f5ca36231d9e3121a252940" # 与 token.csv 里保持一致
+# 生成 kubelet bootstrap kubeconfig 配置文件
+kubectl config set-cluster kubernetes \
+--certificate-authority=/opt/kubernetes/ssl/ca.pem \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-credentials "kubelet-bootstrap" \
+--token=${TOKEN} \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config set-context default \
+--cluster=kubernetes \
+--user="kubelet-bootstrap" \
+--kubeconfig=bootstrap.kubeconfig
+kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+
+拷贝到配置文件路径：
+cp bootstrap.kubeconfig /opt/kubernetes/cfg
+```
+
+```
+cat > /opt/kubernetes/cfg/kube-proxy.conf << EOF
+KUBE_PROXY_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--config=/opt/kubernetes/cfg/kube-proxy-config.yml"
+EOF
+```
+
+```
+cat > /opt/kubernetes/cfg/kube-proxy-config.yml << EOF
+kind: KubeProxyConfiguration
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 0.0.0.0
+metricsBindAddress: 0.0.0.0:10249
+clientConnection:
+  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
+hostnameOverride: k8s-master
+clusterCIDR: 10.0.0.0/24
+EOF
+```
+
+```
+生成 kubeconfig 文件：
+KUBE_APISERVER="https://192.168.31.71:6443"
+kubectl config set-cluster kubernetes \
+--certificate-authority=/opt/kubernetes/ssl/ca.pem \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config set-credentials kube-proxy \
+--client-certificate=./kube-proxy.pem \
+--client-key=./kube-proxy-key.pem \
+--embed-certs=true \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config set-context default \
+--cluster=kubernetes \
+--user=kube-proxy \
+--kubeconfig=kube-proxy.kubeconfig
+kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+
+拷贝到配置文件指定路径：
+cp kube-proxy.kubeconfig /opt/kubernetes/cfg/
+```
+
+2.3>创建启动文件
+
+```
+cat > /usr/lib/systemd/system/kubelet.service << EOF
+[Unit]
+Description=Kubernetes Kubelet
+After=docker.service
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kubelet.conf
+ExecStart=/opt/kubernetes/bin/kubelet \$KUBELET_OPTS
+Restart=on-failure
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+```
+cat > /usr/lib/systemd/system/kube-proxy.service << EOF
+[Unit]
+Description=Kubernetes Proxy
+After=network.target
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-proxy.conf
+ExecStart=/opt/kubernetes/bin/kube-proxy \$KUBE_PROXY_OPTS
+Restart=on-failure
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+启动并设置开机启动
+
+```
+systemctl daemon-reload
+systemctl start kube-proxy
+systemctl enable kube-proxy
+```
 
 3.部署 CNI 网络
 
