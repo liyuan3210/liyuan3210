@@ -22,10 +22,15 @@ https://www.jianshu.com/p/944f2003c829
 
 https://blog.51cto.com/liuzhengwei521/2120535?utm_source=oschina-app
 
-证书类型：cfssl与openssl
+常用证书类型：cfssl与openssl
+
+
+
+安装cfssl工具：
 
 ```
-1、下载安装脚本
+1、安装cfssl工具(脚本)
+另存为cfsslInstall.sh
 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
 wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
@@ -33,100 +38,474 @@ chmod +x cfssl_linux-amd64 cfssljson_linux-amd64 cfssl-certinfo_linux-amd64
 mv cfssl_linux-amd64 /usr/local/bin/cfssl
 mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
 mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
+```
 
-2.etcd证书
-cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+1.etcd证书，创建一个etcd目录
 
-server-csr.json文件内容：
+```
+1>创建ca-config.json文件/自签证书颁发机构（CA）
+cat > ca-config.json<< EOF
 {
-    "CN": "etcd",
-    "hosts": [
-        "192.168.1.1",
-        "192.168.1.1"
-    ],
-    "key": {
-        "algo": "rsa",
-        "size": 2048
+  "signing": {
+    "default": {
+      "expiry": "87600h"
     },
-    "names": [
-        {
-            "C": "CN",
-            "L": "ShangHai",
-            "ST": "ShangHai"
-        }
-    ]
+    "profiles": {
+      "www": {
+        "expiry": "87600h",
+        "usages": [
+          "signing",
+          "key encipherment",
+          "server auth",
+          "client auth"
+        ]
+      }
+    }
+  }
 }
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=www server-csr.json | cfssljson -bare server
+EOF
 
-3.apiServer证书
-	自签证书怎么做(方法)：
+2>创建ca-csr.json文件
+cat > ca-csr.json<< EOF
+{
+  "CN": "etcd CA",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "ShangHai",
+      "ST": "ShangHai"
+    }
+  ]
+}
+EOF
+
+3>生成证书
+$ cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+$ ls *pem 	//查看生成的证书
+
+4>使用自签 CA 签发 Etcd HTTPS 证书
+cat > server-csr.json<< EOF
+{
+  "CN": "etcd",
+  "hosts": [
+    "192.168.122.242",
+    "192.168.122.84",
+    "192.168.122.177"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "ShangHai",
+      "ST": "ShangHai"
+    }
+  ]
+}
+EOF
+#注：上述文件 hosts 字段中 IP 为所有 etcd 节点的集群内部通信 IP，一个都不能少！为了方便后期扩容可以多写几个预留的 IP。
+
+生成签发证书:
+$ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=www server-csr.json | cfssljson -bare server
+$ ls server*pem		//查看
+```
+
+2.apiServer证书，创建一个k8s目录
+
+自签证书怎么做(方法)：
 		1.添加可信任ip列表(常用方式)
 		2.携带ca证书发送
-3.1		
-kube-proxy-csr.json
-{
-    "CN": "system:kube-proxy",
-    "hosts": [],
-    "key": {
-        "algo": "rsa",
-        "size": 2048
-    },
-    "names": [
-        {
-            "C": "CN",
-            "L": "ShangHai",
-            "ST": "ShangHai",
-            "O": "k8s",
-            "OU": "System"
-        }
-    ]
-}
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
-profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
 
-3.2
-server-csr.json	//可信任ip列表
+```
+1>自签证书颁发机构（CA）
+cat > ca-config.json<< EOF
 {
-    "CN": "kubernetes",
-    "hosts": [
-        "10.0.0.1",
-        "127.0.0.1",
-        "kubernetes",
-        "kubernetes.default",
-        "kubernetes.default.svc",
-        "kubernetes.default.svc.cluster",
-        "kubernetes.default.svc.cluster.local",
-        "master IP",
-        "node1 IP",
-        "node2 IP"
-    ],
-    "key": {
-        "algo": "rsa",
-        "size": 2048
+  "signing": {
+    "default": {
+      "expiry": "87600h"
     },
-    "names": [
-        {
-            "C": "CN",
-            "L": "ShangHai",
-            "ST": "ShangHai",
-            "O": "k8s",
-            "OU": "System"
-        }
-    ]
+    "profiles": {
+      "kubernetes": {
+        "expiry": "87600h",
+        "usages": [
+          "signing",
+          "key encipherment",
+          "server auth",
+          "client auth"
+        ]
+      }
+    }
+  }
 }
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
-profile=kubernetes server-csr.json | cfssljson -bare server	
-		
+EOF
 
+2>创建ca-csr.json文件
+cat > ca-csr.json<< EOF
+{
+  "CN": "kubernetes",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "Beijing",
+      "ST": "Beijing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+
+3>生成证书
+cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+ls *pem
+
+4>使用自签 CA 签发 kube-apiserver HTTPS 证书
+cat > server-csr.json<< EOF
+{
+  "CN": "kubernetes",
+  "hosts": [
+    "10.0.0.1",
+    "127.0.0.1",
+    "192.168.122.242",
+    "192.168.122.84",
+    "192.168.122.177",
+    "kubernetes",
+    "kubernetes.default",
+    "kubernetes.default.svc",
+    "kubernetes.default.svc.cluster",
+    "kubernetes.default.svc.cluster.local"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "BeiJing",
+      "ST": "BeiJing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+//上面添加可信任的ip列表
+生成签发证书:
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes server-csr.json | cfssljson -bare server
+ls server*pem	//查看
 ```
 
 
 
 ### 四．部署etcd集群
 
+下载并解压etcd:
+
+wget https://github.com/etcd-io/etcd/releases/download/v3.4.9/etcd-v3.4.9-linux-amd64.tar.gz
+
+tar xzvf etcd-v3.4.9-linux-amd64.tar.gz  //解压后安装只需etcd	， etcdctl两个执行文件即可
+
+创建etcd自定义安装目录：
+
+mkdir etcd&&mkdir etcd/bin etcd/cfg etcd/ssl
+
+1>拷贝etcd,etcdctl两执行文件到etcd/bin目录下面
+
+2>拷贝生成的证书文件ca.pem，server-key.pem，server.pem到etcd/ssl下面	//生成方法见第`三章`etcd证书生成
+
+3>创建配置etcd.conf文件到etcd/cfg目录下面
+
+```
+cat > etcd.conf << EOF
+#[Member]
+ETCD_NAME="etcd-1"
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+ETCD_LISTEN_PEER_URLS="https://192.168.31.71:2380"
+ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379"
+#[Clustering]
+ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380"
+ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379"
+ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+ETCD_INITIAL_CLUSTER_STATE="new"
+EOF
+```
+
+**每个节点要修改的字段(要修改的)：**
+
+```
+ETCD_NAME							//节点名称，不能重复
+ETCD_LISTEN_PEER_URLS				//当前节点ip
+ETCD_LISTEN_CLIENT_URLS				//当前节点ip
+ETCD_INITIAL_ADVERTISE_PEER_URLS	//当前节点ip
+ETCD_ADVERTISE_CLIENT_URLS			//当前节点ip
+ETCD_INITIAL_CLUSTER				//集群节点数组
+```
+
+描述：
+
+```
+ETCD_NAME：节点名称，集群中唯一
+ETCD_DATA_DIR：数据目录
+ETCD_LISTEN_PEER_URLS：集群通信监听地址
+ETCD_LISTEN_CLIENT_URLS：客户端访问监听地址
+ETCD_INITIAL_ADVERTISE_PEER_URLS：集群通告地址
+ETCD_ADVERTISE_CLIENT_URLS：客户端通告地址
+ETCD_INITIAL_CLUSTER：集群节点地址
+ETCD_INITIAL_CLUSTER_TOKEN：集群 Token
+ETCD_INITIAL_CLUSTER_STATE：加入集群的当前状态，new 是新集群，existing 表示加入
+已有集群
+```
+
+4>创建etcd服务文件
+
+```
+cat > /usr/lib/systemd/system/etcd.service << EOF
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=notify
+EnvironmentFile=/opt/etcd/cfg/etcd.conf
+ExecStart=/opt/etcd/bin/etcd \
+--cert-file=/opt/etcd/ssl/server.pem \
+--key-file=/opt/etcd/ssl/server-key.pem \
+--peer-cert-file=/opt/etcd/ssl/server.pem \
+--peer-key-file=/opt/etcd/ssl/server-key.pem \
+--trusted-ca-file=/opt/etcd/ssl/ca.pem \
+--peer-trusted-ca-file=/opt/etcd/ssl/ca.pem \
+--logger=zap
+Restart=on-failure
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+使用scp发送/usr/lib/systemd/system/etcd.service至远程节点
+
+5>使用scp发送制作好的安装包etcd到远程节点/opt/
+
+```
+$ scp -r etcd root@node1:/opt/
+```
+
+6>启动服务并设置自启动
+
+```
+systemctl daemon-reload
+systemctl start etcd
+systemctl enable etcd
+```
+
+7>查看集群状态
+
+```
+如果输出上面信息，就说明集群部署成功。如果有问题第一步先看日志：
+/var/log/message 或 journalctl -u etcd
+```
+
 
 
 ### 五．部署master组件
+
+下载kubernetes:v1.19.7，下载server端就可以了
+
+$ wget https://dl.k8s.io/v1.19.7/kubernetes-server-linux-amd64.tar.gz
+
+创建k8s自定义安装目录：
+
+mkdir kubernetes&&mkdir kubernetes/bin kubernetes/cfg kubernetes/ssl kubernetes/logs
+
+1>拷贝kube-apiserver，kube-controller-manager，kubectl，kube-scheduler至k8s/bin目录
+
+2>拷贝前面生成的apiServer证书ca-key.pem，ca.pem，server-key.pem，server.pem到k8s/ssl里面
+
+3>创建配置文件kube-apiserver.conf
+
+```
+cat > kube-apiserver.conf << EOF
+KUBE_APISERVER_OPTS="--logtostderr=false --v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--etcdservers=https://192.168.31.71:2379,https://192.168.31.72:2379,https://192.168.31.73:2379 \\
+--bind-address=192.168.31.71 \\
+--secure-port=6443 \\
+--advertise-address=192.168.31.71 \\
+--allow-privileged=true \\
+--service-cluster-ip-range=10.0.0.0/24 \\
+--enable-admissionplugins=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,NodeRestriction \\
+--authorization-mode=RBAC,Node \\
+--enable-bootstrap-token-auth=true \\
+--token-auth-file=/opt/kubernetes/cfg/token.csv \\
+--service-node-port-range=30000-32767 \\
+--kubelet-client-certificate=/opt/kubernetes/ssl/server.pem \\
+--kubelet-client-key=/opt/kubernetes/ssl/server-key.pem \\
+--tls-cert-file=/opt/kubernetes/ssl/server.pem \\
+--tls-private-key-file=/opt/kubernetes/ssl/server-key.pem \\
+--client-ca-file=/opt/kubernetes/ssl/ca.pem \\
+--service-account-key-file=/opt/kubernetes/ssl/ca-key.pem \\
+--etcd-cafile=/opt/etcd/ssl/ca.pem \\
+--etcd-certfile=/opt/etcd/ssl/server.pem \\
+--etcd-keyfile=/opt/etcd/ssl/server-key.pem \\
+--audit-log-maxage=30 \\
+--audit-log-maxbackup=3 \\
+--audit-log-maxsize=100 \\
+--audit-log-path=/opt/kubernetes/logs/k8s-audit.log"
+EOF
+```
+
+**需要改的字段：**
+
+```
+etcdservers	//etcd集群ip
+bind-address //主节点Ip
+advertise-address //主节点Ip
+```
+
+描述：
+
+```
+–logtostderr：启用日志
+—v：日志等级
+–log-dir：日志目录
+–etcd-servers：etcd 集群地址
+–bind-address：监听地址
+–secure-port：https 安全端口
+–advertise-address：集群通告地址
+–allow-privileged：启用授权
+–service-cluster-ip-range：Service 虚拟 IP 地址段
+–enable-admission-plugins：准入控制模块
+–authorization-mode：认证授权，启用 RBAC 授权和节点自管理
+–enable-bootstrap-token-auth：启用 TLS bootstrap 机制
+–token-auth-file：bootstrap token 文件
+–service-node-port-range：Service nodeport 类型默认分配端口范围
+–kubelet-client-xxx：apiserver 访问 kubelet 客户端证书
+–tls-xxx-file：apiserver https 证书
+–etcd-xxxfile：连接 Etcd 集群证书
+–audit-log-xxx：审计日志
+```
+
+4>创建配置文件kube-controller-manager.conf，kube-scheduler.conf
+
+```
+cat > kube-controller-manager.conf << EOF
+KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--leader-elect=true \\
+--master=127.0.0.1:8080 \\
+--bind-address=127.0.0.1 \\
+--allocate-node-cidrs=true \\
+--cluster-cidr=10.244.0.0/16 \\
+--service-cluster-ip-range=10.0.0.0/24 \\
+--cluster-signing-cert-file=/opt/kubernetes/ssl/ca.pem \\
+--cluster-signing-key-file=/opt/kubernetes/ssl/ca-key.pem \\
+--root-ca-file=/opt/kubernetes/ssl/ca.pem \\
+--service-account-private-key-file=/opt/kubernetes/ssl/ca-key.pem \\
+--experimental-cluster-signing-duration=87600h0m0s"
+EOF
+
+描述：
+–master：通过本地非安全本地端口 8080 连接 apiserver。
+–leader-elect：当该组件启动多个时，自动选举（HA）
+–cluster-signing-cert-file/–cluster-signing-key-file：自动为 kubelet 颁发证书
+的 CA，与 apiserver 保持一致
+```
+
+配置文件kube-scheduler.conf
+
+```
+cat > kube-scheduler.conf << EOF
+KUBE_SCHEDULER_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--leader-elect \\
+--master=127.0.0.1:8080 \\
+--bind-address=127.0.0.1"
+EOF
+
+描述
+–master：通过本地非安全本地端口 8080 连接 apiserver。
+–leader-elect：当该组件启动多个时，自动选举（HA）
+```
+
+5>创建服务启动文件
+
+```
+创建kube-apiserver.service文件
+cat > kube-apiserver.service << EOF
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/kubernetes/kubernetes
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-apiserver.conf
+ExecStart=/opt/kubernetes/bin/kube-apiserver \$KUBE_APISERVER_OPTS
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+
+创建kube-controller-manager.service文件
+cat > kube-controller-manager.service << EOF
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/kubernetes/kubernetes
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-controller-manager.conf
+ExecStart=/opt/kubernetes/bin/kube-controller-manager \$KUBE_CONTROLLER_MANAGER_OPTS
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+
+创建kube-scheduler.service文件
+cat > kube-scheduler.service << EOF
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://github.com/kubernetes/kubernetes
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-scheduler.conf
+ExecStart=/opt/kubernetes/bin/kube-scheduler \$KUBE_SCHEDULER_OPTS
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+启动并设置开机启动：
+```
+systemctl daemon-reload
+systemctl start kube-controller-manager
+systemctl enable kube-controller-manager
+```
+
+6>验证
+
+```
+$ kubectl get cs
+```
+
+7>授权 kubelet-bootstrap 用户允许请求证书
+
+```
+$ kubectl create clusterrolebinding kubelet-bootstrap \
+--clusterrole=system:node-bootstrapper \
+--user=kubelet-bootstrap
+```
+
+
 
 ### 六．部署node组件
 
