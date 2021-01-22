@@ -674,7 +674,34 @@ EOF
 –cert-dir：kubelet 证书生成目录
 –pod-infra-container-image：管理 Pod 网络容器的镜像
 ```
+kube-proxy-config.yaml
+```
+cat > /opt/kubernetes/cfg/kube-proxy-config.yml << EOF
+kind: KubeProxyConfiguration
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 0.0.0.0
+metricsBindAddress: 0.0.0.0:10249
+clientConnection:
+  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
+hostnameOverride: k8s-master
+clusterCIDR: 10.0.0.0/24 
+EOF
+```
+////////////////////////////下面文件没修改
+
+kube-proxy.conf
+
+```
+cat > /opt/kubernetes/cfg/kube-proxy.conf << EOF
+KUBE_PROXY_OPTS="--logtostderr=false \\
+--v=2 \\
+--log-dir=/opt/kubernetes/logs \\
+--config=/opt/kubernetes/cfg/kube-proxy-config.yml"
+EOF
+```
+
 修改kubelet-config.yml
+
 ```
 cat > /opt/kubernetes/cfg/kubelet-config.yml << EOF
 kind: KubeletConfiguration
@@ -707,29 +734,6 @@ nodefs.available: 10%
 nodefs.inodesFree: 5%
 maxOpenFiles: 1000000
 maxPods: 110
-EOF
-```
-
-kube-proxy.conf
-```
-cat > /opt/kubernetes/cfg/kube-proxy.conf << EOF
-KUBE_PROXY_OPTS="--logtostderr=false \\
---v=2 \\
---log-dir=/opt/kubernetes/logs \\
---config=/opt/kubernetes/cfg/kube-proxy-config.yml"
-EOF
-```
-kube-proxy-config.yaml
-```
-cat > /opt/kubernetes/cfg/kube-proxy-config.yml << EOF
-kind: KubeProxyConfiguration
-apiVersion: kubeproxy.config.k8s.io/v1alpha1
-bindAddress: 0.0.0.0
-metricsBindAddress: 0.0.0.0:10249
-clientConnection:
-  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
-hostnameOverride: k8s-master
-clusterCIDR: 10.0.0.0/24
 EOF
 ```
 
@@ -771,6 +775,24 @@ EOF
 systemctl daemon-reload
 systemctl start kube-proxy
 systemctl enable kube-proxy
+```
+
+2.4>批准 kubelet 证书申请并加入集群（master节点）
+
+```
+# 查看 kubelet 证书请求
+kubectl get csr
+NAME AGE SIGNERNAME
+REQUESTOR CONDITION
+node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--K6M4G7bjhk8A 6m3s
+kubernetes.io/kube-apiserver-client-kubelet kubelet-bootstrap Pending
+
+# 批准申请
+kubectl certificate approve node-csr-uCEGPOIiDdlLODKts8J658HrFq9CZ--
+K6M4G7bjhk8A
+
+# 查看节点
+kubectl get node
 ```
 
 3.部署 CNI 网络
