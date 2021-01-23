@@ -266,7 +266,7 @@ ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379"
 #[Clustering]
 ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380"
 ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379"
-ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd-2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
 ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
 ETCD_INITIAL_CLUSTER_STATE="new"
 EOF
@@ -298,10 +298,10 @@ ETCD_INITIAL_CLUSTER_STATE：加入集群的当前状态，new 是新集群，ex
 已有集群
 ```
 
-4>创建etcd服务文件
+4>创建etcd服务文件到etcd/cfg目录下面
 
 ```
-cat > /usr/lib/systemd/system/etcd.service << EOF
+cat > etcd.service << EOF
 [Unit]
 Description=Etcd Server
 After=network.target
@@ -323,15 +323,18 @@ LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target
 EOF
-```
 
-使用scp发送/usr/lib/systemd/system/etcd.service至远程节点
+#考本etcd.service文件到启动目录
+cp etcd.service /usr/lib/systemd/system/
+```
 
 5>使用scp发送制作好的安装包etcd到远程节点/opt/
 
 ```
 $ scp -r etcd root@node1:/opt/
 ```
+
+拷贝每个节点都需要改etcd.conf必改配置信息，及把etcd.service拷贝到 /usr/lib/systemd/system/目录
 
 6>启动服务并设置自启动
 
