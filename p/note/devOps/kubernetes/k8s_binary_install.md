@@ -667,6 +667,8 @@ KUBELET_OPTS="--logtostderr=false \\
 --cert-dir=/opt/kubernetes/ssl \\
 --pod-infra-container-image=lizhenliang/pause-amd64:3.0"
 EOF
+
+//镜像:--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google-containers/pause-amd64:3.0
 描述：
 –hostname-override：显示名称，集群中唯一
 –network-plugin：启用 CNI –kubeconfig：空路径，会自动生成，后面用于连接 apiserver –bootstrap-kubeconfig：首次启动向 apiserver 申请证书
