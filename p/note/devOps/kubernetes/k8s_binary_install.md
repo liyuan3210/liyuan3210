@@ -856,8 +856,8 @@ $ mv *.service /usr/lib/systemd/system/			//在每个节点操作
 
 ```
 systemctl daemon-reload
-systemctl start kube-proxy
-systemctl enable kube-proxy
+systemctl start kubelet&&systemctl start kube-proxy
+systemctl enable kubelet&&systemctl enable kube-proxy
 ```
 
 2.4>批准 kubelet 证书申请并加入集群（master节点）
