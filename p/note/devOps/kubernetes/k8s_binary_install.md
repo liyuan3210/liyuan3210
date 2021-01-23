@@ -716,8 +716,8 @@ kubectl config set-cluster kubernetes \
 --server=${KUBE_APISERVER} \
 --kubeconfig=kube-proxy.kubeconfig
 kubectl config set-credentials kube-proxy \
---client-certificate=./kube-proxy.pem \
---client-key=./kube-proxy-key.pem \
+--client-certificate=/opt/kubernetes/ssl/kube-proxy.pem \
+--client-key=/opt/kubernetes/ssl/kube-proxy-key.pem \
 --embed-certs=true \
 --kubeconfig=kube-proxy.kubeconfig
 kubectl config set-context default \
