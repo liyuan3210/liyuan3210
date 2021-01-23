@@ -533,7 +533,7 @@ Description=Kubernetes API Server
 Documentation=https://github.com/kubernetes/kubernetes
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kube-apiserver.conf
-ExecStart=/opt/kubernetes/bin/kube-apiserver \$KUBE_APISERVER_OPTS
+ExecStart=/opt/kubernetes/bin/kube-apiserver $KUBE_APISERVER_OPTS
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
@@ -546,7 +546,7 @@ Description=Kubernetes Controller Manager
 Documentation=https://github.com/kubernetes/kubernetes
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kube-controller-manager.conf
-ExecStart=/opt/kubernetes/bin/kube-controller-manager \$KUBE_CONTROLLER_MANAGER_OPTS
+ExecStart=/opt/kubernetes/bin/kube-controller-manager $KUBE_CONTROLLER_MANAGER_OPTS
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
@@ -559,7 +559,7 @@ Description=Kubernetes Scheduler
 Documentation=https://github.com/kubernetes/kubernetes
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kube-scheduler.conf
-ExecStart=/opt/kubernetes/bin/kube-scheduler \$KUBE_SCHEDULER_OPTS
+ExecStart=/opt/kubernetes/bin/kube-scheduler $KUBE_SCHEDULER_OPTS
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
