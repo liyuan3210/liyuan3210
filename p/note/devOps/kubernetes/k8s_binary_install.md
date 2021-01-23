@@ -735,7 +735,7 @@ cat > kubelet.conf << EOF
 KUBELET_OPTS="--logtostderr=false \\
 --v=2 \\
 --log-dir=/opt/kubernetes/logs \\
---hostname-override=master \\
+--hostname-override=node1 \\
 --network-plugin=cni \\
 --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \\
 --bootstrap-kubeconfig=/opt/kubernetes/cfg/bootstrap.kubeconfig \\
