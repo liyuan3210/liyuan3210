@@ -729,7 +729,7 @@ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 拷贝到配置文件指定路径：
 cp kube-proxy.kubeconfig /opt/kubernetes/cfg/
 ```
-修改kubelet.conf
+修改kubelet.conf（hostname-override节点主机名）
 ```
 cat > kubelet.conf << EOF
 KUBELET_OPTS="--logtostderr=false \\
@@ -763,7 +763,7 @@ KUBE_PROXY_OPTS="--logtostderr=false \\
 EOF
 ```
 
-kube-proxy-config.yaml
+kube-proxy-config.yaml（bindAddress节点ip,hostnameOverride节点主机名）
 
 ```
 cat > kube-proxy-config.yml << EOF
