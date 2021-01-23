@@ -616,7 +616,7 @@ wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz
 ```
 $ tar tar zxvf docker-19.03.9.tgz
 
-$ mv docker/* /usr/bin
+$ scp -r docker/* root@node1:/usr/bin/		//发送到每个节点
 ```
 
 服务安装：
@@ -644,21 +644,25 @@ StartLimitInterval=60s
 [Install]
 WantedBy=multi-user.target
 EOF
+
+$ scp docker.service root@node1:/usr/lib/systemd/system/	//发送到每个节点
 ```
 
 ```
-mkdir /etc/docker
-cat > /etc/docker/daemon.json << EOF
+mkdir /etc/docker	//要先在每个几点创建这个目录
+cat > daemon.json << EOF
 {
   "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"]
 }
 EOF
+
+$ scp daemon.json root@node1:/etc/docker/		//发送到每个节点
 ```
 
 ```
+//每节点执行
 systemctl daemon-reload
-systemctl start docker
-systemctl enable docker
+systemctl start docker && systemctl enable docker
 ```
 
 **2.安装kubelet，kube-proxy**
