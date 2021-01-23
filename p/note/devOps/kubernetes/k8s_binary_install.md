@@ -156,8 +156,8 @@ cat > ca-csr.json<< EOF
   "names": [
     {
       "C": "CN",
-      "L": "Beijing",
-      "ST": "Beijing",
+      "L": "ShangHai",
+      "ST": "ShangHai",
       "O": "k8s",
       "OU": "System"
     }
@@ -192,8 +192,8 @@ cat > server-csr.json<< EOF
   "names": [
     {
       "C": "CN",
-      "L": "BeiJing",
-      "ST": "BeiJing",
+      "L": "ShangHai",
+      "ST": "ShangHai",
       "O": "k8s",
       "OU": "System"
     }
