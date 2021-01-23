@@ -674,15 +674,20 @@ systemctl start docker && systemctl enable docker
 $ mkdir -p /opt/kubernetes/{bin,cfg,ssl,logs}
 从master节点拷贝
 scp kubelet kube-proxy node:/opt/kubernetes/bin
+
+或者如下(完成包含上面两个步骤)：
+
+直接在master节点scp发送至各个节点(可以删除bin目录下除kubelet kube-proxy的所有文件)：
+$ scp -r kubernetes root@node1:/opt/
 ```
 
-2.2>创建配置文件
+2.2>创建配置文件(单独创建在kubernetes/nodecfg目录)
 修改bootstrap.kubeconfig文件
 
 ```
 #生成 bootstrap.kubeconfig 文件
-KUBE_APISERVER="https://192.168.31.71:6443" # apiserver IP:PORT
-TOKEN="c47ffb939f5ca36231d9e3121a252940" # 与 token.csv 里保持一致
+KUBE_APISERVER="https://192.168.122.242:6443" # apiserver IP:PORT
+TOKEN="f6c3d69e8ad0c5c1c9924c63c8fec657" # 与 token.csv 里保持一致
 # 生成 kubelet bootstrap kubeconfig 配置文件
 kubectl config set-cluster kubernetes \
 --certificate-authority=/opt/kubernetes/ssl/ca.pem \
@@ -703,8 +708,8 @@ cp bootstrap.kubeconfig /opt/kubernetes/cfg
 ```
 修改kube-proxy.kubeconfig
 ```
-生成 kubeconfig 文件：
-KUBE_APISERVER="https://192.168.31.71:6443"
+# 生成 kubeconfig 文件：
+KUBE_APISERVER="https://192.168.122.242:6443"
 kubectl config set-cluster kubernetes \
 --certificate-authority=/opt/kubernetes/ssl/ca.pem \
 --embed-certs=true \
@@ -726,17 +731,17 @@ cp kube-proxy.kubeconfig /opt/kubernetes/cfg/
 ```
 修改kubelet.conf
 ```
-cat > /opt/kubernetes/cfg/kubelet.conf << EOF
+cat > kubelet.conf << EOF
 KUBELET_OPTS="--logtostderr=false \\
 --v=2 \\
 --log-dir=/opt/kubernetes/logs \\
---hostname-override=k8s-master \\
+--hostname-override=master \\
 --network-plugin=cni \\
 --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \\
 --bootstrap-kubeconfig=/opt/kubernetes/cfg/bootstrap.kubeconfig \\
 --config=/opt/kubernetes/cfg/kubelet-config.yml \\
 --cert-dir=/opt/kubernetes/ssl \\
---pod-infra-container-image=lizhenliang/pause-amd64:3.0"
+--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google-containers/pause-amd64:3.0"
 EOF
 
 //镜像:--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google-containers/pause-amd64:3.0
@@ -747,25 +752,10 @@ EOF
 –cert-dir：kubelet 证书生成目录
 –pod-infra-container-image：管理 Pod 网络容器的镜像
 ```
-kube-proxy-config.yaml
-```
-cat > /opt/kubernetes/cfg/kube-proxy-config.yml << EOF
-kind: KubeProxyConfiguration
-apiVersion: kubeproxy.config.k8s.io/v1alpha1
-bindAddress: 0.0.0.0
-metricsBindAddress: 0.0.0.0:10249
-clientConnection:
-  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
-hostnameOverride: k8s-master
-clusterCIDR: 10.0.0.0/24 
-EOF
-```
-////////////////////////////下面文件没修改
-
 kube-proxy.conf
 
 ```
-cat > /opt/kubernetes/cfg/kube-proxy.conf << EOF
+cat > kube-proxy.conf << EOF
 KUBE_PROXY_OPTS="--logtostderr=false \\
 --v=2 \\
 --log-dir=/opt/kubernetes/logs \\
@@ -773,10 +763,24 @@ KUBE_PROXY_OPTS="--logtostderr=false \\
 EOF
 ```
 
+kube-proxy-config.yaml
+
+```
+cat > kube-proxy-config.yml << EOF
+kind: KubeProxyConfiguration
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 0.0.0.0
+metricsBindAddress: 0.0.0.0:10249
+clientConnection:
+  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
+hostnameOverride: master
+clusterCIDR: 10.0.0.0/24 
+EOF
+```
 修改kubelet-config.yml
 
 ```
-cat > /opt/kubernetes/cfg/kubelet-config.yml << EOF
+cat > kubelet-config.yml << EOF
 kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
 address: 0.0.0.0
@@ -810,16 +814,16 @@ maxPods: 110
 EOF
 ```
 
-2.3>创建启动文件
+2.3>创建启动文件（单独创建在kubernetes/nodecfg目录）
 
 ```
-cat > /usr/lib/systemd/system/kubelet.service << EOF
+cat > kubelet.service << EOF
 [Unit]
 Description=Kubernetes Kubelet
 After=docker.service
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kubelet.conf
-ExecStart=/opt/kubernetes/bin/kubelet \$KUBELET_OPTS
+ExecStart=/opt/kubernetes/bin/kubelet $KUBELET_OPTS
 Restart=on-failure
 LimitNOFILE=65536
 [Install]
@@ -828,19 +832,25 @@ EOF
 ```
 
 ```
-cat > /usr/lib/systemd/system/kube-proxy.service << EOF
+cat > kube-proxy.service << EOF
 [Unit]
 Description=Kubernetes Proxy
 After=network.target
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kube-proxy.conf
-ExecStart=/opt/kubernetes/bin/kube-proxy \$KUBE_PROXY_OPTS
+ExecStart=/opt/kubernetes/bin/kube-proxy $KUBE_PROXY_OPTS
 Restart=on-failure
 LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
+
+$ rm -rf /opt/kubernetes/cfg	//删除node节点kubernetes/cfg目录下所有文件
+
+$ scp nodecfg/* root@node2:/opt/kubernetes/cfg/	//把nodecfg目录下所有文件copy到节点
+
+$ mv *.service /usr/lib/systemd/system/			//在每个节点操作
 
 启动并设置开机启动（上面两个服务都做）
 
