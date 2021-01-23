@@ -411,7 +411,7 @@ $ wget https://dl.k8s.io/v1.19.7/kubernetes-server-linux-amd64.tar.gz
 
 mkdir kubernetes&&mkdir kubernetes/bin kubernetes/cfg kubernetes/ssl kubernetes/logs
 
-1>拷贝kube-apiserver，kube-controller-manager，kubectl，kube-scheduler至k8s/bin目录
+1>拷贝kube-apiserver，kube-controller-manager，kubectl，kubelet，kube-proxy，kube-scheduler至k8s/bin目录
 
 2>拷贝前面生成的apiServer证书ca-key.pem，ca.pem，server-key.pem，server.pem到k8s/ssl里面
 
@@ -421,10 +421,10 @@ mkdir kubernetes&&mkdir kubernetes/bin kubernetes/cfg kubernetes/ssl kubernetes/
 cat > kube-apiserver.conf << EOF
 KUBE_APISERVER_OPTS="--logtostderr=false --v=2 \\
 --log-dir=/opt/kubernetes/logs \\
---etcdservers=https://192.168.31.71:2379,https://192.168.31.72:2379,https://192.168.31.73:2379 \\
---bind-address=192.168.31.71 \\
+--etcdservers=https://192.168.122.242:2379,https://192.168.122.84:2379,https://192.168.122.177:2379 \\
+--bind-address=192.168.122.242 \\
 --secure-port=6443 \\
---advertise-address=192.168.31.71 \\
+--advertise-address=192.168.122.242 \\
 --allow-privileged=true \\
 --service-cluster-ip-range=10.0.0.0/24 \\
 --enable-admissionplugins=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,NodeRestriction \\
