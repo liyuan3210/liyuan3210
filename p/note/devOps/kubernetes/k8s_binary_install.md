@@ -351,6 +351,54 @@ systemctl enable etcd
 /var/log/message 或 journalctl -u etcd
 ```
 
+8>节点etcdctl命令数据访问验证
+
+```
+1>生成client配置文件
+cfssl print-defaults csr > client.json
+2>创建ca-config.json文件
+cat > ca-config.json<< EOF
+{
+  "signing": {
+    "default": {
+      "expiry": "87600h"
+    },
+    "profiles": {
+      "client": {
+        "expiry": "87600h",
+        "usages": [
+          "signing",
+          "key encipherment",
+          "server auth",
+          "client auth"
+        ]
+      }
+    }
+  }
+}
+EOF
+2>拷贝文件到跟目录下
+	ca-key.pem  ca.pem
+3>生成文件
+	cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client.json | cfssljson -bare client
+```
+
+数据访问验证：
+
+```
+添加值：
+etcdctl --cacert=/root/etcdclient2/ca.pem \
+--cert=/root/etcdclient2/client.pem \
+--key=/root/etcdclient2/client-key.pem \
+--endpoints https://192.168.122.84:2379 put foo2 hello
+取值：
+etcdctl --cacert=/root/etcdclient2/ca.pem \
+--cert=/root/etcdclient2/client.pem \
+--key=/root/etcdclient2/client-key.pem \
+--endpoints https://192.168.122.242:2379 \
+get foo2 hello
+```
+
 
 
 ### 五．部署master组件
