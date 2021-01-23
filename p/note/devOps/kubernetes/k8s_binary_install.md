@@ -228,8 +228,7 @@ cat > kube-proxy-csr.json<< EOF
 EOF
 
 # 生成证书
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
-profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
 
 # 查看
 ls kube-proxy*pem
