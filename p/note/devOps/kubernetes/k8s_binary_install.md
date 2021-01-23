@@ -421,13 +421,13 @@ mkdir kubernetes&&mkdir kubernetes/bin kubernetes/cfg kubernetes/ssl kubernetes/
 cat > kube-apiserver.conf << EOF
 KUBE_APISERVER_OPTS="--logtostderr=false --v=2 \\
 --log-dir=/opt/kubernetes/logs \\
---etcdservers=https://192.168.122.242:2379,https://192.168.122.84:2379,https://192.168.122.177:2379 \\
+--etcd-servers=https://192.168.122.242:2379,https://192.168.122.84:2379,https://192.168.122.177:2379 \\
 --bind-address=192.168.122.242 \\
 --secure-port=6443 \\
 --advertise-address=192.168.122.242 \\
 --allow-privileged=true \\
 --service-cluster-ip-range=10.0.0.0/24 \\
---enable-admissionplugins=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,NodeRestriction \\
+--enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,NodeRestriction \\
 --authorization-mode=RBAC,Node \\
 --enable-bootstrap-token-auth=true \\
 --token-auth-file=/opt/kubernetes/cfg/token.csv \\
