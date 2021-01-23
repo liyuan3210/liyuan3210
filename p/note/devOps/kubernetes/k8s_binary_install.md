@@ -565,11 +565,28 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 ```
+（5.1）首先把服务配置文件移动启动目录:$ mv *.service /usr/lib/systemd/system/
+
+（5.2）然后把kubernetes包移动到/opt/目录下面：$ cp -rf kubernetes /opt/
+
+（5.3）token文件生成
+
+```
+cat > /opt/kubernetes/cfg/token.csv << EOF
+c47ffb939f5ca36231d9e3121a252940,kubelet-bootstrap,10001,"system:nodebootstrapper"
+EOF
+格式：token，用户名，UID，用户组
+
+token 也可自行生成替换：
+head -c 16 /dev/urandom | od -An -t x | tr -d ' '
+```
+
 启动并设置开机启动（上面三个服务都做）：
+
 ```
 systemctl daemon-reload
-systemctl start kube-controller-manager
-systemctl enable kube-controller-manager
+systemctl start kube-apiserver&&systemctl start kube-controller-manager&&systemctl start kube-scheduler
+systemctl enable kube-apiserver&&systemctl enable kube-controller-manager&&systemctl enable kube-scheduler
 ```
 
 6>验证（查看健康状态）
