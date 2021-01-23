@@ -773,7 +773,7 @@ bindAddress: 0.0.0.0
 metricsBindAddress: 0.0.0.0:10249
 clientConnection:
   kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
-hostnameOverride: master
+hostnameOverride: node1
 clusterCIDR: 10.0.0.0/24 
 EOF
 ```
