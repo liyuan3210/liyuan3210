@@ -887,16 +887,26 @@ https://github.com/containernetworking/plugins	//仓库
 
 下载CNI插件：wget https://github.com/containernetworking/plugins/releases/download/v0.9.0/cni-plugins-linux-amd64-v0.9.0.tgz
 
-先要创建几个目录：
+各个节点先要创建几个目录：
 mkdir /opt/cni/bin /etc/cni/net.d -p
 
-解压
-tar cni-plugins-linux-amd64-v0.9.0.tgz -C /opt/cni/bin/
+master节点发送文件
+scp发送cni命令到节点/opt/cni/bin目录:
+$ scp -r cni/* root@node1:/opt/cni/bin
+scp发送flannel保存的镜像到各个节点并load镜像
+$ scp flannel-v0.13.1-rc1.tar root@node1:/root/
+
+node节点载入flannel镜像：
+$ docker load -i flannel-v0.13.1-rc1.tar
 ```
 
 最后master节点操作：
 
 ```
+官方下载kube-flannel.yml：
+# kube-flannel.yaml使用镜像版本要和上面操作版本flannel-v0.13.1-rc1.tar对应
+$ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+# 执行部署
 $ kubectl apply -f kube-flannel.yml		//这个操作和kubeadm安装一样
 ```
 

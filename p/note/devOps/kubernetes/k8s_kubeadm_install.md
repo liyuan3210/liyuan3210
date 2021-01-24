@@ -130,6 +130,7 @@ sysctl --system # 生效
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     
     4>安装Flannel(quay.io/coreos/flannel镜像要每台机器单独导入)
+    项目地址:https://github.com/coreos/flannel
     https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 	下载不了解决办法：
         1.先到云实例机器上ping域名raw.githubusercontent.com,得到151.101.228.133
