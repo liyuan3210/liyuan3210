@@ -41,9 +41,9 @@ nppd或ideal插件（有很多工具）
 
 ![](img/jvm-2.3.png)
 
-#### 2.4javap与idea插件(明细)
+#### 2.4javap与idea插件(显示class二进制明细)
 
- javap-v file.class
+ javap-v file.class		//java命令查看
 
 在ideal中javap 实现：选中class文件->view->show bytecode
 

@@ -1511,3 +1511,71 @@ $ kubectl get pv,pvc
 $ kubectl get pods	//查看pod
 
 $ kubectl exec -it nginx-dep1-231341234-2342 bash	//查看/usr/share/nginx/html目录
+
+### 十.dashboard安装
+
+官方
+	https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+	https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+	https://github.com/kubernetes/dashboard
+
+安装：
+
+```
+//下面地址可能不能访问，需要根据类似Flannel安装方式解决，先把文件下载下来然后执行发布命令
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.1.0/aio/deploy/recommended.yaml
+//里面有两个镜主要的镜像，需要查看本网络是否能获取，否则要从镜像托管
+kubernetesui/dashboard:v2.1.0
+kubernetesui/metrics-scraper:v1.0.6
+//默认Secret是不能用用的，需要把recommended.yaml注释掉，如下
+    #apiVersion: v1
+    #kind: Secret
+    #metadata:
+    #  labels:
+    #    k8s-app: kubernetes-dashboard
+    #  name: kubernetes-dashboard-certs
+    #  namespace: kubernetes-dashboard
+    #type: Opaque
+//默认type是ClusterIP对外不能访问需要改成NodePort
+    kind: Service
+    apiVersion: v1
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+      name: kubernetes-dashboard
+      namespace: kubernetes-dashboard
+    spec:
+      type: NodePort	//添加到这里
+      ports:
+        - port: 443
+          targetPort: 8443
+      selector:
+        k8s-app: kubernetes-dashboard
+        
+//执行发布
+$ kubectl apply -f recommended.yaml
+
+//创建签名
+#创建key目录并进入
+mkdir key && cd key
+#生成证书
+openssl genrsa -out dashboard.key 2048
+openssl req -new -out dashboard.csr -key dashboard.key -subj '/CN=kubernetes-dashboard-certs'
+openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt
+#删除原有的证书secret，v2.0是 -n kubernetes-dashboard
+kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
+#删除原有的证书pod，v2.0是 -n kubernetes-dashboard
+kubectl delete pod kubernetes-dashboard -n kubernetes-dashboard
+#创建新的证书secret
+kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt -n kubernetes-dashboard
+#查看dashboard pod，v2.0是 -n kubernetes-dashboard
+kubectl get pod -n kubernetes-dashboard
+
+# 查看对外访问端口
+kubectl get svc -n kubernetes-dashboard -o wide
+```
+
+  产生token访问：
+
+$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+
