@@ -1579,3 +1579,15 @@ kubectl get svc -n kubernetes-dashboard -o wide
 
 $ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
 
+kubectl exec问题：
+
+```
+报问题：
+unable to upgrade connection: Forbidden (user=kubernetes, verb=create, resource=nodes, subresource=proxy)
+解决办法：
+根据错误提示，没有给用户kubernetes赋命令执行权限(apiserver 调用 kubelet API 的授权)
+kubectl create clusterrolebinding dashboard-admin2
+ --clusterrole=cluster-admin --user=kubernetes
+注意：系统可能会有dashboard-admin名字，所以自己取了个不重复的dashboard-admin2
+```
+
