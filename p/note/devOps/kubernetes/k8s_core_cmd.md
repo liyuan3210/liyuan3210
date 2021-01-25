@@ -1168,9 +1168,9 @@ spec:
       hostNetWork: true		//修改此处
 ```
 
-​			# 上面文件命名为ingress-conyaml
+​			# 上面文件命名为ingress-con.yaml
 
-​			$ kubectl apply -f ingress-conyaml
+​			$ kubectl apply -f ingress-con.yaml
 
 ​			# 查看Ingress状态
 
