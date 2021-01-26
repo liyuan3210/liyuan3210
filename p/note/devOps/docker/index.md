@@ -204,6 +204,7 @@ docker logout
 	docker run -it centos 	//--name可省略
 	docker run --name demo1 -i -t ubuntu:15.10 /bin/bash	//创建容器并进入,命名容器demo1
 	docker run --name demo1 -it ubuntu:15.10 /bin/bash		//-i -t 可以合并写成 -it
+	docker run -it -d --name=myos centos:test /bin/bash		//创建一个一直在后台运行的centos
 	docker run --h //自定义容器主机名
 	退出：exit或CTRL+D
 		 ctrl+P+Q	（容器不停止退出）
