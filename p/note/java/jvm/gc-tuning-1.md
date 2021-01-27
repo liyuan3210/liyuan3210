@@ -72,3 +72,5 @@ heap dump部分:
 ### 设定日志参数:
 
 java -Xloggc:/opt/xxx/logs/xxx-xxx-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCCause HelloGC
+
+产生五个文件，满了后把最后一个干掉继续产生，最终不会超过20M*5=100M

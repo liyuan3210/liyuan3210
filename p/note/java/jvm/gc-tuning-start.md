@@ -61,23 +61,39 @@ G1逻辑分代，物理不分
 
 ### 常见垃圾回收器组合参数设定：(1.8)
 
-- -XX:+UseSerialGC = Serial New (DefNew) + Serial Old
+- -XX:+UseSerialGC = Serial New (DefNew) + Serial Old	（**常见垃圾回收1**）
+  
   - 小型程序。默认情况下不会是这种选项，HotSpot会根据计算及配置和JDK版本自动选择收集器
+  
 - -XX:+UseParNewGC = ParNew + SerialOld
   - 这个组合已经很少用（在某些版本中已经废弃）
   - https://stackoverflow.com/questions/34962257/why-remove-support-for-parnewserialold-anddefnewcms-in-the-future
-- -XX:+UseConc(urrent)MarkSweepGC = ParNew + CMS + Serial Old
-- -XX:+UseParallelGC = Parallel Scavenge + Parallel Old (1.8默认) 【PS + SerialOld】
-- -XX:+UseParallelOldGC = Parallel Scavenge + Parallel Old
-- -XX:+UseG1GC = G1
+  
+- -XX:+UseConc(urrent)MarkSweepGC = ParNew + CMS + Serial Old（**常见垃圾回收2**）
+
+- -XX:+UseParallelGC = Parallel Scavenge + Parallel Old (1.8默认) 【PS + SerialOld】（**默认3**）
+
+- -XX:+UseParallelOldGC = Parallel Scavenge + Parallel Old（**默认3[跟上面-XX:+UseParallelGC一样]**）
+
+- -XX:+UseG1GC = G1（**1.8后默认的**）
+
 - Linux中没找到默认GC的查看方法，而windows中会打印UseParallelGC 
   - java +XX:+PrintCommandLineFlags -version
   - 通过GC的日志来分辨
+  
 - Linux下1.8版本默认的垃圾回收器到底是什么？
   - 1.8.0_181 默认（看不出来）Copy MarkCompact
   - 1.8.0_222 默认 PS + PO
+  
+- 约定俗成的规定：
 
+  1）堆内存不超过物理内存的3/4  
+  2）年轻代的大小不超过堆内存的3/8  
+  3）CMSInitiatingOccupancyFraction一般不低于70%？？？
 
+  (Xmx-Xmn)*(1-CMSInitiatingOccupancyFraction/100)>=(Xmn-Xmn/(SurvivorRatior+2))
+
+  -XX:CMSInitiatingOccupancyFraction 指定当老年代空间使用的阈值达到多少才进行一次CMS垃圾回收
 
 ### 三．JVM调优第一步，了解JVM常用命令行参数
 
