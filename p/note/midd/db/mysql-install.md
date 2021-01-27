@@ -40,6 +40,7 @@ mysql-community-server-5.7.30-1.el7.x86_64.rpm
     3.3>问题Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
     这是由于yum安装了旧版本的GPG keys所造成，从rpm版本4.1后，在安装或升级软件包时会自动检查软件包的签名。
     https://blog.csdn.net/weixin_44198965/article/details/91853471
+    3.4>centos8需要安装：$ yum install -y libncurses.so.5 libtinfo.so.5
     末尾加上--force --nodeps
  $ rpm -ivh mysql-community-* --force --nodeps
  
