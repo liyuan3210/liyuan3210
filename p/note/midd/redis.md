@@ -110,18 +110,31 @@ cd utils  //从解压目录cd到utils目录
 
 service redis_6379 status	//查看状态
 
-5.远程访问配置（vi /etc/redis/6379.conf）
+5.远程访问配置与密码（vi /etc/redis/6379.conf）
 bind 127.0.0.1 改为 bind 0.0.0.0
-
-6.配置redis访问密码（否则重启会报Waiting for Redis to shutdown ...）
 requirepass foobared 	//注释拿掉改成自己密码
+
+6.配置redis启动脚本（否则重启会报Waiting for Redis to shutdown ...）
 #配置密码后还要修改启动文件vi /etc/init.d/redis_6379
 $CLIEXEC -p $REDISPORT shutdown
 替换成
 $CLIEXEC -a "123456" -p $REDISPORT shutdown
 
 
-make PREFIX=/home/liyuan/soft/redis-6.0.3 install
+安装redis-6.0问题：
+Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!
+
+//注释掉utils/install_server.sh文件如下内容
+#_pid_1_exe="$(readlink -f /proc/1/exe)"
+#if [ "${_pid_1_exe##*/}" = systemd ]
+#then
+#	echo "This systems seems to use systemd."
+#	echo "Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!"
+#	exit 1
+#fi
+#unset _pid_1_exe
+
+就可以执行./install_server.sh安装了
 ```
 
 其它问题：
@@ -142,19 +155,6 @@ https://www.cnblogs.com/chy18883701161/p/11075123.html
 redis内存数据库三个级别(NO,always,每秒)
 aof默认关闭（appendonly no），开启有三个级别
 (appendfsync   always,everysec,no)
-
-3.redis安装问题
-Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!
-
-//注释掉utils/install_server.sh文件如下内容
-#_pid_1_exe="$(readlink -f /proc/1/exe)"
-#if [ "${_pid_1_exe##*/}" = systemd ]
-#then
-#	echo "This systems seems to use systemd."
-#	echo "Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!"
-#	exit 1
-#fi
-#unset _pid_1_exe
 ```
 
 
