@@ -127,12 +127,12 @@ make PREFIX=/home/liyuan/soft/redis-6.0.3 install
 其它问题：
 
 ```
-1.密码问题
+1.密码问题：
 https://blog.csdn.net/qq_42815754/article/details/83827375
 https://www.cnblogs.com/userzf/p/12874472.html
 命令设置的密码重启后失效，一般不使用这种方式
 
-2.redis 默认rdb aof 
+2.redis 默认rdb aof：
 https://www.cnblogs.com/chy18883701161/p/11075123.html
 存储	：rdb(快照)	aof(日志)
 如果rdb,aof都开启，redis只会拿aof进行恢复
@@ -142,6 +142,19 @@ https://www.cnblogs.com/chy18883701161/p/11075123.html
 redis内存数据库三个级别(NO,always,每秒)
 aof默认关闭（appendonly no），开启有三个级别
 (appendfsync   always,everysec,no)
+
+3.redis安装问题
+Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!
+
+//注释掉utils/install_server.sh文件如下内容
+#_pid_1_exe="$(readlink -f /proc/1/exe)"
+#if [ "${_pid_1_exe##*/}" = systemd ]
+#then
+#	echo "This systems seems to use systemd."
+#	echo "Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!"
+#	exit 1
+#fi
+#unset _pid_1_exe
 ```
 
 
