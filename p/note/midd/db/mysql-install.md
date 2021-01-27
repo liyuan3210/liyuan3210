@@ -15,6 +15,79 @@ https://downloads.mysql.com/archives/
 下载mysql源码???
 进入http://dev.mysql.com首页选择 Archives，进去才能下载到你想要的源码
 
+### centos二进制安装
+
+```
+环境准备问题（为了能改默认mysql端口）
+vi /etc/selinux/config
+SELINUX=enforcing
+改成
+SELINUX=permissive
+
+1.下载mysql,rpm包，版本：Red Hat Enterprise / oracle linux
+https://downloads.mysql.com/archives/community/
+$ tar -xvf mysql-5.7.30-1.el7.x86_64.rpm-bundle.tar
+
+2.从解压目录copy如下工具至install目录：
+mysql-community-client-5.7.30-1.el7.x86_64.rpm
+mysql-community-common-5.7.30-1.el7.x86_64.rpm
+mysql-community-libs-5.7.30-1.el7.x86_64.rpm
+mysql-community-server-5.7.30-1.el7.x86_64.rpm
+
+3.安装及依赖包安装
+    3.1>可能需要卸载marydb包(centos默认marydb):	$ yum remove mariadb-libs
+    3.2>华为云需要安装依赖：$ yum install libaio
+    3.3>问题Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+    这是由于yum安装了旧版本的GPG keys所造成，从rpm版本4.1后，在安装或升级软件包时会自动检查软件包的签名。
+    https://blog.csdn.net/weixin_44198965/article/details/91853471
+    末尾加上--force --nodeps
+ $ rpm -ivh mysql-community-* --force --nodeps
+ 
+4.启动mysql服务
+$ systemctl start mysqld.service
+
+5.查看root临时密码
+grep 'temporary password' /var/log/mysqld.log
+
+6.登录修改root密码(使用临时密码登录)
+mysql -u root -p
+
+设置密码(在上面基础上随便改几位)：
+set password = password('devOka2rAKR;H');
+更改密码后使用如下命令登录
+mysql -u root -h 127.0.0.1 -p
+
+7./etc/my.cnf配置文件修改
+[client]
+default-character-set = utf8mb4
+[mysql]
+default-character-set = utf8mb4
+[mysqld]
+character-set-server = utf8mb4
+
+问题解决`columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by`：
+1>首先查询：select @@GLOBAL.sql_mode
+2>把值copy出来把ONLY_FULL_GROUP_BY删去，配置my.cnf
+[mysqld]
+......
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+改变数据存储目录：
+    datadir=/data/soft/mysql
+    socket=/data/soft/mysql/mysql.sock
+    log-error=/var/log/mysqld.log
+    
+8.创建库与用户
+create database pro;
+create user 'adm'@'%' identified by 'adm!>KTH*23L6';
+grant all on pro.* to 'adm'@'%';
+
+远程访问用户设定
+GRANT ALL PRIVILEGES ON *.* TO 'adm'@'%' IDENTIFIED BY 'adm!>KTH*23L6' WITH GRANT OPTION;
+//修改生效
+FLUSH PRIVILEGES;
+```
+
 ## 一.windows下安装
 
 ```

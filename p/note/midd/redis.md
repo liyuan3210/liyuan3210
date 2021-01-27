@@ -62,9 +62,89 @@ http://840327220.iteye.com/blog/2274812
 切片式,非切片式
 ```
 
-2.linux安装
+2.linux安装(redis-5.0.10.tar.gz)
+
+```
+1.下载redis-5.0.10.tar.gz
+tar -xzvf redis-5.0.10.tar.gz	//解压
+mkdir /data && mkdir /data/soft && mkdir /data/soft/redis	//创建安装目录
+
+2.配置安装,cd到redis-5.0.10.tar.gz解压跟目录
+yum install -y make gcc		//源码安装需要的环境
+make PREFIX=/data/soft/redis install
+
+3.配置环境变量.bashrc:
+export REDIS_HOME=/data/soft/redis
+export PATH=$PATH:$REDIS_HOME/bin
+
+4.使用服务安装工具安装redis服务实例
+cd utils  //从解压目录cd到utils目录
+./install_server.sh	//床架一个redis实例,可以创建多个
+    [root@centos8 utils]# ./install_server.sh
+    Welcome to the redis service installer
+    This script will help you easily set up a running redis server
+
+    Please select the redis port for this instance: [6379] 
+    Selecting default: 6379
+    Please select the redis config file name [/etc/redis/6379.conf] 
+    Selected default - /etc/redis/6379.conf
+    Please select the redis log file name [/var/log/redis_6379.log] 
+    Selected default - /var/log/redis_6379.log
+    Please select the data directory for this instance [/var/lib/redis/6379] 
+    Selected default - /var/lib/redis/6379
+    Please select the redis executable path [] /data/soft/redis/bin/redis-server	//自定义安装路径
+    Selected config:
+    Port           : 6379
+    Config file    : /etc/redis/6379.conf
+    Log file       : /var/log/redis_6379.log
+    Data dir       : /var/lib/redis/6379
+    Executable     : /data/soft/redis/bin/redis-server
+    Cli Executable : /data/soft/redis/bin/redis-cli
+    Is this ok? Then press ENTER to go on or Ctrl-C to abort.
+    Copied /tmp/6379.conf => /etc/init.d/redis_6379
+    Installing service...
+    Successfully added to chkconfig!
+    Successfully added to runlevels 345!
+    Starting Redis server...
+    Installation successful!
+
+service redis_6379 status	//查看状态
+
+5.远程访问配置（vi /etc/redis/6379.conf）
+bind 127.0.0.1 改为 bind 0.0.0.0
+
+6.配置redis访问密码（否则重启会报Waiting for Redis to shutdown ...）
+requirepass foobared 	//注释拿掉改成自己密码
+#配置密码后还要修改启动文件vi /etc/init.d/redis_6379
+$CLIEXEC -p $REDISPORT shutdown
+替换成
+$CLIEXEC -a "123456" -p $REDISPORT shutdown
+
 
 make PREFIX=/home/liyuan/soft/redis-6.0.3 install
+```
+
+其它问题：
+
+```
+1.密码问题
+https://blog.csdn.net/qq_42815754/article/details/83827375
+https://www.cnblogs.com/userzf/p/12874472.html
+命令设置的密码重启后失效，一般不使用这种方式
+
+2.redis 默认rdb aof 
+https://www.cnblogs.com/chy18883701161/p/11075123.html
+存储	：rdb(快照)	aof(日志)
+如果rdb,aof都开启，redis只会拿aof进行恢复
+4.0前是增量的，命令抵消的（独立的aof命令处理恢复）
+但是4.0后aof包含rdb全量与增加记录些的操作(快)
+
+redis内存数据库三个级别(NO,always,每秒)
+aof默认关闭（appendonly no），开启有三个级别
+(appendfsync   always,everysec,no)
+```
+
+
 
 ## 二．redis脚本
 

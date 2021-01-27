@@ -93,7 +93,42 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 		 也支持Raid功能,包括常用的LVM（logical volume manager）
 	3.逻辑区扩容LVM
 		逻辑区动态扩容,不停机情况动态扩容
+数据盘格式化及挂载：
+
+```
+参考：
+https://www.cnblogs.com/root0/p/9269140.html
+
+1>fdisk /dev/sdb	分区
+2>mkfs.xfs /dev/sdb1	格式化
+3>mount /dev/vdb1 /data	//新建data目录，并挂载
+4>echo "/dev/sdb1 /data xfs defaults 0 0" >> /etc/fstab	//启动自动挂载
+```
+
+数据盘挂载及云盘扩容：
+
+```
+参考：
+https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
+
+1>查看磁盘挂载情况：df -TH
+2>新建一个数据：echo "abc" >test.txt
+3>打快照（防止扩容失败，可以回滚）
+4>扩容操作,支付(阿里需要重启，点击实例按钮重启)
+5>fdisk -l	(查看磁盘容量，扩容后的)
+6>df -TH	(查看分区信息，旧的)
+7>umount /dev/xvdb1 停服务，卸载磁盘（umount -lf强制卸载）
+8>fdisk /dev/xvdb	//重新分区（d（删除），n（新建分区），p（主分区），分区号，分区开始，分区结束（默认），w(写入)）
+9>e2fsck  -f  /dev/xvdb1	检查分区
+10>resize2fs  /dev/xvdb1	  扩容命令
+11>mount  /dev/xvdb1  /data	挂载	(df -TH查看)
+12>/etc/fstab	//开机自动挂载
+```
+
+
+
 ### 四）.网络
+
 ​	3.ip子网划分?
 ​	chain_block?
 ​	
