@@ -120,6 +120,8 @@ $CLIEXEC -p $REDISPORT shutdown
 替换成
 $CLIEXEC -a "123456" -p $REDISPORT shutdown
 
+7.密码登录
+AUTH 123456
 
 安装redis-6.0问题：
 Please take a look at the provided example service unit files in this directory, and adapt and install them. Sorry!

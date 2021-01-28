@@ -1,5 +1,86 @@
 # redis
 
+```
+1.原理讲解redis实现基于epoll
+
+2.命令帮助使用
+	help 
+	
+3.常见redis类型
+	list ，set，hash，sorted_set，skiplist
+	
+4.redis的消息订阅、pipeline、事务、modules、布隆过滤器、缓存LRU
+学习站点redis.cn
+
+5.redis的持久化RDB、fork、copyonwrite、AOF、RDB&AOF混合使用
+管道：
+yum install -y nc
+echo -e "set k1 99\nincr k2\n getk2" | nc localhost:6379
+减少网络交互流量
+
+发布、订阅:
+publish ooxx hello	//发布
+subscribe ooxx		//各个客户端进行订阅
+数据类型sorted set
+
+redis内存回收策略：
+1.key值设置有效期
+2.回收策略
+redis使用的内存使用最大限制:maxmemory <bytes>
+回收策略：		
+    noeviction: 当内存限制达到,再向redis添加数据，会直接返回错误。
+    allkeys-lru:使用LRU算法。最少使用的缓存数据将被丢弃。
+    volatile-lru:类似使用LRU-K算法。拥有两个队列，一个是缓存队列，一个是过期队列，丢弃数据从过期队列开始。
+    allkeys-random:随机回收缓存数据。
+    volatile-random:随机回收过期队列的缓存数据。
+    volatile-ttl:回收过期队列的缓存数据，而且优先回收存活时间(ttl)较短的缓存数据。
+
+事务：
+见下面事务
+
+布隆过滤器：
+需要加载redisbloom模块，
+$ redis-server --loadmodule /path/redisbloom.so 
+解决客户端搜索后台数据库没有的商品，减少服务端查询数据库的次数
+BF.ADD ooxx abc	//向redis添加数据库已有的数据
+BF.EXISTS ooxx abc	//验证客户端数据abc有没有
+CF.DEL ooxx	//删除
+
+rdb,aof:
+rdb:快照，有时点性，save(触发前台阻塞)，bgsave（后台进程）
+	后台可以配置进行触发save(实际用的是bgsave)，执行后会生成dump.rdb文件
+	vi 6379.conf
+	# SNAPSHOTTING
+	
+	save ""		//关闭快照
+	
+	save [时间] [操作数]	//两个有一个满足触发快照
+	save 60 100		//60秒没达到100，走下面规则
+	save 120 10		//120秒没满足10，走下面规则
+	save 360 5		//360秒没满足5，没有规则就执行
+	
+	dbfilename dump.rdb	//文件名称
+	dir /var/lib/redis/6379	//文件存的目录
+aof:日志，丢失数据少
+	rdb与aof可以同时开，如果开启aof，只会用aof来恢复
+	aof配置：
+		#APPEND ONLY MODE
+		appendonly no	//默认关闭，打开你改为yes
+		appendfilename "appendonly.aof"
+		appendfsync everysec  //aof三个级别always（一直刷盘）,everysec（每秒种落一次盘）,no（buffer满了才刷盘）
+		no-appendsync-on-rewrite no	//reis抛出子进程，要不要跟子进程争抢
+		aof-use-rdb-preamble yes  //通过rdb增量aof来恢复数据
+	
+ 4.0版本之前是单独的rdb,aof,数据恢复是重写记录的reids指令，时间长了会导致恢复时间很长
+ 4.0版本后rdb与aof一起，增量的从rdb快照执行重写
+		
+		
+6.集群
+
+```
+
+
+
 ## 一．redis脚本
 
 ```
@@ -91,6 +172,11 @@ QUEUED
 
 命令行执行eval
 redis-cli.exe --eval luaTest.lua 1 k1 kval1
+
+
+watch:
+MULTI事务前可以wathc k1一个值，如果k1值改变，整个事务是失败的，
+
 
 ```
 
