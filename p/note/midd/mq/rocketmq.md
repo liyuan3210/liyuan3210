@@ -22,15 +22,13 @@ https://www.bilibili.com/video/BV1L4411y7mn?from=search&seid=1484692832945318855
 
 2m-noslave:2主没有从
 
- ## 二．架构
+ ## 二．消息介绍
 
 ### 消息模式：
 
-1.DefaultMQPushConsumer (push)
+1.DefaultMQPushConsumer (push)Consumer与broker建立长连接，broker每隔5秒检查有没有推送的数据
 
-2.DefaultMQPullConsumer (pull)
-
-rocketmq push与pull???
+2.DefaultMQPullConsumer (pull)为了减轻broker负担，Consumer端主动拉取
 
 ### 消息类型：
 
@@ -40,9 +38,19 @@ rocketmq push与pull???
 
 3.事物消息
 
+![](img/rocketmq-3-transcation.png)
+
 4.订阅消息(消费端)
 
-## 三．存储
+### 刷盘机制
+
+刷盘方式（这里指发送消息的方式，还有主从复制又分为同步与异步）：
+
+​	异步：producer发送消息给broker,不管落盘返回结果给poducer（有数据丢失情况）
+
+​	同步：producer发送消息给broker落盘后才返回给producer
+
+## 三．架构
 
 ![](img/rocketmq-1.png)
 
@@ -51,12 +59,6 @@ rocketmq push与pull???
 nameServer	,	producer	,	consumer 是无状态的(可以动态添加)
 
 ​	master(可写，可读)，slaver（读取），
-
-刷盘方式（这里指发送消息的方式，还有主从复制又分为同步与异步）：
-
-​	异步：producer发送消息给broker,不管落盘,返回结果给poducer（有数据丢失情况）技术技术技术
-
-​	同步：producer发送消息给broker,落盘master才返回给producer
 
 主从复制(分同步，异步)
 
@@ -68,11 +70,13 @@ nameServer	,	producer	,	consumer 是无状态的(可以动态添加)
 
 通常生产建议异步刷盘，同步复制
 
+### 四.存储
+
 ![](img/rocketmq-2.png)
 
 通常有三个文件:
 
-commitLog
+commitLog（默认1G）
 
 consumerQueue（可以通过commitLog文件恢复）
 
