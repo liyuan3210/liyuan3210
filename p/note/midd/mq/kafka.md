@@ -156,9 +156,9 @@ pull模式可以根据consumer的消费能力，以适当的速率消费信息
 
 **kafka消费策略：**
 
-　	．roundrobin（轮循）默认
+　	．roundrobin（轮循）
 
-​		．range	(范围)可能导致消费不均匀
+​		．range	(范围，默认) 可能导致消费不均匀
 
 
 
@@ -178,9 +178,40 @@ pull模式可以根据consumer的消费能力，以适当的速率消费信息
 
 ### 7.生产/消费端实例
 
+生产者：
 
+![](img\kafka-producer-7.png)
 
 ```
-...
+* kafka异步发送后可以实现回调方法
+* kafka发送消息本身属于异步发送，但是可以通过Future的get实现同步发送
+```
+
+消费者：
+
+```
+kafka消费端offset维护有三种方式:
+1.自动提交
+	enable.auto.commit：是否开启自动提交offset功能
+	auto.commit.interval.ms：自动提交offset的时间间隔
+问题：不能保证设置的时间段，主机挂掉，丢失了多少数据。
+2.手动提交
+	enable.auto.commit：false
+	consumer.commitSync();//这是同步方式提交(同步提交失败会重试)，还有异步
+问题：会产生 数据缺失与数据重复问题
+	当先进行消费，再进行提交，会产生重复消费问题
+	当先进行提交，再进行消费，会产生数据缺失问题
+	
+3.自己维护offset
+	可以保存在redis,mysql其它存储里面，通过事务控制业务与提交、
+
+
+拦截器：
+？？？？
+
+* 要保证顺序，只能一个分区，一个消费者
+offset维护？？？
+
+
 ```
 
