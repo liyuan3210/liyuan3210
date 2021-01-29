@@ -1,5 +1,49 @@
 # zookeeper
 
+```
+1.解压apache-zookeeper-3.6.2-bin.tar.gz到/opt目录
+tar -xzvf apache-zookeeper-3.6.2-bin.tar.gz
+
+2.配置环境变量
+export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.6.2-bin
+export PATH $ZOOKEEPER_HOME/bin:$PATH
+
+3.根据模板创建zoo.cfg文件
+cp zoo_sample.cfg zoo.cfg
+
+4.需要配置vi /etc/hosts
+192.168.1.135 test1
+192.168.1.155 test2
+192.168.1.98 test3
+
+5.配置zoo.cfg
+dataDir=/opt/apache-zookeeper-3.6.2-bin/data/zkdata
+dataLogDir=/opt/apache-zookeeper-3.6.2-bin/data/zklog
+server.1=test1:2888:3888
+server.2=test2:2888:3888
+server.3=test3:2888:3888
+
+6.创建数据与日志目录
+mkdir /opt/apache-zookeeper-3.6.2-bin/data&&mkdir /opt/apache-zookeeper-3.6.2-bin/data/zkdata&&mkdir /opt/apache-zookeeper-3.6.2-bin/data/zklog
+
+7.scp分发包
+scp /etc/hosts root@test2:/etc/hosts						//各个节点分发hosts包
+scp /etc/profile root@test2:/etc/profile					//各个节点分发环境变量
+scp -r /opt/apache-zookeeper-3.6.2-bin root@test1:/opt/		//分发zk安装包
+
+8.各个节点创建myid
+echo 1 > /opt/apache-zookeeper-3.6.2-bin/data/zkdata/myid	//echo值各个节点不能一样，要与server.1配置文件一致
+
+9.启动
+	zkServer.sh start
+	zkServer.sh stop
+	
+	zookpper本机启动多实例
+	zkServer.sh　start ../conf/zoo1.cfg
+	验证
+	zkServer.sh status	//查看主从
+```
+
 ## 一．安装
 
 1.windows安装
