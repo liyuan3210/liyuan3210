@@ -42,9 +42,10 @@ kafka是一个分布式，基于于发布/订阅的消息队列
 安装：
 
 ```
-下载解压kafka_2.12-2.7.0.tgz
+下载解压kafka_2.12-2.7.0.tgz到/opt/kafka目录
 http://kafka.apache.org/downloads
-配置java环境变量
+$ tar -xzvf kafka_2.12-2.7.0.tgz
+$ mv kafka_2.12-2.7.0 kafka
 
 1.配置config/server.properties
 #broker的全局唯一编号，不能重复
@@ -56,26 +57,29 @@ log.dirs=/opt/kafka/logs
 #配置zoookeeper集群地址
 zookeeper.connect=node1:2181,node2:2181,node3:2181
 
-2.配置环境变量
+2.创建日志目录
+$ mkdir /opt/kafka/logs
+
+3.配置环境变量
 #KAFKA_HOME
 export KAFKA_HOME=/opt/kafka
-export PATH=$PATH:$KAFKA_HOME/bin
+export PATH=$PATH:$KAFKA_HOME/bin:
 
-3.分发安装包并修改server.properties(broker.id)
-scp分发
+4.分发安装包并修改server.properties(broker.id)
+scp -r kafka root@test2:/opt/	//scp分发
 
 4.启动（各个节点启动）
-bin/kafka-server-start.sh -daemon config/server.properties
+/opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
 ```
 
 安装验证：
 
 ```
 1.查看所有topic
-kafka-topics --zookeeper localhost:2128 --list
+kafka-topics.sh --zookeeper test2:2128 --list
 
 2.创建topic
-kafka-topics --zookeeper localhost:2181 --create --partition 3 --replication-factor 2 --topic test
+kafka-topics.sh --zookeeper localhost:2181 --create --partition 3 --replication-factor 2 --topic test
 
 3.删除topic
 kafka-topics.sh --zookeeper localhost:2128  --delete --topic test

@@ -17,22 +17,22 @@ cp zoo_sample.cfg zoo.cfg
 192.168.1.98 test3
 
 5.配置zoo.cfg
-dataDir=/opt/apache-zookeeper-3.6.2-bin/data/zkdata
-dataLogDir=/opt/apache-zookeeper-3.6.2-bin/data/zklog
+dataDir=/opt/zookeeper/data/zkdata
+dataLogDir=/opt/zookeeper/data/zklog
 server.1=test1:2888:3888
 server.2=test2:2888:3888
 server.3=test3:2888:3888
 
 6.创建数据与日志目录
-mkdir /opt/apache-zookeeper-3.6.2-bin/data&&mkdir /opt/apache-zookeeper-3.6.2-bin/data/zkdata&&mkdir /opt/apache-zookeeper-3.6.2-bin/data/zklog
+mkdir /opt/zookeeper/data&&mkdir /opt/zookeeper/data/zkdata&&mkdir /opt/zookeeper/data/zklog
 
 7.scp分发包
 scp /etc/hosts root@test2:/etc/hosts						//各个节点分发hosts包
 scp /etc/profile root@test2:/etc/profile					//各个节点分发环境变量
-scp -r /opt/apache-zookeeper-3.6.2-bin root@test1:/opt/		//分发zk安装包
+scp -r /opt/zookeeper root@test1:/opt/		//分发zk安装包
 
 8.各个节点创建myid
-echo 1 > /opt/apache-zookeeper-3.6.2-bin/data/zkdata/myid	//echo值各个节点不能一样，要与server.1配置文件一致
+echo 1 > /opt/zookeeper/data/zkdata/myid	//echo值各个节点不能一样，要与server.1配置文件一致
 
 9.启动
 	zkServer.sh start

@@ -22,6 +22,118 @@ https://www.bilibili.com/video/BV1L4411y7mn?from=search&seid=1484692832945318855
 
 2m-noslave:2主没有从
 
+```
+1.下载rocketmq-all-4.8.0-bin-release.zip并解压到/opt/
+unzip rocketmq-all-4.8.0-bin-release.zip -d /opt/rocketmq
+
+2.创建数据目录
+mkdir /opt/rocketmq/data&&mkdir /opt/rocketmq/data/commitlog&&mkdir /opt/rocketmq/data/consumequeue&&mkdir /opt/rocketmq/data/index
+
+3.进入conf/2m-2s-async目录配置broker-a.properties文件
+```
+
+broker-a.properties配置文件：
+
+```
+#所属集群名字
+brokerClusterName=rocketmq-cluster
+#broker名字，注意此处不同的配置文件填写的不一样
+brokerName=broker-a
+#0 表示 Master，>0 表示 Slave
+brokerId=0
+#nameServer地址，分号分割
+namesrvAddr=test1:9876
+#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数
+defaultTopicQueueNums=4
+#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭
+autoCreateTopicEnable=true
+#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭
+autoCreateSubscriptionGroup=true
+#Broker 对外服务的监听端口
+listenPort=10911
+#删除文件时间点，默认凌晨 4点
+deleteWhen=04
+#文件保留时间，默认 48 小时
+fileReservedTime=120
+#commitLog每个文件的大小默认1G
+mapedFileSizeCommitLog=1073741824
+#ConsumeQueue每个文件默认存30W条，根据业务情况调整
+mapedFileSizeConsumeQueue=300000
+#destroyMapedFileIntervalForcibly=120000
+#redeleteHangedFileInterval=120000
+#检测物理文件磁盘空间
+diskMaxUsedSpaceRatio=88
+#存储路径
+storePathRootDir=/opt/rocketmq/data
+#commitLog 存储路径
+storePathCommitLog=/opt/rocketmq/data/commitlog
+#消费队列存储路径存储路径
+storePathConsumeQueue=/opt/rocketmq/data/consumequeue
+#消息索引存储路径
+storePathIndex=/opt/rocketmq/data/index
+#checkpoint 文件存储路径
+storeCheckpoint=/opt/rocketmq/data/checkpoint
+#abort 文件存储路径
+abortFile=/opt/rocketmq/data/abort
+#限制的消息大小
+maxMessageSize=65536
+#flushCommitLogLeastPages=4
+#flushConsumeQueueLeastPages=2
+#flushCommitLogThoroughInterval=10000
+#flushConsumeQueueThoroughInterval=60000
+#Broker 的角色
+#- ASYNC_MASTER 异步复制Master
+#- SYNC_MASTER 同步双写Master
+#- SLAVE
+brokerRole=ASYNC_MASTER
+#刷盘方式
+#- ASYNC_FLUSH 异步刷盘
+#- SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
+#checkTransactionMessageEnable=false
+#发消息线程池数量
+#sendMessageThreadPoolNums=128
+#拉消息线程池数量
+#pullMessageThreadPoolNums=128
+```
+
+下一步：
+
+```
+4.替换rocketmq/conf下面所有xml路径
+sed -i 's#${user.home}#/opt/rocketmq#g' *.xml
+
+5.根据实际内存，配置内存大小
+vi /opt/rocketmq/bin/runbroker.sh
+# 开发环境配置 JVM Configuration
+JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m"
+
+vi /opt/rocketmq/bin/runserver.sh
+JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
+
+6.启动
+启动nameserver:
+nohup sh /opt/rocketmq/bin/mqnamesrv &
+
+启动broker:
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-async/broker-a.properties &
+或者
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-async/broker-a.properties > /dev/null 2>&1 &
+```
+
+管理控制台工具
+
+```
+项目
+https://github.com/apache/rocketmq-externals.git
+工程：
+rocketmq-console
+
+java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
+```
+
+
+
  ## 二．消息介绍
 
 ### 消息模式：
@@ -108,7 +220,7 @@ set "JAVA_OPT=%JAVA_OPT% -cp %CLASSPATH%"//这一行技术
 https://github.com/apache/rocketmq-externals.git
 下载完后rocketmq-externals\rocketmq-console\src\main\resources\application.properties
 修改两项:
-server.port=8081	//插件工程端口
+c	//插件工程端口
 rocketmq.config.namesrvAddr=127.0.0.1:9876		//此处mq地址
 
 编译
