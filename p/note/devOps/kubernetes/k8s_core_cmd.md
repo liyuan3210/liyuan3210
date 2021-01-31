@@ -586,7 +586,7 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
-        prots:
+        ports:
         - containerPort: 80
         
 #执行：
