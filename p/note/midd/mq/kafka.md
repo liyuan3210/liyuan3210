@@ -70,6 +70,11 @@ scp -r kafka root@test2:/opt/	//scp分发
 
 4.启动（各个节点启动）
 /opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
+
+java访问问题：
+https://www.cnblogs.com/nacyswiss/p/12617864.html
+kafka advertised.listeners区别：
+https://blog.csdn.net/weixin_38251332/article/details/105638535
 ```
 
 安装验证kafka_2.12-2.7.0.tgz
