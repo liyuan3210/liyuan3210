@@ -88,7 +88,7 @@ $ kafka-topics.sh --create --topic test --bootstrap-server localhost:9092
 $ kafka-console-producer.sh --topic test --bootstrap-server localhost:9092
 
 5.消费消息
-$ kafka-console-consumer.sh --topic test --from-beginning --bootstrap-server localhost:9092
+$ kafka-console-consumer.sh --topic test2 --from-beginning --bootstrap-server localhost:9092
 ```
 
 安装验证版本kafka_2.11-0.11.0.2.tgz（old）：
@@ -236,5 +236,34 @@ kafka消费端offset维护有三种方式:
 offset维护？？？
 
 
+```
+
+### 8.监控
+
+KafkaOffsetMonitor
+https://github.com/quantifind/KafkaOffsetMonitor/releases(下载不到)
+
+```
+java -cp KafkaOffsetMonitor-assembly-0.4.6-SNAPSHOT.jar \
+com.quantifind.kafka.offsetapp.OffsetGetterWeb \
+--offsetStorage kafka \
+--kafkaBrokers test1:9092,test2:9092,test3:9092 \
+--kafkaSecurityProtocol PLAINTEXT \
+--zk test1:2181,test2:2181,test3:2181 \
+--port 8086 \
+--refresh 10.seconds \
+--retain 2.days \
+--dbName offsetapp_kafka
+```
+
+Kafka Manager
+
+https://github.com/yahoo/CMAK
+
+```
+https://www.cnblogs.com/yaowentao/p/12705503.html
+
+
+./cmak -Dconfig.file=/opt/cmak/conf/application.conf -Dhttp.port=8082 -java-home /opt/jdk-13
 ```
 
