@@ -641,7 +641,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
-        valueMounts:
+        volumeMounts:
         - name varlog
           mountPath: /tmp/log
       volumes:
