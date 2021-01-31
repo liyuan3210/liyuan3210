@@ -72,14 +72,33 @@ scp -r kafka root@test2:/opt/	//scp分发
 /opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
 ```
 
-安装验证：
+安装验证kafka_2.12-2.7.0.tgz
+
+```
+1.查看topic
+kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+2.删除topic
+kafka-topics.sh --delete --topic test2 --bootstrap-server localhost:9092
+
+3.创建topic
+$ kafka-topics.sh --create --topic test --bootstrap-server localhost:9092
+
+4.发送消息
+$ kafka-console-producer.sh --topic test --bootstrap-server localhost:9092
+
+5.消费消息
+$ kafka-console-consumer.sh --topic test --from-beginning --bootstrap-server localhost:9092
+```
+
+安装验证版本kafka_2.11-0.11.0.2.tgz（old）：
 
 ```
 1.查看所有topic
 kafka-topics.sh --zookeeper test2:2128 --list
 
 2.创建topic
-kafka-topics.sh --zookeeper localhost:2181 --create --partition 3 --replication-factor 2 --topic test
+kafka-topics.sh --zookeeper localhost:2181 --create --partitions 3 --replication-factor 2 --topic test
 
 3.删除topic
 kafka-topics.sh --zookeeper localhost:2128  --delete --topic test
