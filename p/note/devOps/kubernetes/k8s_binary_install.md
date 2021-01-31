@@ -8,6 +8,10 @@ kubernetes版本：v1.19.7
 
 etcd版本：v3.4.14
 
+cni-plugins版本：v0.9.0
+
+flannel版本：v0.13.1-rc1
+
 ### 二．操作系统初始化
 
 见kubeadm安装一样
