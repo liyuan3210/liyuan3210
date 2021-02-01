@@ -50,12 +50,14 @@ $ mv kafka_2.12-2.7.0 kafka
 1.配置config/server.properties
 #broker的全局唯一编号，不能重复
 broker.id=0
-#删除topic功能(方便演示)
+#删除topic功能(方便演示，非必配项)
 delete.topic.enable=true
 #kafka运行日志存放路径
 log.dirs=/opt/kafka/logs
 #配置zoookeeper集群地址
 zookeeper.connect=node1:2181,node2:2181,node3:2181
+#配置advertised.listeners，必须外网访问的ip
+advertised.listeners=PLAINTEXT://192.168.1.135:9092
 
 2.创建日志目录
 $ mkdir /opt/kafka/logs
@@ -72,9 +74,9 @@ scp -r kafka root@test2:/opt/	//scp分发
 /opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
 
 java访问问题：
-https://www.cnblogs.com/nacyswiss/p/12617864.html
-kafka advertised.listeners区别：
-https://blog.csdn.net/weixin_38251332/article/details/105638535
+    https://www.cnblogs.com/nacyswiss/p/12617864.html
+    kafka advertised.listeners区别：
+    https://blog.csdn.net/weixin_38251332/article/details/105638535
 ```
 
 安装验证kafka_2.12-2.7.0.tgz
@@ -267,8 +269,20 @@ https://github.com/yahoo/CMAK
 
 ```
 https://www.cnblogs.com/yaowentao/p/12705503.html
+1.下载并解压cmak-3.0.0.5.zip
+unzip cmak-3.0.0.5.zip
 
+2.配置conf/application.conf
+cmak.zkhosts="test1:2181,test2:2181,test3:2181"		//配置zk
+basicAuthentication.enabled=true					//???
 
+需要注意及手动配置zk
+zkCli.sh	//进入zk控制台
+$ create /kafka-manager/mutex ""
+$ create /kafka-manager/mutex/locks ""
+$ create /kafka-manager/mutex/leases ""
+
+3.启动服务(jdk1.8运行不了，需要指定jdk13目录)
 ./cmak -Dconfig.file=/opt/cmak/conf/application.conf -Dhttp.port=8082 -java-home /opt/jdk-13
 ```
 
