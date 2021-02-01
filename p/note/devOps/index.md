@@ -10,7 +10,7 @@
 
 [3.gitlab安装及github域名绑定配置...](gitlab_install.md)
 
-4.mysql,[redis](redis.md),nginx
+[4.mysql](mysql.md),[redis](redis.md),nginx
 
 [5.samba,nfs_win](samba-nfs_win.md)
 

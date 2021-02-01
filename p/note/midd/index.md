@@ -2,7 +2,7 @@
 
 ## 一．部件列表
 
-[1.db(mysql)](db/index.md)
+[1.mysql](db/mysql.md),[mariadb](db/mariadb.md),[oracle](db/oracle.md),[mongodb](db/mongodb.md)
 
 [2.redis](redis.md)
 
