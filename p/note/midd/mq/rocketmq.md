@@ -132,6 +132,106 @@ rocketmq-console
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
 
+**工作中常用集群模式：**
+
+```
+双主双从（同步复制异步刷盘）
+配置conf/2m-2s-sync里面的broker-a.properties文件：
+```
+
+配置如下：
+
+四个重要参数：brokerName，brokerId，brokerRole，flushDiskType
+
+```
+////////////////////////////////////broker-a.properties
+#所属集群名字
+brokerClusterName=rocketmq-cluster
+#broker名字，注意此处不同的配置文件填写的不一样
+brokerName=broker-a
+#0 表示 Master，>0 表示 Slave
+brokerId=0
+#nameServer地址，分号分割
+namesrvAddr=test1:9876;test2:9876;test3:9876;test4:9876
+#Broker 的角色(master同步复制)
+#- ASYNC_MASTER 异步复制Master
+#- SYNC_MASTER 同步双写Master
+#- SLAVE
+brokerRole=SYNC_MASTER
+#刷盘方式（异步刷盘）
+#- ASYNC_FLUSH 异步刷盘
+#- SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
+////////////////////////////////////broker-a-s.properties
+#所属集群名字
+brokerClusterName=rocketmq-cluster
+#broker名字，注意此处不同的配置文件填写的不一样
+brokerName=broker-a
+#0 表示 Master，>0 表示 Slave
+brokerId=1
+#nameServer地址，分号分割
+namesrvAddr=test1:9876;test2:9876;test3:9876;test4:9876
+#Broker 的角色(master同步复制)
+#- ASYNC_MASTER 异步复制Master
+#- SYNC_MASTER 同步双写Master
+#- SLAVE
+brokerRole=SLAVE
+#刷盘方式（异步刷盘）
+#- ASYNC_FLUSH 异步刷盘
+#- SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
+
+////////////////////////////////////broker-b.properties
+#所属集群名字
+brokerClusterName=rocketmq-cluster
+#broker名字，注意此处不同的配置文件填写的不一样
+brokerName=broker-b
+#0 表示 Master，>0 表示 Slave
+brokerId=0
+#nameServer地址，分号分割
+namesrvAddr=test1:9876;test2:9876;test3:9876;test4:9876
+#Broker 的角色(master同步复制)
+#- ASYNC_MASTER 异步复制Master
+#- SYNC_MASTER 同步双写Master
+#- SLAVE
+brokerRole=SYNC_MASTER
+#刷盘方式（异步刷盘）
+#- ASYNC_FLUSH 异步刷盘
+#- SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
+////////////////////////////////////broker-b-s.properties
+#所属集群名字
+brokerClusterName=rocketmq-cluster
+#broker名字，注意此处不同的配置文件填写的不一样
+brokerName=broker-b
+#0 表示 Master，>0 表示 Slave
+brokerId=1
+#nameServer地址，分号分割
+namesrvAddr=test1:9876;test2:9876;test3:9876;test4:9876
+#Broker 的角色(master同步复制)
+#- ASYNC_MASTER 异步复制Master
+#- SYNC_MASTER 同步双写Master
+#- SLAVE
+brokerRole=SLAVE
+#刷盘方式（异步刷盘）
+#- ASYNC_FLUSH 异步刷盘
+#- SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
+```
+
+操作步骤：
+
+```
+1.scp发送替换目录下conf/2m-2s-sync所有文件到从节点
+2.首先每个节点启动nameserver
+nohup sh /opt/rocketmq/bin/mqnamesrv &
+3.启动每个节点broker
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a.properties &
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a-s.properties &
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-b.properties &
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-b-s.properties &
+```
+
 
 
  ## 二．消息介绍
