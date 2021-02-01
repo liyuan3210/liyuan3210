@@ -42,6 +42,9 @@ mysql-community-server-5.7.30-1.el7.x86_64.rpm
     https://blog.csdn.net/weixin_44198965/article/details/91853471
     3.4>centos8需要安装：$ yum install -y libncurses.so.5 libtinfo.so.5
     末尾加上--force --nodeps
+    3.5>linux使用mysql客户端工具时报如下问题
+    mysql: error while loading shared libraries: libncurses.so.5: cannot open shared object
+    yum install libncurses*	//这个命令可以解决
  $ rpm -ivh mysql-community-* --force --nodeps
  
 4.启动mysql服务
