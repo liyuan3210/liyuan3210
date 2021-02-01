@@ -276,13 +276,17 @@ unzip cmak-3.0.0.5.zip
 cmak.zkhosts="test1:2181,test2:2181,test3:2181"		//配置zk
 basicAuthentication.enabled=true					//???
 
-需要注意及手动配置zk
+创建日志目录并设置
+mkdir /opt/cmak/logs
+sed -i 's#${application.home}#/opt/cmak#g' *.xml
+
+（可能）需要注意及手动配置zk
 zkCli.sh	//进入zk控制台
 $ create /kafka-manager/mutex ""
 $ create /kafka-manager/mutex/locks ""
 $ create /kafka-manager/mutex/leases ""
 
 3.启动服务(jdk1.8运行不了，需要指定jdk13目录)
-./cmak -Dconfig.file=/opt/cmak/conf/application.conf -Dhttp.port=8082 -java-home /opt/jdk-13
+/opt/cmak/bin/cmak -Dconfig.file=/opt/cmak/conf/application.conf -Dhttp.port=80 -java-home /opt/jdk-13
 ```
 
