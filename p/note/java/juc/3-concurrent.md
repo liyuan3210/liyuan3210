@@ -45,6 +45,12 @@ Callback Function
 
 ## 4.RefType And TheadLocal
 
+代码：com.liyuan3210.juc.c04
+
+TheadLocal为什么每个线程能独享数据：
+
+​		因为每次set都设置到了当前线程的map里面了
+
 java四种引用‘强软弱虚’
 
 ```

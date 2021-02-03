@@ -25,7 +25,7 @@ ReentrantLock，CountDownLatch，CyclicBarrier．．．线程同步容器，基�
 
 ## [三.生产消费容器demo,读源码规则](3-concurrent.md)
 
-代码：com.liyuan3210.juc.c03
+代码：com.liyuan3210.juc.c03，com.liyuan3210.juc.c04
 
 ```
 demo1(2个进程一个进行add数据，另一个进程监控数量给出提示并退出)
@@ -35,6 +35,10 @@ VarHandle(普通属性原子操作，比反射快，直接操作二进制码)
 
 代码：com.liyuan3210.juc.c04
 	java四种引用‘强软弱虚’与TheadLocal
+	
+JUC:	java.util.concurrent.*			//高并发工具类
+AQS:	AbstractQueuedSynchronizer.*	//所有锁的核心
+CAS：	AQS底层实现是AQS
 ```
 
 ## [四.Collection,Map并发容器](4-collection-map.md)
