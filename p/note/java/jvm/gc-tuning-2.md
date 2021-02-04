@@ -67,17 +67,17 @@ public class T15_FullGC_Problem01 {
 
 ## 1.cpu经常100％，如何调优
 
-top命令查看java进程id
+top或jps命令查看java进程id
 
-top -Hp 1333		//查看具体哪个线程占用cpu高,线程号7951
+top -Hp 1333		//根据进程id查看具体哪个线程占用cpu高,线程id是7951
 
-​		jstack -l 7951		//7951十进制转成16进制ox1f0f
+​		*  jstack -l 7951		//列出指定java进程里面的线程信息（7951十进制转成16进制ox1f0f）
 
-​		jstack 1333		//列出这个进程下面所有线程信息
+​		*  jstack 1333		//列出这个java进程下面所有线程信息
 
 jps定位进程
 
-jinfo pid 		//查看java线程基本信息
+​		* jinfo pid 		//查看java线程基本信息
 
 jstat -gc 动态观察gc情况 / 阅读GC日志发现频繁GC / arthas观察 / jconsole/jvisualVM/ Jprofiler（最好用）
 
