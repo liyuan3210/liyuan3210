@@ -2,18 +2,24 @@
 
 ![](img/collection-map.jpeg)
 
+物理上只存在两种结构，数组与链表
+
+java主要分两大类容器，List与Map
+
 ## 1.Hashtable,HashMap,synchronizedMap,ConcurrentHashMap比较
 
 代码：com.liyuan3210.juc.c05.map
 
+Hashtable，vector基本不用（自带锁）
+
 ```
 Hashtable		线程安全
 HashMap			线程不安全
-synchronizedMap()	与Hashtable效率相当
+synchronizedMap()	与Hashtable效率相当，降低锁力度
 ConcurrentHashMap	 插入效率低，读取效率高
 ```
 
-## 2.以卖票系统为例，比较ArrayList，Vector，LinkedList，ConcurrentLinkedQueue
+## 2.以卖票系统为例，比较ArrayList，Vector，   LinkedList，ConcurrentLinkedQueue
 
 代码：com.liyuan3210.juc.c05.collection
 
@@ -69,8 +75,6 @@ Queue
 	list queue区别？
 	对线程提供友好的api offer,peek,poll
 	blocking阻塞：put,take
-
-
 
 
 
