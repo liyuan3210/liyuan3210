@@ -38,7 +38,7 @@ VarHandle(普通属性原子操作，比反射快，直接操作二进制码)
 	
 JUC:	java.util.concurrent.*			//高并发工具类
 AQS:	AbstractQueuedSynchronizer.*	//所有锁的核心
-CAS：	AQS底层实现是AQS
+CAS：	AQS底层实现是CAS
 ```
 
 ## [四.Collection,Map并发容器](4-collection-map.md)

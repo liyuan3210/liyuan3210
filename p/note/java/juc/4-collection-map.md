@@ -47,11 +47,11 @@ ConcurrentHashMap
 ConcurrentSkipListMap 排好序，在链表基础上加上分段索引（cas在tree上实现非常复杂，然后实现skip）
 
 3：队列
-ArrayList
-LinkedList
-Collections.synchronizedXXX
-CopyOnWriteList		写时候加索，读的时候不加索。使用在写少读多情况
-Queue
+    ArrayList
+    LinkedList
+    Collections.synchronizedXXX
+    CopyOnWriteList		写时候加索，读的时候不加索。使用在写少读多情况
+队列Queue：
 	CocurrentLinkedQueue 	//concurrentArrayQueue,内部加锁队列,offer(添加结果返回值表示),add(不成功会报异常) | poll（取出值并移除），peek（只取出）
 	BlockingQueue			//阻塞队列
 		LinkedBQ	//无界队列 put(满了就阻塞)，take（为空就阻塞）
@@ -86,8 +86,6 @@ linkHashMap	使用链表，迭代查询效率高
 CopyOnWriteArrayList	写时候加索，读的时候不加索。使用在写少读多情况
 
 BlockingQueue 阻塞队列
-						无界
-						有界
 
 ```
 
