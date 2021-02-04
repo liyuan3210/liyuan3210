@@ -8,11 +8,13 @@ Executor
 ExecutorServic
 Executors　工具类
 
-Future
+Callable(有返回值) -> Runnable
+
+Future+（存储执行将来的结果）
 继承
 RunnableFuture
 实现
-FutureTask
+FutureTask->Future+Runnable
 
 ForkJoinPool
 递归分解总的任务，很扫的线程执行很多的任务，cpu密集型
