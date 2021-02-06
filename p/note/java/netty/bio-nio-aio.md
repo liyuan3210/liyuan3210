@@ -14,15 +14,11 @@
 
 NIO三大核心组件：
 
-SERVER(服务端)
+1>.Selector（１个选择器）
 
-Thread（1个线程）
+2>.Channel（多个通道）
 
-Selector（１个选择器）
-
-Channel（多个通道）
-
-Buffer（多个缓冲区）
+3>.Buffer（多个缓冲区）
 
 ## 3.java AIO模型(没流行起来)
 
