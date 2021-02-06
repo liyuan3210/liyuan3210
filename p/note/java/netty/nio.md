@@ -62,5 +62,15 @@ FileChannel，DatagramChannel，ServerSocketChannel与SocketChannel
 
 1.聊天系统	//NIOServer.java与NIOClient.java
 
-2.零拷贝案例分析
+2.聊天系统	//groupchat包下
+
+3.零拷贝案例分析  //zerocopy包下
+
+java零拷贝有mmap(内存映射)，sendFile
+
+*mmap适合小数据量读写，sendFile适合大文件传输
+
+*mmap需要4次上下文切换，3次数据拷贝，sendFile需要3次上下文切换,最少2次数据拷贝
+
+*sendFIle可以利用DMA方式，减少cpu拷贝，mmap则不能(必须从内核拷贝到socket缓冲区)
 
