@@ -18,6 +18,8 @@ https://blog.csdn.net/KingCat666/article/details/77685608
 
 ## 2.simple实例（根据简单实例分析）
 
+netty.simple包下面
+
 ## 3.taskqueue
 
 三种task典型使用场景：
@@ -41,6 +43,8 @@ ch.pipeline().addFirst(new XXXHandler());
 pipeline 和　channelPipeline???
 
 EventLoop组件
+
+实例：netty.http
 
 ### 6.unpooled类buffer使用???
 

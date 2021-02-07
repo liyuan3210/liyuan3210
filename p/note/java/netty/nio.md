@@ -30,7 +30,7 @@ NIO程序－＞Buffer缓冲区－＞文件
 
 可以想成一个连接
 
-实例：
+**实例：**
 
 1.本地文件写数据	//NIOFileChannel01.java
 
@@ -58,7 +58,7 @@ FileChannel，DatagramChannel，ServerSocketChannel与SocketChannel
 
 能够检测多个通道上是否有事件发生，多个Channel注册到Selector，如果Channel有事件发生，便获取事件对事件进行处理
 
-实例：
+**实例：**
 
 1.聊天系统	//NIOServer.java与NIOClient.java
 
