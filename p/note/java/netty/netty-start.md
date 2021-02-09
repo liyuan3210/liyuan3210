@@ -16,11 +16,15 @@ https://blog.csdn.net/KingCat666/article/details/77685608
 
 ![](img/netty-3.1.png)
 
+channel与pipeline是相互包含关系
+
 ## 2.simple实例（根据简单实例分析）
 
 netty.simple包下面
 
 ## 3.taskqueue
+
+当请求执行的任务时间比较长事就需要放到线程队列里面，保证后面请求能够顺利执行不阻塞（因为为netty是基于nio,nio是单线程基于事件循环的）
 
 三种task典型使用场景：
 
@@ -28,7 +32,13 @@ netty.simple包下面
 ２）用户自定义定时任务
 ３）非当前Reactor线程调用Channel各种方法？？？
 
-#### 4.异步FutureListener机制
+## 4.异步FutureListener机制/channelHandler类
+
+4.1>future与channelFuture
+
+4.2>channelHandler及其实现类？？？(出站，入站)
+
+4.3>pipeline和channelPipleline
 
 ## 5.服务程序http入门（过滤指定资源）
 
@@ -48,17 +58,49 @@ EventLoop组件
 
 ### 6.unpooled类buffer使用???
 
+类似NIO中的ByteBuffer，但有区别。
+
+实例：netty.buf
+
 ### 7.群聊系统实现.(思考点对点私聊实现???)
+
+实例：netty.groupchat
 
 ### 8.心跳机制实例
 
+当出现程序不可预料的连接断开时，需要心跳检测客户端是否还保持链接(并做相应业务处理)
+
+MyServer启动后需要启动一个客户端连接验证(本例使用groupchat/GroupChatClient.java)
+
+实例：netty.heartbeat
+
 ### 9.websocket
+
+http协议升级websocket协议
+
+实例：netty.websocket
 
 ### 10. google protoBuff编码解码(效率高解决跨语言问题)
 
+**编码与解码：**
+
+客户端（业务数据--->编码）===二进制码===>服务端（解码--->业务数据）
+
+**netty自身提供编码与解码器，但会出现如下问题：**
+
+*无法跨语言  *序列化性能太低 *序列化体积太大(是二进制五倍多)
+
+引出方案protoBuff与使用流程：
+
+编写.proto文件===>使用命令生成java文件(相关语言的类文件)
+
+生成java文件命令：protoc.exe --java_out=. Student.proto
+
+**实例：**netty.codec，netty.codec2
+
 ### 11.入站与出站机制
 
-编码器，解码器了解
+
 
 添加log4j支持（方便查看调试日志）
 
