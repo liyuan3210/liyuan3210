@@ -285,6 +285,19 @@
 	windows,linux平台破解:
 	find / -name app.asar			//linux查看文件目录
 	/opt/XMind/resources/app.asar	//替换的文件
+	
+十四.安装微信，与安装钉钉(未安装过)
+	1.安装微信
+	https://linux265.com/news/3734.html
+	https://www.linuxprobe.com/how-ubuntu-wechat.html
+	仓库地址：
+	https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu
+	安装：
+	sudo snap install electronic-chat 
+	或者直接在软件中心搜索electronic-chat安装
+	
+	2.安装钉钉
+	https://github.com/nashaofu/dingtalk
 
 
 XX.Linux系统下Notepad++的优秀替代品(未安装)
