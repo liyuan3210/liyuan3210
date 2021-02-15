@@ -124,15 +124,17 @@ http协议升级websocket协议
 
 
 
-实例：netty.inboundhandlerandoutboundhandler
-
-
-
 **常用编解码器：**
 
 
 
-添加log4j支持（方便查看调试日志）
+**添加log4j支持：**
+
+（方便查看调试日志）
+
+
+
+**实例：**netty.inboundhandlerandoutboundhandler
 
 ### 12.tcp粘包拆包解决方案
 
@@ -140,6 +142,8 @@ http协议升级websocket协议
 由于不可能知道远程节点是否会一次性发送一个完整信息，就会出现粘包，拆包。
 这个类会对入站数据进行缓冲，直到它准备好被处理
 
+实例：
 
+1.演示tcp粘包，拆包问题，netty.tcp
 
-接收端接收数据时按照指定长度进行读取
+2.粘包，拆包解决方案：netty.protocoltcp
