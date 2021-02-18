@@ -14,6 +14,8 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ## 一．七大设计原则
 
+实例：com.atguigu.principle.singleresponsibility
+
 ### 1.单一职责原则
 
 ​			一个类只负责一项职责。通常情况下只有当逻辑非常简单，方法足够少，才可以在代码级别违法单一原则，可在方法级别保持单一原则
