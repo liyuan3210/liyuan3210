@@ -1,6 +1,7 @@
 # ubuntu桌面
 
 ```
+
 一.chrome浏览器
 	实例:https://www.cnblogs.com/hupeng1234/p/6956500.html
 	
@@ -288,16 +289,60 @@
 	
 十四.安装微信，与安装钉钉(未安装过)
 	1.安装微信
-	https://linux265.com/news/3734.html
-	https://www.linuxprobe.com/how-ubuntu-wechat.html
+	实例：
+		https://linux265.com/news/3734.html
+		https://www.linuxprobe.com/how-ubuntu-wechat.html
 	仓库地址：
-	https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu
+		https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu
 	安装：
-	sudo snap install electronic-chat 
-	或者直接在软件中心搜索electronic-chat安装
+	1.1>首先本地克隆并安装deepin-wine-ubuntu(克隆项目)
+		git clone https://github.com/wszqkzqk/deepin-wine-ubuntu.git
+		安装：
+			./install.sh
+	1.3>下载并安装微信deb包
+		wget https://gitee.com/wszqkzqk/deepin-wine-containers-for-ubuntu/raw/master/deepin.com.wechat_2.6.8.65deepin0_i386.deb
+		安装：	
+			dpkg -i deepin.com.wechat_2.6.8.65deepin0_i386.deb
+	1.4>乱码问题(https://blog.csdn.net/lixuedong1024/article/details/105815815/)
+	首先修改配置/opt/deepinwine/tools目录下打run.sh，run_v2.sh两个文件：
+        #WINE_CMD="deepin-wine"
+        WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
+
+        #added by user，输入模型设在的是fcitx
+        export GTK_IM_MODULE="fcitx"
+        export QT_IM_MODULE="fcitx" 
+        export XMODIFIERS="@im=fcitx"
+     添加字体支持(此步骤是否可省略？？？)：
+     	下载字体msyh.ttc https://www.lanzous.com/i5wivmd
+     	*.解压后拷贝：
+     	cp msyh.ttc /home/liyuan/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts
+     	*.修改system.reg文件：
+     	vi /home/liyuan/.deepinwine/Deepin-WeChat/system.reg
+     	"MS Shell Dlg"="msyh"
+		"MS Shell Dlg 2"="msyh"
+		*.新建文件/home/liyuan/.deepinwine/Deepin-WeChat/msyh_config.reg：
+        REGEDIT4
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
+        "Lucida Sans Unicode"="msyh.ttc"
+        "Microsoft Sans Serif"="msyh.ttc"
+        "MS Sans Serif"="msyh.ttc"
+        "Tahoma"="msyh.ttc"
+        "Tahoma Bold"="msyhbd.ttc"
+        "msyh"="msyh.ttc"
+        "Arial"="msyh.ttc"
+        "Arial Black"="msyh.ttc"
+		*.执行命令生效：
+		deepin-wine regedit msyh_config.reg
+		
+		图片不能发送问题：
+			sudo apt-get install libjpeg62:i386
 	
 	2.安装钉钉
 	https://github.com/nashaofu/dingtalk
+	下载：
+	wget https://github.com/nashaofu/dingtalk/releases/download/v2.1.9/dingtalk-2.1.9-latest-amd64.deb
+	安装deb包：
+	dpkg -i dingtalk-2.1.9-latest-amd64.deb
 
 
 XX.Linux系统下Notepad++的优秀替代品(未安装)
