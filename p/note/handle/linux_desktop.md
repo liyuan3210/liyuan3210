@@ -44,7 +44,23 @@
 		sudo apt-get install flashplugin-installer
 
 二.安装中文输入法
-	实例1:https://blog.csdn.net/u011795345/article/details/53041707
+	实例1：https://cloud.tencent.com/developer/article/1341770
+	sougo拼音安装[推荐](切换输入法时有乱码情况存在)
+		1.首先安装Fcitx框架
+		sudo apt install fcitx-bin fcitx-table
+		2.然后配置输入法系统
+		打开设置中心， 选中 "区域和语言" > 管理已安装的语言 > 键盘输入法系统中选择 "fcitx"  > 应用到整个系统
+		3.然后下载对应系统的输入法，双击安装或者sudo dpkg -i *.deb
+		https://pinyin.sogou.com/linux/
+		4.重启系统，点击右上角的小键盘的图标(选择configure current input method),
+		点击加号(input method)，把搜狗输入法添加进去（Sougo Pinyin）,搜狗输入法就安装完毕了。
+		5.配置input Sources
+		打开设置中心(Settings)， 选中 "区域和语言"(region Language) > 点击加号(Chinese(Intelligent Pinyin))
+安装时出现问题
+		E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+		执行命令: sudo  apt --fix-broken install
+
+	实例2:https://blog.csdn.net/u011795345/article/details/53041707
 	google pinyin的安装
 		1.安装汉语语言包
 		sudo apt-get install language-pack-zh-hans  
@@ -64,22 +80,6 @@
 		>
 		only show current language(勾选去掉)
 		输入google pinyin(选上)
-	
-	实例2：https://cloud.tencent.com/developer/article/1341770
-	sougo拼音安装(切换输入法时有乱码情况存在)
-		1.首先安装Fcitx框架
-		sudo apt install fcitx-bin fcitx-table
-		2.然后配置输入法系统
-		打开设置中心， 选中 "区域和语言" > 管理已安装的语言 > 键盘输入法系统中选择 "fcitx"  > 应用到整个系统
-		3.然后下载对应系统的输入法，双击安装或者sudo dpkg -i *.deb
-		https://pinyin.sogou.com/linux/
-		4.重启系统，点击右上角的小键盘的图标(选择configure current input method),
-		点击加号(input method)，把搜狗输入法添加进去（Sougo Pinyin）,搜狗输入法就安装完毕了。
-		5.配置input Sources
-		打开设置中心(Settings)， 选中 "区域和语言"(region Language) > 点击加号(Chinese(Intelligent Pinyin))
-安装时出现问题
-		E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
-		执行命令: sudo  apt --fix-broken install
 	
 	buntu18安装自带输入法?
 		https://blog.csdn.net/mint_ying/article/details/80267005

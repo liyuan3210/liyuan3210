@@ -14,15 +14,21 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ## 一．七大设计原则
 
-实例：com.atguigu.principle.singleresponsibility
+实例：com.atguigu.principle
 
 ### 1.单一职责原则
 
-​			一个类只负责一项职责。通常情况下只有当逻辑非常简单，方法足够少，才可以在代码级别违法单一原则，可在方法级别保持单一原则
+​			一个类只负责一项职责。只有当逻辑足够简单，才可以在代码级别违反单一原则：只有类中方法数量足够少，可以在方法级别保持单一原则
+
+实例：com.atguigu.principle.singleresponsibility
 
 ### 2.接口隔离原则
 
-​			客户端不应该依赖它不需要的接口，根据需求独立出不同的接口
+​			客户端不应该依赖它不需要的接口，根据需求独立出不同的接口，即一个类对另一个类的依赖应该建立在最小接口上。
+
+实例：com.atguigu.principle.segregation
+
+根据要求画出uml流程图？？？
 
 ### 3.依赖倒转原则
 
@@ -30,7 +36,9 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ​		抽象不应该依赖细节，细节应该依赖抽象
 
-​		依赖传递方式：接口传递，构造方法传递，setter方式传递			
+​		依赖传递方式：接口传递，构造方法传递，setter方式传递（实例：DependencyPass.java）
+
+实例：com.atguigu.principle.inversion
 
 ### 4.里式替换原则
 
