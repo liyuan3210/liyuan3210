@@ -287,7 +287,7 @@
 	find / -name app.asar			//linux查看文件目录
 	/opt/XMind/resources/app.asar	//替换的文件
 	
-十四.安装微信，与安装钉钉(未安装过)
+十四.安装微信，QQ,钉钉(未安装过)
 	1.安装微信
 	实例：
 		https://linux265.com/news/3734.html
@@ -336,8 +336,14 @@
 		
 		图片不能发送问题：
 			sudo apt-get install libjpeg62:i386
+			
+	2.安装QQ
+	https://im.qq.com/linuxqq/download.html
+	下载与安装：
+	wget http://down.qq.com/qqweb/LinuxQQ/linuxqq_2.0.0-b2-1084_amd64.deb
+	dpkg -i linuxqq_2.0.0-b2-1084_amd64.deb
 	
-	2.安装钉钉
+	3.安装钉钉
 	https://github.com/nashaofu/dingtalk
 	下载：
 	wget https://github.com/nashaofu/dingtalk/releases/download/v2.1.9/dingtalk-2.1.9-latest-amd64.deb
