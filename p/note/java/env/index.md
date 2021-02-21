@@ -96,10 +96,10 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 
 使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录),
 
-环境变量配置(非必)：
+**环境变量配置(非必)：**
 
->GRADLE_USER_HOME=D:\soft\dev\mvnRepo
->
+GRADLE_USER_HOME=/home/liyuan/.gradle
+
 >项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库mavenCentral() 找) 	
 >
 >	repositories {
@@ -121,6 +121,24 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 gradle user home作用？？？
 
 https://www.yisu.com/zixun/309965.html
+
+
+
+**GRADLE_USER_HOME(环境变量,命令行gradlew目录，与gradle命令是不同的)：**
+
+指定Gradle用户主目录位置，即.gradle目录位置。
+
+**Gradle user home(eclipse与idea都有自己的Gradle user home)：**
+
+
+
+**gradle与gradlew不同版本问题解决(idea工具)：**
+
+idea里面配置Gradle->Use Gradle from->specified location->gradle安装目录
+
+eclipse里面要配置好(Local installation directory与Gradle user home)
+
+
 
 ## 三.IDE
 

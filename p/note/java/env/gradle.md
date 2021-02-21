@@ -6,6 +6,8 @@ https://www.bilibili.com/video/av31574438/?p=1
 
 ## 二．配置介绍
 
+**gradle基于groovy语言**
+
 1.配置阿里代理
 
 repositories {
