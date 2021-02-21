@@ -116,6 +116,12 @@ apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？�
 
 [gradle使用](gradle.md)
 
+
+
+gradle user home作用？？？
+
+https://www.yisu.com/zixun/309965.html
+
 ## 三.IDE
 
 ### 1.eclipse
