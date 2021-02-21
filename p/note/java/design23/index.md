@@ -48,9 +48,13 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ​		子类继承父类，尽量不要重写父类方法．在适当情况下可以使用聚合，组合依赖关系来解决问题
 
+实例：com.atguigu.principle.liskov
+
 ### 5.开闭原则
 
 　　　一个软件实体如类，模块，函数 ：对外扩展开放（提供方），对修改关闭（使用方）。当有一个软件需求时，应该是扩展软件的具体行为，而不是通过修改已有的代码实现
+
+实例：com.atguigu.principle.ocp
 
 ### 6.迪米特原则
 
@@ -60,9 +64,13 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 出现在局部变量的类不是思考直接的朋友，也就是说陌生的类最好不要以局部变量的形式出现在类的内部
 
+实例：com.atguigu.principle.demeter
+
 ### 7.合成复用原则
 
 　　　尽量使用合成/聚合的方式，而不是使用继承
+
+实例：com.atguigu.principle.composite
 
 ## 二．UML设计
 
