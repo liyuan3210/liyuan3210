@@ -37,6 +37,8 @@ sudo apt-get update	//更新最新版本，这步用户自己选择，可以直�
 sudo apt-get install notepadqq	//安装
 ```
 
+[keepass:](https://keepass.info/)密码管理工具
+
 ## 三.新闻事件
 
 [2020.12.12：红帽停止centos8维护](https://blog.csdn.net/weixin_40787712/article/details/111087380)                 [centos替代者rocky](https://rockylinux.org/)
