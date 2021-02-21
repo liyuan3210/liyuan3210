@@ -127,6 +127,26 @@ Eclipse IDE for Java EE Developers : java web开发
 Eclipse IDE for C/C++ Developers : c/c++ gcc环境
 ```
 
+**eclipse导入项目（java常规项目，web项目...）:**
+
+现有web项目从git克隆下来后只有src,WebContent目录（或src目录），这样直接从eclipse导入项目时,是识别不了导不进去的。
+
+下面两种方法可以导入项目到eclipse。
+方法1.在eclipse上新建一个web工程,然后把工程里面.classpath与.project文件拷贝到要导入eclipse项目的根目录下面,
+然后修改.project文件里面的name节点为项目名称为对应导入的项目的名称
+方法2.直接在要导入项目跟目录下面新建.project文件,在里面添加如下内容
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ebk</name>
+</projectDescription>
+执行上面两种方法任意一种后就可以顺利导入项目了
+
+**导入后需要配置项目：**
+
+右键项目properties>project facets（只是java项目要勾选上`java`,不同项目工程需要勾选不同打模块）
+
+
+
 ### 2.idea
 
 https://www.jetbrains.com/idea/
@@ -135,6 +155,17 @@ https://www.jetbrains.com/idea/
 https://blog.csdn.net/flyingdream123/article/details/77622421/
 https://jingyan.baidu.com/article/afd8f4debd60f434e286e91f.html
 ```
+idea导入项目：
+
+File->new->Project from existing sources（选择对应类型项目）
+idea环境配置：
+
+File->Settings
+
+idea项目配置：
+
+File->Project Structure
+
 ## 四.git
 
 ### 1.linux install

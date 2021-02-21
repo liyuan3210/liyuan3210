@@ -451,21 +451,6 @@ Content directory:/src/main/webapp
 properties>Deployment Assembly>add>Java Buid Path Entries>Maven Dependencies>Finsh
 
 上面可能转换的有点慢,因为后台需要maven下载相关文件,下载不动时建议通过hero vpn翻墙软件,连接国外网络进行下载
-
-
-
-eclipse从文件导入现有web项目:
-现有web项目从git克隆下来后只有src,WebContent目录,
-这样直接从eclipse导入项目时,是识别不了导不进去的。
-下面两种方法可以导入项目到eclipse。
-方法1.在eclipse上新建一个web工程,然后把工程里面.classpath与.project文件拷贝到要导入eclipse项目的根目录下面,
-然后修改.project文件里面的name节点为项目名称为对应导入的项目的名称
-方法2.直接在要导入项目跟目录下面新建.project文件,在里面添加如下内容
-<?xml version="1.0" encoding="UTF-8"?>
-<projectDescription>
-	<name>ebk</name>
-</projectDescription>
-执行上面两种方法任意一种后就可以顺利导入项目了
 ```
 
 # eclipse_mingw_gcc
