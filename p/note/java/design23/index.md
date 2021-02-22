@@ -5,7 +5,7 @@ https://www.bilibili.com/video/BV1G4411c7N4?from=search&seid=4889535572362876599
 
 链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
 
-当前(总：150，当前：39) ,选（代理5）
+当前(总：149，当前：39) ,选（单例模式，代理模式）
 
 https://www.bilibili.com/video/BV1G4411c7N4?p=39
 
@@ -114,7 +114,7 @@ Relation:
 
 １．适配器模式　２．桥接模式　３．装饰模式　４．组合模式　５．外观模式
 
-６．享元模式　<font color="blue">７．代理模式代理代理</font>
+６．享元模式　<font color="blue">７．代理模式</font>
 
 ### .行为型模式
 

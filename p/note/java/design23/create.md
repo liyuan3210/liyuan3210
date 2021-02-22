@@ -18,3 +18,5 @@
 
 ８）．枚举	－＞　推荐
 
+实例：com.liyuan3210.design23.create.singleton2
+
