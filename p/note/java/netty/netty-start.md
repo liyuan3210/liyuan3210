@@ -114,7 +114,7 @@ http协议升级websocket协议
 
 **客户端程序/服务端程序流程：**
 
-？？？
+![](img/encoder_decoder_process.png)
 
 
 
@@ -126,6 +126,8 @@ http协议升级websocket协议
 
 **常用编解码器：**
 
+根据官方api文档查看常用编解码器有哪些，怎么使用？？？
+
 
 
 **添加log4j支持：**
@@ -136,6 +138,15 @@ http协议升级websocket协议
 
 **实例：**netty.inboundhandlerandoutboundhandler
 
+```
+实例要求:  
+使用自定义的编码器和解码器来说明Netty的handler 调用机制
+客户端发送long -> 服务器
+服务端发送long -> 客户端
+```
+
+
+
 ### 12.tcp粘包拆包解决方案
 
 **为什么要有粘包，拆包：**
@@ -144,6 +155,19 @@ http协议升级websocket协议
 
 实例：
 
-1.演示tcp粘包，拆包问题，netty.tcp
+1.演示tcp粘包，拆包（问题演示），netty.tcp
+
+读取的信息很随机
 
 2.粘包，拆包解决方案：netty.protocoltcp
+
+```
+TCP 粘包和拆包解决方案
+*.使用自定义协议 + 编解码器 来解决
+*.关键就是要解决 服务器端每次读取数据长度的问题, 这个问题解决，就不会出现服务器多读或少读数据的问题，从而避免的TCP 粘包、拆包 。
+
+看一个具体的实例:
+*.要求客户端发送 5 个 Message 对象, 客户端每次发送一个 Message 对象
+*.服务器端每次接收一个Message, 分5次进行解码， 每读取到 一个Message , 会回复一个Message 对象 给客户端.
+```
+
