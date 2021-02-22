@@ -74,6 +74,8 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ## 二．UML设计
 
+实例：com.atguigu.uml
+
 ### 1.UML图类型
 
 > 静态结构图：

@@ -59,7 +59,7 @@ https://www.bilibili.com/video/BV1B4411H76f?p=16
 
 实例：dsa.dataStructures.linkedlist
 
-单向链表：
+**单向链表：**
 
 SingleLinkedListDemo.java
 
@@ -74,19 +74,53 @@ SingleLinkedListDemo.java
 4>从头打印单链表(不改变链表数据顺序，使用到了栈Stack)
 ```
 
-双向链表：
+**双向链表：**
 
 DoubleLinkedListDemo.java
 
 双向链表显示，添加，删除，修改
 
-单向环形链表（约瑟夫问题）
+**单向环形链表（约瑟夫问题）:**
 
 Josepfu.java
 
 数组取模也可以完成（环形链表）
 
+4.栈
 
+使用场景：
+
+子程序的调用 	
+处理递归调用
+表达式的转换[中缀表达式转后缀表达式]与求值(实际解决)。
+二叉树的遍历。
+图形的深度优先(depth一first)搜索法。
+
+实例：dsa.dataStructures.stack
+
+4.1>.数组实现栈 ：ArrayStackDemo.java
+
+4.2>.栈实现计算器：Calculator.java
+
+4.3>.前缀，中缀，后缀表达式规则
+
+每一种表达式有不同方式读取计算规则
+
+```
+前缀表达式（波兰表达式）:
+中缀:前面实现的都是按照中缀实现的(人比较好理解，但计算机不太容易处理)
+后缀（逆波兰表达式）:计算机容易处理的表达式
+```
+
+4.4>.中缀表达式转后缀表达式
+
+PolandNotation.java
+
+4.5>.逆波兰计算器完整版
+
+课件ppt第56页
+
+5.递归使用
 
 ### 二．算法分类
 
