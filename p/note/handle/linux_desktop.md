@@ -181,6 +181,8 @@
 	
 六.Postman安装
 	https://ywnz.com/linuxjc/3158.html
+	下载：
+	https://www.postman.com/downloads/
 	
 	解压
 	Postman-linux-x64-7.0.9.tar.gz

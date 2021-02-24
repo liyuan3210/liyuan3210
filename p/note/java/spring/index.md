@@ -56,3 +56,12 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 
 ​	.CGLIB
 
+### 3.spring security
+
+https://www.bilibili.com/video/BV15a411A7kP?from=search&seid=7599475529802441512
+
+链接：https://pan.baidu.com/s/1atNzFMD9SYy[cv3](https://www.bilibili.com/read/cv3/)VwXW89eg 
+提取码：ndv3
+
+[spring security +jwt还有shiro](../oauth.md)
+
