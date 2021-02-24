@@ -152,7 +152,7 @@ mary	/	123
 
 
 
-### 4.查询数据库进行认证
+### 4.查询数据库验证
 
 1.整合MyBatisPlus完成操作，使用引入相关依赖
 
@@ -199,6 +199,176 @@ INSERT INTO `test`.`users` (`id`, `username`, `password`) VALUES ('2', 'mary', '
 5.添加注解MapperScan
 
 @MapperScan("com.liyuan3210.jwtspringsecurity.springsecurity.mapper")
+
+## 4.1自定义用户登录界面
+
+1.自定义设置登录界面，不需要认证可以访问
+
+步骤：
+
+1>实现MyUserDetailsService接口方法
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http.formLogin()   //自定义自己编写的登录页面
+    .loginPage("/login.html")  //登录页面设置
+    .loginProcessingUrl("/user/login")   //登录访问路径
+    .defaultSuccessUrl("/test/index").permitAll()  //登录成功之后，跳转路径
+    .and().authorizeRequests()
+        .antMatchers("/","/test/hello","/user/login").permitAll() //设置哪些路径可以直接访问，不需要认证
+       .anyRequest().authenticated()
+       .and().csrf().disable();//关闭csrf
+}
+```
+
+2>编写页面，与controller
+
+resources下新建static目录,页面目录,在static目录下新建login.html页面
+
+```html
+<!DOCTYPE html>
+<!-- 需要添加
+<html  xmlns:th="http://www.thymeleaf.org">
+这样在后面的th标签就不会报错
+ -->
+<html  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h1>表单提交</h1>
+<!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
+<form action="/user/login"  method="post">
+    <input type="text" name="username" />
+    <br/>
+    <input type="text" name="password" />
+    <br/>
+    <input type="submit" value="login"/>
+</form>
+</body>
+</html>
+```
+
+添加一个/test/index访问路径controller
+
+```java
+@RestController
+@RequestMapping("/test")
+public class TestController3 {
+	@GetMapping("hello")
+	public String hello() {
+		return "hello security";
+	}
+	@GetMapping("index")
+	public String index() {
+		return "hello index";
+	}
+}
+```
+
+**用户名与密码名称必须是username,password**
+
+验证：
+
+http://127.0.0.1:8080/test/hello	//不需要登录可以访问的路径
+
+http://127.0.0.1:8080/test/index	//登录后才能访问的路径
+
+### 4.2基于角色或权限访问控制
+
+首先要在MyUserDetailsService.java把返回user对象设置权限（角色)
+
+```java
+List<GrantedAuthority> auths =
+        AuthorityUtils.commaSeparatedStringToAuthorityList("admins,ROLE_sale,ROLE_role");
+```
+
+1 hasAuthority方法(当登录用户具有**admins权限**才可以访问）
+.antMatchers("/test/index").hasAuthority("admins")针对某一个
+2 hasAnyAuthority方法(当登录用户具有**admins,manager有多个权限**属于某一个时才可以访问）针对多个权限
+.antMatchers("/test/index").hasAnyAuthority("admins,manager")
+3 hasRole方法   ROLE_sale（返回user对象设置时前面必须是ROLE_*)
+.antMatchers("/test/index").hasRole("sale")
+4 hasAnyRole方法 (有多个角色属于某一个角色时才可以访问)
+.antMatchers("/test/index").hasAnyRole("sale,role")
+
+
+
+**自定义没权限访问的页面：**
+
+首先创建没权限跳转的页面static/unauth.html，然后配置类：
+
+```java
+//配置没有权限访问跳转自定义页面
+http.exceptionHandling().accessDeniedPage("/unauth.html");
+```
+
+
+
+**注解使用：**
+
+注解使用前需要在启动类添加开启注解：@EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled = true)
+
+注解使用：
+
+@Secured：判断用户是否有这个角色，有这个角色才可以访问
+
+```
+@Secured({"ROLE_sale","ROLE_manager"})
+```
+
+@PreAuthorize：在方法访问之前进行验证
+
+```
+@PreAuthorize("hasAnyAuthority('admins')")
+```
+
+@PostAuthorize：在方法执行之后
+
+```
+@PostAuthorize("hasAnyAuthority('admins')")
+```
+
+@PostFilter：对数据进行过滤
+
+```
+@PostFilter("filterObject.username == 'admin1'")
+```
+
+权限表达式：
+
+```
+？？？
+```
+
+
+
+**用户注销操作：**
+
+添加一个登录成功页面success.html,并添加一个退出按钮事件
+
+配置操作：
+
+```java
+http.logout().logoutUrl("/logout").logoutSuccessUrl("/test/hello").permitAll();
+.defaultSuccessUrl("/success.html").permitAll()  //修改之前的登录成功后的跳转地址
+```
+
+
+
+**基于数据库的记住我（自动登录功能):**
+
+???
+
+
+
+**CSRF功能：**
+
+???
+
+
 
 ### 5.微服务方案
 
