@@ -104,13 +104,13 @@ Relation:
 
 ## 三．设计模式类型
 
-### .创建型模式
+### .[创建型模式](create.md)
 
-<font color="blue">１．单例模式</font>　２．抽象工厂模式　３．原型模式　４．建造者模式　
+<font color="blue">１．单例模式</font>　<font color="blue">２．抽象工厂模式</font>　<font color="blue">３．原型模式</font>　４．建造者模式　
 
 ５．工厂模式
 
-### .结构型模式
+### .[结构型模式](structure.md)
 
 １．适配器模式　２．桥接模式　３．装饰模式　４．组合模式　５．外观模式
 
