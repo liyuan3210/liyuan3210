@@ -260,7 +260,7 @@ PolandNotation.java
 
 ![](img/sort-3.png)Added Added 
 
-插入时有两种方法，交换法，移动法
+插入时有两种方法，**交换法（效率很慢）**，**移位法（效率高）**
 
 实例：com.liyuan3210.dsa.dataStructures.sort.ShellSort.java
 
