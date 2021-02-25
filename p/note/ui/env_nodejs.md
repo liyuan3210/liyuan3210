@@ -37,24 +37,26 @@ less sass 区别？
 	https://www.jianshu.com/p/e3f1fcbbccc3
 
 官网:https://nodejs.org
-一.nodeJs
-	安装
-	下载解压安装版本,配置好环境变量path(最简只要配置node.exe环境变量path即可):
-		NODE_HOME(不是固定的):		D:\soft\dev\node-v12.14.1-win-x64
-		Path:				%NODE_PATH%
-		Path:				%NODE_PATH%\node-global
-	目录命令设置(可略)：
-		查看变量:
-		npm config get cache										//压缩包缓存目录
-		npm config get prefix										//全局安装位置
-		npm config get registry										//查看镜像代理
-		设置变量:
-		npm config set registry https://registry.npmjs.org/			//默认官方仓库
-		npm config set cache "D:\soft\dev\node-v12.18.3-win-x64\node-cache"					//设置node-cache
-		npm config set prefix "D:\soft\dev\node-v12.18.3-win-x64\node-global"				//设置node-global
-		npm config set registry http://registry.npm.taobao.org/		//设置淘宝镜像仓库			
-	
-	编码
+一.nodeJs安装
+
+```
+下载解压安装版本,配置好环境变量path(最简只要配置node.exe环境变量path即可):
+	NODE_HOME(不是固定的):		D:\soft\dev\node-v12.14.1-win-x64
+	Path:				%NODE_PATH%
+	Path:				%NODE_PATH%\node-global
+目录命令设置(可略)：
+	查看变量:
+	npm config get cache										//压缩包缓存目录
+	npm config get prefix										//全局安装位置
+	npm config get registry										//查看镜像代理
+	设置变量:
+	npm config set registry https://registry.npmjs.org/			//默认官方仓库
+	npm config set cache "D:\soft\dev\node-v12.18.3-win-x64\node-cache"					//设置node-cache
+	npm config set prefix "D:\soft\dev\node-v12.18.3-win-x64\node-global"				//设置node-global
+	npm config set registry http://registry.npm.taobao.org/		//设置淘宝镜像仓库	
+```
+
+​	hello world示例：
 	保存文件为helloWord.js
 	var http = require('http');
 	http.createServer(function (req, res) {
