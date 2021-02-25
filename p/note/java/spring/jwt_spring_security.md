@@ -360,13 +360,82 @@ http.logout().logoutUrl("/logout").logoutSuccessUrl("/test/hello").permitAll();
 
 **基于数据库的记住我（自动登录功能):**
 
-???
+![](img/spring_security-1.png)
+
+
+
+实现：
+
+1.首先建表，可以自动生成，可以查看JdbcTokenRepositoryImpl类看到
+
+```sql
+CREATE TABLE persistent_logins (
+    username VARCHAR(64) NOT NULL,
+    series VARCHAR(64) PRIMARY KEY,
+    token VARCHAR(64) NOT NULL,
+    last_used TIMESTAMP NOT NULL
+);
+```
+
+2.配置类，注入数据源
+
+```java
+//注入数据源
+@Autowired
+private DataSource dataSource;
+//配置对象
+@Bean
+public PersistentTokenRepository persistentTokenRepository() {
+JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+jdbcTokenRepository.setDataSource(dataSource);
+//jdbcTokenRepository.setCreateTableOnStartup(true);//自动生成表
+return jdbcTokenRepository;
+}
+```
+
+3.配置：
+
+```java
+//自动登录，设置60秒
+...
+.anyRequest().authenticated()
+.and().rememberMe().tokenRepository(persistentTokenRepository())
+.tokenValiditySeconds(60)//设置有效时长，单位秒
+.userDetailsService(userDetailsService)
+...
+```
+
+4.页面编写(用的是框架所以remember-me名称是固定的)
+
+```html
+<input type="checkbox" name="remember-me"/>自动登录
+```
+
+验证：
+
+http://127.0.0.1:8080/test/hello
 
 
 
 **CSRF功能：**
 
-???
+跨站请求伪造，过滤器在CsrfFilter
+
+默认开启csrf防护功能，如下进行关闭
+
+```
+http.csrf().disable();
+```
+
+请求时添加携带参数：
+
+```
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+```
+
+验证：
+
+验证失败？？？
 
 
 
