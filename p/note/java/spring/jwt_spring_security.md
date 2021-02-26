@@ -441,7 +441,31 @@ http.csrf().disable();
 
 ### 5.微服务方案
 
-pdf文件：44页
+**pdf文件：44页**
+
+**权限方案(用户流程)：**
+
+![](img/spring_security-1.png)
+
+**项目结构(工程介绍)：**
+
+![](img/spring_security-2.png)
+
+**运行：**
+
+问题1：sh: 1: webpack-dev-server: Permission denied
+
+npm install webpack -g
+npm install webpack-dev-server -g
+
+问题2：error node-sass@4.13.1 postinstall: `node scripts/build.js`
+
+npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass
+npm install
+
+完成npm install后就可以执行如下运行
+
+npm start
 
 
 
