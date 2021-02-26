@@ -152,31 +152,26 @@ https://www.cnblogs.com/free-java/p/7532371.html
 	lombok的作用：
 	在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成上面提到的这些方法。 lombok的产生就是为了省去我们手动创建上述方法的麻烦，它能够在我们编译源码的时候自动帮我们生成上述方法。即它最终能够达到的效果是：在源码中没有上述方法，但是在编译生成的字节码文件中有上述方法 。
 
-	lombok的原理：
-	通过编译时注解进行注解解析，在编译生成的字节码文件中生成上述方法 。
+使用：
+    下载地址：
+    https://projectlombok.org/downloads/lombok.jar
 
-	运行时解析注解
-	运行时能够解析的注解，必须将@Retention设置为RUNTIME，这样可以通过反射拿到该注解。java.lang.reflect反射包中提供了一个接口AnnotatedElement，该接口定义了获取注解信息的几个方法，Class、Constructor、Field、Method、Package等都实现了该接口，大部分开发者应该都很熟悉这种解析方式。
+    如果用的是eclipse,将 lombok.jar 复制到 myeclipse.ini / eclipse.ini 所在的文件夹目录下。
+    在ini文件下最后面插入以下两行并保存：
+    -Xbootclasspath/a:lombok.jar
+    -javaagent:lombok.jar
+    或者
+    执行java -jar lombok.jar,在弹出界面选择eclipse安装目录（选中文件），安装后eclipse.ini文件后面会追加配置
 
-	编译时解析注解
-	编译时解析有两种机制，Annotation Processing Tool 和 Pluggable Annotation Processing API。 Annotation Processing API不推荐使用，原因：1、api都在com.sun.mirror非标准包下， 2、没有集成到javac中，需要额外运行。 Lombok就是使用Pluggable Annotation Processing API这种方式实现的。
+    然后重启 eclipse / myeclipse
 
-	lombok的使用：
-	下载地址：https://projectlombok.org/downloads/lombok.jar
-	将 lombok.jar 复制到 myeclipse.ini / eclipse.ini 所在的文件夹目录下
-	打开 eclipse.ini / myeclipse.ini，在最后面插入以下两行并保存：
-	 -Xbootclasspath/a:lombok.jar
-	 -javaagent:lombok.jar
-	重启 eclipse / myeclipse
-	maven依赖
-	<dependency>
-	 <groupId>org.projectlombok</groupId>
-	 <artifactId>lombok</artifactId>
-	 <version>1.16.18</version>
-	 <scope>provided</scope>
-	</dependency>
-	lombok的注解：
-	@Data ：注解在类上；提供类所有属性的 getting 和 setting 方法。@ToString, @EqualsAndHashCode, 所有属性的@Getter, 所有non-final属性的@Setter和@RequiredArgsConstructor的组合，通常情况下，我们使用这个注解就足够了。 @Setter：注解在属性上；为属性提供 setting 方法。放在类上，会对所有的非静态(non-static)属性生成Setter方法 @Getter：注解在属性上；为属性提供 getting 方法。放在类上，会对所有的非静态(non-static)属性生成Getter方法 @Log4j ：注解在类上；为类提供一个 属性名为log 的 log4j 日志对象 @NoArgsConstructor：注解在类上；为类提供一个无参的构造方法 @AllArgsConstructor：注解在类上；为类提供一个全参的构造方法 @EqualsAndHashCode：会使用所有非瞬态(non-transient)和非静态(non-static)字段来生成equals和hascode方法，也可以指定具体使用哪些属性。 @ToString：生成toString方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。 @NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor：无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，Lombok就无能为力了
+    lombok工程pom
+    <dependency>
+     <groupId>org.projectlombok</groupId>
+     <artifactId>lombok</artifactId>
+     <version>1.16.18</version>
+     <scope>provided</scope>
+    </dependency>
 
 	lombok的罪恶
 	使用lombok虽然能够省去手动创建setter和getter方法的麻烦，但是却大大降低了源代码文件的可读性和完整性，降低了阅读源代码的舒适度。 另外lombok无法支持多种参数构造器的重载。

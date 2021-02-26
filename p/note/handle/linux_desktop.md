@@ -352,9 +352,15 @@
 	安装deb包：
 	dpkg -i dingtalk-2.1.9-latest-amd64.deb
 
-
-XX.Linux系统下Notepad++的优秀替代品(未安装)
-	https://blog.sbot.io/articles/8
+十五.redis客户端界面
+    参考：https://www.redis.com.cn/clients.html
+    RedisDesktopManager工具(windows客户端收费，linux免费)
+        https://rdm.dev/
+        https://docs.rdm.dev/en/latest/install
+        https://github.com/uglide/RedisDesktopManager
+    AnotherRedisDesktopManager工具(redis客户端)：
+        https://github.com/qishibo/AnotherRedisDesktopManager
+        https://gitee.com/qishibo/AnotherRedisDesktopManager/releases
 	
 deb卸载:
 	实例:https://blog.csdn.net/hanshuning/article/details/52328136

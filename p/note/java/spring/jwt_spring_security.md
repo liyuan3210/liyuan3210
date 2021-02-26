@@ -469,7 +469,27 @@ npm start
 
 
 
+**nacos环境：**
 
+nacos = 配置注中心+册中心：
+
+https://nacos.io/
+
+下载解压安装包：
+
+wget https://github.com/alibaba/nacos/releases/download/1.4.1/nacos-server-1.4.1.tar.gz
+
+启动：
+
+cd nacos/bin
+
+sh startup.sh -m standalone
+
+访问：
+
+http://192.168.1.136:8848/nacos
+
+帐号/密码： nacos / nacos
 
 
 
