@@ -1581,18 +1581,20 @@ mkdir key && cd key
 openssl genrsa -out dashboard.key 2048
 openssl req -new -out dashboard.csr -key dashboard.key -subj '/CN=kubernetes-dashboard-certs'
 openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt
-#删除原有的证书secret，v2.0是 -n kubernetes-dashboard
+//如果没注释掉已发布Secret，就删除原有的名称空间kubernetes-dashboard
 kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
-#删除原有的证书pod，v2.0是 -n kubernetes-dashboard
 kubectl delete pod kubernetes-dashboard -n kubernetes-dashboard
+//上面两句话可以一句命令搞定，如下：
+$ kubectl delete ns kubernetes-dashboard
+// 如果recommended.yaml注释掉了Secret，需要手动创建命名空间kubernetes-dashboard
+$ kubectl create ns kubernetes-dashboard
 #创建新的证书secret
 kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt -n kubernetes-dashboard
 
-// 如果recommended.yaml注释掉了Secret，需要手动创建命名空间kubernetes-dashboard
-$ kubectl create ns kubernetes-dashboard
-
 //创建角色，用户，发布容器
 $ kubectl apply -f clusterRoleBinding.yaml
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
+
 $ kubectl apply -f serviceAccount.yaml
 $ kubectl apply -f recommended.yaml
 
