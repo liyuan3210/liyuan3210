@@ -1519,6 +1519,10 @@ $ kubectl exec -it nginx-dep1-231341234-2342 bash	//查看/usr/share/nginx/html�
 	https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 	https://github.com/kubernetes/dashboard
 
+自己的脚本：
+
+https://github.com/liyuan3210/base_other/tree/master/k8s/dashboard
+
 安装：
 
 ```
@@ -1551,9 +1555,6 @@ kubernetesui/metrics-scraper:v1.0.6
           targetPort: 8443
       selector:
         k8s-app: kubernetes-dashboard
-        
-//执行发布
-$ kubectl apply -f recommended.yaml
 
 //创建签名
 #创建key目录并进入
@@ -1568,16 +1569,27 @@ kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
 kubectl delete pod kubernetes-dashboard -n kubernetes-dashboard
 #创建新的证书secret
 kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt -n kubernetes-dashboard
-#查看dashboard pod，v2.0是 -n kubernetes-dashboard
+
+// 如果recommended.yaml注释掉了Secret，需要手动创建命名空间kubernetes-dashboard
+$ kubectl create ns kubernetes-dashboard
+
+//创建角色，用户，发布容器
+$ kubectl apply -f clusterRoleBinding.yaml
+$ kubectl apply -f serviceAccount.yaml
+$ kubectl apply -f recommended.yaml
+
+//查看dashboard pod，v2.0是 -n kubernetes-dashboard
 kubectl get pod -n kubernetes-dashboard
 
-# 查看对外访问端口
+// 查看对外访问端口
 kubectl get svc -n kubernetes-dashboard -o wide
 ```
 
   产生token访问：
 
-$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+```
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+```
 
 kubectl exec问题：
 
