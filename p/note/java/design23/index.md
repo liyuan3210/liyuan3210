@@ -106,11 +106,11 @@ Relation:
 
 ### .[创建型模式](create.md)
 
-<font color="blue">１．单例模式</font>　<font color="blue">２．抽象工厂模式</font>　<font color="blue">３．原型模式</font>　４．建造者模式　<font color="blue">５．工厂模式</font>
+<font color="blue">１．单例模式</font>　<font color="blue">２．抽象工厂模式</font>　<font color="blue">３．原型模式</font>　<font color="blue">４．建造者模式</font>　<font color="blue">５．工厂模式</font>
 
 ### .[结构型模式](structure.md)
 
-１．适配器模式　２．桥接模式　３．装饰模式　４．组合模式　５．外观模式
+<font color="blue">１．适配器模式</font>　２．桥接模式　３．装饰模式　４．组合模式　５．外观模式
 
 ６．享元模式　<font color="blue">７．代理模式</font>
 
