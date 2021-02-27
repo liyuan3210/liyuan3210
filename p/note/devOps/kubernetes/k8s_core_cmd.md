@@ -1204,6 +1204,24 @@ $ kubectl get pods -n ingress-nginx -o wide
 
 最后宿主机上访问：example.ingressdemo.com
 
+ingress安装问题：
+
+```
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+https://kubernetes.github.io/ingress-nginx/deploy/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/cloud/deploy.yaml
+ingress安装
+https://www.cnblogs.com/linuxk/p/9706720.html
+https://blog.csdn.net/zhangjunli/article/details/107545705
+问题service "ingress-nginx-controller-admission" not found：
+Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+Error from server (InternalError): error when creating "ingress01.yaml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1beta1/ingresses?timeout=10s": service "ingress-nginx-controller-admission" not found
+https://www.e-learn.cn/topic/3708257
+$ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+```
+
+
+
 ### 八．Helm
 
 官网：
