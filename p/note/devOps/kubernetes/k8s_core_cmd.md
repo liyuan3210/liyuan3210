@@ -1588,7 +1588,10 @@ kubectl get svc -n kubernetes-dashboard -o wide
   产生token访问：
 
 ```
+1）手动安装查找方式
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+2) kubeadm安装查找方式
+kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep dashboard-admin) | grep token
 ```
 
 kubectl exec问题：
