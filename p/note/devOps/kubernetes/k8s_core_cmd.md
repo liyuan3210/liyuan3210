@@ -1571,6 +1571,7 @@ kubernetesui/metrics-scraper:v1.0.6
       ports:
         - port: 443
           targetPort: 8443
+          nodePort: 32196   //配置对外访问端口32196（https://<any_node_ip>:32196）
       selector:
         k8s-app: kubernetes-dashboard
 
@@ -1593,8 +1594,6 @@ kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.k
 
 //创建角色，用户，发布容器
 $ kubectl apply -f clusterRoleBinding.yaml
-Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
-
 $ kubectl apply -f serviceAccount.yaml
 $ kubectl apply -f recommended.yaml
 
