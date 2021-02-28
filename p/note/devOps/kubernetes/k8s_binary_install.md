@@ -692,20 +692,21 @@ $ scp -r kubernetes root@node1:/opt/
 #生成 bootstrap.kubeconfig 文件
 KUBE_APISERVER="https://192.168.122.242:6443" # apiserver IP:PORT
 TOKEN="f6c3d69e8ad0c5c1c9924c63c8fec657" # 与 token.csv 里保持一致
-# 生成 kubelet bootstrap kubeconfig 配置文件
-kubectl config set-cluster kubernetes \
+
+# 把上面KUBE_APISERVER，TOKEN值替换下面要执行的命令
+$ kubectl config set-cluster kubernetes \
 --certificate-authority=/opt/kubernetes/ssl/ca.pem \
 --embed-certs=true \
 --server=${KUBE_APISERVER} \
 --kubeconfig=bootstrap.kubeconfig
-kubectl config set-credentials "kubelet-bootstrap" \
+$ kubectl config set-credentials "kubelet-bootstrap" \
 --token=${TOKEN} \
 --kubeconfig=bootstrap.kubeconfig
-kubectl config set-context default \
+$ kubectl config set-context default \
 --cluster=kubernetes \
 --user="kubelet-bootstrap" \
 --kubeconfig=bootstrap.kubeconfig
-kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+$ kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
 
 拷贝到配置文件路径：
 cp bootstrap.kubeconfig /opt/kubernetes/cfg
@@ -714,17 +715,18 @@ cp bootstrap.kubeconfig /opt/kubernetes/cfg
 ```
 # 生成 kubeconfig 文件：
 KUBE_APISERVER="https://192.168.122.242:6443"
-kubectl config set-cluster kubernetes \
+# 把KUBE_APISERVER值替换下面要执行的命令
+$ kubectl config set-cluster kubernetes \
 --certificate-authority=/opt/kubernetes/ssl/ca.pem \
 --embed-certs=true \
 --server=${KUBE_APISERVER} \
 --kubeconfig=kube-proxy.kubeconfig
-kubectl config set-credentials kube-proxy \
+$ kubectl config set-credentials kube-proxy \
 --client-certificate=/opt/kubernetes/ssl/kube-proxy.pem \
 --client-key=/opt/kubernetes/ssl/kube-proxy-key.pem \
 --embed-certs=true \
 --kubeconfig=kube-proxy.kubeconfig
-kubectl config set-context default \
+$ kubectl config set-context default \
 --cluster=kubernetes \
 --user=kube-proxy \
 --kubeconfig=kube-proxy.kubeconfig

@@ -163,6 +163,13 @@ sysctl --system # 生效
 	6>部署验证
 		kubectl get nodes
 		
+	7>加入节点(join token 24小时后失效)
+		http://www.mamicode.com/info-detail-3038435.html
+		#创建并打印join命令及token(每执行一次，生成一个不同的token)
+		$ kubeadm token create --print-join-command
+		#查看当前可用的token
+		$ kubeadm token list
+		
 ```
 
 
