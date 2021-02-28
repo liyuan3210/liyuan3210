@@ -1204,6 +1204,24 @@ $ kubectl get pods -n ingress-nginx -o wide
 
 最后宿主机上访问：example.ingressdemo.com
 
+ingress安装问题：
+
+```
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+https://kubernetes.github.io/ingress-nginx/deploy/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/cloud/deploy.yaml
+ingress安装
+https://www.cnblogs.com/linuxk/p/9706720.html
+https://blog.csdn.net/zhangjunli/article/details/107545705
+问题service "ingress-nginx-controller-admission" not found：
+Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+Error from server (InternalError): error when creating "ingress01.yaml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1beta1/ingresses?timeout=10s": service "ingress-nginx-controller-admission" not found
+https://www.e-learn.cn/topic/3708257
+$ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+```
+
+
+
 ### 八．Helm
 
 官网：
@@ -1519,6 +1537,10 @@ $ kubectl exec -it nginx-dep1-231341234-2342 bash	//查看/usr/share/nginx/html�
 	https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 	https://github.com/kubernetes/dashboard
 
+自己的脚本：
+
+https://github.com/liyuan3210/base_other/tree/master/k8s/dashboard
+
 安装：
 
 ```
@@ -1551,9 +1573,6 @@ kubernetesui/metrics-scraper:v1.0.6
           targetPort: 8443
       selector:
         k8s-app: kubernetes-dashboard
-        
-//执行发布
-$ kubectl apply -f recommended.yaml
 
 //创建签名
 #创建key目录并进入
@@ -1562,22 +1581,38 @@ mkdir key && cd key
 openssl genrsa -out dashboard.key 2048
 openssl req -new -out dashboard.csr -key dashboard.key -subj '/CN=kubernetes-dashboard-certs'
 openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt
-#删除原有的证书secret，v2.0是 -n kubernetes-dashboard
+//如果没注释掉已发布Secret，就删除原有的名称空间kubernetes-dashboard
 kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
-#删除原有的证书pod，v2.0是 -n kubernetes-dashboard
 kubectl delete pod kubernetes-dashboard -n kubernetes-dashboard
+//上面两句话可以一句命令搞定，如下：
+$ kubectl delete ns kubernetes-dashboard
+// 如果recommended.yaml注释掉了Secret，需要手动创建命名空间kubernetes-dashboard
+$ kubectl create ns kubernetes-dashboard
 #创建新的证书secret
 kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt -n kubernetes-dashboard
-#查看dashboard pod，v2.0是 -n kubernetes-dashboard
+
+//创建角色，用户，发布容器
+$ kubectl apply -f clusterRoleBinding.yaml
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
+
+$ kubectl apply -f serviceAccount.yaml
+$ kubectl apply -f recommended.yaml
+
+//查看dashboard pod，v2.0是 -n kubernetes-dashboard
 kubectl get pod -n kubernetes-dashboard
 
-# 查看对外访问端口
+// 查看对外访问端口
 kubectl get svc -n kubernetes-dashboard -o wide
 ```
 
   产生token访问：
 
-$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+```
+1）手动安装查找方式
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dasboard-admin | awk '{print $1}')
+2) kubeadm安装查找方式
+kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep dashboard-admin) | grep token
+```
 
 kubectl exec问题：
 
