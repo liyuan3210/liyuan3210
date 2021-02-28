@@ -550,7 +550,7 @@ $ kubectl scale deployment web --replicas=10
 
 无头service，ClusterIp:none,
 
-SatefulSet部署有状态
+StatefulSet部署有状态
 
 ```
 apiVersion: v1
@@ -604,7 +604,7 @@ $ kubectl get svc	//CLUSTER-IP值为None
 
 ```
 
-deployment和statefueset区别:有身份的(唯一标识)
+deployment和StatefulSet区别:有身份的(唯一标识)
 
 * 根据主机名+按照一定规则生成域名
 * 每个pod有唯一主机名
