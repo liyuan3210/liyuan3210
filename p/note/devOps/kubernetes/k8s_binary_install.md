@@ -920,7 +920,7 @@ $ kubectl apply -f kube-flannel.yml		//这个操作和kubeadm安装一样
 
 ------------------------------------------------------------------------------------------------------
 
-### kubernetes手动安装etcd,flannel
+### （Old）kubernetes手动安装etcd,flannel
 
 ```
 官网:https://kubernetes.io
