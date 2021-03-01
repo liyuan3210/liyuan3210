@@ -1628,3 +1628,28 @@ kubectl delete clusterrolebinding  【clusterrolebindingName】 //删除
 注意：系统可能会有dashboard-admin名字，所以自己取了个不重复的dashboard-admin2
 ```
 
+### 十一.资源监控
+
+？？？
+
+### 十二.集群高可用搭建
+
+？？？
+
+### 十三.部署项目
+
+？？？
+
+### 问题：
+
+存储卷？？？
+
+1.k8s集群节点ip改变（验证数据发不发生变化）？？？
+
+https://www.cnblogs.com/gaohq/p/11882175.html
+
+http://www.manongjc.com/detail/8-rbzciyesyddmvpj.html
+
+2.创建证书时，预留备用节点？？？
+
+3.加入节点，剔除节点（验证数据发不发生变化）？？？

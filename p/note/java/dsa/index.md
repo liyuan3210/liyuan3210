@@ -40,13 +40,13 @@ https://www.bilibili.com/video/BV1B4411H76f?p=16
 
 实例：dsa.dataStructures.queue
 
-简单队列：ArrayQueueDemo.java
+简单队列：com.liyuan3210.dsa.dataStructures.queue.ArrayQueueDemo.java
 
 ```
 数组模拟队列一个思路，但有问题（数组不能重复使用）
 ```
 
-环形队列：CircleArrayQueueDemo.java
+环形队列：com.liyuan3210.dsa.dataStructures.queue.CircleArrayQueueDemo.java
 
 ```
 改进成环形队列（通过取模方式）。算法可以有多种，但这种数据有效个数是lenth-1(因为有个预留空间)
@@ -61,7 +61,7 @@ https://www.bilibili.com/video/BV1B4411H76f?p=16
 
 **单向链表：**
 
-SingleLinkedListDemo.java
+实例：com.liyuan3210.dsa.dataStructures.linkedlist.SingleLinkedListDemo.java
 
 链表排序，添加，删除
 
@@ -76,13 +76,17 @@ SingleLinkedListDemo.java
 
 **双向链表：**
 
-DoubleLinkedListDemo.java
+实例：com.liyuan3210.dsa.dataStructures.linkedlist.DoubleLinkedListDemo.java
 
 双向链表显示，添加，删除，修改
 
 **单向环形链表（约瑟夫问题）:**
 
-Josepfu.java
+```
+Josephu  问题为：设编号为1，2，… n的n个人围坐一圈，约定编号为k（1<=k<=n）的人从1开始报数，数到m 的那个人出列，它的下一位又从1开始报数，数到m的那个人又出列，依次类推，直到所有人出列为止，由此产生一个出队编号的序列。
+```
+
+实例：com.liyuan3210.dsa.dataStructures.linkedlist.Josepfu.java
 
 数组取模也可以完成（环形链表）
 
@@ -206,6 +210,12 @@ PolandNotation.java
 
 ![](img/sort-2.png)
 
+什么是`稳定`？
+
+```
+注:假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i]=r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定的
+```
+
 6.1.冒泡排序
 
 ```
@@ -292,21 +302,31 @@ PolandNotation.java
 
 ![](img/meger-2.png)
 
-实例：
+实例：com.liyuan3210.dsa.dataStructures.sort.MergetSort.java
 
 
 
 6.7.基数排序
 
-实例：
+基数排序(桶排序)介绍:
 
+```
+1>基数排序（radix sort）属于“分配式排序”（distribution sort），又称“桶子法”（bucket sort）或bin sort，顾名思义，它是通过键值的各个位的值，将要排序的元素分配至某些“桶”中，达到排序的作用
+2>基数排序法是属于稳定性的排序，基数排序法的是效率高的稳定性排序法
+3>基数排序(Radix Sort)是桶排序的扩展
+4>基数排序是1887年赫尔曼·何乐礼发明的。它是这样实现的：将整数按位数切割成不同的数字，然后按每个位数分别比较。
 
+基数排序基本思想:
+将所有待比较数值统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后, 数列就变成一个有序序列。
+```
 
-比较
+![](img/sort-4.png)
 
+实例：com.liyuan3210.dsa.dataStructures.sort.RadixSort.java
 
+6.8.时间复杂度比较：
 
-
+![](img/sort-bijiao.png)
 
 
 
