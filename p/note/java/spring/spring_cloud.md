@@ -9,3 +9,18 @@
 资料：
 
 https://github.com/liyuan3210/data/tree/master/drawio
+
+## 一.分布式事物
+
+### 1.基础理论
+
+
+
+### 2.案例启动
+
+seata官网：https://seata.io/
+
+实例：
+
+1.seata实现2PC事物
+
