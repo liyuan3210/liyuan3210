@@ -6,7 +6,7 @@ https://www.bilibili.com/video/BV1B4411H76f?from=search&seid=8541134073371747563
 链接: 
 https://pan.baidu.com/s/18y3CKb6a5N6f8DCpUH1Pbw 提取码: hnms
 
-当前（总：195，当前：71）
+当前（总：195，当前：81）
 
 https://www.bilibili.com/video/BV1B4411H76f?p=16
 
@@ -332,3 +332,21 @@ PolandNotation.java
 
 ### 二．算法分类
 
+**常见查找算法：**
+
+1.顺序查找（传统一个一个查找）
+
+2.二分查找/折半查找
+
+```
+二分查找(必须是有序的)：
+   请对一个有序数组进行二分查找 {1,8, 10, 89, 1000, 1234} ，输入一个数看看该数组是否存在此数，并且求出下标，如果没有就提示"没有这个数"。
+
+思考题： {1,8, 10, 89, 1000, 1000，1234} 当一个有序数组中，有多个相同的数值时，如何将所有的数值都查找到，比如这里的 1000
+```
+
+实例：com.liyuan3210.dsa.dataStructures.search.BinarySearch.java
+
+3.插值查找
+
+4.斐波那契查找
