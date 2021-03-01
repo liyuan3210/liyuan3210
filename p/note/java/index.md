@@ -26,6 +26,16 @@
 
 https://www.bilibili.com/video/BV18E411x7eT?p=1
 
+源码：
+
+https://github.com/TNoOne/cloud2020，https://blog.csdn.net/qq_41211642/article/details/104772140
+
+https://github.com/leelovejava/cloud2020
+
+nacos,rabbitmq,sentinel,seata,consul,erlang等课程需要的软件及jar包都在这
+链接：https://pan.baidu.com/s/18zr_KFYgme6ZI04VZZ4KtA 
+提取码：dzvq
+
 2.微服务分布式事务
 
 https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
