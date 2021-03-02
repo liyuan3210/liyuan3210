@@ -1540,6 +1540,8 @@ ReadWriteMany(RWX)：可以挂在多个工作节点上，读写
 ReadOnlyMany(ROX)：可以挂在多个工作节点上，只读
 ```
 
+存储实例（StatefulSet）：https://github.com/liyuan3210/base_other/tree/master/k8s/storage
+
 ### 十.dashboard安装
 
 官方
