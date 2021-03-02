@@ -1370,8 +1370,8 @@ $ helm install web2 mychart
 1>centos安装: 
 $ yum install -y nfs-utils
 
-2>设置挂载路径(没有需要创建nfs目录)vi /etc/exports：
-/data/nfs *(rw.no_root_squash)
+2>设置挂载路径vi /etc/exports(没有需要创建nfs目录)：
+/data/nfs *(rw,no_root_squash)
 
 3>启动服务（nfs服务端）
 $  systemctl start nfs
