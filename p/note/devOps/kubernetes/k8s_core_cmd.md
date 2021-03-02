@@ -1386,7 +1386,7 @@ $ yum install -y nfs-utils
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-dep1
+  name: nginx-nfs
 spec:
   replicas: 1
   selector:
@@ -1496,7 +1496,7 @@ spec:
     requests:
       storage: 5Gi
       
-# 上面内容保存pvc.yaml文件,执行部署
+# 上面内容保存pvc.yaml文件,执行部署（上面是指定具体pvc，也有动态分配方式）
 $ kubectl apply -f pvc.yaml
 ```
 
@@ -1529,6 +1529,16 @@ $ kubectl get pv,pvc
 $ kubectl get pods	//查看pod
 
 $ kubectl exec -it nginx-dep1-231341234-2342 bash	//查看/usr/share/nginx/html目录
+
+**注意：**
+
+accessModes有三种值：
+
+```
+ReadWriteOnce(RWO)：只能挂载一个工作节点上，读写
+ReadWriteMany(RWX)：可以挂在多个工作节点上，读写
+ReadOnlyMany(ROX)：可以挂在多个工作节点上，只读
+```
 
 ### 十.dashboard安装
 
