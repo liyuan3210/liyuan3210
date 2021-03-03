@@ -349,4 +349,23 @@ PolandNotation.java
 
 3.插值查找
 
+```
+1>插值查找算法类似于二分查找，不同的是插值查找每次从自适应mid处开始查找。
+2>将折半查找中的求mid 索引的公式 , low 表示左边索引left, high表示右边索引right
+3>公式：
+int mid = low + (high - low) * (key - arr[low]) / (arr[high] - arr[low])  ;/*插值索引*/
+对应前面的代码公式：
+int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – arr[left])
+
+插值查找注意事项：
+对于数据量较大，关键字分布比较均匀的查找表来说，采用插值查找, 速度较快.
+关键字分布不均匀的情况下，该方法不一定比折半查找要
+```
+
+实例：com.liyuan3210.dsa.dataStructures.search.InsertValueSearch.java
+
 4.斐波那契查找
+
+？？？
+
+实例：com.liyuan3210.dsa.dataStructures.search.FibonacciSearch.java
