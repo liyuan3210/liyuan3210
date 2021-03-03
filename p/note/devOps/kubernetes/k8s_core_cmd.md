@@ -1642,6 +1642,8 @@ kubectl delete clusterrolebinding  【clusterrolebindingName】 //删除
 
 ### 十一.资源监控
 
+prometheus（数据获取）  + grafana（展现）
+
 ？？？
 
 ### 十二.集群高可用搭建
