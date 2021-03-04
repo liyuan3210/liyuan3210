@@ -6,7 +6,7 @@ https://www.bilibili.com/video/BV1B4411H76f?from=search&seid=8541134073371747563
 链接: 
 https://pan.baidu.com/s/18y3CKb6a5N6f8DCpUH1Pbw 提取码: hnms
 
-当前（总：195，当前：81）
+当前（总：195，当前：91）
 
 https://www.bilibili.com/video/BV1B4411H76f?p=16
 
@@ -328,8 +328,6 @@ PolandNotation.java
 
 ![](img/sort-bijiao.png)
 
-
-
 ### 二．算法分类
 
 **常见查找算法：**
@@ -369,3 +367,40 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 ？？？
 
 实例：com.liyuan3210.dsa.dataStructures.search.FibonacciSearch.java
+
+**哈希表(数据结构)：**
+
+哈希表 = 数组 + 链表
+
+```
+散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。
+也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
+```
+
+*数组下标（取模确定）=  (唯一id值%数组size)，hash取模方式有多种*
+
+![](img/hashtable.png)
+
+实例：com.liyuan3210.dsa.dataStructures.hashtab.HashTabDemo.java
+
+**二插树:**
+
+为什么需要树这种数据结构
+
+```
+数组存储方式的分析
+优点：通过下标方式访问元素，速度快。对于有序数组，还可使用二分查找提高检索速度。
+缺点：如果要检索具体某个值，或者插入值(按一定顺序)会整体移动，效率较低
+
+链式存储方式的分析
+优点：在一定程度上对数组存储方式有优化(比如：插入一个数值节点，只需要将插入节点，链接到链表中即可， 删除效率也很好)。
+缺点：在进行检索时，效率仍然较低，比如(检索某个值，需要从头节点开始遍历) 
+
+树存储方式的分析
+能提高数据存储，读取的效率,  比如利用 二叉排序树(Binary Sort Tree)，既可以保证数据的检索速度，同时也可以保证数据的插入，删除，修改的速度。
+```
+
+树(二叉树)与 数组，链式结构相比，可以提高新增，删除的同时又能提高检索速度。
+
+![](img/ertree.png)
+
