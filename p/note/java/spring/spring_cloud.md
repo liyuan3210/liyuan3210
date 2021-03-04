@@ -1,16 +1,12 @@
 # spring cloud微服务
 
-1.数据结构与算法（常用部分）
-2.设计模式（常用部分）
-3.微服务（形成笔记，概念理清楚）
-4.mysql（调优）
-5.分布式事物，登录授权jwt，代码生成（框架）
-
-资料：
-
-https://github.com/liyuan3210/data/tree/master/drawio
+资料：https://github.com/liyuan3210/data/tree/master/drawio
 
 ## 一.分布式事物
+
+课程：https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
+
+链接: https://pan.baidu.com/s/1rX3kbHaD9LF4-xRMo-J04w 提取码: qq64
 
 ### 1.基础理论
 

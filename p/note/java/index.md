@@ -36,14 +36,6 @@ nacos,rabbitmq,sentinel,seata,consul,erlang等课程需要的软件及jar包都�
 链接：https://pan.baidu.com/s/18zr_KFYgme6ZI04VZZ4KtA 
 提取码：dzvq
 
-2.微服务分布式事务
-
-https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
-
-3.微服务登录授权方案
-
-https://www.bilibili.com/video/BV1VE411h7aL?from=search&seid=12553764359441323749
-
 4.mybatis代码生成器比较：
 
 https://blog.csdn.net/m0_37524586/article/details/88351833

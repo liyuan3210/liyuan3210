@@ -2,8 +2,6 @@
 
 ## 一.jwt
 
-实例：https://github.com/liyuan3210/java/tree/master/jwt_spring-security/jwt-spring-security
-
 开启/关闭(jwt)：JwtSpringSecurityApplication.java启动类注释掉如下方法
 
 ```
