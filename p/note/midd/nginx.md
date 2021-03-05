@@ -90,100 +90,107 @@ http://nginx.org
 
 ## 二．实例使用
 
-```
-实验环境(局域网环境内)
-		nginx: 192.168.80.135
-		tomcat1:10.20.24.178
-		tomcat2:192.168.80.135
 
-		eclipse新建一个web项目test,一个index验证页面.分别部署到tomcat1，tomcat2,两台机器index分别写上this is page1,this is page2
 
-	配置conf/nginx.conf文件
-		http{}>server节点里面配置
-		listen       80;	//端口,使用默认的
-		server_name  localhost;//使用默认的
-```
+**1.负载配置，**保存为文件为testLock.conf:
 
-1.负载配置:
+一台机器跑两个应用，分别负载到7001与7002
 
 ```
-1.http{}里面配置:
-		#weigth参数表示权值，权值越高被分配到的几率越大
-		upstream hello{
-				server 10.20.24.178:8080 weight=1;
-				server 192.168.80.135:8080 weight=1;            
-		}
-
-		2.http{}>server>里面location /{}配置//感觉可以省略
-		proxy_pass   http://hello;	//hello与上面的upstream xxx对应
-
-		保存配置文件,启动服务在浏览器输入(两个tomcat服务都启动起来):
-		http://192.168.80.135:81/test不停的刷新地址会发现this is page1与this is page2信息不短变化(浏览器有缓存的需要重新打开一个页面)
+#weigth参数表示权值，权值越高被分配到的几率越大
+upstream lockhello {
+  server 127.0.0.1:7001 weight=1;
+  server 127.0.0.1:7002 weight=1;
+}
+server {
+  listen 83;
+  server_name localhost;
+  location /api {
+    root html;
+    index index.html index.htm;
+    proxy_pass http://lockhello/;
+  }
+}
 ```
 
-2.虚拟目录配置(alias与root):
+**2.虚拟目录配置（**可在浏览器显示，下载文件），保存文件为virdir.conf:
 
 ```
-1>.http{}>server>里面配置(方式一:浏览器ftp)
-		location /toolDir {
-			alias C:/tool;
-			autoindex on;				//开启目录浏览功能(必须的)
-			autoindex_exact_size off;	//关闭详细文件大小统计，让文件大小显示MB,GB单位,默认为B
-			autoindex_localtime on;		//开启以服务器本地时区显示文件修改日期！
-		}
-		
-		浏览器目录浏览配置(上面节点添加如下):
-		http://ip:port/toolDir/file.txt(访问的是C:/tool/file.txt下的文件)
-		注意:
-			1.域名内网穿透访问可能会有问题(目前没问题)
-			2.貌似默认不能使用这个(location /),必须得location /pathName配置才行 
-		
-		2>.http{}>server>里面配置(方式二:静态资源访问如html)
-		location /toolDir {
-			   root C:/tool;	
-			   index index.html index.htm;
-		}
-		http://ip:port/toolDir/file.txt(访问的是C:/tool/toolDir/file.txt下的文件)
+# 虚拟目录访问
+server {
+  listen 81;
+  server_name localhost;
+  location /tool {
+    alias /home/liyuan/Desktop/tool;
+    autoindex on; # 开启目录浏览功能(必须的)
+    autoindex_exact_size off; #关闭详细文件大小统计，让文件大小显示MB,GB单位,默认为B
+    autoindex_localtime on; #开启以服务器本地时区显示文件修改日期！
+  }
+}
+
+# 静态资源访问
+server {
+  listen 82;
+  server_name 127.0.0.1;
+  location /lock {
+    alias /var/www/html;
+  }
+}
 ```
 
-3.代理:
+**root路径配置**（静态页面访问）：
 
 ```
+server {
+  listen 82;
+  server_name localhost;
+  location /docs {
+    root /home/liyuan/Desktop/tool/env/midd/apache-zookeeper-3.6.2-bin;
+    index index.html index.htm;
+  }
+}
+下面访问：
+http://127.0.0.1:82/docs/index.html
+实际访问本地路经是：/home/liyuan/Desktop/tool/env/midd/apache-zookeeper-3.6.2-bin/docs/index.html
+```
+
+**3.代理:**
+
 https://blog.csdn.net/qw_xingzhe/article/details/79580800
-		
-		正向(正向代理不支持https):
-		代理内部网络对internet请求
-		
-		反向(常用的类型):
-		将internet请求转发给内部网络
-		
-			server {
-					listen 86;
-					server_name 127.0.0.1;
-					location / {
-							#proxy_redirect off;
-							#proxy_set_header Host $host;
-							#proxy_set_header X-Real-IP $remote_addr;
-							#proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-							proxy_pass http://192.168.157.137:82/;
-							index index.html index.htm;
-					}
-					location /mysqlAdmin {
-							proxy_pass http://192.168.157.139:81/mysqlAdmin/;
-							#index index.html index.htm index.php;
-					}
-					location /api {
-							proxy_pass http://192.168.157.139:83/;
-					}
-					location /ftp {
-							proxy_pass http://192.168.157.137:84/;
-					}
-					#access_log tomcat1.log;
-			}
-		
-			注意:
-			proxy_pass 配置必须是http://ip:port/后面"/"斜杠不能少
-			访问时http://ip:port/后面要跟"/"否则可能有问题
+正向(正向代理不支持https):
+代理内部网络对internet请求
+
+反向(常用的类型):
+将internet请求转发给内部网络
+
+```
+server {
+	listen 86;
+	server_name localhost;
+	
+	location / {
+		#proxy_redirect off;
+		#proxy_set_header Host $host;
+		#proxy_set_header X-Real-IP $remote_addr;
+		#proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_pass http://192.168.157.137:82/;
+		index index.html index.htm;
+	}
+	location /mysqlAdmin {
+		proxy_pass http://192.168.157.139:81/mysqlAdmin/;
+		#index index.html index.htm index.php;
+	}
+	location /api {
+		proxy_pass http://192.168.157.139:83/;
+	}
+	location /ftp {
+		proxy_pass http://192.168.157.137:84/;
+	}
+	#access_log tomcat1.log;
+}
+注意:
+proxy_pass 配置必须是http://ip:port/后面"/"斜杠不能少
+访问时http://ip:port/后面要跟"/"否则可能有问题
 ```
 
 ## 三．nginx配置https
