@@ -315,6 +315,19 @@ http://127.0.0.1:9000
 
 2.在portainer中添加管理节点
 支持管理多个docker
+https://www.cnblogs.com/wudequn/p/13419922.html
+
+1.要加如打节点配置vi /etc/docker/daemon.json，重启
+{
+  "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"],
+  "hosts": ["tcp://0.0.0.0:2375","unix:///var/run/docker.sock"]
+}
+
+2.选择docker(Directly connect to the Docker API),Endpoints->Add endpoint填写
+Endpoint URL: 192.168.1.136:2375
+public IP: 192.168.1.136
+
+3.最后点击Add endpoint完成添加,点击左上角Home就可以看到能够管理的所有节点了
 ```
 
 ## 五.docker命令使用
