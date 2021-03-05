@@ -133,6 +133,7 @@ windows安装
 	docker pull nginx 				//拉取nginx镜像
 	docker rmi hello-world			//删除一个镜像,直接删除(docker rmi hello-world -f)
 	docker search nginx				//查找镜像
+	docker rmi -f $(docker images -qa) //删除所有镜像
 	
 二.镜像托管
 1.docker官网默认仓库登录
@@ -208,6 +209,9 @@ docker logout
 	docker run --name demo1 -it ubuntu:15.10 /bin/bash		//-i -t 可以合并写成 -it
 	docker run -it -d --name=myos centos:test /bin/bash		//创建一个一直在后台运行的centos
 	docker run --h //自定义容器主机名
+	docker rm -f $(docker ps -a -q)	 或
+	docker ps -a -q | xargs docker rm//删除所有容器
+	
 	退出：exit或CTRL+D
 		 ctrl+P+Q	（容器不停止退出）
 		 批量删除镜像，容器
