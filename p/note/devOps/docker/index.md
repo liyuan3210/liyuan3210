@@ -196,6 +196,8 @@ docker logout
 	docker push 192.168.209.132:5000/ubuntu:v1	//推送	
 ```
 
+
+
 ## 三.docker容器操作
 
 ```
@@ -289,6 +291,27 @@ dockerfile构建语法：
 	$ docker build -f dockerfile文件名字 -t mycentos:v1.0.0 .
 ```
 
+## docker 网络管理
+
+？？？
+
+## docker UI管理工具
+
+https://www.cnblogs.com/frankdeng/p/9686735.html
+
+```
+1.查看portainer镜像,安装
+$ docker search portainer
+$ docker pull portainer/portainer
+$ docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+2.访问
+http://127.0.0.1:9000
+
+密码：admin / 99999999
+
+2.在portainer中添加管理节点
+支持管理多个docker
+```
 
 ## 五.docker命令使用
 
