@@ -163,6 +163,8 @@ https://blog.csdn.net/qw_xingzhe/article/details/79580800
 反向(常用的类型):
 将internet请求转发给内部网络
 
+保存文件为agent_http.conf
+
 ```
 server {
 	listen 86;
