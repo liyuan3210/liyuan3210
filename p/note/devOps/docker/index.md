@@ -307,7 +307,7 @@ https://www.cnblogs.com/frankdeng/p/9686735.html
 1.查看portainer镜像,安装
 $ docker search portainer
 $ docker pull portainer/portainer
-$ docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+$ docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /data/portainer:/data portainer/portainer
 2.访问
 http://127.0.0.1:9000
 
