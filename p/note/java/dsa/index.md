@@ -436,6 +436,8 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 第n个元素的父节点为  (n-1) / 2
 ```
 
+实例：com.liyuan3210.dsa.dataStructures.tree.ArrBinaryTreeDemo.java
+
 **线索化二叉树：**
 
 利用前面left,right空节点指向
@@ -451,5 +453,7 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 ```
 
 ![](img/odertree.png)
+
+实例：com.liyuan3210.dsa.dataStructures.tree.threadedbinarytree.ThreadedBinaryTreeDemo.java
 
 **堆排序：**
