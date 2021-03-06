@@ -164,6 +164,14 @@ zkCli.cmd -server 127.0.0.1:2181
 	zkServer.sh status	//查看主从
 ```
 
+**图形化查看工具：**
+
+https://issues.apache.org/jira/secure/attachment/12436620/ZooInspector.zip
+
+条件必须安装java运行环境，执行如下：：
+
+java -jar zookeeper-dev-ZooInspector.jar
+
 ## 三．问题
 
 ```
