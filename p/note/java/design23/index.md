@@ -110,9 +110,9 @@ Relation:
 
 ### .[结构型模式](structure.md)
 
-<font color="blue">１．适配器模式</font>　<font color="blue">２．桥接模式</font>　<font color="blue">３．装饰模式</font>　<font color="blue">４．组合模式</font>　５．外观模式
+<font color="blue">１．适配器模式</font>　<font color="blue">２．桥接模式</font>　<font color="blue">３．装饰模式</font>　<font color="blue">４．组合模式</font>　<font color="blue">５．外观模式</font>
 
-６．享元模式　<font color="blue">７．代理模式</font>
+<font color="blue">６．享元模式</font>　<font color="blue">７．代理模式</font>
 
 ### .行为型模式
 
