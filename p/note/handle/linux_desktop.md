@@ -300,12 +300,12 @@
 	1.1>首先本地克隆并安装deepin-wine-ubuntu(克隆项目)
 		git clone https://github.com/wszqkzqk/deepin-wine-ubuntu.git
 		安装：
-			./install.sh
-	1.3>下载并安装微信deb包
+		    ./install.sh
+	1.2>下载并安装微信deb包
 		wget https://gitee.com/wszqkzqk/deepin-wine-containers-for-ubuntu/raw/master/deepin.com.wechat_2.6.8.65deepin0_i386.deb
 		安装：	
-			dpkg -i deepin.com.wechat_2.6.8.65deepin0_i386.deb
-	1.4>乱码问题(https://blog.csdn.net/lixuedong1024/article/details/105815815/)
+		    dpkg -i deepin.com.wechat_2.6.8.65deepin0_i386.deb
+	1.3>乱码问题(https://blog.csdn.net/lixuedong1024/article/details/105815815/)
 	首先修改配置/opt/deepinwine/tools目录下打run.sh，run_v2.sh两个文件：
         #WINE_CMD="deepin-wine"
         WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
@@ -336,8 +336,8 @@
 		*.执行命令生效：
 		deepin-wine regedit msyh_config.reg
 		
-		图片不能发送问题：
-			sudo apt-get install libjpeg62:i386
+	1.4>图片不能发送问题：
+	     sudo apt-get install libjpeg62:i386
 			
 	2.安装QQ
 	https://im.qq.com/linuxqq/download.html
