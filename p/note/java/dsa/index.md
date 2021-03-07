@@ -457,3 +457,32 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 实例：com.liyuan3210.dsa.dataStructures.tree.threadedbinarytree.ThreadedBinaryTreeDemo.java
 
 **堆排序：**
+
+堆是一种选择排序,分为**大顶堆**,**小顶堆**(一般升序采用大顶堆，降序采用小顶堆 )
+
+大顶堆特性:`arr[i] >= arr[2*i+1] && arr[i] >= arr[2*i+2]  // i 对应第几个节点，i从0开始编号`
+
+数组中顺序(大顶堆):50 , 45 , 40 , 20 , 25 , 35, 30 , 10 , 15
+
+![](img/dui-b.png)
+
+
+
+
+
+小顶堆特性:`arr[i] <= arr[2*i+1] && arr[i] <= arr[2*i+2] // i 对应第几个节点，i从0开始编号`
+
+![](img/dui-m.png)
+
+堆排序的基本思想是：
+
+```
+1).将待排序序列构造成一个大顶堆
+2).此时，整个序列的最大值就是堆顶的根节点。
+3).将其与末尾元素进行交换，此时末尾就为最大值。
+4).然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了。
+
+可以看到在构建大顶堆的过程中，元素的个数逐渐减少，最后就得到一个有序序列了.
+```
+
+实例:com.liyuan3210.dsa.dataStructures.tree.HeapSort.java
