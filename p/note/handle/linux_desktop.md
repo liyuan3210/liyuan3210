@@ -503,7 +503,10 @@ apt源切换:
 	安装dmg文件后,命令是/usr/local/bin/gpg2
 
 	2.mac 切换 root用户
-	https://blog.csdn.net/hhthwx/article/details/79432815
+	参考:https://blog.csdn.net/hhthwx/article/details/79432815
+	首先: sudo su
+	再执行: su -
+	切换至普通用户: su - 用户名
 
 	3.mac eclipse 安装
 	https://blog.csdn.net/cloud_xy/article/details/88623975

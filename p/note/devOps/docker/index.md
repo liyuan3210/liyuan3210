@@ -299,7 +299,7 @@ dockerfile构建语法：
 
 ？？？
 
-## docker UI管理工具
+## docker UI管理工具(portainer)
 
 https://www.cnblogs.com/frankdeng/p/9686735.html
 
@@ -333,6 +333,26 @@ public IP: 192.168.1.136
 
 3.最后点击Add endpoint完成添加,点击左上角Home就可以看到能够管理的所有节点了
 ```
+
+#### 二进制安装portainer:
+
+参考:	https://blog.csdn.net/cljdsc/article/details/110931289
+
+下载及github:	https://github.com/portainer/portainer
+
+首先解压安装:	tar zxvf portainer-1.20.1-linux-amd64.tar.gz
+
+创建数据目录:	mkdir /data/portainer
+
+后台运行:
+
+./portainer --data /data/portainer  -p :9000
+
+还可以指定模板文件:
+
+./portainer --data /data/portainer  -p :9000 --template-file "${PWD}/templates.json" &
+
+
 
 ## 五.docker命令使用
 

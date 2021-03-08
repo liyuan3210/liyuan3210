@@ -53,10 +53,10 @@
 				zip test.zip		//解压zip
 			
 			打包命令：
-				tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 //不压缩
-				tar -zcvf /tmp/etc.tar.gz /etc//打包后，以 gzip 压缩
-				tar -jcvf /tmp/etc.tar.bz2 /etc//打包后，以 bzip2 压缩
-				xz  -z    file.tar//打包后变成file.tar.xz
+				tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 	//不压缩
+				tar -zcvf etc.tar.gz etc							//打包后(在要打包etc目录的根目录下执行)，以 gzip 压缩
+				tar -jcvf /tmp/etc.tar.bz2 /etc						//打包后(在要打包etc目录的根目录下执行???)，以 bzip2 压缩
+				xz  -z    file.tar									//打包后变成file.tar.xz
 				rar格式	
 					rar centos.rar ./piaoyi.org/		//将piaoyi.org目录打包为 centos.rar
 				zip -r test.zip ../*					//递归打包目录
