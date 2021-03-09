@@ -20,13 +20,13 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ​			一个类只负责一项职责。只有当逻辑足够简单，才可以在代码级别违反单一原则：只有类中方法数量足够少，可以在方法级别保持单一原则
 
-实例：com.atguigu.principle.singleresponsibility
+实例：com.liyuan3210.design23.principle.singleresponsibility
 
 ### 2.接口隔离原则
 
 ​			客户端不应该依赖它不需要的接口，根据需求独立出不同的接口，即一个类对另一个类的依赖应该建立在最小接口上。
 
-实例：com.atguigu.principle.segregation
+实例：com.liyuan3210.design23.principle.segregation
 
 根据要求画出uml流程图？？？
 
@@ -38,7 +38,7 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ​		依赖传递方式：接口传递，构造方法传递，setter方式传递（实例：DependencyPass.java）
 
-实例：com.atguigu.principle.inversion
+实例：com.liyuan3210.design23.principle.inversion
 
 ### 4.里式替换原则
 
@@ -48,13 +48,13 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 ​		子类继承父类，尽量不要重写父类方法．在适当情况下可以使用聚合，组合依赖关系来解决问题
 
-实例：com.atguigu.principle.liskov
+实例：com.liyuan3210.design23.principle.liskov
 
 ### 5.开闭原则
 
 　　　一个软件实体如类，模块，函数 ：对外扩展开放（提供方），对修改关闭（使用方）。当有一个软件需求时，应该是扩展软件的具体行为，而不是通过修改已有的代码实现
 
-实例：com.atguigu.principle.ocp
+实例：com.liyuan3210.design23.principle.ocp
 
 ### 6.迪米特原则
 
@@ -64,17 +64,17 @@ https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
 
 出现在局部变量的类不是思考直接的朋友，也就是说陌生的类最好不要以局部变量的形式出现在类的内部
 
-实例：com.atguigu.principle.demeter
+实例：com.liyuan3210.design23.principle.demeter
 
 ### 7.合成复用原则
 
 　　　尽量使用合成/聚合的方式，而不是使用继承
 
-实例：com.atguigu.principle.composite
+实例：com.liyuan3210.design23.principle.composite
 
 ## 二．UML设计
 
-实例：com.atguigu.uml
+实例：com.liyuan3210.design23.uml
 
 ### 1.UML图类型
 
