@@ -116,7 +116,7 @@ Relation:
 
 ### .行为型模式
 
-１．模板方法模式　２．命令模式　３．访问者模式　４．迭代器模式　
+<font color="blue">１．模板方法模式</font>　<font color="blue">２．命令模式</font>　<font color="blue">３．访问者模式</font>　<font color="blue">４．迭代器模式</font>
 
 ５．观察者模式　６．中介者模式　７．备忘录模式　
 
