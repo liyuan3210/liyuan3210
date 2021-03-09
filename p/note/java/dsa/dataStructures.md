@@ -89,5 +89,66 @@ l: 001          : 01
 
 实例:com.liyuan3210.dsa.dataStructures.huffmancode
 
+**2.BST二叉排序树**
+
+二叉排序树介绍
+
+二叉排序树：BST: (Binary Sort(Search) Tree), 对于二叉排序树的任何一个非叶子节点，`要求左子节点的值比当前节点的值小，右子节点的值比当前节点的值大`。
+`特别说明：`如果有相同的值，可以将该节点放在左子节点或右子节点
+
+![](img/bst-1.png)
+
+`中序遍历二叉排序树,数组是一个有序的数组`(从小到大).
+
+二叉树添加(比较简单),删除,删除有点逻辑,大致如下:
+
+![](img/bst-2.png)
+
+```
+1).删除叶子节点 (比如：2, 5, 9, 12)
+2).删除只有一颗子树的节点 (比如：1)
+3).删除有两颗子树的节点. (比如：7, 3，10 )
+
+第一种情况:
+删除叶子节点 (比如：2, 5, 9, 12)
+思路
+(1) 需求先去找到要删除的结点  targetNode
+(2)  找到targetNode 的 父结点 parent 
+(3)  确定 targetNode 是 parent的左子结点 还是右子结点
+(4)  根据前面的情况来对应删除
+左子结点 parent.left = null
+右子结点 parent.right = null;
+
+第二种情况: 删除只有一颗子树的节点 (代码逻辑问题???)
+思路
+(1) 需求先去找到要删除的结点  targetNode
+(2)  找到targetNode 的 父结点 parent 
+(3) 确定targetNode 的子结点是左子结点还是右子结点
+(4) targetNode 是 parent 的左子结点还是右子结点
+(5) 如果targetNode 有左子结点
+5. 1 如果 targetNode 是 parent 的左子结点
+parent.left = targetNode.left;
+5.2  如果 targetNode 是 parent 的右子结点
+parent.right = targetNode.left;
+(6) 如果targetNode 有右子结点
+6.1 如果 targetNode 是 parent 的左子结点
+parent.left = targetNode.right;
+6.2 如果 targetNode 是 parent 的右子结点
+parent.right = targetNode.right
+
+情况三 ： 删除有两颗子树的节点. (比如：7, 3，10 )
+思路
+(1) 需求先去找到要删除的结点  targetNode
+(2)  找到targetNode 的 父结点 parent 
+(3)  从targetNode 的右子树找到最小的结点 或者从 左子数找最大的(???)
+(4) 用一个临时变量，将 最小结点的值保存 temp = 11
+(5)  删除该最小结点
+(6)  targetNode.value = temp
+```
+
+实例:com.liyuan3210.dsa.dataStructures.binarysorttree
+
+**3.AVL树**
+
 
 
