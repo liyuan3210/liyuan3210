@@ -29,152 +29,142 @@ iptables与ubuntu的ufw都属于应用层操作内核配置的程序
 	forward		接收到需要通过防火墙发送给其他地址的数据包(转发)
 	prerouting	对数据包作路由选择之前
 	postrouting	对数据包作路由选择之后
-	
-				
-PREROUTING			[网卡]
-raw表				
-mangle表							POSTROUTING
-nat表								mangle表
-					FORWARD		→	nat表
-↓					mangle表
-					filter表
-路由判断	→		security表	    ↑
-							   	
-↓
-									OUTPUT
-INPUT								raw表
-mangle表							mangle表
-nat表(centos7)						nat表(centos7)
-filter表							filter表
-security表		→	[应用程序]	→	security表
-									
-所有数据都有两种路径出去
+```
+
+![](img/iptables-1.png)
+
+**所有数据都有两种路径:**
 [网卡]入站 -> PREROUTING -> FORWARD -> POSTROUTING -> [网卡]出站
 [网卡]入站 -> PREROUTING -> INPUT -> [应用程序] -> OUTPUT -> POSTROUTING -> [网卡]出站
 
-
-表与链关系
-filter		INPUT,FORWARD,OUTPUT
-nat			OUTPUT,PREROUTING,POSTROUTING
-mangle		PREROUTING,POSTROUTING,INPUT,FORWARD,OUTPUT
-raw			PREROUTING,output
-security	???
-```
-
 ## 二．常用命令及零基础搭建防火墙
 
-```
-查看网卡及ip
+**查看iptables语法**
+	man iptables
+
+**查看网卡及ip**
 	ip a
 	ip addr
 
-或者traceroute ip查看是通过哪台主机访问的目标机器的
+**查看到达目标ip的完整经过打节点ip**
 	tracepath 192.168.5.12
 
-查看iptables语法
-	man iptables
-
-telnet验证
-	telnet ip 22
-	验证规则(下面端口协议通过,可能是操作系统返回的参数)
-可以使用watch iptables -vnxL命令监控是否通过规则
-	telnet ip 80 
-	telnet: connet to address 192.168.5.11:Connetion refused
-
-查看所有表配置(默认对filter表进行操作)
-	iptables -t filter -S
-	iptables -t raw -S
-	iptables -t mangle -S
-	iptables -t security -S
-	iptables -t nat -S
-
-查看内建表
-	-j 参数值，保存规则
-	cat /proc/net/ip_tables_names
-	https://www.cnblogs.com/wangkangluo1/archive/2012/04/19/2457072.html
-
-查看表下面的链
-	iptables -L -t security	
-
-自定义链
-	https://blog.csdn.net/lbyyy/article/details/78898931
-	https://www.jianshu.com/p/4ac00aa88ec3
+**telnet端口验证**(可以没有80服务)
+	telnet 192.168.5.12 80
+   可以使用watch iptables -vnxL命令监控数据是否通过规则
+   telnet: connet to address ip:Connetion refused 
+   如果监控有数据到达表示防火墙没问题(上面问题是操作系统返回的)
 	
-	iptables -t security -N WEB_LIYUAN3210	//新建链
-	iptables -t security -I INPUT -p tcp --dport 80 -j WEB_LIYUAN3210	//引用自定义链
-	iptables -t security -E WEB_LIYUAN3210 WEB_SIT	//重命名
-	iptables -t security -X WEB_LIYUAN3210	//删除链(满足两个条件1.没被引用,2.没有任何规则)
-	
-	
-从零搭建一个基本防火墙
-放行端口
-	//iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-	//iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-	上面三条语句可以只用一句搞定
-	iptables -A INPUT -p multiport --dports 22,443,80 -j ACCEPT
-	-j     后面加动作： 
-			（1）ACCEPT  允许包  
-			（2）DROP 丢掉包 
-			（3）REJECT 拒绝包
 
-默认执行上面是没有走上面规则的(放行22,443,80规则),要执行如下命令
-	1.注意执行下面语句是要先执行上面放行22端口(否则会断开连接)
-	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+```
+新的firewalld
+	systemctl status firewalld	查看防火墙状态
+	systemctl start firewalld	开启防火墙
+	systemctl stop firewalld	停止防火墙
+	systemctl disable firewalld	禁止开机启动防火墙
+	systemctl enable firewalld	开机自启动防火墙
+老的iptables
+	systemctl status iptables	查看防火墙状态
+	systemctl start iptables	开启防火墙
+	systemctl enable iptables	开机自启动防火墙
+	...同上
+
+
+1.清除所有规则:
+iptables -F -t filter
+iptables -X -t filter
+iptables -Z -t filter
+iptables -F -t raw
+iptables -X -t raw
+iptables -Z -t raw
+iptables -F -t mangle
+iptables -X -t mangle
+iptables -Z -t mangle
+iptables -F -t security
+iptables -X -t security
+iptables -Z -t security
+iptables -F -t nat
+iptables -X -t nat
+iptables -Z -t nat
+
+
+2.查看所有表配置(默认对filter表进行操作)
+iptables -t filter -S
+iptables -t raw -S
+iptables -t mangle -S
+iptables -t security -S
+iptables -t nat -S
+
+3.保存/恢复规则
+https://www.iteye.com/blog/neo-it-2398275
+
+3.1.自动方式
+	centos 7 默认使用了firewalld ，iptables-service 没有安装所以，如果要用iptables，首先要禁用firewalld,同时安装iptables-service 。
+	否则不会在开机时去读iptables设置的规则
+
+	停用firewalld并安装iptables-services
+	systemctl stop firewalld  		//停止firewalld
+	systemctl disable firewalld  		//停止firewalld开机自启动
+	yum install iptables-services -y  	//安装iptables-services
+	systemctl enable iptables		//设置iptables开机自启动
+
+	保存规则
+	/usr/libexec/iptables/iptables.init save    
+	##或者  
+	iptables-save > /etc/sysconfig/iptables 
+
+3.2.手动方式
+	备份
+	iptables-save > ipt.txt
+	恢复
+	iptables-restore < ipt.txt
+
+4.从零自定义防火墙
+规则是从上往下匹配的,要注意添加规则的顺序
+iptables -I INPUT -m state --state ESTABLISHED -j ACCEPT	//添加在规则前面
+iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT	//追加在规则后面
+iptables -D INPUT -m state --state ESTABLISHED -j ACCEPT	//删除规则
+
+4.1.放行端口(注意,从零开始前首先放行必要的22端口)
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT		//放行80,
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT	//放行443
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT		//放行22
+上面三条语句可以只用一句搞定
+iptables -A INPUT -p multiport --dports 22,443,80 -j ACCEPT
+-j  后面加动作： 
+		（1）ACCEPT  允许包  
+		（2）DROP 丢掉包 
+		（3）REJECT 拒绝包
+4.2.这样设置上面规则是不起效的,再对默认规则设置
 	iptables -P INPUT DROP
-
-	2.现在上面是ping不通上面机器的问题(ping走的是icmp协议)
+4.3.现在上面是ping不通上面机器的问题(ping走的是icmp协议)
 	iptables -A INPUT -p icmp -j ACCEPT
-
-	查看规则使用情况
+4.4.查看iptables规则使用情况
 	watch iptables -vnxL
+4.5.访问本机服务问题(本机telnet 127.0.0.1 22不能通过问题),默认都是针对ens33网卡,不针对回环地址lo,需要执行如下命令.
+	watch iptables -vnxL		//查看规则匹配情况
+	iptables -I INPUT -i lo -j ACCEPT // 大-I插入到规则最前面,-A是插到最后面,小-i指定网卡
+4.6.本机不能上网问题(curl www.baidu.com)
+	watch iptables -vnxL		//查看规则匹配情况
+	iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT	//要添加到规则最后
 
-	3.本机telnet 127.0.0.1 22不能通过问题
-	默认都是针对ens33网卡,不针对回环地址lo,需要执行如下命令
-	iptables -I INPUT -i lo -j ACCEPT (大-I插入到规则最前面,-A是插到最后面,小-i指定网卡)
-	-I把这个规则放到规则最前面
+		NEW:该包想要开始一个新的连接(重新连接或连接重定向)
+		RELATED:该包是属于某个已经建立的连接所建立的新连接,如FTP的数据传输连接和控制连接之间的是RELATED关系
+		ESTABLISHED:该包属于某个已经建立的连接
+		INVALID:该包不匹配于任何连接,通常这些包被DROP
+```
 
-	4.本机不能访问外面网站服务问题(curl www.baidu.com)
-	watch iptables -vnxL
-	//iptables -I INPUT -m state --state ESTABLISHED -j ACCEPT
-	//iptables -D INPUT -m state --state ESTABLISHED -j ACCEPT
-	iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT
+ubuntu保存iptables
 
-	NEW:该包想要开始一个新的连接(重新连接或连接重定向)
-	RELATED:该包是属于某个已经建立的连接所建立的新连接,如FTP的数据传输连接和控制连接之间的是RELATED关系
-	ESTABLISHED:该包属于某个已经建立的连接
-	INVALID:该包不匹配于任何连接,通常这些包被DROP
-	
-规则添加顺序问题
-	大-I插入到规则最前面,-A是插到最后面
-
-清除规则(重启后会不会还原)
-	iptables -F
-	-F：清除所有制订的规则
-	-X：清除所有用户“自定义”的chain
-	-Z：将所有chain的计数与流量统计都归零
-
-	https://blog.csdn.net/chengqiuming/article/details/70139629
-	https://blog.csdn.net/ingiaohi/article/details/70559425
-
-保存配置(保存不同规则)
-	iptables添加规则后(重启后不会保存)
-	
-	ubuntu保存
 	iptables-save > /etc/iptables.rules	//保存
-	
 	vi /etc/network/interfaces
 	pre-up iptables-restore < /etc/iptables.rules	//最后面添加这行
-	
 	这样重启后还会生效
 	
 	保存问题
 	https://blog.csdn.net/sqzhao/article/details/10174955
 	http://www.zhimengzhe.com/linux/281990.html
 
-删除规则问题
-https://blog.csdn.net/chengxuyuanyonghu/article/details/51897666
-```
 
 ## 三．ftp主动模式和被动模式下iptables的配置(vsftp)
 
@@ -200,7 +190,7 @@ ftp客户端登录成功后,服务端会分配一个随机的发送数据端口
 	vi /etc/sysconfig/iptables-config
 	IPTABLES_MODULES="nf_conntrack_ftp"//去掉注释
 	IPTABLES_MODULES=""//默认是空注释掉
-	systemctl restart iptables	//重启
+	systemctl restart iptables	//重启之前需要备份前面的iptables配置iptables-save > /etc/sysconfig/iptables
 
 	最后重启
 	systemctl restart vsftpd
