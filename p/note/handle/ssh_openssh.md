@@ -108,7 +108,7 @@ linux登录方式：
 	
 问题
 	1.Permissions 0664 for '.../id_rsa' are too open.
-	授权:chmod 700 id_rsa
+	授权:chmod 600 id_rsa
 ----------------------------------------------------------------------------
 github SSH配置:
 	一.密码登录
