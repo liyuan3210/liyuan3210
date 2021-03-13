@@ -334,7 +334,10 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	node2(备)				X			X		X		X			X						X
 	node3								X		X					X			X			X
 	node4								X		X								X			X
-	
+	单节点需要配置(添加如下配置):
+	vi hadoop-env.sh
+        export YARN_RESOURCEMANAGER_USER=root
+        export YARN_NODEMANAGER_USER=root
 	必须配置的(不管是单点，集群，HA都需要配置的)
 		mapred-site.xml修改(可以配置本机):
 			<configuration>
