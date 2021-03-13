@@ -16,11 +16,15 @@ https://www.bilibili.com/video/BV1L4411y7mn?from=search&seid=1484692832945318855
 
 ##　一．安装
 
+**安装模式:**
+
 2m-2s-async:2主2从异步
 
 2m-2s-sync:2主2从同步
 
 2m-noslave:2主没有从
+
+**单机安装:**
 
 ```
 1.下载rocketmq-all-4.8.0-bin-release.zip并解压到/opt/
@@ -32,7 +36,7 @@ mkdir /opt/rocketmq/data&&mkdir /opt/rocketmq/data/commitlog&&mkdir /opt/rocketm
 3.进入conf/2m-2s-async目录配置broker-a.properties文件
 ```
 
-broker-a.properties配置文件：
+broker-a.properties配置文件(放到conf/2m-2s-sync目录)：
 
 ```
 #所属集群名字
@@ -116,9 +120,9 @@ JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m -XX:MetaspaceSize=128m 
 nohup sh /opt/rocketmq/bin/mqnamesrv &
 
 启动broker:
-nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-async/broker-a.properties &
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a.properties &
 或者
-nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-async/broker-a.properties > /dev/null 2>&1 &
+nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a.properties > /dev/null 2>&1 &
 ```
 
 管理控制台工具
@@ -132,7 +136,7 @@ rocketmq-console
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
 
-`工作中常用集群模式：`
+**集群安装(**双主双从（同步双写,异步刷盘）)`工作中常用集群模式：`
 
 ```
 双主双从（同步双写,异步刷盘）
