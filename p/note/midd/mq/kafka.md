@@ -288,5 +288,9 @@ $ create /kafka-manager/mutex/leases ""
 
 3.启动服务(jdk1.8运行不了，需要指定jdk13目录)
 /opt/cmak/bin/cmak -Dconfig.file=/opt/cmak/conf/application.conf -Dhttp.port=80 -java-home /opt/jdk-13
+
+登录80端口,默认账户与密码
+username="admin"
+password="password"
 ```
 
