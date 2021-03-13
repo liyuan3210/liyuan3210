@@ -85,7 +85,7 @@ maxMessageSize=65536
 #- ASYNC_MASTER 异步复制Master
 #- SYNC_MASTER 同步双写Master
 #- SLAVE
-brokerRole=ASYNC_MASTER
+brokerRole=SYNC_MASTER
 #刷盘方式
 #- ASYNC_FLUSH 异步刷盘
 #- SYNC_FLUSH 同步刷盘
@@ -132,10 +132,10 @@ rocketmq-console
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
 
-**工作中常用集群模式：**
+`工作中常用集群模式：`
 
 ```
-双主双从（同步复制异步刷盘）
+双主双从（同步双写,异步刷盘）
 配置conf/2m-2s-sync里面的broker-a.properties文件：
 ```
 
