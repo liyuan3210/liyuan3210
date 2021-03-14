@@ -42,6 +42,22 @@ windows server2012虚拟机克隆安装问题
 
 sysprep(sid重新封装，双击sysprep，选择`通用`，点击`确定`)
 
+#### 工具:
+
+**wireshark**
+
+```
+官网:
+https://www.wireshark.org/
+
+ubuntu安装:
+$ sudo add-apt-repository universe
+$ sudo apt install wireshark
+$ apt show wireshark	//查看可用版本
+```
+
+
+
 ## 问题
 
 [1.集线器，交换机，路由器区别](hub-switch-router.md)？？？
