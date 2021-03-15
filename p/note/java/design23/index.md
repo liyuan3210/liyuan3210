@@ -118,7 +118,7 @@ Relation:
 
 <font color="blue">１．模板方法模式</font>　<font color="blue">２．命令模式</font>　<font color="blue">３．访问者模式</font>　<font color="blue">４．迭代器模式</font>
 
-<font color="blue">５．观察者模式</font>　<font color="blue">６．中介者模式</font>　７．备忘录模式　
+<font color="blue">５．观察者模式</font>　<font color="blue">６．中介者模式</font>　<font color="blue">７．备忘录模式　</font>
 
 ８．解释器模式（interpreter模式）　９．状态模式　１０．策略模式
 
