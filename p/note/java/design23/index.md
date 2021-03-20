@@ -120,6 +120,6 @@ Relation:
 
 <font color="blue">５．观察者模式</font>　<font color="blue">６．中介者模式</font>　<font color="blue">７．备忘录模式　</font>
 
-８．解释器模式（interpreter模式）　９．状态模式　１０．策略模式
+<font color="blue">８．解释器模式（interpreter模式）</font>　<font color="blue">９．状态模式</font>　１０．策略模式
 
 １１．职责链模式（责任链模式）

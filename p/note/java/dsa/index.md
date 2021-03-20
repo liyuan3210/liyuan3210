@@ -6,7 +6,7 @@ https://www.bilibili.com/video/BV1B4411H76f?from=search&seid=8541134073371747563
 链接: 
 https://pan.baidu.com/s/18y3CKb6a5N6f8DCpUH1Pbw 提取码: hnms
 
-当前（总：195，当前：142）
+当前（总：195，当前：164）
 
 https://www.bilibili.com/video/BV1B4411H76f?p=16
 
@@ -16,8 +16,16 @@ https://www.bilibili.com/video/BV1B4411H76f?p=16
 
 应用场景（程序）　＝ 	数据结构	＋　算法
 
-### 一．数据结构分类
+内容：
 
+[1.数据结构与算法-上](#datastructures-1)
+
+[2.数据结构与算法-下](dataStructures.md)
+
+[3.十种常见算法](algorithm.md)
+
+### 一．数据结构分类
+<div id="datastructures-1"/>
 #### 线性结构：
 
 数组，队列，链表和栈
@@ -486,5 +494,3 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 ```
 
 实例:com.liyuan3210.dsa.dataStructures.tree.HeapSort.java
-
-[继续...](dataStructures.md)
