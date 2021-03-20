@@ -1375,6 +1375,7 @@ $ yum install -y nfs-utils
 
 3>启动服务（nfs服务端）
 $  systemctl start nfs
+$  systemctl enable nfs		//设置开机启动
 
 4>需要在k8s节点也安装nfs
 $ yum install -y nfs-utils

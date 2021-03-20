@@ -50,6 +50,7 @@ windows安装
     	
    	4.启动服务/自启
    		$ sudo systemctl start docker
+   		$ sudo systemctl enable docker		//设置开机启动
    	5.验证
 		$ sudo docker run hello-world
    	6.反安装
