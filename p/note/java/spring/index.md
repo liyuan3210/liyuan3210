@@ -61,3 +61,6 @@ https://www.bilibili.com/video/BV15a411A7kP?from=search&seid=7599475529802441512
 
 https://www.bilibili.com/video/BV1VE411h7aL?from=search&seid=12553764359441323749
 
+**4.oauth2**
+
+https://haokan.baidu.com/v?vid=4100768588022005153&pd=bjh&fr=bjhauthor&type=video

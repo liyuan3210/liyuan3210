@@ -166,11 +166,19 @@ zkCli.cmd -server 127.0.0.1:2181
 
 **图形化查看工具：**
 
+1.ZooInspector(windos可以,linux不行)
+
 https://issues.apache.org/jira/secure/attachment/12436620/ZooInspector.zip
 
-条件必须安装java运行环境，执行如下：：
+解压后进入build目录执行命令: java -jar zookeeper-dev-ZooInspector.jar
 
-java -jar zookeeper-dev-ZooInspector.jar
+2.ZooViewer（windows,linux都行idea）
+
+https://github.com/HelloKittyNII/ZooViewer
+
+3.zkui（web形式）
+
+https://github.com/zifangsky/zkui/releases
 
 ## 三．问题
 

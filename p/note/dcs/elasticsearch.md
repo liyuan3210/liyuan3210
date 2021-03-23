@@ -141,5 +141,17 @@ https://github.com/elasticjob/elastic-job-lite
 
 elasticsearch-sql客户端
 https://github.com/NLPchina/elasticsearch-sql
+
+
+---------------------------
+ElasticSearch架构
+
+elasticsearch基于lucene（全文检索工具包）框架实现
+
+倒排索引组成：
+1.单词词典（term dictionary）
+	基于b+tree实现，用来保存分词（ik中文分词）后的单词列表，关联文档id
+2.倒排列表（posting list）
+	记录了文档id,位置（单词在文档位置），偏移量
 ```
 
