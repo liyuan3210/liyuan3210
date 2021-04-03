@@ -114,12 +114,12 @@ Relation:
 
 <font color="blue">６．享元模式</font>　<font color="blue">７．代理模式</font>
 
-### .行为型模式
+### .[行为型模式](acts.md)
 
 <font color="blue">１．模板方法模式</font>　<font color="blue">２．命令模式</font>　<font color="blue">３．访问者模式</font>　<font color="blue">４．迭代器模式</font>
 
 <font color="blue">５．观察者模式</font>　<font color="blue">６．中介者模式</font>　<font color="blue">７．备忘录模式　</font>
 
-<font color="blue">８．解释器模式（interpreter模式）</font>　<font color="blue">９．状态模式</font>　１０．策略模式
+<font color="blue">８．解释器模式（interpreter模式）</font>　<font color="blue">９．状态模式</font>　<font color="blue">１０．策略模式</font>
 
 １１．职责链模式（责任链模式）
