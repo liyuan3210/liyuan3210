@@ -248,6 +248,19 @@ public int[] dis;
 private char[] vertex; // 存放顶点的数组
 private int[][] dis; // 保存，从各个顶点出发到其它顶点的距离，最后的结果，也是保留在该数组
 private int[][] pre;// 保存到达目标顶点的前驱顶点
+
+
+第一轮循环中，以A(下标为：0)作为中间顶点
+【即把A作为中间顶点的所有情况都进行遍历, 就会得到更新距离表 和 前驱关系】，距离表和前驱关系更新为
+
+将A作为中间顶点情况有
+1. C-A-G [9]
+2. C-A-B [12]
+3. G-A-B [7]
+
+中间顶点   			[A, B, C, D, E, F, G]
+出发顶点   			[A, B, C, D, E, F, G]
+终点            	 [A, B, C, D, E, F, G]
 ```
 
 实例：com.liyuan3210.dsa.algorithm.floyd
