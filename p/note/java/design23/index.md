@@ -1,13 +1,9 @@
 # 设计模式
 
 韩顺平
-https://www.bilibili.com/video/BV1G4411c7N4?from=search&seid=4889535572362876599
+https://www.bilibili.com/video/BV1G4411c7N4
 
 链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
-
-当前(总：149，当前：39) ,选（单例模式，代理模式）
-
-https://www.bilibili.com/video/BV1G4411c7N4?p=39
 
 马士兵
 https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
