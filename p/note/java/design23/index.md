@@ -122,4 +122,4 @@ Relation:
 
 <font color="blue">８．解释器模式（interpreter模式）</font>　<font color="blue">９．状态模式</font>　<font color="blue">１０．策略模式</font>
 
-１１．职责链模式（责任链模式）
+<font color="blue">１１．职责链模式（责任链模式）</font>
