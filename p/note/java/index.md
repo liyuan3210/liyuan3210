@@ -22,7 +22,7 @@
 
 ## 二．系统方案
 
-1.尚硅谷2020最新版SpringCloud(H版&alibaba)
+**1.尚硅谷2020最新版SpringCloud(H版&alibaba)**
 
 https://www.bilibili.com/video/BV18E411x7eT?p=1
 
@@ -36,11 +36,11 @@ nacos,rabbitmq,sentinel,seata,consul,erlang等课程需要的软件及jar包都�
 链接：https://pan.baidu.com/s/18zr_KFYgme6ZI04VZZ4KtA 
 提取码：dzvq
 
-2.mybatis代码生成器比较：
+**2.mybatis代码生成器比较：**
 
 https://blog.csdn.net/m0_37524586/article/details/88351833
 
-3.jmeter(并发测试工具)
+**3.jmeter(并发测试工具)**
 
 number。。。:一次发X次请求
 
@@ -48,7 +48,7 @@ Ramp。。。。：0（点击压测开始一刹那发X次请求）或数字为 n
 
 Loop。。。。：表示循环上面步骤多少次
 
-4.io（文档整理）
+**4.io（文档整理）**
 
 流的分类（按照不同角度进行分类）：
 
@@ -70,11 +70,11 @@ serilizable:序列化，jdk控制序列化过程
 
 Externalizable：自己控制序列化过程
 
-5.时间介绍（UT/UTC/GMT的区别和联系）
+**5.时间介绍（UT/UTC/GMT的区别和联系）**
 
 https://blog.csdn.net/xujiezhige/article/details/8215186
 
-6.视屏格式转码（ffmpeg）
+**6.视屏格式转码（ffmpeg）**
 
 [http://www.ffmpeg.org](http://www.ffmpeg.org/)
 
@@ -88,7 +88,7 @@ https://www.bilibili.com/video/BV16N411d7ih/
 
 https://www.zhihu.com/question/351214031/answer/873651210
 
-7.分布式数据库（postgresql）
+**7.分布式数据库（postgresql）**
 
 [**http://postgresql.org**](http://postgresql.org/)
 
