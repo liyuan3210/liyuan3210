@@ -75,18 +75,27 @@
 			分卷压缩,解压:
 				zip
 					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz
+					zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz // 不是必须，应该是把tar.gz转换成zip，直接用zip打包然后分压
 					zip -s 30m jdk-8u151-linux-x64-part-all.zip --out jdk-8u151-linux-x64-part
-					2>合卷
+					
+					2>解压
+					首先合卷：
 					cat jdk-8u151-linux-x64-part.z* > jdk-8u151-linux-x64.zip
-					3>解压
+						windows下合卷：
+						copy /B 1.zip.001 + 1.zip.002 + 1.zip.003 1.zip
+						实例：
+						https://blog.csdn.net/weixin_37730482/article/details/78216922
+						https://blog.csdn.net/u010921682/article/details/90900932
+							
+					最后解压：
 					unzip jdk-8u151-linux-x64.zip
 				tar
 					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
 					tar cvzpf - jdk-8u151-linux-x64.tar.gz  | split -d -b 30m
-					2>合卷
+					2>解压
+					首先合卷：
 					cat x* > jdk-8u151-linux-x64.tar.gz
-					3>解压(貌似要执行2次才能解压)
+					最后解压(要执行2次如下命令才能解压)：
 					tar -xzvf jdk-8u151-linux-x64.tar.gz
 				rar
 					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
