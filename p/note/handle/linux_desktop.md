@@ -47,34 +47,49 @@
 二.安装中文输入法
 	实例1：https://cloud.tencent.com/developer/article/1341770
 	sougo拼音安装[推荐](切换输入法时有乱码情况存在)
-		1.首先安装Fcitx框架
-		sudo apt install fcitx-bin fcitx-table
-		2.然后配置输入法系统
-		打开设置中心， 选中 "区域和语言" > 管理已安装的语言 > 键盘输入法系统中选择 "fcitx"  > 应用到整个系统
-		3.然后下载对应系统的输入法，双击安装或者sudo dpkg -i *.deb
+		1.添加中文语言支持
+		打开 系统设置——区域和语言——管理已安装的语言——在“语言”tab下——点击“添加或删除语言”(选择简体中文支持)
+		2.回到“语言支持”窗口，在键盘输入法系统中，选择“fcitx”
+		打开设置中心， 选中 "区域和语言" > 管理已安装的语言 > 键盘输入法系统中选择 "fcitx"  
+        需要点击“应用到整个系统”
+		注意：如果没有fcitx，需要安装fcitx
+		sudo apt-get install fcitx （sougo官方建议）
+		或者
+		sudo apt-get install fcitx-bin fcitx-table
+		3.通过命令行安装搜狗输入法deb
 		https://pinyin.sogou.com/linux/
-		4.重启系统，点击右上角的小键盘的图标(选择configure current input method),
+		下载deb,使用sudo dpkg -i *.deb安装
+		注意：
+		如果安装过程中提示缺少相关依赖，则执行如下命令解决：sudo apt -f install	//官方推荐
+		或
+		4.重启系统，正常sogou输入法就可以使用了，如果没有需要按照如下手动添加配置：
+		点击右上角的小键盘的图标(选择configure current input method),
 		点击加号(input method)，把搜狗输入法添加进去（Sougo Pinyin）,搜狗输入法就安装完毕了。
-		5.配置input Sources
-		打开设置中心(Settings)， 选中 "区域和语言"(region Language) > 点击加号(Chinese(Intelligent Pinyin))
-安装时出现问题
+		
+		安装deb时出现问题：
 		E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
 		执行命令: sudo  apt --fix-broken install
 
 	实例2:https://blog.csdn.net/u011795345/article/details/53041707
 	google pinyin的安装
-		1.安装汉语语言包
-		sudo apt-get install language-pack-zh-hans  
-		执行该命令后，系统就会自动安装所需要的汉语语言包
+		安装汉语语言包（不是必须）
+		sudo apt-get install language-pack-zh-hans 
+		
+		
+		1.添加中文语言支持
+		打开 系统设置——区域和语言——管理已安装的语言——在“语言”tab下——点击“添加或删除语言”(选择简体中文支持)
+		2.回到“语言支持”窗口，在键盘输入法系统中，选择“fcitx”
+		打开设置中心， 选中 "区域和语言" > 管理已安装的语言 > 键盘输入法系统中选择 "fcitx"  
+        需要点击“应用到整个系统”
+		注意：如果没有fcitx，需要安装fcitx
+		sudo apt-get install fcitx （sougo官方建议）
+		或者
+		sudo apt-get install fcitx-bin fcitx-table
+		
+		2.安装google输入法
+        sudo apt-get install fcitx-googlepinyin
 
-		2.安装谷歌拼音输入法
-		sudo apt-get install fcitx-googlepinyin  
-		执行该命令后，系统就会自动安装fcitx和goolgepinyin程序，也同时会安装一些配置fcitx的工具
-
-		3.打开SystemSettings-->Language Support，系统会进行语言包自动搜索下载安装。
-		按装好后设置keyboard input method system:fcitx(选择此方式)
-
-		4.重启电脑,打开终端运行fcitx-configtool命令(或者｀点击右上角的小键盘的图标(选择configure current input method)｀)
+		3.重启电脑,打开终端运行fcitx-configtool命令(或者｀点击右上角的小键盘的图标(选择configure current input method)｀)
 		input method
 		>
 		"+"添加一个输入方式
@@ -296,9 +311,10 @@
 		https://www.linuxprobe.com/how-ubuntu-wechat.html
 	仓库地址：
 		https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu
+		https://github.com/wszqkzqk/deepin-wine-ubuntu
 	安装：
 	1.1>首先本地克隆并安装deepin-wine-ubuntu(克隆项目)
-		git clone https://github.com/wszqkzqk/deepin-wine-ubuntu.git
+		git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
 		安装：
 		    ./install.sh
 	1.2>下载并安装微信deb包
@@ -307,14 +323,14 @@
 		    dpkg -i deepin.com.wechat_2.6.8.65deepin0_i386.deb
 	1.3>乱码问题(https://blog.csdn.net/lixuedong1024/article/details/105815815/)
 	首先修改配置/opt/deepinwine/tools目录下打run.sh，run_v2.sh两个文件：
-        #WINE_CMD="deepin-wine"
+        #WINE_CMD="deepin-wine"	//修改WINE_CMD
         WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
 
-        #added by user，输入模型设在的是fcitx
+        #added by user，输入模型设在的是fcitx	//追加三个export
         export GTK_IM_MODULE="fcitx"
         export QT_IM_MODULE="fcitx" 
         export XMODIFIERS="@im=fcitx"
-     添加字体支持(此步骤是否可省略？？？)：
+     添加字体支持(此步骤可以省略)：
      	下载字体msyh.ttc https://www.lanzous.com/i5wivmd
      	*.解压后拷贝：
      	cp msyh.ttc /home/liyuan/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts
