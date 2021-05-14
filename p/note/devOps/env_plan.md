@@ -47,7 +47,7 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 				
 			linux下可以直接使用dd命令写入ios镜像
 			fdisk -lh	//查看u盘物理路径(/dev/sdb)
-			dd if=/home/xxx/xxx.iso of=/dev/sdb
+			dd if=/home/xxx/xxx.iso of=/dev/sdb status=progress
 
 ### 二）.虚拟机
 ​	1.linux(基于linux内核的KVM)：
