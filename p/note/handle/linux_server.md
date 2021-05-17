@@ -459,8 +459,19 @@ systemctl restart sshd	(重启生效)
 ----------------------------------------------------------------------------
 linux王者归来
 http://www.tup.com.cn/booksCenter/book_05630601.html
+* linux分区概念（ MBR分区概念）
+1>.主分区：
+主分区也叫引导分区，是系统安装的分区,如windows的c盘，linux的`/`挂载目录，一个硬盘只能建4个主分区(包括扩展分区)
+2>.扩展分区：
+扩展分区是一个概念，实际在硬盘中是看不到的，也无法直接使用扩展分区，扩展分区下可以划分`逻辑分区`
+3>.逻辑分区：
+扩展分区上可以建多个逻辑分区，是一块存储介质，和操作系统，主分区没什么关系，是`独立的`
+4>.激活分区：
+一个硬盘最多可以有4个主分区，你可以在4个主分区上都安装系统，而系统从硬盘启动启动时，并不知道你打算从哪个分区启动系统。所以，需要将其中一个设为“活动”属性
+5>.MBR与GPT(uefi)分区的区别
+http://www.360doc.com/content/18/0901/23/11935121_783145790.shtml
 
-linux分区方案
+* linux分区方案
 	https://jingyan.baidu.com/article/c33e3f48ec471aea15cbb538.html
 	分区命令:https://www.cnblogs.com/hanson1/p/7102206.html
 	https://blog.csdn.net/explore_world/article/details/79081587

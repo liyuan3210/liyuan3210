@@ -91,3 +91,88 @@ virbr0		8000.525400dff118	yes		virbr0-nic
 	2.使用kvm进行clone虚拟机,花生壳(hsk)内网穿透智能开启一个账号(必须重装win2012系统才可以开启多个账号)
 ```
 
+# qemu-kvm
+
+```
+1.qemu-kvm安装
+$ yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools
+
+2.创建一个镜像
+qemu-img create test1.raw 2G
+默认创建的为raw格式镜像，如果需要指定qcow2
+$ qemu-img create test2.qcow2 -f qcow2 2G
+
+3.镜像信息查看
+$ qemu-img info test1.raw
+
+4.镜像格式转换
+raw:默认格式，不支持快照功能。镜像大小可以增大缩小
+qcow2:支持快照，镜像只能增大，不能缩小
+$ qemu-img convert -p -f raw -O qcow2 test1.raw test1.qcow2
+-p 显示转换进度，-f 原有镜像格式，-O 输出镜像格式 输入文件 输出文件
+主要用于将不同虚拟化产品的虚拟机镜像格式进行转换，例如VMware的vmdk转换成kvm用的qcow2格式
+
+5.快照
+查看镜像信息
+$ qemu-img info centos7_sev.qcow2
+1.查看快照
+$ qemu-img snapshot centos7_sev.qcow2 -l
+2.删除快照
+$ qemu-img snapshot centos7_sev.qcow2 -d snapshot1-init
+3.还原快照
+$ qemu-img snapshot centos7_sev.qcow2 -a snapshot1-init
+4.快照单独提取镜像
+$ qemu-img convert -f qcow2 -O qcow2 -s snapshot1-init centos7_sev.qcow2 centos7_sev-init.qcow2
+
+镜像一致性检查
+$ qemu-img check test1.qcow2
+
+6.镜像大小修改
+1.raw格式
+qemu-img resize test1.raw  +2G
+qemu-img resize test1.raw  3G
+2.qcow2格式
+qemu-img resize test2.qcow2 +2G
+
+------------------------------------
+7.查看所有虚拟机
+$ virsh list --all
+virsh pool-list --all	//列出所有存储池
+
+8.start,shutdown虚拟机
+$ virsh start centos7_sev
+$ virsh shutdown centos7_sev
+
+创建虚拟机(centos qemu-kvm命令创建虚拟机)
+https://blog.csdn.net/weixin_34212762/article/details/92179634
+
+虚拟机组成部分
+https://www.cnblogs.com/goldsunshine/p/12668632.html
+qemu-kvm：qemu模拟器
+qemu-img：qemu磁盘image管理器
+virt-install：用来创建虚拟机的命令行工具
+libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor
+virt-viewer：图形控制台
+
+$ virt-manager		//调用图形管理界面
+
+kvm虚拟机安装：
+？？？？
+
+创建虚拟机
+//qemu-img create -f qcow2 fedora.img 10G
+创建虚拟机
+https://www.cnblogs.com/yexiaochong/p/6029315.html
+安装虚拟机并启动服务
+https://blog.csdn.net/sukysun125/article/details/89474962
+参数详细
+https://blog.51cto.com/u_11555417/2341874
+1.create磁盘
+$ qemu-img create kvm_test.qcow2 -f qcow2 40G
+2.create虚拟机
+virt-install --name kvm_test --virt-type kvm --ram 2048 --cdrom=/home/liyuan/tool/os/ubuntu-18.04.3-desktop-amd64.iso --disk path=/home/liyuan/soft/mach_vm/testvm/kvm_test.qcow2 --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole
+3.启动停止
+$ virsh start centos7_sev
+$ virsh shutdown centos7_sev
+```
+
