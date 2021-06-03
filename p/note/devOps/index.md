@@ -24,4 +24,4 @@
 
 [1.linux远程桌面连接](linux_remote_desktop.md)
 
-[2.KVM桥接](linux_kvm.md)
+[2.KVM桥接，qemu-kvm](linux_kvm.md)
