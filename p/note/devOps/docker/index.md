@@ -198,8 +198,6 @@ docker logout
 	docker push 192.168.209.132:5000/ubuntu:v1	//推送	
 ```
 
-
-
 ## 三.docker容器操作
 
 ```
@@ -334,6 +332,14 @@ public IP: 192.168.1.136
 
 3.最后点击Add endpoint完成添加,点击左上角Home就可以看到能够管理的所有节点了
 ```
+
+## docker-compose(docker编排)
+
+https://docs.docker.com/compose/install/
+
+https://github.com/docker/compose
+
+
 
 #### 二进制安装portainer:
 
