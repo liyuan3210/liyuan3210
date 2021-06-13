@@ -98,8 +98,10 @@ windows安装
         	https://www.linuxidc.com/Linux/2017-02/141054.htm
         	
 四.客户端配置文件（加速器配置）
-	1.加速器配置(centos)
-        腾讯加速地址:https://mirror.ccs.tencentyun.com
+	1.加速器配置(centos,ubuntu)
+        腾讯云加速地址:https://mirror.ccs.tencentyun.com
+        阿里云加速地址：https://6brt8p5b.mirror.aliyuncs.com
+        配置文件：
         vi /etc/docker/daemon.json
         {
           "registry-mirrors": ["https://6brt8p5b.mirror.aliyuncs.com"]
