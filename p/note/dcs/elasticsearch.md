@@ -1,5 +1,24 @@
 # elasticsearch
 
+### docker 安装
+
+```
+官网查看es版本
+https://www.elastic.co/
+
+安装elasticsearch(核心)：
+1.拉取镜像
+docker pull elasticsearch:7.13.1
+2.运行镜像(单实例)
+docker run -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.13.1
+
+
+安装elasticsearch-analysis-ik(ik分词器)：
+
+```
+
+
+
 ```
 elasticsearch官网
 https://www.elastic.co
