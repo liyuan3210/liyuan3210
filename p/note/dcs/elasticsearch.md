@@ -13,7 +13,12 @@ docker pull elasticsearch:7.13.1
 docker run -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.13.1
 
 
-安装elasticsearch-analysis-ik(ik分词器)：
+安装elasticsearch-analysis-ik(ik分词器),ik测试安装：
+https://blog.csdn.net/qq_33612228/article/details/107563446
+
+elasticsearch安装:
+http://chenzhijun.me/2017/12/01/elasticsearch-install/
+
 
 ```
 
