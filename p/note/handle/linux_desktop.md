@@ -330,15 +330,15 @@
         export GTK_IM_MODULE="fcitx"
         export QT_IM_MODULE="fcitx" 
         export XMODIFIERS="@im=fcitx"
-     添加字体支持(此步骤可以省略)：
+        1.4>.添加字体支持：
      	下载字体msyh.ttc https://www.lanzous.com/i5wivmd
      	*.解压后拷贝：
      	cp msyh.ttc /home/liyuan/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts
      	*.修改system.reg文件：
      	vi /home/liyuan/.deepinwine/Deepin-WeChat/system.reg
      	"MS Shell Dlg"="msyh"
-		"MS Shell Dlg 2"="msyh"
-		*.新建文件/home/liyuan/.deepinwine/Deepin-WeChat/msyh_config.reg：
+	"MS Shell Dlg 2"="msyh"
+	1.5>新建文件 /home/liyuan/.deepinwine/Deepin-WeChat/msyh_config.reg：
         REGEDIT4
         [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
         "Lucida Sans Unicode"="msyh.ttc"
@@ -349,8 +349,8 @@
         "msyh"="msyh.ttc"
         "Arial"="msyh.ttc"
         "Arial Black"="msyh.ttc"
-		*.执行命令生效：
-		deepin-wine regedit msyh_config.reg
+	*.执行命令生效：
+	deepin-wine regedit msyh_config.reg
 		
 	1.4>图片不能发送问题：
 	     sudo apt-get install libjpeg62:i386
