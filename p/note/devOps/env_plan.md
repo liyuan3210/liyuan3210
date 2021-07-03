@@ -256,25 +256,5 @@ A4
 /		总共164.2GB	可用134.3GB		使用21.5GB
 /boot	总共8GB		可用7.4GB		使用179.0Mb
 /home	总共301.7GB	可用169.7GB		使用116.6GB
---------------------------------------
-3.ubuntu安装问题
-Check if you are using third party repositories. If so disable them, since they are a common source of problems.
-Furthermore run the following command in a Terminal: apt-get install -f
-Transaction failed: The package system is broken
- The following packages have unmet dependencies:
-
-libwxgtk3.0-0v5: Depends: libgcc1 (>= 1:3.0) but it is not installed
-                 Depends: libjpeg8 (>= 8c) but 8c-2ubuntu8 is installed
-                 Depends: libstdc++6 (>= 5.2) but 10.2.0-5ubuntu1~20.04 is installed
-                 Depends: libtiff5 (>= 4.0.3) but 4.1.0+git191117-2build1 is installed
-                 Depends: libwxbase3.0-0v5 (>= 3.0.4+dfsg) but it is not installed
-libwxgtk3.0-0v5:i386: Depends: libgcc1 (>= 1:4.2) but it is not installed
-                      Depends: libjpeg8 (>= 8c) but 8c-2ubuntu8 is installed
-                      Depends: libstdc++6 (>= 5.2) but 10.2.0-5ubuntu1~20.04 is installed
-                      Depends: libtiff5 (>= 4.0.3) but 4.1.0+git191117-2build1 is installed
-                      Depends: libwxbase3.0-0v5 (>= 3.0.4+dfsg) but it is not installed
---------------------------------------
-4.u盘fdisk分区，grub引导，安装系统
-？？？？
 ```
 
