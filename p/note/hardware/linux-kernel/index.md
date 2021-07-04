@@ -1,5 +1,11 @@
 # linux内核
 
+课程
+
+https://www.bilibili.com/video/BV1iJ411u7ps?from=search&seid=11641610883183403768
+
+https://www.bilibili.com/video/BV1yD4y1m7Q9?from=search&seid=11641610883183403768
+
 ## 一．基础
 
 [1.kernelBasis](1-kernelBasis.md)
