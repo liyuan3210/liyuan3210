@@ -529,5 +529,9 @@ apt源切换:
 	
 macbook air 2017 sd卡升级方案
 	https://post.smzdm.com/p/48758/
+	
+五.mac升级后报错
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+$ xcode-select –install		//执行命令，重装command line tools 就好了
 ```
 
