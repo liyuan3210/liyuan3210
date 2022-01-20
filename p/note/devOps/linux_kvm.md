@@ -49,6 +49,7 @@ Device model : 选Hypervisor default(会自动选择rtl8139)
 否则vm不能访问外网
 -----------------------------------------------------
 安装插件bridge-utils
+$ brctl --version	#如果没此命令，就需要安装bridge-utils
 https://pkgs.org/download/bridge-utils	//centos8如果没有就下载centos7版本的.rpm
 rpm -ivh *.rpm
 
@@ -56,6 +57,7 @@ rpm -ivh *.rpm
 https://www.jianshu.com/p/e720a1dd26c5
 brctl addif br0 eth0 //将eth0配置为桥接网卡接口
 
+cd /etc/sysconfig/network-scripts/ifcfg-enp3s0
 1.修改ifcfg-enp3s0
 #BOOTPROTO="dhcp"	//ADD 注释
 BRIDGE="br0"	//ADD

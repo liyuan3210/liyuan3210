@@ -443,6 +443,10 @@ centos安装google chrome
 	1.wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 	2.su root
 	3.dnf localinstall google-chrome-stable_current_x86_64.rpm
+	保证dnf命令安装：
+	$ yum install epel-release
+	$ yum install dnf
+	$ dnf --version
 
 问题
 1.centos7解决开机不启动网卡问题(刚装完centos7后会出现的问题)

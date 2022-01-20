@@ -88,6 +88,9 @@ virtualbox环境设置：
 	2.虚拟机VirtualBox启动虚拟机报Only Ethernet Adapter' (VERR_INTNET_FLT_IF_NOT_FOUND).
 	添加网络管理器可以选择Host-only，报上面问题，解决办法：
 	控制面板打开"网络连接"选中刚才建的网络适配器右键禁用，然后再启用就ok
+
+	3.退出屏幕
+	Right+Ctrl 按右边的（Alt+Ctrl）
 ----------------------------------------------------------------------------
 network(网络问题解决)
 	笔记本创建wifi热点：
