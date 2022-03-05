@@ -293,6 +293,10 @@
 	sudo apt update
 	sudo apt install obs-studio
 	
+	
+	安装Shotcut（视频编辑）：
+	官方地址：https://shotcut.com/
+	
 十三.xmind（收费,图标查看）
 	官网:https://www.xmind.cn/
 
