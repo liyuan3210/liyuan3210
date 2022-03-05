@@ -15,12 +15,17 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 ​			https://www.centos.org/
 ​		桌	面:ubuntu(推荐)
 ​			https://ubuntu.com/
-​			
 
-	2.windows(当前)
-		服务器:windows_server_2012
-		桌	面:windows7,windows10
-		
+​    2.windwos(当前)
+​		服务器:windows_server_2012
+​		桌	面:windows7,windows10
+
+​	windows(开源dos系统)
+​		https://github.com/FDOS/kernel
+​		https://github.com/FDOS/freecom
+​		http://www.freedos.org/
+
+
 	创建usb引导工具:
 	可以参考ubuntu,centos官方文档,在不同平台创建usb引导
 	https://docs.centos.org/en-US/8-docs/standard-install/assembly_preparing-for-your-installation/#create-bootable-usb-linux_preparing-for-your-installation

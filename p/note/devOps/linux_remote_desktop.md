@@ -158,10 +158,15 @@ tiger/888888
 
 
 
-错误查看
+错误查看：
 systemctl status vncserver@:1.service	//启动日志
 grep vnc /var/log/messages				//错误日志
 
+Vncserver默认端口改变：
+解决办法：
+删除 / tmp/.X11-unix/的内容
+重启vnvserver
+$ systemctl restart vncserver@:2.service
 ----------------------------------------------------------------------------
 问题(未解决)
 Job for vncserver@:1.service failed because the control process exited with error code. 

@@ -533,5 +533,21 @@ macbook air 2017 sd卡升级方案
 五.mac升级后报错
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 $ xcode-select –install		//执行命令，重装command line tools 就好了
+
+六.Git:hint:Pulling without specifying how to reconclie divergent branches is...
+依次执行如下命令：
+$ git config pull.ff false
+$ git config --global pull.rebase false
+参考：
+https://blog.csdn.net/weixin_42881768/article/details/119236014
+```
+
+## Wine(让windows程序exe能在linux,unix运行的中间件)
+
+```
+https://www.winehq.org
+https://ywnz.com/linuxjc/2553.html
+Linux下安装使用windows软件
+https://jingyan.baidu.com/article/200957616211eb8b0621b42d.html
 ```
 

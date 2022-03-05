@@ -39,6 +39,17 @@ sudo apt-get install notepadqq	//安装
 
 [keepass:](https://keepass.info/)密码管理工具
 
+推荐工具：
+
+```
+一。mermaidjs（广泛集成于Markdown中）
+官网：https://mermaidjs.github.io/
+Github 项目地址：https://github.com/knsv/mermaid
+参考：https://blog.csdn.net/fenghuizhidao/article/details/79440583
+```
+
+
+
 ## 三.新闻事件
 
 [2021.06.02：鸿蒙系统发布](https://new.qq.com/omn/20210603/20210603A05LDA00.html)
