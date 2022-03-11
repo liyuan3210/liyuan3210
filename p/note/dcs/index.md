@@ -6,7 +6,7 @@
 
 [2.elasticsearch](elasticsearch.md)
 
-3.分布式存储（Gluster，FreeNAS，Lustre，Ceph）
+[3.分布式存储（Gluster，FreeNAS，Lustre，Ceph）](storage/index.md)
 
 ## 二．分布式方案
 
