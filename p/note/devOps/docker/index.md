@@ -8,9 +8,17 @@ https://www.bilibili.com/video/BV18b411K7q7?from=search&seid=3006540982052779079
 
 https://docs.docker.com/engine/install/binaries/#install-static-binaries
 
-配置selinux
+配置selinux：
 
 https://blog.csdn.net/java0506/article/details/108600504
+
+脚本库：
+
+https://github.com/liyuan3210/base_other/tree/master/docker
+
+### mac桌面docker开发环境：
+
+​			苹果mac运行docker,没有桥网卡，宿主机不能直接ping通容器ip，所以要用"-p"参数（-p 80:80）来把端口映射到宿主机上（-v容器挂载目录要改成苹果的data目录）
 
 ## 一.docker安装
 

@@ -8,6 +8,6 @@
 
 [3.rocketmq](mq/rocketmq.md),[kafka](mq/kafka.md),[rabbitmq](mq/rabbitmq.md)(MQ)
 
-[4.nginx](nginx.md)
+[4.nginx](nginx.md),[openresty](openresty.md)
 
 [5.zookeeper](zookeeper.md)
