@@ -1,7 +1,6 @@
 # js插件
-
+### js组建介绍：
 ```
-js 组件介绍
 1.bootstrap
   官网：https://getbootstrap.com
   中文官网: https://www.bootcss.com
@@ -18,16 +17,21 @@ js 组件介绍
 		实例
 			https://www.cnblogs.com/ziyoublog/p/9055790.html
 			http://www.cnblogs.com/landeanfen/p/4976838.html
+			
 2.jquery-ui(jquery样式框架)
 	官网:https://jqueryui.com
+	
 3.jquery-validation(form表单校验,ajax submit提交)
 	官网:https://jqueryvalidation.org/
 	github:https://github.com/jquery-validation/jquery-validation
+	
 4.zTree(树形插件)
 	官网:http://www.treejs.cn
 	github:https://github.com/zTree/zTree_v3
+	
 5.kindeditor(在线编辑器)
 	官网:http://kindeditor.net
+	
 6.SVG
   A>Method-Draw
 	https://editor.method.ac
@@ -35,8 +39,8 @@ js 组件介绍
   B>SVG-Edit
 	https://raw.githack.com/SVG-Edit/svgedit/master/editor/svg-editor.html
 	https://github.com/SVG-Edit/svgedit
-----------------------------------------------------------------------------------------------------
-1.时间日期
+	
+7.时间日期
 	下载
 		http://www.my97.net/
 
@@ -45,8 +49,8 @@ js 组件介绍
 
 	html页面
 		<input type="text" th:id="startTime" name="startTime"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-----------------------------------------------------------------------------------------------------
-2.form表单校验,ajax submit提交
+
+8.form表单校验,ajax submit提交
 	官网
 		https://jqueryvalidation.org/
 		https://github.com/jquery-validation/jquery-validation
@@ -88,8 +92,155 @@ js 组件介绍
 			}
 		});
 		
-----------------------------------------------------------------------------------------------------
-3.web打印组件
+9.ajax同步异步参数(让ajax执行完后再继续往下执行)
+	$.ajax({
+		cache: false,
+		async: false,// 太关键了,同步和异步的参数
+		dataType: 'json',
+		type: 'post',
+		url: "action",
+		success: function (data){
+			alert("1");
+		}
+	);
+	alert("2")
+10.js正则全部替换
+	var r= "1\n2\n3\n";
+	//将字母\n替换成分号
+	alert(r.replace("\n",";"));
+	结果：1;2\n3\n 只替换了第一个
+	
+	var r= "1\n2\n3\n";
+	//将字母\n替换成分号
+	alert(r.replace(/\n/g, ";"));
+	结果：1;2;3; replace 的第一个参数可以是正则表达式，/g标识全文匹配。
+11.load html
+	实例：https://www.cnblogs.com/lixiaoran/p/6251397.html
+	$("#div").load("test.html #content");  
+	
+	实例：
+	$.post("url",{url:href},function(data){
+		$("#span").html('');
+		$("#span").html(data);
+	});
+```
+### bootstrap时间控件
+
+```
+1.时间控件
+	官网
+		http://www.bootcss.com/p/bootstrap-datetimepicker/
+	源码
+		https://github.com/uxsolutions/bootstrap-datepicker
+	包引入
+		<script type="text/javascript" src="/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="/js/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+	html页面
+		<input type="text" id="startTime" name="startTime" data-date-format="yyyy-mm-dd hh:ii:ss"/>
+		<input type="text" id="endTime" name="endTime" data-date-format="yyyy-mm-dd hh:ii:ss"/>
+	js实例化
+		$('#startTime').datetimepicker({
+			language:'zh-CN',
+			minView: 2,	//去掉小时分钟选择
+			autoclose: 1 //自动关闭
+		});
+		$('#endTime').datetimepicker({
+			language:'zh-CN',
+			minView: 2,	
+			autoclose: 1
+		});
+	初始化值
+	function startDate() {
+		var date = new Date();
+		date.setDate(date.getDate()-7);
+		var seperator1 = "-";
+		var seperator2 = ":";
+		var month = date.getMonth()+1;
+		var strDate = date.getDate();
+		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		        + " " + date.getHours() + seperator2 + date.getMinutes()
+		        + seperator2 + date.getSeconds();
+		var currentdate2 = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		        + " " + "00" + seperator2 + "00"
+		        + seperator2 + "00";
+		return currentdate2;
+	}
+	function endDate() {
+		var date = new Date();
+		var seperator1 = "-";
+		var seperator2 = ":";
+		var month = date.getMonth()+1;
+		var strDate = date.getDate();
+		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		        + " " + date.getHours() + seperator2 + date.getMinutes()
+		        + seperator2 + date.getSeconds();
+		var currentdate2 = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	        + " " + "23" + seperator2 + "59"
+	        + seperator2 + "59";
+		return currentdate2;
+	}
+	
+	$("#startTime").val(startDate());
+	$("#endTime").val(endDate());
+	
+2.bootstrap typeahead
+官网:https://getbootstrap.com
+
+下载examples(模块栏>examples)
+	https://getbootstrap.com/docs/4.1/examples/
+	
+模糊匹配autocomplete
+	下载:
+		https://github.com/bassjobsen/Bootstrap-3-Typeahead
+
+	包引入
+		<script type="text/javascript" th:src="/js/bootstrap/bootstrap3-typeahead.min.js"></script>
+
+	html页面
+		<input id="senderSreach" type="text" data-provide="typeahead" />
+
+	js调用
+		$("#senderSreach").typeahead({
+			minLength:1,
+			items:8,
+			source: function (query, process) {
+				return $.ajax({
+					url: '/order/querContact',
+					type: 'post',
+					data: {postData: query,paramType:'寄件'},
+					success: function (result) {
+						//要去掉if,不然有相同值时,用户自定义输入时会输入不进
+						//if(result.length){
+							process(result);
+						//}
+					}
+				});
+			},updater: function (item) {
+				//这里一定要return，否则选中不显示，外加调用display的时候null reference错误。
+				return item;
+			},displayText: function (item) {//返回显示字符串
+				//alert('displayText:'+item);
+				return "选: " + item.result;
+			},afterSelect: function (item) {//选择项之后的事件 ，item是当前选中的。
+				$("#contactProvSender").val(item.contactProv);
+
+				
+			}
+		});
+3.省市区三级联动
+https://www.sunzhongwei.com/js-provinces-three-level-linkage-selection-component
+jquery plugs
+http://fengyuanchen.github.io/distpicker/
+
+4.列表组件
+https://github.com/wenzhixin/bootstrap-table
+https://examples.bootstrap-table.com/
+
+https://www.cnblogs.com/ziyoublog/p/9055790.html
+http://www.cnblogs.com/landeanfen/p/4976838.html
+```
+### web打印组件LODOP：
+```
 	下载
 		http://www.lodop.net/
 		http://www.lodop.net/download.html
@@ -186,86 +337,6 @@ js 组件介绍
 问题:
     需要设置系统默认打印机
 ----------------------------------------------------------------------------------------------------
-4.js正则全部替换
-	var r= "1\n2\n3\n";
-	//将字母\n替换成分号
-	alert(r.replace("\n",";"));
-	结果：1;2\n3\n 只替换了第一个
-	
-	var r= "1\n2\n3\n";
-	//将字母\n替换成分号
-	alert(r.replace(/\n/g, ";"));
-	结果：1;2;3; replace 的第一个参数可以是正则表达式，/g标识全文匹配。
-----------------------------------------------------------------------------------------------------
-5.ajax同步异步参数(让ajax执行完后再继续往下执行)
-	$.ajax({
-		cache: false,
-		async: false,// 太关键了,同步和异步的参数
-		dataType: 'json',
-		type: 'post',
-		url: "action",
-		success: function (data){
-			alert("1");
-		}
-	);
-	alert("2")
-----------------------------------------------------------------------------------------------------
-6.bootstrap时间控件
-	官网
-		http://www.bootcss.com/p/bootstrap-datetimepicker/
-	源码
-		https://github.com/uxsolutions/bootstrap-datepicker
-	包引入
-		<script type="text/javascript" src="/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-		<script type="text/javascript" src="/js/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
-	html页面
-		<input type="text" id="startTime" name="startTime" data-date-format="yyyy-mm-dd hh:ii:ss"/>
-		<input type="text" id="endTime" name="endTime" data-date-format="yyyy-mm-dd hh:ii:ss"/>
-	js实例化
-		$('#startTime').datetimepicker({
-			language:'zh-CN',
-			minView: 2,	//去掉小时分钟选择
-			autoclose: 1 //自动关闭
-		});
-		$('#endTime').datetimepicker({
-			language:'zh-CN',
-			minView: 2,	
-			autoclose: 1
-		});
-	初始化值
-	function startDate() {
-		var date = new Date();
-		date.setDate(date.getDate()-7);
-		var seperator1 = "-";
-		var seperator2 = ":";
-		var month = date.getMonth()+1;
-		var strDate = date.getDate();
-		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-		        + " " + date.getHours() + seperator2 + date.getMinutes()
-		        + seperator2 + date.getSeconds();
-		var currentdate2 = date.getFullYear() + seperator1 + month + seperator1 + strDate
-		        + " " + "00" + seperator2 + "00"
-		        + seperator2 + "00";
-		return currentdate2;
-	}
-	function endDate() {
-		var date = new Date();
-		var seperator1 = "-";
-		var seperator2 = ":";
-		var month = date.getMonth()+1;
-		var strDate = date.getDate();
-		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-		        + " " + date.getHours() + seperator2 + date.getMinutes()
-		        + seperator2 + date.getSeconds();
-		var currentdate2 = date.getFullYear() + seperator1 + month + seperator1 + strDate
-	        + " " + "23" + seperator2 + "59"
-	        + seperator2 + "59";
-		return currentdate2;
-	}
-	
-	$("#startTime").val(startDate());
-	$("#endTime").val(endDate());
-----------------------------------------------------------------------------------------------------
 7.spring boot thymeleaf问题坑
 	页面js运算符问题
 		"&&"等特殊运算符出现在页面会出现问题
@@ -284,63 +355,10 @@ js 组件介绍
 					</configuration>
 				</plugin>
 		<plugins/>
-----------------------------------------------------------------------------------------------------
-8.bootstrap typeahead
-官网:https://getbootstrap.com
-
-下载examples(模块栏>examples)
-	https://getbootstrap.com/docs/4.1/examples/
-	
-1.模糊匹配autocomplete
-	下载:
-		https://github.com/bassjobsen/Bootstrap-3-Typeahead
-
-	包引入
-		<script type="text/javascript" th:src="/js/bootstrap/bootstrap3-typeahead.min.js"></script>
-
-	html页面
-		<input id="senderSreach" type="text" data-provide="typeahead" />
-
-	js调用
-		$("#senderSreach").typeahead({
-			minLength:1,
-			items:8,
-			source: function (query, process) {
-				return $.ajax({
-					url: '/order/querContact',
-					type: 'post',
-					data: {postData: query,paramType:'寄件'},
-					success: function (result) {
-						//要去掉if,不然有相同值时,用户自定义输入时会输入不进
-						//if(result.length){
-							process(result);
-						//}
-					}
-				});
-			},updater: function (item) {
-				//这里一定要return，否则选中不显示，外加调用display的时候null reference错误。
-				return item;
-			},displayText: function (item) {//返回显示字符串
-				//alert('displayText:'+item);
-				return "选: " + item.result;
-			},afterSelect: function (item) {//选择项之后的事件 ，item是当前选中的。
-				$("#contactProvSender").val(item.contactProv);
-
-				
-			}
-		});
-----------------------------------------------------------------------------------------------------
-9.load html
-	实例：https://www.cnblogs.com/lixiaoran/p/6251397.html
-	$("#div").load("test.html #content");  
-	
-	实例：
-	$.post("url",{url:href},function(data){
-		$("#span").html('');
-		$("#span").html(data);
-	});
-----------------------------------------------------------------------------------------------------
-10.cookie JS 操作
+```
+### cookie操作:
+```
+1.cookie JS 操作
 	//写入ck
 	function setCookie(name,value){
 		var Days = 30;
@@ -364,19 +382,13 @@ js 组件介绍
 		if(cval!=null)
 		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 	}
-----------------------------------------------------------------------------------------------------
-11.省市区三级联动
-https://www.sunzhongwei.com/js-provinces-three-level-linkage-selection-component
-jquery plugs
-http://fengyuanchen.github.io/distpicker/
-----------------------------------------------------------------------------------------------------
-https://www.cnblogs.com/ziyoublog/p/9055790.html
-http://www.cnblogs.com/landeanfen/p/4976838.html
-12.列表组件
-https://github.com/wenzhixin/bootstrap-table
-https://examples.bootstrap-table.com/
-----------------------------------------------------------------------------------------------------
+
 13.cookie localstorage(sessionStorage) indexedDB
 js客户端存储
 ```
-
+### mermaidjs（广泛集成于Markdown中）
+```
+官网：https://mermaidjs.github.io/
+Github 项目地址：https://github.com/knsv/mermaid
+参考：https://blog.csdn.net/fenghuizhidao/article/details/79440583
+```
