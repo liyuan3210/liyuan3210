@@ -12,7 +12,7 @@ https://github.com/liyuan3210/ui
 
 3.moduleJs模块化编程
 
-3.es6语法(es6->es5)
+4.es6语法(es6->es5)
 
 [5.webpacck编译,打包](webpack.md)
 
