@@ -4,6 +4,22 @@
 
 官网文档：https://www.nginx.com/resources/wiki/modules/lua/
 
+### openresty介绍
+
+openresty = nginx + lua（luagit）
+
+### 两种安装方式：
+
+1.安装nginx，安装luaJIT，安装lua-nginx-module
+
+2，直接安装openresty
+
+### lua安装：
+
+lua官网：https://www.lua.org/
+
+luajit解释器:<http://luajit.org/>
+
 ### 测试环境：
 
 ```
@@ -14,7 +30,7 @@ docker run --name myOpenrestry2 --net dev-net --ip 172.18.1.21 -p 81:80 --privil
 # mycentos
 docker run --name myOpenrestry3 --net dev-net --ip 172.18.1.22 --privileged=true -it -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/mycentos:sshnopwd
 ```
-### 一。安装
+### 一。安装openresty
 
 ```
 # add the yum repo:
@@ -34,7 +50,7 @@ sudo yum install -y openresty-resty
 sudo yum --disablerepo="*" --enablerepo="openresty" list available
 ```
 
-### 二。启动
+### 二。启动openresty
 
 配置环境变量path(略掉)：/usr/local/openresty/nginx/sbin
 
