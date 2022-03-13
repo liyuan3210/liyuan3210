@@ -4,9 +4,7 @@
 
 官网文档：https://www.nginx.com/resources/wiki/modules/lua/
 
-### mac桌面docker开发环境：
-
-​			苹果mac运行docker,没有桥网卡，宿主机不能直接ping通容器ip，所以要用"-p"参数（-p 80:80）来把端口映射到宿主机上（-v容器挂载目录要改成苹果的data目录）
+### 测试环境：
 
 ```
 # mycentos_openrestry
