@@ -1,8 +1,8 @@
 # linux服务器常用命令
-
+[centos](#centos)<br/>
+[tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
 [wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
-[周志磊(马士兵教育)经典linux命令演示](#mashibing)<br/>
-[tar,rar,zip压缩,解压](#tar_rar_zip)
+[周志磊(马士兵教育)经典linux命令演示](#mashibing)
 
 ### ubuntu:
 ```
@@ -372,6 +372,7 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
 ### centos：
+<div id="centos"/>
 ```
 官网:
 	https://www.centos.org
