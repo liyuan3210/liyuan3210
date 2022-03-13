@@ -446,76 +446,76 @@ sudo yum install epel-release -y
 <div  id="tar_rar_zip"/>
 ```
 1.解压命令:
-				tar -xvf  file.tar      //tar解压 
-				tar -xzvf file.tar.gz   //gzip解压
-				tar -jxvf file.tar.bz2  //bzip2解压
-				xz  -d    file.tar.xz	//解压后变成file.tar
-				rar格式
-					rar安装
-						wget http://www.rarsoft.com/rar/rarlinux-x64-5.8.0.tar.gz
-						tar -zxvf rarlinux-x64-5.4.0.tar.gz
-						cd rar
-						make
-				rar x centos.rar	//rar解压
-				zip test.zip		//解压zip
+	tar -xvf  file.tar      //tar解压 
+	tar -xzvf file.tar.gz   //gzip解压
+	tar -jxvf file.tar.bz2  //bzip2解压
+	xz  -d    file.tar.xz	//解压后变成file.tar
+	rar格式
+		rar安装
+			wget http://www.rarsoft.com/rar/rarlinux-x64-5.8.0.tar.gz
+			tar -zxvf rarlinux-x64-5.4.0.tar.gz
+			cd rar
+			make
+	rar x centos.rar	//rar解压
+	zip test.zip		//解压zip
 			
 2.打包命令：
-				tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 	//不压缩
-				tar -zcvf etc.tar.gz etc		//打包后(在要打包etc目录的根目录下执行)，以 gzip 压缩
-				tar -jcvf /tmp/etc.tar.bz2 /etc		//打包后(在要打包etc目录的根目录下执行???)，以 bzip2 压缩
-				xz  -z    file.tar									//打包后变成file.tar.xz
-				rar格式	
-					rar centos.rar ./piaoyi.org/		//将piaoyi.org目录打包为 centos.rar
-				zip -r test.zip ../*					//递归打包目录
+	tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 	//不压缩
+	tar -zcvf etc.tar.gz etc		//打包后(在要打包etc目录的根目录下执行)，以 gzip 压缩
+	tar -jcvf /tmp/etc.tar.bz2 /etc		//打包后(在要打包etc目录的根目录下执行???)，以 bzip2 压缩
+	xz  -z    file.tar									//打包后变成file.tar.xz
+	rar格式	
+			rar centos.rar ./piaoyi.org/		//将piaoyi.org目录打包为 centos.rar
+	zip -r test.zip ../*					//递归打包目录
 				
 3.加密打包,加密：
-		rar
-					打包：?
-					解压：?
-				tar(只能加密单个文件)
-					打包：tar -czvf - file | openssl des3 -salt -k password -out /path/to/file.tar.gz
-					解压：openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -
-				zip
-					打包：zip -rP password test.zip test		//-r表示递归test目录,password(密码)
-					解压：unzip test.zip	//根据提示输入pwd
+	rar
+			打包：?
+			解压：?
+	tar(只能加密单个文件)
+			打包：tar -czvf - file | openssl des3 -salt -k password -out /path/to/file.tar.gz
+			解压：openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -
+	zip
+			打包：zip -rP password test.zip test		//-r表示递归test目录,password(密码)
+			解压：unzip test.zip	//根据提示输入pwd
 					
 4.分卷压缩,解压:
-		zip：
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz //把tar.gz转换成zip后，才能用zip分卷压缩（必须是zip文件格式zip -r jdk-13.zip jdk-13）
-					zip -s 50m jdk-13.zip --out jdk-13-part
+	zip：
+		1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+		zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz //把tar.gz转换成zip后，才能用zip分卷压缩（必须是zip文件格式zip -r jdk-13.zip jdk-13）
+		zip -s 50m jdk-13.zip --out jdk-13-part
 					
-					2>解压
-					首先合卷：
-					zip jdk-13-part -s 0 --out jdk-13-all.zip
-					或
-					cat jdk-8u151-linux-x64-part.z* > jdk-8u151-linux-x64.zip //貌似有问题
-						windows下合卷：
-						copy /B 1.zip.001 + 1.zip.002 + 1.zip.003 1.zip
-						实例：
-						https://blog.csdn.net/weixin_37730482/article/details/78216922
-						https://blog.csdn.net/u010921682/article/details/90900932
+		2>解压
+			首先合卷：
+			zip jdk-13-part -s 0 --out jdk-13-all.zip
+			或
+			cat jdk-8u151-linux-x64-part.z* > jdk-8u151-linux-x64.zip //貌似有问题
+			windows下合卷：
+			copy /B 1.zip.001 + 1.zip.002 + 1.zip.003 1.zip
+			实例：
+			https://blog.csdn.net/weixin_37730482/article/details/78216922
+			https://blog.csdn.net/u010921682/article/details/90900932
 							
-					最后解压：
-					unzip jdk-8u151-linux-x64.zip
-		tar：
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					tar cvzpf - jdk-8u151-linux-x64.tar.gz  | split -d -b 30m
-					2>解压
-					首先合卷：
-					cat x* > jdk-8u151-linux-x64.tar.gz
-					最后解压(要执行2次如下命令才能解压)：
-					tar -xzvf jdk-8u151-linux-x64.tar.gz
-		rar：
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					rar a -v30m jdk-8u151-linux-x64.rar jdk-8u151-linux-x64.tar.gz
-					2>解压
-					rar x jdk-8u151-linux-x64.part1.rar
+			最后解压：
+			unzip jdk-8u151-linux-x64.zip
+	tar：
+		 1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+			tar cvzpf - jdk-8u151-linux-x64.tar.gz  | split -d -b 30m
+			2>解压
+			首先合卷：
+			cat x* > jdk-8u151-linux-x64.tar.gz
+			最后解压(要执行2次如下命令才能解压)：
+			tar -xzvf jdk-8u151-linux-x64.tar.gz
+	rar：
+		 1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+		 rar a -v30m jdk-8u151-linux-x64.rar jdk-8u151-linux-x64.tar.gz
+		 2>解压
+		 rar x jdk-8u151-linux-x64.part1.rar
 				
 tar,zip,rar区别：
-				tar:linux压缩格式
-				zip:开源免费的,很早的压缩格式,应用广泛
-				rar:收费的,支持分卷压缩,压缩效率比zip高
+		tar:linux压缩格式
+		zip:开源免费的,很早的压缩格式,应用广泛
+		rar:收费的,支持分卷压缩,压缩效率比zip高
 ```
 ### wget_curl_awk_grep
 <div id="wget_curl_awk_grep"/>
