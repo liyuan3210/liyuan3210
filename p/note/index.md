@@ -39,12 +39,6 @@ sudo apt-get install notepadqq	//安装
 
 [keepass:](https://keepass.info/)密码管理工具
 
-推荐工具：
-
-```
-
-```
-
 ## 三.新闻事件
 
 [2021.06.02：鸿蒙系统发布](https://new.qq.com/omn/20210603/20210603A05LDA00.html)

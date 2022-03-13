@@ -1,10 +1,11 @@
 # linux服务器常用命令
 
 [wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
-[周志磊(马士兵教育)经典linux命令演示](#mashibing)
+[周志磊(马士兵教育)经典linux命令演示](#mashibing)<br/>
+[tar,rar,zip压缩,解压](#tar_rar_zip)
 
+### ubuntu:
 ```
-一.ubuntu
 	官网:
 	https://ubuntu.com/
 	开启root:
@@ -37,79 +38,6 @@
 			 ufw status numbered//本地端口开放情况
 			 sudo ufw delete 2//根据需要进行删除
 			 
-		·tar,rar,zip解压,打包命令
-			解压命令:
-				tar -xvf  file.tar      //tar解压 
-				tar -xzvf file.tar.gz   //gzip解压
-				tar -jxvf file.tar.bz2  //bzip2解压
-				xz  -d    file.tar.xz	//解压后变成file.tar
-				rar格式
-					rar安装
-						wget http://www.rarsoft.com/rar/rarlinux-x64-5.8.0.tar.gz
-						tar -zxvf rarlinux-x64-5.4.0.tar.gz
-						cd rar
-						make
-				rar x centos.rar	//rar解压
-				zip test.zip		//解压zip
-			
-			打包命令：
-				tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 	//不压缩
-				tar -zcvf etc.tar.gz etc							//打包后(在要打包etc目录的根目录下执行)，以 gzip 压缩
-				tar -jcvf /tmp/etc.tar.bz2 /etc						//打包后(在要打包etc目录的根目录下执行???)，以 bzip2 压缩
-				xz  -z    file.tar									//打包后变成file.tar.xz
-				rar格式	
-					rar centos.rar ./piaoyi.org/		//将piaoyi.org目录打包为 centos.rar
-				zip -r test.zip ../*					//递归打包目录
-				
-			加密打包,加密：
-				rar
-					打包：?
-					解压：?
-				tar(只能加密单个文件)
-					打包：tar -czvf - file | openssl des3 -salt -k password -out /path/to/file.tar.gz
-					解压：openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -
-				zip
-					打包：zip -rP password test.zip test		//-r表示递归test目录,password(密码)
-					解压：unzip test.zip	//根据提示输入pwd
-					
-			分卷压缩,解压:
-				zip
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz //把tar.gz转换成zip后，才能用zip分卷压缩（必须是zip文件格式zip -r jdk-13.zip jdk-13）
-					zip -s 50m jdk-13.zip --out jdk-13-part
-					
-					2>解压
-					首先合卷：
-					zip jdk-13-part -s 0 --out jdk-13-all.zip
-					或
-					cat jdk-8u151-linux-x64-part.z* > jdk-8u151-linux-x64.zip //貌似有问题
-						windows下合卷：
-						copy /B 1.zip.001 + 1.zip.002 + 1.zip.003 1.zip
-						实例：
-						https://blog.csdn.net/weixin_37730482/article/details/78216922
-						https://blog.csdn.net/u010921682/article/details/90900932
-							
-					最后解压：
-					unzip jdk-8u151-linux-x64.zip
-				tar
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					tar cvzpf - jdk-8u151-linux-x64.tar.gz  | split -d -b 30m
-					2>解压
-					首先合卷：
-					cat x* > jdk-8u151-linux-x64.tar.gz
-					最后解压(要执行2次如下命令才能解压)：
-					tar -xzvf jdk-8u151-linux-x64.tar.gz
-				rar
-					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
-					rar a -v30m jdk-8u151-linux-x64.rar jdk-8u151-linux-x64.tar.gz
-					2>解压
-					rar x jdk-8u151-linux-x64.part1.rar
-				
-			tar,zip,rar区别
-				tar:linux压缩格式
-				zip:开源免费的,很早的压缩格式,应用广泛
-				rar:收费的,支持分卷压缩,压缩效率比zip高
-
 		·安装命令:
 			deb安装方法：dpkg -i *.deb
 			rpm安装方法：rpm -ivh *.rpm
@@ -355,72 +283,6 @@ ubuntu发布私有deb
 	版本介绍
 	https://www.cnblogs.com/EasonJim/p/7119331.html
 ----------------------------------------------------------------------------
-二.CentOS
-	官网:
-	https://www.centos.org
-
-	当我们下载CentOS 7 时会发现有几个版本可以选择，如下：
-	1、CentOS-7-DVD版本：DVD是标准安装盘，一般下载这个就可以了。
-	2、CentOS-7-NetInstall版本：网络安装镜像。
-	3、CentOS-7-Everything版本：对完整版安装盘的软件进行补充，集成所有软件。
-	4、CentOS-7-GnomeLive版本：GNOME桌面版。
-	5、CentOS-7-KdeLive版本：KDE桌面版。
-	6、CentOS-7.0-livecd版本：光盘上运行的系统，类拟于winpe
-
-	下载地址
-	https://www.centos.org/download/mirrors/
-	
-	centos发布rpm维护包(指南)
-		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
-		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
-----------------------------------------------------------------------------
-yum的使用
-	yum源配置目录/etc/yum.repos.d (softName.repo)
-	两种方式配置源
-	1.进入到源目录执行
-	wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-	2.自己编写repo文件
-	vi kubernetes.repo
-		[kubernetes]
-		name=kubernetes repo
-		baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
-		gpgcheck=1	//1表示检查,0表示不检查
-		gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-		enabled=1
-	
-	3.测试仓库源
-		yum repolist
-
-	4.查看能安装的版本列表
-		kubelet kubeadm kubectl三个版本都为1.15.3
-		yum list kubelet kubeadm kubectl  --showduplicates|sort -r
-		docker-ce版本为18.06.3.ce-3.el7
-		yum list docker-ce --showduplicates|sort -r
-
-	5.指定并版本安装
-		yum install -y docker-ce-18.06.3.ce-3.el7
-		yum install -y kubelet-1.15.3 kubeadm-1.15.3 kubectl-1.15.3
-
-	6.重建缓存
-	yum clean all
-	yum makecache
-	
-	7.升级所有包（改变软件设置和系统设置，系统版本内核都升级，故需要几分钟耐心等待）
-	yum -y update
-	
-	8.配置源(下载阿里yum配置到该目录中)
-	https://www.cnblogs.com/Skate0rDie/p/11418287.html
-	yum install -y wget
-	mv /etc/yum.repos.d /etc/yum.repos.d.backup
-	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-	
-	9.扩展源epel
-	epel源(安装完成之后你就可以直接使用yum来安装额外的软件包了)：
-	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-	rpm -ivh epel-release-latest-7.noarch.rpm
-	是基于Fedora的一个项目，为“红帽系”的操作系统提供额外的软件包，
-	适用于RHEL、CentOS和Scientific Linux.
-		
 服务管理systemctl
 	systemctl enable kubelet docker
 	systemctl start docker		//启动docker服务
@@ -509,7 +371,151 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	https://zhidao.baidu.com/question/271278332.html
 	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
+### centos：
+```
+官网:
+	https://www.centos.org
 
+	当我们下载CentOS 7 时会发现有几个版本可以选择，如下：
+	1、CentOS-7-DVD版本：DVD是标准安装盘，一般下载这个就可以了。
+	2、CentOS-7-NetInstall版本：网络安装镜像。
+	3、CentOS-7-Everything版本：对完整版安装盘的软件进行补充，集成所有软件。
+	4、CentOS-7-GnomeLive版本：GNOME桌面版。
+	5、CentOS-7-KdeLive版本：KDE桌面版。
+	6、CentOS-7.0-livecd版本：光盘上运行的系统，类拟于winpe
+
+	下载地址
+	https://www.centos.org/download/mirrors/
+	
+	centos发布rpm维护包(指南)
+		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
+		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
+		
+一。yum的使用
+yum源配置目录/etc/yum.repos.d (softName.repo)
+两种方式配置源
+1.进入到源目录执行
+	wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+2.自己编写repo文件
+	vi kubernetes.repo
+		[kubernetes]
+		name=kubernetes repo
+		baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+		gpgcheck=1	//1表示检查,0表示不检查
+		gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+		enabled=1
+	
+3.测试仓库源
+		yum repolist
+
+4.查看能安装的版本列表
+		kubelet kubeadm kubectl三个版本都为1.15.3
+		yum list kubelet kubeadm kubectl  --showduplicates|sort -r
+		docker-ce版本为18.06.3.ce-3.el7
+		yum list docker-ce --showduplicates|sort -r
+
+5.指定并版本安装
+		yum install -y docker-ce-18.06.3.ce-3.el7
+		yum install -y kubelet-1.15.3 kubeadm-1.15.3 kubectl-1.15.3
+
+6.重建缓存
+	yum clean all
+	yum makecache
+	
+7.升级所有包（改变软件设置和系统设置，系统版本内核都升级，故需要几分钟耐心等待）
+	yum -y update
+	
+8.配置源(下载阿里yum配置到该目录中)
+	https://www.cnblogs.com/Skate0rDie/p/11418287.html
+	yum install -y wget
+	mv /etc/yum.repos.d /etc/yum.repos.d.backup
+	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+	
+9.扩展源epel
+	epel源(安装完成之后你就可以直接使用yum来安装额外的软件包了)：
+	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	rpm -ivh epel-release-latest-7.noarch.rpm
+	是基于Fedora的一个项目，为“红帽系”的操作系统提供额外的软件包，
+	适用于RHEL、CentOS和Scientific Linux.
+	
+*很多软件包在yum里面没有的，解决的方法，就是使用epel源,也就是安装epel-release软件包
+sudo yum install epel-release -y
+```
+### tar,rar,zip解压,打包命令：
+<div  id="tar_rar_zip"/>
+```
+1.解压命令:
+				tar -xvf  file.tar      //tar解压 
+				tar -xzvf file.tar.gz   //gzip解压
+				tar -jxvf file.tar.bz2  //bzip2解压
+				xz  -d    file.tar.xz	//解压后变成file.tar
+				rar格式
+					rar安装
+						wget http://www.rarsoft.com/rar/rarlinux-x64-5.8.0.tar.gz
+						tar -zxvf rarlinux-x64-5.4.0.tar.gz
+						cd rar
+						make
+				rar x centos.rar	//rar解压
+				zip test.zip		//解压zip
+			
+2.打包命令：
+				tar -cvf nfs-utils-1.1.2.tar.gz nfs-utils-1.1.2 	//不压缩
+				tar -zcvf etc.tar.gz etc		//打包后(在要打包etc目录的根目录下执行)，以 gzip 压缩
+				tar -jcvf /tmp/etc.tar.bz2 /etc		//打包后(在要打包etc目录的根目录下执行???)，以 bzip2 压缩
+				xz  -z    file.tar									//打包后变成file.tar.xz
+				rar格式	
+					rar centos.rar ./piaoyi.org/		//将piaoyi.org目录打包为 centos.rar
+				zip -r test.zip ../*					//递归打包目录
+				
+3.加密打包,加密：
+		rar
+					打包：?
+					解压：?
+				tar(只能加密单个文件)
+					打包：tar -czvf - file | openssl des3 -salt -k password -out /path/to/file.tar.gz
+					解压：openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -
+				zip
+					打包：zip -rP password test.zip test		//-r表示递归test目录,password(密码)
+					解压：unzip test.zip	//根据提示输入pwd
+					
+4.分卷压缩,解压:
+		zip：
+					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+					zip jdk-8u151-linux-x64-part-all.zip jdk-8u151-linux-x64.tar.gz //把tar.gz转换成zip后，才能用zip分卷压缩（必须是zip文件格式zip -r jdk-13.zip jdk-13）
+					zip -s 50m jdk-13.zip --out jdk-13-part
+					
+					2>解压
+					首先合卷：
+					zip jdk-13-part -s 0 --out jdk-13-all.zip
+					或
+					cat jdk-8u151-linux-x64-part.z* > jdk-8u151-linux-x64.zip //貌似有问题
+						windows下合卷：
+						copy /B 1.zip.001 + 1.zip.002 + 1.zip.003 1.zip
+						实例：
+						https://blog.csdn.net/weixin_37730482/article/details/78216922
+						https://blog.csdn.net/u010921682/article/details/90900932
+							
+					最后解压：
+					unzip jdk-8u151-linux-x64.zip
+		tar：
+					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+					tar cvzpf - jdk-8u151-linux-x64.tar.gz  | split -d -b 30m
+					2>解压
+					首先合卷：
+					cat x* > jdk-8u151-linux-x64.tar.gz
+					最后解压(要执行2次如下命令才能解压)：
+					tar -xzvf jdk-8u151-linux-x64.tar.gz
+		rar：
+					1>.分卷压缩jdk-8u151-linux-x64.tar.gz
+					rar a -v30m jdk-8u151-linux-x64.rar jdk-8u151-linux-x64.tar.gz
+					2>解压
+					rar x jdk-8u151-linux-x64.part1.rar
+				
+tar,zip,rar区别：
+				tar:linux压缩格式
+				zip:开源免费的,很早的压缩格式,应用广泛
+				rar:收费的,支持分卷压缩,压缩效率比zip高
+```
 ### wget_curl_awk_grep
 <div id="wget_curl_awk_grep"/>
 
