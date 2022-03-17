@@ -532,17 +532,26 @@ apt源切换:
 	
 macbook air 2017 sd卡升级方案
 	https://post.smzdm.com/p/48758/
-	
-五.mac升级后报错
+
+
+五.系统问题
+（1）mac升级后报错
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 $ xcode-select –install		//执行命令，重装command line tools 就好了
 
-六.Git:hint:Pulling without specifying how to reconclie divergent branches is...
+（2）Git:hint:Pulling without specifying how to reconclie divergent branches is...
 依次执行如下命令：
 $ git config pull.ff false
 $ git config --global pull.rebase false
 参考：
 https://blog.csdn.net/weixin_42881768/article/details/119236014
+
+（3）重装ios系统
+	?
+（4）安装brew
+	https://www.jianshu.com/p/9252d4d2e824
+	brew install jmeter	//安装jmeter
+	brew info jmeter		//查看信息
 ```
 ### docker开发环境：
 
