@@ -14,7 +14,7 @@
 
 [6.linux内核](linux-kernel/index.md)
 
-[7.gcc跨平台](gcc.md)
+[7.gcc跨平台](gcc/index.md)
 
 
 
