@@ -41,6 +41,16 @@ iptables与ubuntu的ufw都属于应用层操作内核配置的程序
 ```
 ## 二．常用命令及零基础搭建防火墙
 
+**iptables	table	command	chain	parameter&Xmatch	target**
+
+```
+table:	filter,nat...
+command:	-A,-D,-L,-F,-P,-I,-R,-n
+chain:	INPUT,OUTPUT,FORWARD...
+parameter:	-p tcp,-s,-d,--sport,--dport,--dports,-m tcp | state | multiport
+target:	-j ACCEPT | DROP | REJECT | DNAT | SNAT
+```
+
 **查看iptables语法**
 	man iptables
 
