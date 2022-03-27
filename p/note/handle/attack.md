@@ -171,3 +171,18 @@
 		3.把漏洞利用代码exe上传到服务器并运行(然后用net user查看，系统多了一个后门用户)
 ```
 
+### 钩子技术：
+
+文章：
+https://mp.weixin.qq.com/s/Tot3sxanv75ozrY04xcAfg
+
+按照劫持的目标不同，常见的 HOOK 有以下这些类型：
+Inline HOOK
+IAT HOOK
+C++ virtable HOOK
+SEH HOOK
+IDT HOOK
+SSDT HOOK
+IRP HOOK
+TDI HOOK && NDIS HOOK
+Windows Message HOOK
