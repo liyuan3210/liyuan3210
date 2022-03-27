@@ -34,10 +34,11 @@ iptables与ubuntu的ufw都属于应用层操作内核配置的程序
 ![](img/iptables-1.png)
 
 **所有数据都有三种路径:**
+```
 往本地系统传入数据：[网卡]入站 -> PREROUTING -> INPUT-> [应用程序] 
 到另一台主机的数据：[网卡]入站 -> PREROUTING -> FORWARD -> POSTROUTING -> [网卡]出站
 本地生成的包数据： [应用程序] -> OUTPUT -> POSTROUTING -> [网卡]出站
-
+```
 ## 二．常用命令及零基础搭建防火墙
 
 **查看iptables语法**
