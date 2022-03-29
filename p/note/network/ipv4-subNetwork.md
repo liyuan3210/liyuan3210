@@ -4,6 +4,8 @@
 
 在线科学计算器:https://www.123cha.com/jsq/
 
+子网号，网络号，广播地址，网络地址是什么:https://www.bilibili.com/video/BV1m5411x7VB
+
 ## 一．Ａ，Ｂ，Ｃ类	地址
 
 ![](img/net-1.png)
