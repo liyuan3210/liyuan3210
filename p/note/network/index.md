@@ -12,8 +12,6 @@
 
 [5.iptables（防火墙）](iptables.md)
 
-​		课程：https://www.bilibili.com/video/av91392644?p=1
-
 ## 二．应用方案
 
 [1.内网穿透（grok , frp）](plan/frp-ngrok.md)
