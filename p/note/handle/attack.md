@@ -10,6 +10,9 @@ https://www.bilibili.com/video/BV1dh411s7vP
 	设计用于安全检测操作系统，内部集成600+安全工具
 
 2.metasploitable2(基于ubuntu操作系统)
+	下载地址：https://sourceforge.net/projects/metasploitable/files/Metasploitable2/
+	解压后是已安装好后的vmware虚拟机文件
+	默认用户与密码：msfadmin	/	msfadmin
 	本身设计作为安全工具测试和演示常见漏洞攻击（本镜像一定不要暴露在容易受攻击的网络中）
 
 3.win2k3(windows server系统)
