@@ -31,8 +31,12 @@ https://www.bilibili.com/video/BV1dh411s7vP
 
 	reCAPTCHA key 是啥？
 	注册地址：https://www.google.com/recaptcha/admin/create
+	
 6.漏洞利用
 	https://www.metasploit.com
+	安装：https://github.com/rapid7/metasploit-framework/wiki/Nightly-Installers
+	教程：https://www.bilibili.com/video/BV127411c7yE
+			 https://www.bilibili.com/video/BV1VJ411g7fU
 
 7.增加点攻击面（w2k3）
 	关闭防火墙，开启远程桌面，启动iis服务器，添加新组件
