@@ -182,10 +182,9 @@ https://www.bilibili.com/video/BV1dh411s7vP
 ```
 
 ### 钩子技术：
-
 文章：
 https://mp.weixin.qq.com/s/Tot3sxanv75ozrY04xcAfg
-
+```
 按照劫持的目标不同，常见的 HOOK 有以下这些类型：
 Inline HOOK
 IAT HOOK
@@ -196,3 +195,4 @@ SSDT HOOK
 IRP HOOK
 TDI HOOK && NDIS HOOK
 Windows Message HOOK
+```
