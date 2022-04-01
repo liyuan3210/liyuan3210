@@ -4,7 +4,7 @@
 
 [1.ipv4寻址与子网划分](ipv4-subNetwork.md)
 
-2.dhcp , dns , 网关
+[2.dhcp , dns , 网关](dhcp-dns.md)
 
 [3.网络OSI七层参考及数据包请求过程](osi-proccess.md)
 
