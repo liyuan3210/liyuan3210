@@ -31,11 +31,12 @@ shiro轻量级框架，spring security重量级框架
 3.1spring security集成入门
 
 ​		1>.spring boot项目添加依赖
-
-		<dependency>
+```
+<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+</dependency>
+```
 ​		2>.编写controller
 
 ​		启动默认用户user,默认密码在控制台(Using generated security password: aa1672de-e829-4dfe-992d-84228ffc804a)
