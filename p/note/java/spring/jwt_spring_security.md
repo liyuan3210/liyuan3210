@@ -219,17 +219,39 @@ https://baomidou.com/pages/779a6e/
 
   简单分页：
 
-  ```
-  
+  ```java
+  IPage<User> iPage = new Page<>(1,2);
+  IPage<User> page = UserService.page(iPage);
+  List<User> records = page.getRecords();
+  System.out.println("records："+records);
+  System.out.println("getPages："+page.getPages());
   ```
 
   xml自定义分页：
 
-  ```
+  ```java
+  * 首先添加mapper方法
+  IPage<User> queryPage(IPage page, @Param("userDto")UserDto userDto);
+  * 然后在xml编写sql
   
+  IPage<User> iPage = new Page<>(1,2);
+  UserDto userDto = new UserDto();
+  userDto.setName("z1");
+  userDto.setAge(3);
+  IPage<User> page = userMapper.queryPage(iPage,userDto);
+  List<User> records = page.getRecords();
   ```
 
-  
+  **DO、VO、DTO 区别**：
+
+  https://zhuanlan.zhihu.com/p/296492029
+
+  https://blog.csdn.net/jslrjb/article/details/86597851
+
+  ```java
+  //对象之间数据转化工具
+  BeanUtils.copyProperties(orderVo, jhOrder);	
+  ```
 
 * 条件构造器Wrapper
 
