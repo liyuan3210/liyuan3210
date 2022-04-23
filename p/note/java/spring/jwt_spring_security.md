@@ -69,6 +69,7 @@ JAXB [API](https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020)是java E
 解决办法：
 1.JDK 版本降到 JDK 8（之前是jbr-11）
 2.添加pom配置
+		<!-- JAXB -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -91,10 +92,107 @@ JAXB [API](https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020)是java E
 		</dependency>
 ```
 
+## 二.mybatisPlus
 
+代码：？？？
 
+代码生成器比较
 
-## 二.spring_security
+https://blog.csdn.net/m0_37524586/article/details/88351833
+
+1.Mybatis-generator
+http://mybatis.org/generator/index.html
+
+2.Mybatis-Plus
+https://baomidou.com/
+https://baomidou.com/pages/779a6e/
+
+* 准备环境建表
+
+  ```
+  --创建角色表
+  CREATE TABLE `tb_role` (
+    `id` int(11) NOT NULL,
+    `name` varchar(45) DEFAULT NULL,
+    `desc` varchar(45) DEFAULT NULL,
+    `create_dt` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  --创建用户表
+  CREATE TABLE tb_user
+  (
+      id BIGINT(20) NOT NULL COMMENT '主键ID',
+      name VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
+      age INT(11) NULL DEFAULT NULL COMMENT '年龄',
+      email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
+      PRIMARY KEY (id)
+  );
+  INSERT INTO tb_user (id, name, age, email) VALUES
+  (1, 'Jone', 18, 'test1@baomidou.com'),
+  (2, 'Jack', 20, 'test2@baomidou.com'),
+  (3, 'Tom', 28, 'test3@baomidou.com'),
+  (4, 'Sandy', 21, 'test4@baomidou.com'),
+  (5, 'Billie', 24, 'test5@baomidou.com');
+  ```
+
+* 配置pom
+
+  ```
+  	<!-- web -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<!-- jdbc -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-jdbc</artifactId>
+  		</dependency>
+  		<!-- mybatis-plus-boot -->
+  		<dependency>
+  			<groupId>com.baomidou</groupId>
+  			<artifactId>mybatis-plus-boot-starter</artifactId>
+  			<version>3.4.1</version>
+  		</dependency>
+  		<!-- mybatis-plus -->
+  		<dependency>
+  			<groupId>com.baomidou</groupId>
+  			<artifactId>mybatis-plus-generator</artifactId>
+  			<version>3.4.1</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.apache.velocity</groupId>
+  			<artifactId>velocity-engine-core</artifactId>
+  			<version>2.2</version>
+  		</dependency>
+  		<!--mysql-->
+  		<dependency>
+  			<groupId>mysql</groupId>
+  			<artifactId>mysql-connector-java</artifactId>
+  			<version>8.0.23</version>
+  		</dependency>
+  		<!-- 引入JAXB -->
+  		....
+  ```
+
+* 数据库配置application.properties
+
+  ```
+  server.port=8081
+  # mysql
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  spring.datasource.url=jdbc:mysql://127.0.0.1:3306/mybatisPlus?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+  spring.datasource.username=root
+  spring.datasource.password=123456
+  ```
+
+* 代码生成
+
+  ```
+  com.liyuan3210.demo.myBatisPlus.util.CodeGenerator
+  ```
+
+## 三.spring_security
 
 **概述：**
 
