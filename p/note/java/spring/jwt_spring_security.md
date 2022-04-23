@@ -112,29 +112,36 @@ https://baomidou.com/pages/779a6e/
   ```
   --创建角色表
   CREATE TABLE `tb_role` (
-    `id` int(11) NOT NULL,
-    `name` varchar(45) DEFAULT NULL,
-    `desc` varchar(45) DEFAULT NULL,
-    `create_dt` varchar(45) DEFAULT NULL,
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `name` varchar(45) DEFAULT NULL COMMENT '角色名称',
+    `desc` varchar(45) DEFAULT NULL COMMENT '角色描述',
+    `create_dt` varchar(45) DEFAULT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   --创建用户表
-  CREATE TABLE tb_user
-  (
-      id BIGINT(20) NOT NULL COMMENT '主键ID',
-      name VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
-      age INT(11) NULL DEFAULT NULL COMMENT '年龄',
-      email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
-      PRIMARY KEY (id)
-  );
-  INSERT INTO tb_user (id, name, age, email) VALUES
+  CREATE TABLE `tb_user2` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `name` varchar(30) DEFAULT NULL COMMENT '姓名',
+    `age` int(11) DEFAULT NULL COMMENT '年龄',
+    `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  --插入数据，自增id
+  INSERT INTO tb_user2 (id, name, age, email) VALUES
   (1, 'Jone', 18, 'test1@baomidou.com'),
   (2, 'Jack', 20, 'test2@baomidou.com'),
   (3, 'Tom', 28, 'test3@baomidou.com'),
   (4, 'Sandy', 21, 'test4@baomidou.com'),
-  (5, 'Billie', 24, 'test5@baomidou.com');
+  (5, 'Billie', 24, 'test5@baomidou.com'),
+  (6, 'z1', 3, '000@111,com'),
+  (7, 'z1', 3, '000@222,com'),
+  (8, 'z1', 3, '000@333,com'),
+  (9, 'z4', 3, '000@444,com'),
+  (10, 'z5', 3, '000@555,com'),
+  (11, 'z6', 3, '000@666,com'),
+  (12, 'z7', 3, '000000000000');
   ```
-
+  
 * 配置pom
 
   ```
@@ -191,6 +198,40 @@ https://baomidou.com/pages/779a6e/
   ```
   com.liyuan3210.demo.myBatisPlus.util.CodeGenerator
   ```
+
+* Mapper,service 测试单元
+
+  
+
+* 分页实现
+
+  配置分页插件
+
+  ```
+  放在启动类下面：
+  	@Bean
+  	public MybatisPlusInterceptor MybatisPlusInterceptor(){
+  		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+  		interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+  		return interceptor;
+  	}
+  ```
+
+  简单分页：
+
+  ```
+  
+  ```
+
+  xml自定义分页：
+
+  ```
+  
+  ```
+
+  
+
+* 条件构造器Wrapper
 
 ## 三.spring_security
 
