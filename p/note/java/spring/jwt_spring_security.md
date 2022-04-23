@@ -2,17 +2,97 @@
 
 ## 一.jwt
 
-开启/关闭(jwt)：JwtSpringSecurityApplication.java启动类注释掉如下方法
+官网：
+
+代码：
+
+步骤：
+
+* 创建工程（单体）
+
+* 配置pom
+
+  ```
+  		<!-- 添加web模块验证 -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<!-- jwt -->
+  		<dependency>
+  			<groupId>io.jsonwebtoken</groupId>
+  			<artifactId>jjwt</artifactId>
+  			<version>0.7.0</version>
+  		</dependency>
+  ```
+
+* 编写代码
+
+  ```
+  编写代码：
+  com.liyuan3210.demo.jwt.config.JwtAuthenticationFilter
+  com.liyuan3210.demo.jwt.util.JwtUtil
+  com.liyuan3210.demo.jwt.controller.LoginController
+  com.liyuan3210.demo.jwt.controller.TestController
+  
+  开启jwt：JwtApplication.java启动类注释掉如下方法
+  	@Bean
+      public FilterRegistrationBean jwtFilter() {
+          final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+          JwtAuthenticationFilter filter = new JwtAuthenticationFilter();
+          registrationBean.setFilter(filter);
+          return registrationBean;
+      }
+      
+  配置端口
+  server.port=8080
+  ```
+
+* 启动验证
+
+  首先访问login获取token
+
+  http://127.0.0.1:8080/jwt/login
+  
+  然后通过token访问hello接口
+  
+  http://127.0.0.1:8080/jwt/hello
+  
+
+问题：
+
+java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter
+
+JAXB [API](https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020)是java EE 的API，因此在java SE 9.0 中不再包含这个 Jar 包。java 9 中引入了模块的概念，默认情况下，Java SE中将不再包含java EE 的Jar包。而在 java 6/7/8 时关于这个API 都是捆绑在一起的
 
 ```
-//    @Bean
-//    public FilterRegistrationBean jwtFilter() {
-//        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-//        JwtAuthenticationFilter filter = new JwtAuthenticationFilter();
-//        registrationBean.setFilter(filter);
-//        return registrationBean;
-//    }
+解决办法：
+1.JDK 版本降到 JDK 8（之前是jbr-11）
+2.添加pom配置
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 ```
+
+
+
 
 ## 二.spring_security
 

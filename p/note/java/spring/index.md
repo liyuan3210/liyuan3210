@@ -32,6 +32,21 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 
 https://haokan.baidu.com/v?vid=4100768588022005153&pd=bjh&fr=bjhauthor&type=video
 
+#### 4.spring boot创建单体项目，创建聚合项目
+
+4.1.spring boot创建单体项目
+
+```
+* 进入官方网站直接下载压缩包(配置语言，版本，名称)
+https://start.spring.io
+
+* idea创建
+。。。。
+```
+
+4.2.spring boot创建聚合项目（maven）
+
+
 ## [二.jwt AND spring security](jwt_spring_security.md)
 
 认证授权方案
