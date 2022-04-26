@@ -3,76 +3,78 @@
 云盘:
 liyuandf@共享资源/基础技能/前端UI/html视频教程
 
-						一.html常用标签
-	<!DOCTYPE html>
-	<html>
-	<head>
-	<meta charset="utf-8" />
-	<!--搜索引擎-->
-	<title>标题</title>
-	<meta name="keywords" content="搜索关键字1,搜索关键字2" />
-	<meta name="description" content="描述" />
-	<!--
-	3秒后跳转到baidu
-	<meta http-equiv="refresh" content="3;URL=http://www.liyuan3210.com/" />
-	-->
-	<meta http-equiv="pragma" content="no-cache" />
-	</head>
-	<body>
-	<!--无序列表-->
-		<ul>
-			<li>列表ul</li>
-			<li>列表ul</li>
-			<li>列表ul</li>
-		</ul>
-	<!--有序标签-->
-	<ol>
-		<li>列表ol</li>
-		<li>列表ol</li>
-		<li>列表ol</li>
-	</ol>
-	<!--定义列表-->
-	<dl>
-		<dt>苹果</dt>
-		<dd>
-			苹果是种低热量食物，每 100 克只产生 60 千卡热量；苹果中营养成份可溶性
-			大，易被人体吸收，故有“活水”之称，有利于溶解硫元素，使皮肤润滑柔嫩。
-		</dd>
-		<dt>鸭梨</dt>
-		<dd>鸭梨也是一种水果.....</dd>
-		<dt>橙子</dt>
-		<dd>橙子.........</dd>
-	</dl>
-	<!--图片定义链接区域-->
-	<img src="images/1.jpg" alt="一对猫咪" usemap="#img1" />
-	<map id="img1" name="img1">
-		<area shape="rect" coords="184,33,391,258" href="http://www.baidu.com" alt="百度一下" target="_blank" />
-	</map>
-	<!--
-	表格由 table 标签创建，
-	tr 标签来创建表格的行，
-	td 标签或者 th 标签创建表格的列。
-	
-	-->
-	<!--
-	自定义属性
-	
-	属性名称在 html5 里面我们推荐加上 data-的前缀后面接一个字母或者多个字母都可
-	以，值我们也可以随便写，我们自己定义的属性默认不会对页面展示造成任何影响！
-	-->
-	<!--
-	标签的类型？
-	
-	div 标签(块级元素)
-	可以把 div 标签看成一个可以存放标签的容器！
-	我们讲的常用标签几乎都可以嵌套在 div 标签的里面
-	块级元素
-	
-	span 标签(内联元素)
-	使用 <span> 来组合内联元素，以便通过 css 来美化它们。
-	-->
-	</body>
-	</html>
+```
+					一.html常用标签
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!--搜索引擎-->
+<title>标题</title>
+<meta name="keywords" content="搜索关键字1,搜索关键字2" />
+<meta name="description" content="描述" />
+<!--
+3秒后跳转到baidu
+<meta http-equiv="refresh" content="3;URL=http://www.liyuan3210.com/" />
+-->
+<meta http-equiv="pragma" content="no-cache" />
+</head>
+<body>
+<!--无序列表-->
+	<ul>
+		<li>列表ul</li>
+		<li>列表ul</li>
+		<li>列表ul</li>
+	</ul>
+<!--有序标签-->
+<ol>
+	<li>列表ol</li>
+	<li>列表ol</li>
+	<li>列表ol</li>
+</ol>
+<!--定义列表-->
+<dl>
+	<dt>苹果</dt>
+	<dd>
+		苹果是种低热量食物，每 100 克只产生 60 千卡热量；苹果中营养成份可溶性
+		大，易被人体吸收，故有“活水”之称，有利于溶解硫元素，使皮肤润滑柔嫩。
+	</dd>
+	<dt>鸭梨</dt>
+	<dd>鸭梨也是一种水果.....</dd>
+	<dt>橙子</dt>
+	<dd>橙子.........</dd>
+</dl>
+<!--图片定义链接区域-->
+<img src="images/1.jpg" alt="一对猫咪" usemap="#img1" />
+<map id="img1" name="img1">
+	<area shape="rect" coords="184,33,391,258" href="http://www.baidu.com" alt="百度一下" target="_blank" />
+</map>
+<!--
+表格由 table 标签创建，
+tr 标签来创建表格的行，
+td 标签或者 th 标签创建表格的列。
+
+-->
+<!--
+自定义属性
+
+属性名称在 html5 里面我们推荐加上 data-的前缀后面接一个字母或者多个字母都可
+以，值我们也可以随便写，我们自己定义的属性默认不会对页面展示造成任何影响！
+-->
+<!--
+标签的类型？
+
+div 标签(块级元素)
+可以把 div 标签看成一个可以存放标签的容器！
+我们讲的常用标签几乎都可以嵌套在 div 标签的里面
+块级元素
+
+span 标签(内联元素)
+使用 <span> 来组合内联元素，以便通过 css 来美化它们。
+-->
+</body>
+</html>
+```
 
 ----------------------------------------------------------------------------------------------------
 						二.CSS给网页装潢
@@ -237,6 +239,7 @@ liyuandf@共享资源/基础技能/前端UI/html视频教程
 		right:不允许右边有浮动对象
 		both:不允许有浮动对象
 	
+
 	结论：
 		被设置浮动的元素会组成一个流，并且会横着紧挨着排队，直到父元素的
 		宽度不够才会换一行排列。
@@ -303,6 +306,7 @@ display:inline-block;
 background:red;
 text-align: center;
 }
+
 <div class="panel">
 	<div class="group">
 		<div class="box">盒子</div>
