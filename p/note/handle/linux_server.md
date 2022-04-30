@@ -6,23 +6,43 @@
 [周志磊(马士兵教育)经典linux命令演示](#mashibing)
 
 ### ubuntu:
-```
-	官网:
-	https://ubuntu.com/
-	开启root:
-		·sudo passwd root  //输入命令后根据提示设置密码，就开启了root
-		·sudo passwd -l root //输入命令后禁用了账户
-		·sudo apt-get update //同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。
-		·sudo apt-get upgrade //升级已安装的所有软件包，升级之后的版本就是本地索引里的
-		·sudo apt-get install libc6-dev//ubuntu安装命令
 
-	环境变量设置:
+```
+官网: https://ubuntu.com/
+
+开启root:
+		·sudo passwd root  //输入命令后根据提示设置密码，就开启了root
+		·sudo passwd -l root //关闭账户
+一。apt-get源配置及安装
+		1.切换源，配置文件/etc/apt/sources.list （/etc/apt/sources.list.d 源的索引）
+		Ubuntu 默认的源地址 http://archive.ubuntu.com/ 替换为 http://mirrors.ustc.edu.cn/
+		$ sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+		$ sudo apt-get update //更换源后需要同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。
+		
+		2.搜索软件包
+		$ apt-cache search mysql
+		还有如下几种：
+		* 网页搜索（http://packages.ubuntu.com/ ）或者命令搜索如下
+		* aptitude方式
+		* dpkg -L <package-name>
+		
+		3.软件包安装
+		$ sudo apt-get install mysql-server-core-8.0
+		
+		4.升级已安装的所有软件包，升级之后的版本就是本地索引里的
+		$ sudo apt-get upgrade
+
+二。环境变量配置
 		·/etc/profile:所有用户,当用户使用UI第一次登录时才执行。
 		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
 		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
 		命令生效:source /etc/profile
+```
 
-	常用命令:
+### 常用命令
+
+```
+常用命令:
 		·ls:当前目录所有文件
 		·ls -la:包括系统隐藏的文件
 		·pwd:查看当前目录
@@ -375,73 +395,88 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 ### centos：
 <div id="centos"/>
 ```
-官网:
-	https://www.centos.org
+官网: https://www.centos.org
 
-	当我们下载CentOS 7 时会发现有几个版本可以选择，如下：
+当我们下载CentOS 7 时会发现有几个版本可以选择，如下：
 	1、CentOS-7-DVD版本：DVD是标准安装盘，一般下载这个就可以了。
 	2、CentOS-7-NetInstall版本：网络安装镜像。
 	3、CentOS-7-Everything版本：对完整版安装盘的软件进行补充，集成所有软件。
 	4、CentOS-7-GnomeLive版本：GNOME桌面版。
 	5、CentOS-7-KdeLive版本：KDE桌面版。
 	6、CentOS-7.0-livecd版本：光盘上运行的系统，类拟于winpe
-
-	下载地址
-	https://www.centos.org/download/mirrors/
 	
-	centos发布rpm维护包(指南)
+centos发布rpm维护包(指南)
 		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
 		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
-		
-一。yum的使用
-yum源配置目录/etc/yum.repos.d (softName.repo)
-两种方式配置源
-1.进入到源目录执行
-	wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-2.自己编写repo文件
-	vi kubernetes.repo
-		[kubernetes]
-		name=kubernetes repo
-		baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
-		gpgcheck=1	//1表示检查,0表示不检查
-		gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-		enabled=1
-	
-3.测试仓库源
-		yum repolist
 
-4.查看能安装的版本列表
-		kubelet kubeadm kubectl三个版本都为1.15.3
-		yum list kubelet kubeadm kubectl  --showduplicates|sort -r
-		docker-ce版本为18.06.3.ce-3.el7
-		yum list docker-ce --showduplicates|sort -r
+一。yum源配置
+	1.切换yum源为https://mirrors.ustc.edu.cn/centos/
+	$ sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+         -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.ustc.edu.cn/centos|g' \
+         -i.bak \
+         /etc/yum.repos.d/CentOS-Base.repo
+         
+   2.更新缓存
+   $ yum makecache
+   
+   3.yum搜索安装包
+   $ yum search mysql-server
+   
+   4.安装软件
+   $ yum install mysql-server -y
+   
+二。yum源安装使用
+	yum源配置目录/etc/yum.repos.d (softName.repo)
+	两种方式配置源
+	1.进入到源目录执行
+		wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+	2.自己编写repo文件
+		vi kubernetes.repo
+      [kubernetes]
+      name=kubernetes repo
+      baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+      gpgcheck=1	//1表示检查,0表示不检查
+      gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+      enabled=1
+	
+	3.测试仓库源
+			yum repolist
 
-5.指定并版本安装
-		yum install -y docker-ce-18.06.3.ce-3.el7
-		yum install -y kubelet-1.15.3 kubeadm-1.15.3 kubectl-1.15.3
+	4.查看能安装的版本列表
+      kubelet kubeadm kubectl三个版本都为1.15.3
+      yum list kubelet kubeadm kubectl  --showduplicates|sort -r
+      docker-ce版本为18.06.3.ce-3.el7
+      yum list docker-ce --showduplicates|sort -r
 
-6.重建缓存
-	yum clean all
-	yum makecache
+	5.指定并版本安装
+      yum install -y docker-ce-18.06.3.ce-3.el7
+      yum install -y kubelet-1.15.3 kubeadm-1.15.3 kubectl-1.15.3
+
+	6.重建缓存
+      yum clean all
+      yum makecache
 	
-7.升级所有包（改变软件设置和系统设置，系统版本内核都升级，故需要几分钟耐心等待）
-	yum -y update
+	7.升级所有包（改变软件设置和系统设置，系统版本内核都升级，故需要几分钟耐心等待）
+			yum -y update
 	
-8.配置源(下载阿里yum配置到该目录中)
-	https://www.cnblogs.com/Skate0rDie/p/11418287.html
-	yum install -y wget
-	mv /etc/yum.repos.d /etc/yum.repos.d.backup
-	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+	8.配置源(下载阿里yum配置到该目录中)
+      https://www.cnblogs.com/Skate0rDie/p/11418287.html
+      yum install -y wget
+      mv /etc/yum.repos.d /etc/yum.repos.d.backup
+      wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+	9.扩展源epel
+      epel源(安装完成之后你就可以直接使用yum来安装额外的软件包了)：
+      wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      rpm -ivh epel-release-latest-7.noarch.rpm
+      是基于Fedora的一个项目，为“红帽系”的操作系统提供额外的软件包，
+      适用于RHEL、CentOS和Scientific Linux.
 	
-9.扩展源epel
-	epel源(安装完成之后你就可以直接使用yum来安装额外的软件包了)：
-	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-	rpm -ivh epel-release-latest-7.noarch.rpm
-	是基于Fedora的一个项目，为“红帽系”的操作系统提供额外的软件包，
-	适用于RHEL、CentOS和Scientific Linux.
-	
-*很多软件包在yum里面没有的，解决的方法，就是使用epel源,也就是安装epel-release软件包
-sudo yum install epel-release -y
+  *	很多软件包在yum里面没有的，解决的方法，就是使用epel源,也就是安装epel-release软件包
+  		sudo yum install epel-release -y
+
+二。环境变量配置
+
 ```
 
 ### suse
