@@ -1,5 +1,6 @@
 # linux服务器常用命令
 [centos](#centos)<br/>
+[suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
 [wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
 [周志磊(马士兵教育)经典linux命令演示](#mashibing)
@@ -442,7 +443,75 @@ yum源配置目录/etc/yum.repos.d (softName.repo)
 *很多软件包在yum里面没有的，解决的方法，就是使用epel源,也就是安装epel-release软件包
 sudo yum install epel-release -y
 ```
+
+### suse
+<div id="suse"/>
+```
+官网
+https://www.opensuse.org/
+
+运行容器
+docker pull opensuse/leap:15.3
+docker run --name myopensuse -it -d opensuse
+
+* 配置源
+自带三个软件源oss, non-oss, update。
+oss指开源软件，
+non-oss是非开源软件
+update源仅用于推送临时安全补丁
+
+禁用原有软件源；
+sudo zypper mr -da
+
+添加科大镜像源
+zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/distribution/leap/\$releasever/repo/oss USTC:OSS
+zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/distribution/leap/\$releasever/repo/non-oss USTC:NON-OSS
+zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/update/leap/\$releasever/oss USTC:UPDATE-OSS
+zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/update/leap/\$releasever/non-oss USTC:UPDATE-NON-OSS
+
+
+对于 15.3 或更高版本的 openSUSE Leap，还需添加 SLE 更新源：
+sudo zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/update/leap/\$releasever/sle USTC:UPDATE-SLE
+
+openSUSE 源使用帮助：
+https://zh.opensuse.org/软件源介绍
+http://mirrors.ustc.edu.cn/help/opensuse.html
+
+* 安装源管理
+	zypper lr		//列出所有定义的安装源
+	zypper ar 源地址 别名	//添加新的安装源
+	zypper rr 别名		//删除安装源
+	zypper nr 别名 新别名	//重命名安装源
+	sudo zypper ref		//刷新源
+	sudo zypper mr -da 	//禁用原有软件源
+
+* 软件包
+搜索软件包			zypper se package_name
+安装某个软件包			zypper install package_name
+安装某个版本的软件包		zypper install package_name=version
+安装以某个单词名字开头的所有软件包	zypper install package_name*
+卸载某个软件包			zypper remove package_name
+升级某个软件包			zypper update package_name
+获取所有可用新包的列表		zypper list-updates
+列出所有所需的包			zypper list-patches
+检验软件包的依赖关系的完整性		zypper verify apackage_name
+
+* 命令安装
+	zypper search mysql					//搜索软件包
+	zypper info mysql-community-server			//查看软件信息 
+	sudo zypper install mysql-community-server		//安装mysql
+	
+	//移除软件
+	//打补丁
+	//锁住包
+	//解锁包
+
+	opensuse software search
+* 安装包安装
+```
+
 ### tar,rar,zip解压,打包命令：
+
 <div  id="tar_rar_zip"/>
 ```
 1.解压命令:
