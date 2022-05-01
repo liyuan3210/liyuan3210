@@ -31,8 +31,14 @@
 		
 		4.升级已安装的所有软件包，升级之后的版本就是本地索引里的
 		$ sudo apt-get upgrade
+二。ubuntu发布私有deb
+	网站:https://launchpad.net/	
+	版本介绍（网上资料）：
+	https://www.cnblogs.com/EasonJim/p/7119331.html
+	
+三。服务启动/停止
 
-二。环境变量配置
+三。环境变量配置
 		·/etc/profile:所有用户,当用户使用UI第一次登录时才执行。
 		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
 		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
@@ -293,16 +299,6 @@ ubuntu16静态ip配置?????还有问题
 	
 查看usb设备
 	lsusb
-	
-ubuntu发布私有deb
-	网站:https://launchpad.net/
-	user:li.yuan3210@163.com
-	liyuan3210	//???
-	liyuan	//???
-	pwd:Liyuanabc123
-	
-	版本介绍
-	https://www.cnblogs.com/EasonJim/p/7119331.html
 ----------------------------------------------------------------------------
 服务管理systemctl
 	systemctl enable kubelet docker
@@ -404,10 +400,6 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	4、CentOS-7-GnomeLive版本：GNOME桌面版。
 	5、CentOS-7-KdeLive版本：KDE桌面版。
 	6、CentOS-7.0-livecd版本：光盘上运行的系统，类拟于winpe
-	
-centos发布rpm维护包(指南)
-		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
-		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
 
 一。yum源配置
 	1.切换yum源为https://mirrors.ustc.edu.cn/centos/
@@ -474,8 +466,12 @@ centos发布rpm维护包(指南)
 	
   *	很多软件包在yum里面没有的，解决的方法，就是使用epel源,也就是安装epel-release软件包
   		sudo yum install epel-release -y
+二。rpm包发布
+centos发布rpm维护包(指南)
+		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
+		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
 
-二。环境变量配置
+三。环境变量配置
 
 ```
 
