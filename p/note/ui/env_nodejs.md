@@ -60,13 +60,14 @@ less sass 区别？
 
 ​	hello world示例：
 ​	保存文件为helloWord.js
-​	var http = require('http');
-​	http.createServer(function (req, res) {
-​		res.writeHead(200,{'Content-Type':'text/plain'}); res.end('Hello World\n'); 
-​	}).listen(1337, "127.0.0.1"); 
-​	console.log('Server running at http://127.0.0.1:1337/');
-​	
 
+	
+	var http = require('http');
+	http.createServer(function (req, res) {
+		res.writeHead(200,{'Content-Type':'text/plain'}); res.end('Hello World\n'); 
+	}).listen(1337, "127.0.0.1"); 
+	console.log('Server running at http://127.0.0.1:1337/');
+	
 	运行
 	node helloWord.js
 	浏览器输入http://127.0.0.1:1337
@@ -123,6 +124,7 @@ NPM配置
 	npm(发布机制)
 	http://www.cnblogs.com/penghuwan/p/6973702.html#_label3_0
 	
+
 	npm 模块安装机制简介
 	http://www.ruanyifeng.com/blog/2016/01/npm-install.html
 	
@@ -151,7 +153,7 @@ NPM配置
 		npm i element-ui -S --registry=https://registry.npm.taobao.org
 		npm install --registry=https://registry.npm.taobao.org
 
-npm包发布
+**npm包发布**
 
 ```
 npm发布站点：
@@ -165,9 +167,19 @@ https://www.npmjs.com
 	npm unpublish 包名称 --force		//报权限问题要加--force
 	unpublish推荐使用如下命令
 	npm deprecate 包名称	//并不会撤销你已有的包,但会在任何人尝试安装这个包的时候得到警告"这个包不再维护了"
-```
+	
+问题：
+1.npm ERR! Unexpected token in JSON at position 1 while parsing near
+npm config set registry http://www.npmjs.org		//仓库地址修改
+npm cache clean --force													//清理缓存
 
-​	
+2.npm ERR! Unexpected end of JSON input while parsing near" "
+npm config ls -l 																//使用下面命令查询npmrc文件位置npm config ls -l 	
+删除.npmrc文件夹
+
+3.发布时（npm ERR! 403 403 Forbidden）
+每一次发布都要修改package.json文件版本号（ "version": "1.0.7"）
+```
 
 nexus上搭建npm本地服务器
 https://www.jianshu.com/p/9085f47726a2
