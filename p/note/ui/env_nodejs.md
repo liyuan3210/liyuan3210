@@ -1,6 +1,12 @@
 # env_nodejs
 
 一.commonjs 与 AMD 规范
+
+commonjs 与 AMD
+https://www.cnblogs.com/yangguoe/p/8474173.html
+https://www.cnblogs.com/chenguangliang/p/5856701.html
+
+```
 commonjs
 	优点：可复用于nodejs环境下并运行,例如做同构应用
 		  通过npm发布的很多第三方模块都采用了commonJS规范
@@ -11,15 +17,11 @@ AMD
 		  可并行加载多个依赖
 		  代码可以运行在浏览器环境和nodejs下
 	缺点：javascript运行环境没有原生支持AMD,需要先导入实现了AMD的库后才能正常使用
+```
 
-commonjs 与 AMD
-https://www.cnblogs.com/yangguoe/p/8474173.html
-https://www.cnblogs.com/chenguangliang/p/5856701.html
-	
-ES6将逐渐取代commonjs与AMD(典型的requirejs插件)规范
-前端样式支持模块化SCSS
-	ES6语法详细介绍
-	https://es6.ruanyifeng.com/
+ES6将逐渐取代commonjs与AMD(典型的requirejs插件)规范,前端样式支持模块化SCSS
+ES6语法详细介绍:
+https://es6.ruanyifeng.com/
 
 	JavaScript、ES5和ES6的介绍和区别
 	https://www.cnblogs.com/fuheng01/articles/JS.html
@@ -57,23 +59,20 @@ less sass 区别？
 ```
 
 ​	hello world示例：
-	保存文件为helloWord.js
-	var http = require('http');
-	http.createServer(function (req, res) {
-		res.writeHead(200,{'Content-Type':'text/plain'}); res.end('Hello World\n'); 
-	}).listen(1337, "127.0.0.1"); 
-	console.log('Server running at http://127.0.0.1:1337/');
-	
+​	保存文件为helloWord.js
+​	var http = require('http');
+​	http.createServer(function (req, res) {
+​		res.writeHead(200,{'Content-Type':'text/plain'}); res.end('Hello World\n'); 
+​	}).listen(1337, "127.0.0.1"); 
+​	console.log('Server running at http://127.0.0.1:1337/');
+​	
+
 	运行
 	node helloWord.js
 	浏览器输入http://127.0.0.1:1337
 
 NPM使用:
 	官网:https://www.npmjs.com/
-	
-	账号:liyuan3210/7233354123(li.yuan3210@163.com)
-	发布npm库
-	https://blog.csdn.net/weixin_34403976/article/details/89927016
 	
 	NPM是同nodejs一起安装的包管理工具
 	npm -v	//查看版本
@@ -153,16 +152,22 @@ NPM配置
 		npm install --registry=https://registry.npm.taobao.org
 
 npm包发布
-	1.登陆
+
+```
+npm发布站点：
+https://www.npmjs.com
+1.登陆
 	npm login
-	2.发布(需要在../node_modules/npmrepo3210执行发布)
+2.发布(需要在../node_modules/npmrepo3210执行发布)
 	npm publish
-	3.撤销发布(即使撤销发布,再次发布的包名称不能和前面撤销的包明相同)
+3.撤销发布(即使撤销发布,再次发布的包名称不能和前面撤销的包明相同)
 	根据规范,只有在发包的24小时内才允许撤销发布的包,
 	npm unpublish 包名称 --force		//报权限问题要加--force
 	unpublish推荐使用如下命令
 	npm deprecate 包名称	//并不会撤销你已有的包,但会在任何人尝试安装这个包的时候得到警告"这个包不再维护了"
-	
+```
+
+​	
 
 nexus上搭建npm本地服务器
 https://www.jianshu.com/p/9085f47726a2
