@@ -1,5 +1,5 @@
 # linux服务器常用命令
-[centos](#centos)<br/>
+[centos/rockylinux](#centos)<br/>
 [suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
 [wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
@@ -392,7 +392,7 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	https://zhidao.baidu.com/question/271278332.html
 	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
-### centos：
+### centos/rockylinux：
 <div id="centos"/>
 ```
 官网: https://www.centos.org
