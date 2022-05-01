@@ -219,7 +219,7 @@ Linux = gnu	+	linux kernel
 |               | centos            | 红帽下游版本，稳定                                    |
 |               | rockylinux        | centos替代品                                          |
 |               |                   |                                                       |
-| suse家族      |                   |                                                       |
+| Slackware家族 |                   |                                                       |
 |               | suse              | 企业版(收费)                                          |
 |               | openSUSE          | 德国人系统，社区开源版                                |
 |               |                   |                                                       |
