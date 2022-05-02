@@ -142,17 +142,33 @@ $ browserify js/lib/main.js -o js/dist/bundle.js		//dist要提前创建好，输
 
 #### 六。vue教程
 
+官网：
+
+https://cn.vuejs.org
+
+https://vuejs.org
+
 能够快速搭建vue工程项目
 
 1.vue基础
 
 vue-basics
 
+```
+
+```
+
 2.vue项目
 
-vue-project
+vue2-project
 
+```
+1.全局安装脚手架
+$ npm install -g @vue/cli
+2.脚手架创建项目
+$ vue create hello-world
 
+```
 
 **课程：**
 
