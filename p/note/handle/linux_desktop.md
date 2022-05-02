@@ -1,4 +1,5 @@
 [mac桌面](#mac)
+
 ### ubuntu桌面
 ```
 一.chrome浏览器
@@ -552,6 +553,9 @@ https://blog.csdn.net/weixin_42881768/article/details/119236014
 	https://www.jianshu.com/p/9252d4d2e824
 	brew install jmeter	//安装jmeter
 	brew info jmeter		//查看信息
+（5）mac磁盘“其它”占用查看及清理
+	https://blog.csdn.net/hjwnaruto/article/details/122735137
+	$ sudo du -sh * | grep 'G' | sort -nr
 ```
 ### docker开发环境：
 

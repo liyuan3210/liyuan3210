@@ -140,11 +140,30 @@ $ browserify js/lib/main.js -o js/dist/bundle.js		//dist要提前创建好，输
 <script type="text/javascript" src="./js/dist/bundle.js"></script>
 ```
 
+#### 六。vue教程
+
+能够快速搭建vue工程项目
+
+1.vue基础
+
+vue-basics
+
+2.vue项目
+
+vue-project
+
 
 
 **课程：**
 
+一。commonjs规范
+https://www.bilibili.com/video/BV1bs411E7pD
+二。AMD,CMD,ES6
 https://www.bilibili.com/video/BV18s411E7Tj
+一。Webpack
+https://www.bilibili.com/video/BV1e7411j7T5
+二。vue教程
+https://www.bilibili.com/video/BV1Zy4y1K7SH
 
 
 
