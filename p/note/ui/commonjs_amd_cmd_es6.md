@@ -77,6 +77,12 @@ browserify js/src/app.js -o js/dist/bundle.js		//输出bundle.js文件
 
 #### 三。AMD
 
+https://requirejs.org/
+
+https://www.requirejs-cn.cn/
+
+https://github.com/requirejs/requirejs
+
 **1.没用AMD规范**
 
 ```
@@ -136,9 +142,9 @@ $ browserify js/lib/main.js -o js/dist/bundle.js		//dist要提前创建好，输
 
 
 
+**课程：**
 
-
-课程：https://www.bilibili.com/video/BV18s411E7Tj
+https://www.bilibili.com/video/BV18s411E7Tj
 
 
 

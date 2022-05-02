@@ -10,9 +10,7 @@ https://github.com/liyuan3210/ui
 
 [2.nodejs环境](env_nodejs.md)
 
-3.moduleJs模块化编程
-
-4.es6语法(es6->es5)
+[3.模块化编程,es6语法(es6->es5)](commonjs_amd_cmd_es6.md)
 
 [5.webpacck编译,打包](webpack.md)
 
