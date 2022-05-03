@@ -1,7 +1,6 @@
 # 开发平台
-
+### 一.Visual Studio安装
 ```
-一.VS平台
 下载
 首先到微软官方下载在线安装文件https://www.microsoft.com
 下载Visual Studio,微软发布的有三个版本分别是
@@ -57,8 +56,12 @@ IDE>visualSVN>get solution from subversion
 ASP导出注意事项:
 asp导出后需要把packages文件引用copy到svn新导出的../tmp_asp目录下(没有就新建一个项目)
 
-----------------------------------------------------------------------------------------------------
-二.Android Studio开发环境搭建
+```
+
+### 二.Android Studio开发环境搭建
+
+```
+二.
 官方下载需要在google网站下载(国内需要代理才能下载)
 官网:https://www.android.com
 
@@ -176,8 +179,11 @@ virtualBox打不开，模拟器使用不了，在oracle官方下载最新的virt
 
 有人说是网络问题
 http://blog.csdn.net/beiminglei/article/details/17399333
-----------------------------------------------------------------------------------------------------
-三.微信开发
+```
+
+### 三.微信开发
+
+```
 官网：
 https://weixin.qq.com/
 
@@ -186,7 +192,6 @@ https://mp.weixin.qq.com/debug/wxadoc/dev/index.html
 工具下载>工具>wechat_web_devtools_0.15.152900_x64.exe
 快速创建项目>简易教程>下载源码(quickstart.zip)
 组件demo项目实例>简易教程>下载源码(demo.zip)
-
 
 微信OAuth实现用户登录
 	https://blog.csdn.net/qq_40437152/article/details/84303104

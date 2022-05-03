@@ -29,15 +29,16 @@
 [notepad:](https://notepad-plus-plus.org/)notepad是windows编辑工具
 
 ```
-ubuntu版本：
+ubuntu版本(不适用)：
 sudo add-apt-repository ppa:notepadqq-team/notepadqq	//添加安装包
-
 sudo apt-get update	//更新最新版本，这步用户自己选择，可以直接用老版本的
-
 sudo apt-get install notepadqq	//安装
 ```
 
 [keepass:](https://keepass.info/)密码管理工具
+
+* 官网：https://keepass.info/
+* 详细见私有库：https://github.com/liyuan3210/data/blob/master/db/keePass/readme.txt
 
 ## 三.新闻事件
 

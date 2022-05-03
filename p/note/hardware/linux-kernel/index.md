@@ -1,11 +1,5 @@
 # linux内核
 
-课程
-
-https://www.bilibili.com/video/BV1iJ411u7ps?from=search&seid=11641610883183403768
-
-https://www.bilibili.com/video/BV1yD4y1m7Q9?from=search&seid=11641610883183403768
-
 ## 一．基础
 
 [1.kernelBasis](1-kernelBasis.md)
@@ -47,4 +41,10 @@ https://www.bilibili.com/video/BV1yD4y1m7Q9?from=search&seid=1164161088318340376
 2.grub+linux源码编译+u盘制作最小启动盘
 
 文件系统＋网卡驱动＋用户登录模块
+
+### 课程
+
+https://www.bilibili.com/video/BV1iJ411u7ps?from=search&seid=11641610883183403768
+
+https://www.bilibili.com/video/BV1yD4y1m7Q9?from=search&seid=11641610883183403768
 
