@@ -17,6 +17,13 @@ https://www.cnblogs.com/renyuan/p/5031100.html
 
 ```
 eclipse C GCC mingw开发环境
+
+下载地址
+https://sourceforge.net/projects/mingw/
+
+访问不了了
+www.mingw.org
+
 一.eclipse java EE安装插件
 1.eclipse需要安装CDT插件
     进入www.eclipse.org,到PROJECTS搜索CDT插件,下载
