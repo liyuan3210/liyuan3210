@@ -39,9 +39,9 @@ http://wwww.ruanyifeng.com/blog/2012/11/require_js.html
 
 **1.服务端运行**
 
-```
-commonjs_node
+例子工程：目commonjs_nodejs
 
+```
 1.创建项目,两种方式
 * 创建文件package.json
 {
@@ -58,24 +58,31 @@ commonjs_node
 "scripts": {
 	"test": "node index.js"
 }
+3.控制台直接看结果
 ```
 
 **2.浏览器运行**
 
+例子工程：commonjs_browserify
+
 ```
-commonjs_browserify
 1.创建项目
-2.下载browserify
+2.下载browserify(用于编译打包，上线后不需要)
 * 全局：npm install browserify -g
 * 局部：npm install browserify --save-dev
 3.编写模块代码
 4.打包处理js
-browserify js/src/app.js -o js/dist/bundle.js		//输出bundle.js文件
+  browserify src/app.js -o dist/bundle.js		//输出bundle.js文件
 5.创建index.html
-<script type="text/javascript" src="./js/dist/bundle.js"></script>
+<script type="text/javascript" src="./dist/bundle.js"/>
+6.浏览器打开index.html,浏览器控制台查看结果
 ```
 
 #### 三。AMD
+
+https://github.com/amdjs/amdjs-api/wiki/AMD
+
+专门用于浏览器，模块加载是异步的
 
 https://requirejs.org/
 
@@ -83,13 +90,17 @@ https://www.requirejs-cn.cn/
 
 https://github.com/requirejs/requirejs
 
+http://www.ruanyifeng.com/blog/2012/11/require_js.html
+
 **1.没用AMD规范**
 
 ```
-
+说明问题
 ```
 
 **2.使用AMD规范**
+
+基本语法：模块暴露，模块引入
 
 ```
 
@@ -142,6 +153,9 @@ $ browserify js/lib/main.js -o js/dist/bundle.js		//dist要提前创建好，输
 
 #### 六。vue教程
 
+npm install -g webpack webpack-cli
+npm install -D webpack webpack-cli
+
 官网：
 
 https://cn.vuejs.org
@@ -172,14 +186,14 @@ $ vue create hello-world
 
 **课程：**
 
-一。commonjs规范
-https://www.bilibili.com/video/BV1bs411E7pD
-二。AMD,CMD,ES6
-https://www.bilibili.com/video/BV18s411E7Tj
-一。Webpack
-https://www.bilibili.com/video/BV1e7411j7T5
-二。vue教程
-https://www.bilibili.com/video/BV1Zy4y1K7SH
+* 一。commonjs规范
+  https://www.bilibili.com/video/BV1bs411E7pD
+* 二。AMD,CMD,ES6
+  https://www.bilibili.com/video/BV18s411E7Tj
+* 三。Webpack
+  https://www.bilibili.com/video/BV1e7411j7T5
+* 四。vue教程
+  https://www.bilibili.com/video/BV1Zy4y1K7SH
 
 
 

@@ -480,10 +480,14 @@ centos发布rpm维护包(指南)
 ```
 官网
 https://www.opensuse.org/
+openSUSE 源使用帮助：
+https://zh.opensuse.org/软件源介绍
+http://mirrors.ustc.edu.cn/help/opensuse.html
 
-运行容器
+运行容器：
 docker pull opensuse/leap:15.3
-docker run --name myopensuse -it -d opensuse
+docker run --name myopensuse -it -d opensuse/leap:15.3
+zypper install net-tools-deprecated
 
 * 配置源
 自带三个软件源oss, non-oss, update。
@@ -503,10 +507,6 @@ zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/update/leap/\$releasever/non
 
 对于 15.3 或更高版本的 openSUSE Leap，还需添加 SLE 更新源：
 sudo zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/update/leap/\$releasever/sle USTC:UPDATE-SLE
-
-openSUSE 源使用帮助：
-https://zh.opensuse.org/软件源介绍
-http://mirrors.ustc.edu.cn/help/opensuse.html
 
 * 安装源管理
 	zypper lr		//列出所有定义的安装源
@@ -539,6 +539,11 @@ http://mirrors.ustc.edu.cn/help/opensuse.html
 
 	opensuse software search
 * 安装包安装
+
+
+* 运行docker容器
+docker run --name myrockylinux -it -d rockylinux:8.5
+zypper install net-tools-deprecated
 ```
 
 ### tar,rar,zip解压,打包命令：

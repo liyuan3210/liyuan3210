@@ -61,7 +61,7 @@ less sass 区别？
 ​	hello world示例：
 ​	保存文件为helloWord.js
 
-	
+
 	var http = require('http');
 	http.createServer(function (req, res) {
 		res.writeHead(200,{'Content-Type':'text/plain'}); res.end('Hello World\n'); 
@@ -179,6 +179,20 @@ npm config ls -l 																//使用下面命令查询npmrc文件位置npm 
 
 3.发布时（npm ERR! 403 403 Forbidden）
 每一次发布都要修改package.json文件版本号（ "version": "1.0.7"）
+```
+
+**npm提交问题**
+
+```
+1.npm ERR! Unexpected token < in JSON at position 1 while parsing near '问题解决如下
+$ npm cache clean --force //然后重新 npm install
+实例：
+https://blog.csdn.net/zhangdaren/article/details/104855813
+
+2.npm ERR! Unexpected end of JSON input while parsing near“ “
+$ npm config ls -l		//查看
+然后删除userconfig = "/Users/yuanli/.npmrc"的.npmrc目录
+
 ```
 
 nexus上搭建npm本地服务器
