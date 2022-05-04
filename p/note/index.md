@@ -42,6 +42,8 @@ sudo apt-get install notepadqq	//安装
 
 ## 三.新闻事件
 
+2022.04.05:	上海疫情，俄乌战争
+
 [2021.06.02：鸿蒙系统发布](https://new.qq.com/omn/20210603/20210603A05LDA00.html)
 
 [2020.12.12：红帽停止centos8维护](https://blog.csdn.net/weixin_40787712/article/details/111087380)                 [centos替代者rocky](https://rockylinux.org/)
