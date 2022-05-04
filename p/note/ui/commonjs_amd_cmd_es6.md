@@ -26,10 +26,18 @@ http://wwww.ruanyifeng.com/blog/2012/11/require_js.html
 3.CMD
 用的不多，综合了commonjs与AMD
 浏览器实现：Sea.js
+浏览器实现：Sea.jshttp://seajs.org/
+http://www.zhangxinxu.com/sp/seajs
+https://github.com/seajs/seajs
 
 4.ES6
+http://es6.ruanyifeng.com/#docs/module
+依赖模块需要打包处理
+
 语法：导出模块（export）,导入模块（import）
 实现：使用Babel将ES6编译为ES5代码，使用browserify编译打包js
+
+* Babel(ES6转ES5代码) -> ES5(包含require语句) -> browserify(编译打包成浏浏览器能执行的语句) 
 
 ```
 
@@ -142,13 +150,21 @@ requirejs.config({
 }
 
 3.编写模块代码
+
 4.编译
 * 使用babel将ES6编译为ES5(包含commonJS语法)：
-$ babel js/src -d js/lib
+$ babel src -d libs
 * 使用browserify编译js：browserify:
-$ browserify js/lib/main.js -o js/dist/bundle.js		//dist要提前创建好，输出bundle.js文件
+$ browserify libs/app.js -o dist/bundle.js		//dist要提前创建好，输出bundle.js文件
+
 5.创建index.html
-<script type="text/javascript" src="./js/dist/bundle.js"></script>
+<script type="text/javascript" src="./../dist/bundle.js"></script>
+
+使用第三方库：
+* 2.x不维护了，3.x用做高级浏览器，所以下面安装1.x.x最新的
+$ npm install jquery@1
+
+import $ from "jquery";
 ```
 
 #### 六。vue教程
