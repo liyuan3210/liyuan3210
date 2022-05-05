@@ -169,9 +169,6 @@ import $ from "jquery";
 
 #### 六。vue教程
 
-npm install -g webpack webpack-cli
-npm install -D webpack webpack-cli
-
 官网：
 
 https://cn.vuejs.org
@@ -189,6 +186,9 @@ vue-basics
 ```
 
 2.vue项目
+
+npm install -g webpack webpack-cli
+npm install -D webpack webpack-cli
 
 vue2-project
 
