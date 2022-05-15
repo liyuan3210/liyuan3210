@@ -1,49 +1,10 @@
 # linux服务器常用命令
+[ubuntu](#ubuntu)<br/>
 [centos/rockylinux](#centos)<br/>
 [suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
 [wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
 [周志磊(马士兵教育)经典linux命令演示](#mashibing)
-
-### ubuntu:
-
-```
-官网: https://ubuntu.com/
-
-开启root:
-		·sudo passwd root  //输入命令后根据提示设置密码，就开启了root
-		·sudo passwd -l root //关闭账户
-一。apt-get源配置及安装
-		1.切换源，配置文件/etc/apt/sources.list （/etc/apt/sources.list.d 源的索引）
-		Ubuntu 默认的源地址 http://archive.ubuntu.com/ 替换为 http://mirrors.ustc.edu.cn/
-		$ sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
-		$ sudo apt-get update //更换源后需要同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。
-		
-		2.搜索软件包
-		$ apt-cache search mysql
-		还有如下几种：
-		* 网页搜索（http://packages.ubuntu.com/ ）或者命令搜索如下
-		* aptitude方式
-		* dpkg -L <package-name>
-		
-		3.软件包安装
-		$ sudo apt-get install mysql-server-core-8.0
-		
-		4.升级已安装的所有软件包，升级之后的版本就是本地索引里的
-		$ sudo apt-get upgrade
-二。ubuntu发布私有deb
-	网站:https://launchpad.net/	
-	版本介绍（网上资料）：
-	https://www.cnblogs.com/EasonJim/p/7119331.html
-	
-三。服务启动/停止
-
-三。环境变量配置
-		·/etc/profile:所有用户,当用户使用UI第一次登录时才执行。
-		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
-		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
-		命令生效:source /etc/profile
-```
 
 ### 常用命令
 
@@ -388,6 +349,47 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	https://zhidao.baidu.com/question/271278332.html
 	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
+
+### ubuntu:
+<div id="ubuntu"/>
+```
+官网: https://ubuntu.com/
+
+开启root:
+		·sudo passwd root  //输入命令后根据提示设置密码，就开启了root
+		·sudo passwd -l root //关闭账户
+一。apt-get源配置及安装
+		1.切换源，配置文件/etc/apt/sources.list （/etc/apt/sources.list.d 源的索引）
+		Ubuntu 默认的源地址 http://archive.ubuntu.com/ 替换为 http://mirrors.ustc.edu.cn/
+		$ sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+		$ sudo apt-get update //更换源后需要同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。
+		
+		2.搜索软件包
+		$ apt-cache search mysql
+		还有如下几种：
+		* 网页搜索（http://packages.ubuntu.com/ ）或者命令搜索如下
+		* aptitude方式
+		* dpkg -L <package-name>
+		
+		3.软件包安装
+		$ sudo apt-get install mysql-server-core-8.0
+		
+		4.升级已安装的所有软件包，升级之后的版本就是本地索引里的
+		$ sudo apt-get upgrade
+二。ubuntu发布私有deb
+	网站:https://launchpad.net/	
+	版本介绍（网上资料）：
+	https://www.cnblogs.com/EasonJim/p/7119331.html
+	
+三。服务启动/停止
+
+四。环境变量配置
+		·/etc/profile:所有用户,当用户使用UI第一次登录时才执行。
+		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
+		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
+		命令生效:source /etc/profile
+```
+
 ### centos/rockylinux：
 <div id="centos"/>
 ```
@@ -417,7 +419,7 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
    4.安装软件
    $ yum install mysql-server -y
    
-二。yum源安装使用
+yum源安装使用:
 	yum源配置目录/etc/yum.repos.d (softName.repo)
 	两种方式配置源
 	1.进入到源目录执行
@@ -471,7 +473,9 @@ centos发布rpm维护包(指南)
 		https://fedoraproject.org/wiki/Category:Package_Maintainers/zh-cn				
 		https://fedoraproject.org/wiki/Join_the_package_collection_maintainers/zh-cn
 
-三。环境变量配置
+三。服务启动/停止
+
+四。环境变量配置
 
 ```
 
