@@ -3,7 +3,9 @@
 ## 一．frp
 
 ```
+官网：https://gofrp.org
 官网源码:https://github.com/fatedier/frp
+
 	实例:http://iytc.net/wordpress/?p=3299
 	https://blog.csdn.net/u010071211/article/details/81182886
 	
@@ -55,6 +57,22 @@
 	测试穿透
 	http://frp.liyuan3210.com:8888
 ```
+
+3.鉴权
+
+```
+* server frps.ini
+[common]
+authentication_method=token
+token=123456
+
+* client frpc.ini
+[common]
+authentication_method=token
+token=123456
+```
+
+
 
 ## 二．ngrok
 
