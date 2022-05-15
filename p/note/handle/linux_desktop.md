@@ -588,3 +588,15 @@ Linux下安装使用windows软件
 https://jingyan.baidu.com/article/200957616211eb8b0621b42d.html
 ```
 
+## windows平台gcc环境编译
+
+```
+nginx官方推荐：
+http://nginx.org/en/docs/howto_build_on_win32.html
+
+MSYS or MSYS2区别？
+https://blog.csdn.net/nodeman/article/details/106431752
+Cygwin、Msys、MinGW、Msys2 区别 ？
+https://www.cnblogs.com/flyinggod/p/12888060.html
+```
+
