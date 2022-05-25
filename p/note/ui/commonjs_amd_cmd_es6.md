@@ -2,6 +2,10 @@
 
 
 
+demo代码：
+
+https://github.com/liyuan3210/ui/tree/master/demo
+
 #### 介绍
 
 ```
@@ -42,6 +46,8 @@ http://es6.ruanyifeng.com/#docs/module
 ```
 
 #### 一。JS模块化规范管理（模块进化）
+
+例子工程：https://github.com/liyuan3210/ui/tree/master/moduleJs
 
 #### 二。commonjs
 
@@ -102,11 +108,15 @@ http://www.ruanyifeng.com/blog/2012/11/require_js.html
 
 **1.没用AMD规范**
 
+例子工程：amd-no
+
 ```
 说明问题
 ```
 
 **2.使用AMD规范**
+
+例子工程：amd-requirejs
 
 基本语法：模块暴露，模块引入
 
@@ -131,11 +141,15 @@ requirejs.config({
 
 #### 四。CMD
 
+例子工程：cmd-seajs
+
 ```
 
 ```
 
 #### 五。ES6
+
+例子工程：es6-babel-browserify
 
 ```
 1.创建项目
