@@ -1,17 +1,5 @@
 # 数据结构与算法
 
-视屏课程:
-https://www.bilibili.com/video/BV1B4411H76f
-
-链接: 
-https://pan.baidu.com/s/18y3CKb6a5N6f8DCpUH1Pbw 提取码: hnms
-
-原始资料：https://gitee.com/liyuan3210/book_source/tree/master/dsa
-
-代码：https://github.com/liyuan3210/java/tree/master/dsa
-
-图：https://github.com/liyuan3210/data/blob/master/drawio/dsa.drawio
-
 ## 一。算法入门
 
 **1.字符串匹配问题**
@@ -727,3 +715,17 @@ int mid = left + (right – left) * (findVal – arr[left]) / (arr[right] – ar
 ```
 
 实例:com.liyuan3210.dsa.dataStructures.tree.HeapSort.java
+
+## 资源：
+
+韩顺平:
+https://www.bilibili.com/video/BV1B4411H76f
+
+链接: 
+https://pan.baidu.com/s/18y3CKb6a5N6f8DCpUH1Pbw 提取码: hnms
+
+原始资料：https://gitee.com/liyuan3210/book_source/tree/master/dsa
+
+代码：https://github.com/liyuan3210/java/tree/master/dsa
+
+流程图：https://github.com/liyuan3210/data/blob/master/drawio/dsa.drawio

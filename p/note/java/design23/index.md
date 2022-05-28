@@ -1,16 +1,8 @@
 # 设计模式
 
-韩顺平
-https://www.bilibili.com/video/BV1G4411c7N4
-
-链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
-
-马士兵
-https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
-
 ## 一．七大设计原则
 
-实例：com.atguigu.principle
+实例：com.liyuan3210.design23.principle
 
 ### 1.单一职责原则
 
@@ -119,3 +111,18 @@ Relation:
 <font color="blue">８．解释器模式（interpreter模式）</font>　<font color="blue">９．状态模式</font>　<font color="blue">１０．策略模式</font>
 
 <font color="blue">１１．职责链模式（责任链模式）</font>
+
+## 资源：
+
+韩顺平：
+https://www.bilibili.com/video/BV1G4411c7N4
+
+链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
+
+马士兵：
+https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
+
+代码：https://github.com/liyuan3210/java/tree/master/design23
+
+流程图：https://github.com/liyuan3210/data/blob/master/drawio/design23.drawio
+
