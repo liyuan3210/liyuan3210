@@ -7,6 +7,7 @@
 3. [资本的故事](https://www.bilibili.com/video/BV1mW411J7ED)
 4. [致富之道](https://www.bilibili.com/video/BV1iE411R7kT)
 5. [21世纪资本论](https://www.bilibili.com/video/BV1pp4y1s73y)
+6. [天道](https://www.le.com/ptv/vplay/25324719.html)
 
 ### 二。读物
 
@@ -31,6 +32,7 @@
 	你莫走，山水组合
 * 旅行
 	远方，刘朋
+	我们的时光，赵雷
 * 京剧
 	五花马，屠洪刚
 ```
