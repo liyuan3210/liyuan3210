@@ -39,7 +39,7 @@
 
 [6.物联网wifi模块ESP8266](plan/wifi-ESP8266.md)
 
-
+[7.安卓ssh客户端](https://github.com/connectbot/connectbot)
 
 
 
