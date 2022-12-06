@@ -596,7 +596,8 @@ http://nginx.org/en/docs/howto_build_on_win32.html
 
 MSYS or MSYS2区别？
 https://blog.csdn.net/nodeman/article/details/106431752
-Cygwin、Msys、MinGW、Msys2 区别 ？
+Cygwin、Msys（停止维护）、Msys2、MinGW、Mingw-w64、TDM-GCC 区别 ？
 https://www.cnblogs.com/flyinggod/p/12888060.html
+https://www.bilibili.com/video/BV1k34y1h76e
 ```
 
