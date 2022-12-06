@@ -3,7 +3,7 @@
 [centos/rockylinux](#centos)<br/>
 [suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
-[wget_curl_awk_grep](#wget_curl_awk_grep) <br/>
+[wget_curl_scp_cat_tail](#wget_curl_scp_cat_tail) <br/>
 [周志磊(马士兵教育)经典linux命令演示](#mashibing)
 
 ### 常用命令
@@ -626,8 +626,8 @@ tar,zip,rar区别：
 		zip:开源免费的,很早的压缩格式,应用广泛
 		rar:收费的,支持分卷压缩,压缩效率比zip高
 ```
-### wget_curl_awk_grep
-<div id="wget_curl_awk_grep"/>
+### wget_curl_scp_cat_tail
+<div id="wget_curl_scp_cat_tail"/>
 
 ```
 wget
@@ -688,42 +688,6 @@ curl
 		https://www.cnblogs.com/dongkang/p/6150356.html
 		https://blog.csdn.net/fungleo/article/details/80703365
 
-	
-	
-grep介绍
-		https://blog.csdn.net/weixin_42193400/article/details/82255541
-		位置锚定：
-		grep "Destroying" test.txt 或 grep Destroying test.txt
-		
-		查询字符串出现次数
-		grep -c "Destroying" test.txt
-		
-		当前目录及其子目录搜索
-		grep -r "Destroying" *
-		
-		https://blog.51cto.com/12384628/2162402
-		grep 9个经典使用场景
-		https://blog.csdn.net/M________123/article/details/79521884
-	
-	
-awk介绍使用
-		http://www.ruanyifeng.com/blog/2018/11/awk.html
-		awk '{print $0}' test.txt	//输出文件
-		
-		echo 'this is a test' | awk '{print $1}'	//管道文件输出
-		print $0 输入 this is a test
-		awk会根据空格和制表符，将每一行分成若干字段，
-		依次用$1、$2、$3代表第一个字段、第二个字段、第三个字段等等。
-		
-		文件demo.txt
-		root:x:0:0:root:/root:/usr/bin/zsh
-		daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-		bin:x:2:2:bin:/bin:/usr/sbin/nologin
-		sys:x:3:3:sys:/dev:/usr/sbin/nologin
-		sync:x:4:65534:sync:/bin:/bin/sync
-		
-		awk -F ':' '{ print $1 }' demo.txt	//使用`:`分割
-		
 scp命令 linux之间文件传送
     本地file上传到远程:
     第一个命令：scp -r /home/oracle/db/20121030.dmp  root@10.20.14.17:/home
@@ -750,7 +714,51 @@ cat与tail命令
 		tail -f access.log
 ```
 
-### 周志磊笔记（马士兵教育）
+### grep,sed,awk三剑客
+```
+参考：https://www.cnblogs.com/smilekun/p/16219263.html
+首先介绍一下Linux里面鼎鼎有名且非常重要的三剑客命令。
+	grep （缩写来自Globally search a Regular Expression and Print）是一种强大的文本搜索工具。
+	sed   功能同awk类似，差别在于，sed简单，对列处理的功能要差一些，awk的功能复杂，对列处理的功能比较强大。
+	awk   是一个优良的文本处理工具，Linux及Unix环境中现有的功能最强大的数据处理引擎之一。
+（grep擅长查找，sed擅长修改文件，awk擅长取列）
+
+grep介绍
+		https://blog.csdn.net/weixin_42193400/article/details/82255541
+		位置锚定：
+		grep "Destroying" test.txt 或 grep Destroying test.txt
+		
+		查询字符串出现次数
+		grep -c "Destroying" test.txt
+		
+		当前目录及其子目录搜索
+		grep -r "Destroying" *
+		
+		https://blog.51cto.com/12384628/2162402
+		grep 9个经典使用场景
+		https://blog.csdn.net/M________123/article/details/79521884
+sed使用
+	。。。。。
+awk使用
+		http://www.ruanyifeng.com/blog/2018/11/awk.html
+		awk '{print $0}' test.txt	//输出文件
+		
+		echo 'this is a test' | awk '{print $1}'	//管道文件输出
+		print $0 输入 this is a test
+		awk会根据空格和制表符，将每一行分成若干字段，
+		依次用$1、$2、$3代表第一个字段、第二个字段、第三个字段等等。
+		
+		文件demo.txt
+		root:x:0:0:root:/root:/usr/bin/zsh
+		daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+		bin:x:2:2:bin:/bin:/usr/sbin/nologin
+		sys:x:3:3:sys:/dev:/usr/sbin/nologin
+		sync:x:4:65534:sync:/bin:/bin/sync
+		
+		awk -F ':' '{ print $1 }' demo.txt	//使用`:`分割
+```
+
+### 周志磊笔记（mashing）
 
 <div id="mashibing"/>
 

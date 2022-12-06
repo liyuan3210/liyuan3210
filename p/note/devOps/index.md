@@ -20,6 +20,8 @@
 
 [8.subversion（svn）](subversion_install.md)
 
+[*.免费云数据库mysql](https://planetscale.com)
+
 ## 二．方案
 
 [1.linux远程桌面连接](linux_remote_desktop.md)
