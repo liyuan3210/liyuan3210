@@ -5,13 +5,25 @@
 跨平台c开发
 https://www.cnblogs.com/renyuan/p/5031100.html
 
-### 一。标准C
+### 一。gcc跨平台编译工具
+ 标准C
 
-### 二。windows C
+Windows C [安装微软vs](../../handle/dev_platform.md)
 
-[安装微软vs](../../handle/dev_platform.md)
+Linux C
 
-### 三。linux C
+### windows平台gcc环境编译
+
+```
+nginx官方推荐：
+http://nginx.org/en/docs/howto_build_on_win32.html
+
+MSYS or MSYS2区别？
+https://blog.csdn.net/nodeman/article/details/106431752
+Cygwin、Msys（停止维护）、Msys2、MinGW、Mingw-w64、TDM-GCC 区别 ？
+https://www.cnblogs.com/flyinggod/p/12888060.html
+https://www.bilibili.com/video/BV1k34y1h76e
+```
 
 ### eclipse_mingw_gcc：
 
