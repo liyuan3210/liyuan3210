@@ -10,9 +10,9 @@
 
 [4.51单片机](51chip/index.md)
 
-5.开源硬件（物联网平台）
+[5.linux内核](linux-kernel/index.md)
 
-[6.linux内核](linux-kernel/index.md)
+6.开源硬件（物联网平台）
 
 [7.gcc跨平台](gcc/index.md)
 
