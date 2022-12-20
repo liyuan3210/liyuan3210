@@ -11,6 +11,19 @@
 [4.nginx](nginx.md),[openresty](openresty.md)
 
 [5.zookeeper](zookeeper.md)
+## 二.大数据，分布式
+
+[1.hadoop基础（hdfs，mapreduce，yarn）](hadoop/index.md)
+
+[2.elasticsearch](elasticsearch.md)
+
+[3.分布式存储（Gluster，FreeNAS，Lustre，Ceph）](storage/index.md)
+
+#### 分布式方案
+
+1.hive
+
+2.elk
 
 ### 开源产品：
 

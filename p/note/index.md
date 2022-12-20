@@ -12,17 +12,15 @@
 
 [5.NETWORK](network/index.md)网络
 
-[6.DCS](dcs/index.md)大数据，分布式
+[6.HARDWARE](hardware/index.md)硬件
 
-[7.HARDWARE](hardware/index.md)硬件
-
-[8.HANDLE...](handle/index.md)常用的手册,助手
+[7.HANDLE...](handle/index.md)常用的手册,助手
 
 ## 二．工具(官网下载/安装)
 
-[vnote:](https://vnote.readthedocs.io)树形目录管理及编辑
-
 [typora:](https://www.typora.io)轻量markdown工具
+
+* 或者[vnote:](https://vnote.readthedocs.io)树形目录管理及编辑
 
 [draw:](https://www.diagrams.net)画图工具
 
