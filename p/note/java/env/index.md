@@ -1,5 +1,10 @@
 # 环境安装
 
+[*.git使用](git_use.md)
+
+[*.ssh免密登录及openssh](ssh_openssh.md)
+
+[*.gpg加解密](gpg_use.md)
 ## 一.jdk安装
 
 ### 1.oracle jdk
