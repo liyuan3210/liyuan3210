@@ -1,5 +1,36 @@
 # 汇编&masm
 
+## 概述
+```
+视频（计算机语言 x86汇编语言）：https://www.bilibili.com/video/BV1xE411N74T
+
+x86汇编
+	https://www.cnblogs.com/juzaizai/p/15195107.html
+	汇编分类
+	https://blog.csdn.net/oqqHuTu12345678/article/details/125697207
+	https://blog.csdn.net/liigo/article/details/80680929
+	汇编：
+	https://www.bilibili.com/video/BV1xE411N74T
+	linux内核采用多汇编：
+	https://blog.csdn.net/oqqHuTu12345678/article/details/125676002
+	编译器(开源)：
+	https://nasm.us
+		安装：
+		./configure --prefix=/opt/nasm
+
+》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉
+b站视频下载
+Imageio: 'ffmpeg.linux64' was not found on your computer; downloading it now.
+https://blog.csdn.net/NFMSR/article/details/78559930
+
+但为了提高读写效率，会减少磁头的移动，写完1盘面前后两个0赤道写完后，再写2盘面两个0赤道，也就是写完一个柱面后移动磁头，在依次写所有柱面的2磁头
+
+采用 磁头，磁道，扇区访问硬盘方法 叫CHS模式（此方法比较麻烦）
+逻辑块地址（LBA）,现在硬盘都支持LBA模式
+
+写入工具
+https://github.com/AloneCafe/fixed-vhd-writer
+```
 ## 一．masm
 
 ```
