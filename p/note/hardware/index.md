@@ -1,20 +1,21 @@
 # 硬件
 
 ## 一．硬件基础
-
-[1.数字电路](digital/index.md)
+[1.电路](circuit/index.md)
 
 [2.模拟电路](simulation/index.md)
 
-[3.汇编](assembly/index.md)
+[3.数字电路](digital/index.md)
 
-[4.51单片机](51chip/index.md)
+[4.汇编](assembly/index.md)
 
-[5.linux内核](linux-kernel/index.md)
+[5.51单片机](51chip/index.md)
 
-6.开源硬件（物联网平台）
+[6.linux内核](linux-kernel/index.md)
 
-[7.gcc跨平台](gcc/index.md)
+7.开源硬件（物联网平台）
+
+[8.gcc跨平台](gcc/index.md)
 
 
 

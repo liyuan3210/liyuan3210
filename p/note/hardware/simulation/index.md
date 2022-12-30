@@ -17,3 +17,12 @@
 7.功率放大电路 
 
 8.直流稳压电源
+
+### 备注
+```
+【电子】模拟电子技术基础 上交大 郑益慧主讲
+https://www.bilibili.com/video/BV1Gt411b7Zq
+
+【课程】模拟电子技术基础（华成英/清华大学）（全189P）
+https://www.bilibili.com/video/BV1Vp411f71S
+```
