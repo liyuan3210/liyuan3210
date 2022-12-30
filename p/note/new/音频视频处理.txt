@@ -1,0 +1,161 @@
+声道（2.1，4.0，4.1，5.1，7.1）
+https://zhidao.baidu.com/question/942726010171563932.html
+
+ffmpeg和opencv对比
+https://blog.csdn.net/zhiyuan2021/article/details/118708538
+
+开源图像视频处理库
+https://blog.csdn.net/xiaotoly/article/details/51042308
+
+Emscripten简介及初体验
+https://blog.csdn.net/cgs1999/article/details/109032278
+
+OpenGL详细解读
+https://zhuanlan.zhihu.com/p/56693625
+
+配音网站
+http://peiyin.xunfei.cn/
+
+》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》
+
+18个免费替代Photoshop的图像编辑软件
+https://blog.csdn.net/weixin_44305576/article/details/86522925
+Gimp图片编辑软件
+https://www.bilibili.com/video/BV1bt411F7Ug
+Flatpak的构建安装（类似ubuntu系统的snap）
+https://zhuanlan.zhihu.com/p/55299546
+图片编辑器（PhotoDemon）适合windows
+https://photodemon.org/
+
+Captura录屏使用
+https://www.captura.org/
+https://mathewsachin.github.io/Captura
+Captura与ffmpeg下载
+https://github.com/MathewSachin/Captura/releases/download/v8.0.0/Captura-Portable.zip
+https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+录屏软件 Captura 及 FFmpeg 安装配置教程
+https://zhuanlan.zhihu.com/p/294895620?utm_source=qq
+
+Ffmpeg去除水印
+https://blog.csdn.net/qq_34777982/article/details/124038072
+>>>>截取图片
+ffmpeg -i 喜欢你.mp4 -ss 00:19 -f image2 -vframes 1 xhn.jpg
+ffmpeg -i 不再犹豫（童声版）Beyond.mp4 -ss 00:15 -f image2 -vframes 1 bzyy.jpg
+ffmpeg -i 不再犹豫（童声版）-已去除.mp4 -ss 00:12 -f image2 -vframes 1 bzyy2.jpg
+ffmpeg -i 喜欢你.mp4 -ss 00:19 -vframes 1 xhn.jpg
+>>>使用图片编辑软件定位位置，长宽参数
+使用“Gimp图片编辑软件”
+>>>移除水印
+ffmpeg -i 喜欢你.mp4 -vf "delogo=x=43:y=29:w=49:h=41:show=0" -c:a copy 喜欢你-以去除.mp4
+ffmpeg -i 不再犹豫（童声版）Beyond.mp4 -vf "delogo=x=376:y=15:w=53:h=30:show=0" -c:a copy 不再犹豫（童声版）-已去除.mp4
+ffmpeg -i 不再犹豫（童声版）-已去除.mp4 -vf "delogo=x=18:y=16:w=73:h=27:show=0" -c:a copy 不再犹豫（童声版）-已去除2.mp4
+
+
+>>>视频裁剪（视频有黑边）
+https://segmentfault.com/a/1190000042069986	//黑边问题
+ffmpeg -i 喜欢你.mp4 -ss 00:03:47 -to 00:04:30 -c copy 喜欢你-wei.mp4
+ffmpeg -i 灰色轨迹.mp4 -ss 00:04:01 -to 00:05:28 -c copy 灰色轨迹-wei.mp4
+ffmpeg -i 大地.mp4 -ss 00:03:38 -to 00:04:16 -c copy 大地-wei.mp4
+>>>视频合并
+ffmpeg -f concat -safe 0 -i vlist.txt 灰色轨迹-大地-喜欢你-all.mp4
+“vlist.txt”文件内容：
+file 'wei/灰色轨迹-wei.mp4'
+file 'wei/大地-wei.mp4'
+file 'wei/喜欢你-wei.mp4'
+
+》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》》〉》〉》〉》〉》〉》〉》〉》〉》〉》〉》
+一。linux能安装的软件
+1.steam平台
+https://store.steampowered.com/about/
+ubuntu安装包
+https://media.st.dl.eccdnx.com/client/installer/steam.deb
+2.微信
+3.输入法（拼音）
+
+4.steam与完美世界？？？
+中国版的steam由完美世界代理的Steam 数字内容分发平台正式定名为“蒸汽平台”
+staem官网：
+https://store.steampowered.com/
+https://store.steampowered.com/about/
+
+staem境外账号（ubuntu系统下）：
+liyuan3210
+7233354lyabc
+
+完美通行证：
+465049568@qq.com
+7233354lyabc
+
+二。安卓安装termux安装
+termux安装，引出问题：F-Droid的安装&&替换TUNA清华源（F-Droid介绍）
+https://www.bilibili.com/video/BV1XT4y1w7Uw/
+
+三。Cygwin、Msys（停止维护）、Msys2、MinGW、Mingw-w64、TDM-GCC
+编译安装
+
+四。Windows打开WLS2, Mingw-w64编译安装nginx
+
+五。linux 内核源码阅读
+
+六。业务架构了解
+	业务架构可以拿快递系统举例
+	管理方向可以拿中电金信举例
+
+七。了解平台短视频收益规则，深挖搬视频收益套路
+	？？？
+
+八。Windows安装podman
+https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md
+https://www.cnblogs.com/jxldjsn/p/15799514.html
+
+九。Kubernetes二进制安装
+https://www.bilibili.com/video/BV16Z4y1b74y
+https://www.bilibili.com/video/BV15g411Y7fs
+Containerd容器
+https://www.bilibili.com/video/BV1RW4y1x71u
+二进制安装Containerd
+https://www.bilibili.com/video/BV1N94y1Q7Nj
+Containerd操作
+https://www.cnblogs.com/yangmeichong/p/16661444.html
+容器云/云原生架构成长路线：
+https://pan.baidu.com/s/1jDdp3nUz5HF2yTJJ2SuvCQ?pwd=6666
+https://www.processon.com/view/link/62bc5d965653bb7bf57c5ccd#map  
+
+containerd:
+wget https://github.com/containerd/containerd/releases/download/v1.6.10/containerd-1.6.10-linux-amd64.tar.gz
+runc:
+https://github.com/opencontainers/runc/releases
+$ install -m 755 runc.amd64 /usr/local/sbin/runc
+解压到目录/usr/local/sbin
+cni:
+https://github.com/containernetworking/plugins/releases
+解压到目录/opt/cni/bin 
+
+十。b站视频，腾讯视频下载工具
+腾讯视频：
+https://github.com/JayCJP/downloadTcVideo.git
+b站视频：
+https://github.com/yutto-dev/bilili.git
+
+十一。运维部分
+1.Linux常用分区工具
+https://www.lxlinux.net/6469.html
+https://gparted.org/
+硬盘GPT分区与MBR分区的区别
+https://xinzhi.wenda.so.com/m/a/1542627025209463
+新版本fdisk可以识别gpt格式分区
+https://www.zhangweijie.net/post/2017/11/12/2906.html
+
+相比于MBR模式,GPT模式拥有对2TB以上的原生支持。GPT不存在扩展分区和逻辑分区,所有分区全都是主分区,且理论上可存在的主分区个数是无限的。
+
+1.1 windows常用分区软件
+https://zhuanlan.zhihu.com/p/551730189
+
+2.windows安装
+系统之家下载windows镜像
+https://windows.xnayw.cn/win1064.html
+https://downloads.sourceforge.net/gparted/gparted-live-1.4.0-6-amd64.iso
+
+准备u盘，下载启动制作工具
+电脑店：http://dnd.lzlcm.cn/
+大白菜：http://dbc.nxexvq.cn/
