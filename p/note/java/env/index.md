@@ -50,10 +50,10 @@ openjdk(开源免费):
 2>验证
 groovy　-v
 
-问题：
-apache-groovy-binary-3.0.4.zip　与　apache-groovy-sdk-3.0.4.zip不同？？？
+binary与sdk包内容：
+apache-groovy-binary-3.0.4.zip　   //只包含二进制运行文件			      
+apache-groovy-sdk-3.0.4.zip		   //all，二进制包，源文件，文档
 ```
-
 
 ## 二.BuildTools
 
@@ -227,3 +227,9 @@ https://code.visualstudio.com/
 3.WindowBuilder(eclipse gui plugins)
 ```
 
+## 六.Emscripten环境安装
+
+```
+$ docker run --name myubuntu_build --net dev-net --ip 172.18.1.30 -it -v /home/ubuntu-a10/Desktop/soft/data:/data -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v1
+$ docker exec -it myubuntu_build /bin/bash
+```
