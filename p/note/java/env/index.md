@@ -233,7 +233,39 @@ https://code.visualstudio.com/
 3.WindowBuilder(eclipse gui plugins)
 ```
 
-## 六.Emscripten环境安装
+## 六.python安裝（linux平台）
+
+```
+linux平台只能源码安装
+
+1.下載源码 Python-3.9.16.tgz
+安装必须
+$ apt-get update && apt-get install git -y && apt-get install gcc -y && apt-get install make -y && apt-get install wget -y
+
+2.参考README.rst安装依赖
+	Build Instructions
+	Refer to the
+	`Install dependencies <https://devguide.python.org/setup/#install-dependencies>`
+
+$ sudo apt-get install build-essential gdb lcov pkg-config \
+      libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
+      libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \
+      lzma lzma-dev tk-dev uuid-dev zlib1g-dev
+
+3.编译安装
+$ mkdir /opt/python3
+$ ./configure --prefix=/opt/python3 && make && make install
+
+4.Pip更换源
+root用户的
+# mkdir /root/.pip
+# cd /root/.pip
+# vi pip.conf	//新增pip.conf配置文件
+# 更换源配置
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+## 七.Emscripten环境安装
 
 ```
 介绍：
@@ -296,35 +328,146 @@ Emscripten简介及初体验
 webAssembly调用c字节码
 		https://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html
 ```
-## 七.python安裝（linux平台）
+
+## 七.golang环境安装
+```
+官网：https://golang.google.cn
+
+视频：
+https://www.bilibili.com/video/BV1ME411Y71o
+环境变量：GOROOT,Path,GOPATH(项目目录)
+
+解压安装go1.19.3.linux-amd64.tar.gz：
+$ xz -d go1.19.3.linux-amd64.tar.gz
+$ tar -xvf go1.19.3.linux-amd64.tar
+
+export GO_HOME=/opt/go			//go home	
+export PATH=$GO_HOME/bin:$PATH	//go path路径
+export GOPATH=/data/goprojects	//go项目目录,感觉没啥用？？？
+
+GOPATH:
+	go install/go get和 go的工具等会用到GOPATH环境变量.
+	GOPATH是作为编译后二进制的存放目的地和import包时的搜索路径 (其实也是你的工作目录, 你可以在src下创建你自己的go源文件, 然后开始工作)。
+
+GOPATH之下主要包含三个目录: bin、pkg、src：
+	bin目录主要存放可执行文件； pkg目录存放编译好的库文件， 主要是*.a文件； src目录下主要存放go的源文件
+
+goprojects目录结构：
+	goprojects/src/go_code/project1,project2
+
+代码：
+package main
+import "fmt"
+
+func main(){
+	fmt.Println("hello go")
+}
+
+直接运行：go run hello.go
+编译： 	go build hello.go
+```
+## 八.rust语言安装
+```
+官网：https://www.rust-lang.org/
+
+1.下载并安装：
+https://forge.rust-lang.org/infra/other-installation-methods.html
+$ chmod -R 777 rustup-init
+$ ./rustup-init 
+默认选择 1）
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+
+To configure your current shell, run:
+source "$HOME/.cargo/env"
+
+容器安装需要执行一下source才能识别到
+root@1fe821b26306:~# source .bashrc 
+root@1fe821b26306:~# source .profile
+
+2.hello world验证
+
+	2.1.验证hello.rs
+	fn main(){
+		println!("hello world!");
+	}
+
+	2.2。编译hello：
+	rustc hello.rs
+
+	2.3。更新：
+	rustup update
+
+	2.4。cargo工程管理
+	cargo new hello_projects
+
+3.配置环境变量
+# rustup home dir
+export RUSTUP_HOME=/home/environment/rust/.rustup
+# rust cargo home dir
+export CARGO_HOME=/home/environment/rust/.cargo
+
+if [-f /home/environment/rust/.cargo/env ] then
+./home/environment/rust/.cargo/env
+fi 
+
+# 用于更新 toolchain
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+# 用于更新 rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
+4.配置cargo镜像源
+配置cargo镜像源/root/.cargo/config
+# 清华大学
+[source.tuna]
+registry="https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
 ```
-linux平台只能源码安装
+## 九.x86汇编
+```
+nasm官网：https://nasm.us
+下载源码：nasm-2.15.05.tar.gz
 
-1.下載源码 Python-3.9.16.tgz
-安装必须
-$ apt-get update && apt-get install git -y && apt-get install gcc -y && apt-get install make -y && apt-get install wget -y
+编译安装：
+$ ./configure --prefix=/opt/nasm
+$ make && make install
 
-2.参考README.rst安装依赖
-	Build Instructions
-	Refer to the
-	`Install dependencies <https://devguide.python.org/setup/#install-dependencies>`
+配置环境变量：
+export NASM_HOME=/opt/nasm
+export $NASM_HOME/bin:$PATH
 
-$ sudo apt-get install build-essential gdb lcov pkg-config \
-      libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
-      libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \
-      lzma lzma-dev tk-dev uuid-dev zlib1g-dev
+实例编译运行：
+代码：
+hello.asm
 
-3.编译安装
-$ mkdir /opt/python3
-$ ./configure --prefix=/opt/python3 && make && make install
+section .data
+  hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
+  helloLen:  equ $-hello             ; Length of the 'Hello world!' string
+                                     ; (I'll explain soon)
+ 
+section .text
+  global _start
+ 
+_start:
+  mov eax,4            ; The system call for write (sys_write)
+  mov ebx,1            ; File descriptor 1 - standard output
+  mov ecx,hello        ; Put the offset of hello in ecx
+  mov edx,helloLen     ; helloLen is a constant, so we don't need to say
+                       ;  mov edx,[helloLen] to get it's actual value
+  int 80h              ; Call the kernel
+ 
+  mov eax,1            ; The system call for exit (sys_exit)
+  mov ebx,0            ; Exit with return code of 0 (no error)
+  int 80h
 
-4.Pip更换源
-root用户的
-# mkdir /root/.pip
-# cd /root/.pip
-# vi pip.conf	//新增pip.conf配置文件
-# 更换源配置
-[global]
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+编译
+nasm -f elf64 hello.asm
+如果是32位系统就把elf64改为elf32
+
+链接
+ld -s -o hello hello.o
+
+运行
+./hello
 ```
