@@ -50,9 +50,15 @@ openjdk(开源免费):
 2>验证
 groovy　-v
 
-binary与sdk包内容：
-apache-groovy-binary-3.0.4.zip　   //只包含二进制运行文件			      
-apache-groovy-sdk-3.0.4.zip		   //all，二进制包，源文件，文档
+3>hello world
+编辑文件helloWorld.groovy
+System.out.println("hello world!");
+#运行
+$ groovy helloWorld.groovy
+
+* binary与sdk包内容：
+apache-groovy-binary-3.0.4.zip		//只包含二进制运行文件			      
+apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 ```
 
 ## 二.BuildTools
@@ -230,6 +236,95 @@ https://code.visualstudio.com/
 ## 六.Emscripten环境安装
 
 ```
-$ docker run --name myubuntu_build --net dev-net --ip 172.18.1.30 -it -v /home/ubuntu-a10/Desktop/soft/data:/data -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v1
+介绍：
+emscripten官网：
+https://emscripten.org/
+https://github.com/emscripten-core/emscripten
+webassembly官网：
+https://webassembly.org/
+实例：
+http://www.uwenku.com/question/p-whwpcqvc-rb.html
+https://blog.csdn.net/shuipingtoy/article/details/90512139
+
+准备容器：
+$ docker run --name myubuntu_build --net dev-net --ip 172.18.1.30 -it -v /home/ubuntu-a10/Desktop/soft/data:/data -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2
 $ docker exec -it myubuntu_build /bin/bash
+
+1.克隆
+$ git clone https://github.com/emscripten-core/emsdk.git
+
+2.安装配置Emscripten：
+# Fetch the latest registry of available tools.
+$ ./emsdk update
+# Download and install the latest SDK tools. Need install Python first. 
+$ ./emsdk install latest
+# Make the "latest" SDK "active" for the current user. (writes ~/.emscripten file)
+$ ./emsdk activate latest
+# Activate PATH and other environment variables in the current terminal
+$ ./emsdk_env.sh
+# To update your environment variables 注意 需要source一下，否则emcc不生效
+$ source emsdk_env.sh 
+# Verifying Emscripten 验证
+$ emcc -v
+
+3.配置环境变量
+vi .bashrc
+$ source /opt/emsdk/emsdk_env.sh
+
+4.实例：
+编写c代码 hello.c：
+#include <stdio.h>
+int main() {
+  printf("hello, world!\n");
+  return 0;
+}
+
+编译运行：
+# 生成 a.out.js
+$ emcc.bat helloworld.cpp
+# 生成 helloworld.js
+$ emcc.bat helloworld.cpp -o helloworld.js
+# 生成 helloworld.html 和 helloworld.js,helloworld.wasm
+$ emcc.bat helloworld.cpp -o helloworld.html
+
+nodejs运行：
+$ node a.out.js或helloworld.js
+
+
+Emscripten简介及初体验
+		https://blog.csdn.net/cgs1999/article/details/109032278
+webAssembly调用c字节码
+		https://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html
+```
+## 七.python安裝（linux平台）
+
+```
+linux平台只能源码安装
+
+1.下載源码 Python-3.9.16.tgz
+安装必须
+$ apt-get update && apt-get install git -y && apt-get install gcc -y && apt-get install make -y && apt-get install wget -y
+
+2.参考README.rst安装依赖
+	Build Instructions
+	Refer to the
+	`Install dependencies <https://devguide.python.org/setup/#install-dependencies>`
+
+$ sudo apt-get install build-essential gdb lcov pkg-config \
+      libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
+      libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \
+      lzma lzma-dev tk-dev uuid-dev zlib1g-dev
+
+3.编译安装
+$ mkdir /opt/python3
+$ ./configure --prefix=/opt/python3 && make && make install
+
+4.Pip更换源
+root用户的
+# mkdir /root/.pip
+# cd /root/.pip
+# vi pip.conf	//新增pip.conf配置文件
+# 更换源配置
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
