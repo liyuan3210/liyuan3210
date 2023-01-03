@@ -51,7 +51,7 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 				在ubuntu上搜索`Startup Disk Creator`(只能创建ubuntu IOS)
 				
 			linux下可以直接使用dd命令写入ios镜像
-			fdisk -lh	//查看u盘物理路径(/dev/sdb)
+			fdisk -l	//查看u盘物理路径(/dev/sdb)
 			dd if=/home/xxx/xxx.iso of=/dev/sdb status=progress
 
 ### 二）.虚拟机
@@ -281,12 +281,29 @@ A4
 
 一个硬盘最多可以有4个主分区，你可以在4个主分区上都安装系统，而系统从硬盘启动启动时，并不知道你打算从哪个分区启动系统。所以，需要将其中一个设为“活动”属性
 
+**一。分区概念2（ GPT分区概念）:**
+相比于MBR模式,GPT模式拥有对2TB以上的原生支持。GPT不存在扩展分区和逻辑分区,所有分区全都是主分区,且理论上可存在的主分区个数是无限的。
+
 ```
-MBR与GPT(uefi)分区的区别
+MBR与GPT(uefi)分区的区别:
 http://www.360doc.com/content/18/0901/23/11935121_783145790.shtml
 
-一个硬盘安装多个linux(MBR分区)(Centos7)
+一个硬盘安装多个linux(MBR分区)(Centos7):
 https://www.cnblogs.com/youxia/p/linux018.html
+
+linux分区工具：
+https://www.lxlinux.net/6469.html
+https://gparted.org/
+硬盘GPT分区与MBR分区的区别
+https://xinzhi.wenda.so.com/m/a/1542627025209463
+新版本fdisk可以识别gpt格式分区
+https://www.zhangweijie.net/post/2017/11/12/2906.html
+
+windows分区工具：
+https://zhuanlan.zhihu.com/p/551730189
+准备u盘，下载启动制作工具
+电脑店：http://dnd.lzlcm.cn/
+大白菜：http://dbc.nxexvq.cn/
 ```
 
 **二。最终分区方案：**
