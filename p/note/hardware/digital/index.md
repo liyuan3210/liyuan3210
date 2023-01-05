@@ -16,8 +16,10 @@
 
 ### 备注
 ```
-数字电子技术基础（数字电路/数电） 清华大学 王红主讲
+【电子】数字电子技术基础（数字电路/数电） 清华大学 王红主讲
 https://www.bilibili.com/video/BV18p411Z7ce
+
+数字电子技术基础_闫石第六版_清华大学王红老师讲解
 https://www.bilibili.com/video/BV1hS4y1k7jV
 
 ***电子技术课程设计**
