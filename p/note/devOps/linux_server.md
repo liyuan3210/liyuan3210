@@ -376,6 +376,14 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 		
 		4.升级已安装的所有软件包，升级之后的版本就是本地索引里的
 		$ sudo apt-get upgrade
+
+		5.卸载软件包（3种方法）
+			5.1 使用ubuntu自带ui管理工具synaptic
+				$ sudo apt-get install synaptic
+			5.2 ubunut软件中心
+			5.3 使用命令
+				$ dpkg --list 	//查看
+				$ sudo apt-get --purge remove <programname>		//卸载
 二。ubuntu发布私有deb
 	网站:https://launchpad.net/	
 	版本介绍（网上资料）：
