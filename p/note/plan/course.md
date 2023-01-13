@@ -2,6 +2,7 @@
 
 #### hardware 
 **1.电路**
+
     1.电路
     西安交通大学 罗先觉主讲-邱关源著电路（邱关源）
     https://www.bilibili.com/video/BV1as411H7Ya
@@ -11,12 +12,14 @@
     https://www.bilibili.com/video/BV1sh411Z7vR
 
 **2.模电**
+
     【电子】模拟电子技术基础 上交大 郑益慧主讲
     https://www.bilibili.com/video/BV1Gt411b7Zq
     【课程】模拟电子技术基础（华成英/清华大学）（全189P）
     https://www.bilibili.com/video/BV1Vp411f71S
 
 **3.数电**
+
     【电子】数字电子技术基础（数字电路/数电） 清华大学 王红主讲
     https://www.bilibili.com/video/BV18p411Z7ce
     数字电子技术基础_闫石第六版_清华大学王红老师讲解
@@ -51,10 +54,12 @@
 
 #### java
 **1.数据结构与算法**
+
     韩顺平:
     https://www.bilibili.com/video/BV1B4411H76f
 
 **2.设计模式**
+
     韩顺平：
     https://www.bilibili.com/video/BV1G4411c7N4
     链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
@@ -62,6 +67,7 @@
     https://www.bilibili.com/video/BV1tK411W7xx
     
 **3.netty**
+
     韩顺平：
     https://www.bilibili.com/video/BV1DJ411m7NR
 
