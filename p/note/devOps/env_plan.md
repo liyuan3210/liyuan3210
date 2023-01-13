@@ -9,6 +9,9 @@ window service2012 clock watchdog timeout
 3.seo优化
 https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 
+### grub
+	[grub引导](grub.md)
+
 ### 一）.操作系统
 ​	1.linux(推荐)
 ​		服务器:centos(推荐)
@@ -25,6 +28,8 @@ https://www.bilibili.com/video/av31630462/?redirectFrom=h5
 ​		https://github.com/FDOS/freecom
 ​		http://www.freedos.org/
 
+	浏览器操作系统：
+	   https://github.com/DustinBrett/daedalOS.git
 
 	创建usb引导工具:
 	可以参考ubuntu,centos官方文档,在不同平台创建usb引导

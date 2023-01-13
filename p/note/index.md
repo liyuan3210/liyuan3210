@@ -3,9 +3,9 @@
 
 [*.linux服务器常用命令](devOps/linux_server.md)
 
-[*.windows_server服务器常用操作](devOps/windows_server.md)
-
 [*.utuntu与ios常用桌面软件安装](devOps/linux_desktop.md)
+
+[*.windows_server服务器常用操作](devOps/windows_server.md)
 
 ## 一．技术栈
 [* new](new/index.md)
