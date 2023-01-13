@@ -1,5 +1,8 @@
 # 认知
 
+### 专业课程
+	课程
+
 ### 一。思想认知
 
 1. [世界上最神奇的24堂课](https://www.bilibili.com/video/BV17q4y1w7Gd)
