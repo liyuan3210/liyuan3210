@@ -34,7 +34,7 @@ https://www.bilibili.com/video/BV1iJ411u7ps
 计算机语言 x86汇编语言（原书作者李忠）
 https://www.bilibili.com/video/BV1xE411N74T
 
-#### 六。网络
+#### network
 网络(子网划分)
     微软MCSE国际认证课程：
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html 
@@ -49,21 +49,22 @@ https://www.bilibili.com/video/BV1xE411N74T
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/q1400pcj7ep.html   //10
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/h1400mtb6ko.html   //11
 
-#### 七。数据结构与算法
+#### java
+**1.数据结构与算法**
     韩顺平:
     https://www.bilibili.com/video/BV1B4411H76f
 
-#### 八。设计模式
+**2.设计模式**
     韩顺平：
     https://www.bilibili.com/video/BV1G4411c7N4
     链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
     马士兵：
     https://www.bilibili.com/video/BV1tK411W7xx
     
-#### 九。netty
+**3.netty**
     韩顺平：
     https://www.bilibili.com/video/BV1DJ411m7NR
 
-#### 十。kali渗透(黑客攻击)
+#### kali渗透(黑客攻击)
     清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
     https://www.bilibili.com/video/BV1dh411s7vP
