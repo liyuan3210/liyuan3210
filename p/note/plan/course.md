@@ -74,3 +74,7 @@
 #### kali渗透(黑客攻击)
     清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
     https://www.bilibili.com/video/BV1dh411s7vP
+
+
+## 百度云资源
+    liyuandf账号:共享资源>course
