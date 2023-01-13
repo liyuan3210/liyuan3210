@@ -1,7 +1,8 @@
 # 课程
 
-#### 一。电路
-1.电路，over
+#### hardware 
+**1.电路**
+1.电路
 西安交通大学 罗先觉主讲-邱关源著电路（邱关源）
 https://www.bilibili.com/video/BV1as411H7Ya
 【电子科技大学】《电路分析基础》—国家级精品课程
@@ -9,13 +10,13 @@ https://www.bilibili.com/video/BV19E411C7bi
 电路基础课（零基础强烈推荐）
 https://www.bilibili.com/video/BV1sh411Z7vR
 
-#### 二。模电
+**2.模电**
 【电子】模拟电子技术基础 上交大 郑益慧主讲
 https://www.bilibili.com/video/BV1Gt411b7Zq
 【课程】模拟电子技术基础（华成英/清华大学）（全189P）
 https://www.bilibili.com/video/BV1Vp411f71S
 
-#### 三。数电
+**3.数电**
 【电子】数字电子技术基础（数字电路/数电） 清华大学 王红主讲
 https://www.bilibili.com/video/BV18p411Z7ce
 数字电子技术基础_闫石第六版_清华大学王红老师讲解
@@ -49,11 +50,20 @@ https://www.bilibili.com/video/BV1xE411N74T
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/h1400mtb6ko.html   //11
 
 #### 七。数据结构与算法
+    韩顺平:
+    https://www.bilibili.com/video/BV1B4411H76f
 
 #### 八。设计模式
-
+    韩顺平：
+    https://www.bilibili.com/video/BV1G4411c7N4
+    链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
+    马士兵：
+    https://www.bilibili.com/video/BV1tK411W7xx
+    
 #### 九。netty
+    韩顺平：
+    https://www.bilibili.com/video/BV1DJ411m7NR
 
 #### 十。kali渗透(黑客攻击)
-清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
-https://www.bilibili.com/video/BV1dh411s7vP
+    清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
+    https://www.bilibili.com/video/BV1dh411s7vP

@@ -1,5 +1,9 @@
 # 设计模式
 
+## 资源
+    代码：https://github.com/liyuan3210/java/tree/master/design23
+    流程图：https://github.com/liyuan3210/data/blob/master/drawio/design23.drawio
+
 ## 概要
 
 面向对象三大特性：继承，封装，多态。面向对象三大特性，体现在设计模式
@@ -120,17 +124,4 @@ Relation:
 
 <font color="blue">１１．职责链模式（责任链模式）</font>
 
-## 资源：
-
-韩顺平：
-https://www.bilibili.com/video/BV1G4411c7N4
-
-链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
-
-马士兵：
-https://www.bilibili.com/video/BV1tK411W7xx?from=search&seid=4889535572362876599
-
-代码：https://github.com/liyuan3210/java/tree/master/design23
-
-流程图：https://github.com/liyuan3210/data/blob/master/drawio/design23.drawio
 
