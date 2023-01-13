@@ -39,15 +39,13 @@ https://mp.weixin.qq.com/s/eRiXgBrEASTc_HURsWy-tg
 
 1.硬件,OS方案
 
-[2.grub](plan/grub.md)
+[2.android连调adb](plan/android-adb.md)
 
-[3.android连调adb](plan/android-adb.md)
+[3.废弃光猫破解与刷机](plan/light-cat.md)
 
-[4.废弃光猫破解与刷机](plan/light-cat.md)
+[4.物联网wifi模块ESP8266](plan/wifi-ESP8266.md)
 
-[6.物联网wifi模块ESP8266](plan/wifi-ESP8266.md)
-
-[7.安卓ssh客户端](https://github.com/connectbot/connectbot)
+[5.安卓ssh客户端](https://github.com/connectbot/connectbot)
 
 
 
