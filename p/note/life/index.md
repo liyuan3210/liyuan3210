@@ -12,6 +12,7 @@
 5. [21世纪资本论](https://www.bilibili.com/video/BV1pp4y1s73y)
 6. [天道](https://www.le.com/ptv/vplay/25324719.html)
 7. [官场电视剧《岁月》](https://www.bilibili.com/video/BV1m44y1774d)
+8. [狂飙](https://www.iqiyi.com/v_1vs5edve4m4.html)
 
 ### 二。读物
 
