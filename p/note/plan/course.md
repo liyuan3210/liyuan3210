@@ -37,7 +37,13 @@
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
 
+    编译原理（哈工大）
+    https://www.bilibili.com/video/BV1zW411t7YE
+
 #### network
+    计算机网络（计算机网络微课堂（有字幕无背景音乐版））
+    https://www.bilibili.com/video/BV1c4411d7jb
+
     网络(子网划分)
     微软MCSE国际认证课程：
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html 
