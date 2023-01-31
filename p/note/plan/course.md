@@ -37,11 +37,11 @@
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
 
-    编译原理（哈工大）
+    编译原理（哈工大）---------------->>>new
     https://www.bilibili.com/video/BV1zW411t7YE
 
 #### network
-    计算机网络（计算机网络微课堂（有字幕无背景音乐版））
+    计算机网络（计算机网络微课堂（有字幕无背景音乐版））---------------->>>new
     https://www.bilibili.com/video/BV1c4411d7jb
 
     网络(子网划分)
