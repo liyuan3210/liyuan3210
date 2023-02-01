@@ -1,6 +1,7 @@
 # 课程
 
 ## hardware 
+
 **1.电路**
 
     1.电路
@@ -26,6 +27,7 @@
     https://www.bilibili.com/video/BV1hS4y1k7jV
 
 **4.linux内核**
+
     非常好的Linux内核视频(在看)
     https://www.bilibili.com/video/BV1tQ4y1d7mo
     庖丁解牛Linux内核
@@ -34,30 +36,46 @@
     https://www.bilibili.com/video/BV1iJ411u7ps
 
 **5.x86汇编语言**
+
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
 
 **6.编译原理**
+
     编译原理（哈工大）--->>>new
     https://www.bilibili.com/video/BV1zW411t7YE
+
+## midd
+
+**1.mysql**
+
+**2.redis**
+
+**3.nginx**
+
+**4.MQ**
+
 ## DevOps
 
 **1.docker**
 
-尚硅谷Docker核心技术
+尚硅谷Docker核心技术--->>>new
 https://www.bilibili.com/video/BV18b411K7q7
 
 **2.kubernetes**
-【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版（new)
+
+【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版（new) --->>>new
 https://www.bilibili.com/video/BV1GT4y1A756
 尚硅谷Kubernetes教程(K8s入门到精通)
 https://www.bilibili.com/video/BV1w4411y7Go
 
 ## network
-    计算机网络（计算机网络微课堂（有字幕无背景音乐版））--->>>new
-    https://www.bilibili.com/video/BV1c4411d7jb
+
+**计算机网络（计算机网络微课堂（有字幕无背景音乐版））**--->>>new
+https://www.bilibili.com/video/BV1c4411d7jb
     
-    网络(子网划分)
+**网络(子网划分)**
+
     微软MCSE国际认证课程：
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html 
     https://v.qq.com/detail/6/60rnvzj96f8c5u3.html 
@@ -92,7 +110,7 @@ https://www.bilibili.com/video/BV1w4411y7Go
 
 **4.微服务**
 
-	尚硅谷2020最新版SpringCloud(H版&alibaba)
+	尚硅谷2020最新版SpringCloud(H版&alibaba)--->>>new
 	https://www.bilibili.com/video/BV18E411x7eT
 	源码：
 	https://github.com/TNoOne/cloud2020
