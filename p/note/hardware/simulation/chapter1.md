@@ -128,3 +128,9 @@
 
 图1.6
 <img src="img/1/1.6.png" style="zoom: 50%;" />
+
+图1.7
+<img src="img/1/1.7.png" style="zoom: 50%;" />
+
+图1.8
+<img src="img/1/1.8.png" style="zoom: 50%;" />
