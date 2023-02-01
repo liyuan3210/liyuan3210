@@ -33,6 +33,15 @@ https://mp.weixin.qq.com/s/eRiXgBrEASTc_HURsWy-tg
 5.自制无线收发器(原理)
 6.卫星锅原理
 7.搜音机原理
+
+
+电路，模电，数电工具：
+开源电路仿真软件CircuitJS1
+https://blog.csdn.net/Naisu_kun/article/details/124189299
+https://www.kicad.org/
+
+MATLAB的4种开源替代品（GNU Octave）
+https://www.likecs.com/show-805013.html
 ```
 
 ## 二．实操方案
