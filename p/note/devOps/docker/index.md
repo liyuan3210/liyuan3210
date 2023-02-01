@@ -1,9 +1,5 @@
 # docker
 
-课程：
-
-https://www.bilibili.com/video/BV18b411K7q7?from=search&seid=3006540982052779079
-
 **二进制安装：**
 
 https://docs.docker.com/engine/install/binaries/#install-static-binaries

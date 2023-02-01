@@ -42,9 +42,3 @@
 
 文件系统＋网卡驱动＋用户登录模块
 
-### 课程
-
-https://www.bilibili.com/video/BV1iJ411u7ps?from=search&seid=11641610883183403768
-
-https://www.bilibili.com/video/BV1yD4y1m7Q9?from=search&seid=11641610883183403768
-

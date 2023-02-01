@@ -1,6 +1,6 @@
 # 课程
 
-#### hardware 
+## hardware 
 **1.电路**
 
     1.电路
@@ -25,7 +25,7 @@
     数字电子技术基础_闫石第六版_清华大学王红老师讲解
     https://www.bilibili.com/video/BV1hS4y1k7jV
 
-#### 四。linux内核
+**4.linux内核**
     非常好的Linux内核视频(在看)
     https://www.bilibili.com/video/BV1tQ4y1d7mo
     庖丁解牛Linux内核
@@ -33,24 +33,37 @@
     linux内核编程(基础,进阶,高级)
     https://www.bilibili.com/video/BV1iJ411u7ps
 
-#### 五。x86汇编语言
+**5.x86汇编语言**
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
 
-    编译原理（哈工大）---------------->>>new
+**6.编译原理**
+    编译原理（哈工大）--->>>new
     https://www.bilibili.com/video/BV1zW411t7YE
+## DevOps
 
-#### network
-    计算机网络（计算机网络微课堂（有字幕无背景音乐版））---------------->>>new
+**1.docker**
+
+尚硅谷Docker核心技术
+https://www.bilibili.com/video/BV18b411K7q7
+
+**2.kubernetes**
+【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版（new)
+https://www.bilibili.com/video/BV1GT4y1A756
+尚硅谷Kubernetes教程(K8s入门到精通)
+https://www.bilibili.com/video/BV1w4411y7Go
+
+## network
+    计算机网络（计算机网络微课堂（有字幕无背景音乐版））--->>>new
     https://www.bilibili.com/video/BV1c4411d7jb
-
+    
     网络(子网划分)
     微软MCSE国际认证课程：
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html 
     https://v.qq.com/detail/6/60rnvzj96f8c5u3.html 
     windows server2012虚拟机克隆安装问题 
     sysprep(sid重新封装，双击sysprep，选择`通用`，点击`确定`)
-
+    
     子网划分：7-11
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/e1400ym6jr3.html   //7
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/y1400kao288.html   //8
@@ -58,7 +71,7 @@
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/q1400pcj7ep.html   //10
     https://v.qq.com/x/cover/60rnvzj96f8c5u3/h1400mtb6ko.html   //11
 
-#### java
+## java
 **1.数据结构与算法**
 
     韩顺平:
@@ -71,13 +84,24 @@
     链接:https://pan.baidu.com/s/12QKlBku3SIPq8XeqScNWIQ 密码:ghno
     马士兵：
     https://www.bilibili.com/video/BV1tK411W7xx
-    
+
 **3.netty**
 
     韩顺平：
     https://www.bilibili.com/video/BV1DJ411m7NR
 
-#### kali渗透(黑客攻击)
+**4.微服务**
+
+	尚硅谷2020最新版SpringCloud(H版&alibaba)
+	https://www.bilibili.com/video/BV18E411x7eT
+	源码：
+	https://github.com/TNoOne/cloud2020
+	https://blog.csdn.net/qq_41211642/article/details/104772140
+	nacos,rabbitmq,sentinel,seata,consul,erlang等课程需要的软件及jar包都在这
+	liyuandf账号:共享资源>course>微服务>nacos,rabbitmq,sentinel,seata,consul,erlang
+
+
+## kali渗透(黑客攻击)
     清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
     https://www.bilibili.com/video/BV1dh411s7vP
 

@@ -1,17 +1,5 @@
 # kubernetes
 
-## 网课
-
-(尚硅谷new)
-
-https://www.bilibili.com/video/BV1GT4y1A756?from=search&seid=4051004465499992104	
-
-(尚硅谷old)
-
-https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=14589942077200278934
-
-https://www.bilibili.com/video/BV1w4411y7Go?from=search&seid=4051004465499992104
-
 ## kubernetes安装
 
 [1.kubeadm安装](k8s_kubeadm_install.md)
