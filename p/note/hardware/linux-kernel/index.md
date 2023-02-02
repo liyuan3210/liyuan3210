@@ -1,5 +1,7 @@
 # linux内核
 
+#### [笔记](explore.md)
+
 ## 一．基础
 
 [1.kernelBasis](1-kernelBasis.md)
