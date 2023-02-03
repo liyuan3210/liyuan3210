@@ -246,7 +246,7 @@
 <img src="img/1/1.13.png" style="zoom: 80%;" />
 
 图1.14
-<img src="img/1/1.14.png" style="zoom: 80%;" />
+<img src="img/1/1.14.png" style="zoom: 60%;" />
 
 图1.15
-<img src="img/1/1.15.png" style="zoom: 80%;" />
+<img src="img/1/1.15.png" style="zoom: 70%;" />
