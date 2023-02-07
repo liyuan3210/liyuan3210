@@ -245,7 +245,6 @@
 	
 * 温度对晶体管的影响
     ？？？
-    
 ```
 图1.11
 <img src="img/1/1.11.png" style="zoom: 80%;" />
@@ -298,8 +297,23 @@
 		
 	2）N沟道耗尽型MOS管
 
-* 结型场效应管
 
+```
+图1.16
+<img src="img/1/1.16.png" style="zoom: 80%;" />
+
+图1.17
+<img src="img/1/1.17.png" style="zoom: 80%;" />
+
+图1.18
+<img src="img/1/1.18.png" style="zoom: 80%;" />
+
+图1.19
+<img src="img/1/1.19.png" style="zoom: 80%;" />
+
+#### 结型场效应管
+```
+* 结型场效应管
 	连接方式：
 	Ugs反偏，不能工作在Ugs>0
 	低频跨导(类贝塔=Ic / Ib)： 贝塔 = Id / Ugs
@@ -341,15 +355,27 @@
 		击穿电压
 		最大耗散功率:Pdm
 		选管子时候要考虑的
+		
+	6）单结晶体管和晶闸管
+		？？？
 ```
-图1.16
-<img src="img/1/1.16.png" style="zoom: 80%;" />
+图1.20
+<img src="img/1/1.20.png" style="zoom: 50%;" />
 
-图1.17
-<img src="img/1/1.17.png" style="zoom: 80%;" />
+图1.21
+<img src="img/1/1.21.png" style="zoom: 50%;" />
 
-图1.18
-<img src="img/1/1.18.png" style="zoom: 80%;" />
+图1.22
+<img src="img/1/1.22.png" style="zoom: 50%;" />
 
-图1.19
-<img src="img/1/1.19.png" style="zoom: 80%;" />
+图1.23
+<img src="img/1/1.23.png" style="zoom: 50%;" />
+
+图1.24
+<img src="img/1/1.24.png" style="zoom: 50%;" />
+
+图1.25
+<img src="img/1/1.25.png" style="zoom: 50%;" />
+
+图1.26
+<img src="img/1/1.26.png" style="zoom: 50%;" />
