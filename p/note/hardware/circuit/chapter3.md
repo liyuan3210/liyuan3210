@@ -154,3 +154,20 @@
 。。。。。
 ```
 
+图3.11
+<img src="img/3/3.11.png" style="zoom:60%;" />
+
+图3.12
+<img src="img/3/3.12.png" style="zoom:60%;" />
+
+图3.13
+<img src="img/3/3.13.png" style="zoom:60%;" />
+
+图3.14
+<img src="img/3/3.14.png" style="zoom:60%;" />
+
+图3.15
+<img src="img/3/3.15.png" style="zoom:60%;" />
+
+图3.16
+<img src="img/3/3.16.png" style="zoom:60%;" />
