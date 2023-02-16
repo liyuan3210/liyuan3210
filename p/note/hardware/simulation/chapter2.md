@@ -85,17 +85,34 @@
 
 ```
 * 基本共射
+	见[图2.6]
 
 * 直接耦合
+	见[图2.7]
 
 * 阻容耦合
+	见[图2.8]
 ```
+图2.6
+<img src="img/2/2.6.png" style="zoom: 80%;" />
+
+图2.7
+<img src="img/2/2.7.png" style="zoom: 80%;" />
+
+图2.8
+<img src="img/2/2.8.png" style="zoom: 80%;" />
 
 图解法
 
 ```
-
+	见[图2.9]
+	见[图2.10]
 ```
+图2.9
+<img src="img/2/2.9.png" style="zoom: 60%;" />
+
+图2.10
+<img src="img/2/2.10.png" style="zoom: 60%;" />
 
 等效电路法
 
