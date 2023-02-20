@@ -9,9 +9,9 @@
 
 [4.汇编](assembly/index.md)
 
-[5.51单片机](51chip/index.md)
+[5.linux内核](linux-kernel/index.md)
 
-[6.linux内核](linux-kernel/index.md)
+[6.51单片机](51chip/index.md)
 
 7.开源硬件（物联网平台）
 
