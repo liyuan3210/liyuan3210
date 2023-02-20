@@ -43,7 +43,12 @@ https://www.kicad.org/
 MATLAB的4种开源替代品（GNU Octave）
 https://www.likecs.com/show-805013.html
 ```
+### 笔记
 
+```
+* x86汇编
+* linux内核启动过程
+```
 ## 二．实操方案
 
 1.硬件,OS方案
