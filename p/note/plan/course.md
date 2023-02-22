@@ -26,7 +26,14 @@
     数字电子技术基础_闫石第六版_清华大学王红老师讲解
     https://www.bilibili.com/video/BV1hS4y1k7jV
 
-**4.linux内核**
+**4.高等数学**
+
+    《高等数学》同济版 全程教学视频（宋浩老师）（new) --->>>new
+    https://www.bilibili.com/video/BV1Eb411u7Fw
+    包含(线性代数，微积分，概率论与数理统计)
+
+
+**5.linux内核**
 
     非常好的Linux内核视频(在看)
     https://www.bilibili.com/video/BV1tQ4y1d7mo
@@ -35,12 +42,12 @@
     linux内核编程(基础,进阶,高级)
     https://www.bilibili.com/video/BV1iJ411u7ps
 
-**5.x86汇编语言**
+**6.x86汇编语言**
 
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
 
-**6.编译原理**
+**7.编译原理**
 
     编译原理（哈工大）--->>>new
     https://www.bilibili.com/video/BV1zW411t7YE
