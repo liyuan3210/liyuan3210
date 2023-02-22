@@ -119,6 +119,16 @@
 	
 4.验证
 	启动虚拟机，黑屏幕左上角显示“asm”，至此整个环境已可用在实模式下运行。
+	
+	
+笔记问题：
+	fixed-vhd-writer编译问题：
+		https://www.codenong.com/cs107121403/
+	npp导入hex插件：
+		https://blog.csdn.net/wkd_007/article/details/128193482
+	windows运行库下载
+		https://blog.csdn.net/qq_37003559/article/details/122828051
+    	https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170
 ```
 代码4-2.asm
 ```assembly
