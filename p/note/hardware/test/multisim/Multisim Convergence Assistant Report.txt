@@ -1,0 +1,5 @@
+Multisim Convergence Assistant Log 
+ 
+Step 1: Verifying Error Scenario
+	...could not reproduce the error
+ 
