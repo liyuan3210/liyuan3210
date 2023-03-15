@@ -51,7 +51,17 @@ https://zhuanlan.zhihu.com/p/56693625
     obs官网：
     https://obsproject.com/
 ```
-
+#### bilibili视频，腾讯视频下载工具
+```
+腾讯视频：
+https://github.com/JayCJP/downloadTcVideo.git
+b站视频：
+https://github.com/yutto-dev/bilili.git
+pyton工具（视频下载工具）：
+https://zhuanlan.zhihu.com/p/575687926
+pip install you-get 
+you-get http://url
+```
 #### ffmpeg工具使用
 ```
 视频转码：

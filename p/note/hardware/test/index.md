@@ -31,9 +31,14 @@ I=U/R
 i = 5v / 10欧
 
 -----------------------------------------------------------------------------
-
 芯片查询网站
 http://www.alldatasheet.com
+产品打样
+https://www.jlc.com/
+datasheet
+https://pdf.elecfans.com/
+硬件开源社区（电子发烧友论坛）：
+https://www.elecfans.com/
 
 二极管
 1N4148
