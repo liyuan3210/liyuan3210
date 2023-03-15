@@ -1,3 +1,5 @@
+
+
 ## linux体系了解
 
 ```
@@ -6,6 +8,14 @@ Linux内核查看工具
 https://zhuanlan.zhihu.com/p/523591912
 https://github.com/KrisJiaqiXie/linux_kernel_study.git
 ```
+#### linux内核汇编编译工具
+```
+见[图0.1]
+```
+
+图0.1
+<img src="img/0/0.1.png" style="zoom:50%;" />
+
 
 #### 体系结构
 
