@@ -78,13 +78,8 @@ staem官网：
 https://store.steampowered.com/
 https://store.steampowered.com/about/
 
-staem境外账号（ubuntu系统下）：
-liyuan3210
-7233354lyabc
-
-完美通行证：
-465049568@qq.com
-7233354lyabc
+staem境内，境外账号,完美通行证（ubuntu系统下）：
+见Database.kdbx
 
 二。安卓安装termux安装
 termux安装，引出问题：F-Droid的安装&&替换TUNA清华源（F-Droid介绍）
