@@ -17,7 +17,7 @@
 
 [8.gcc跨平台](gcc/index.md)
 
-[实验与仿真](test/index.md)
+[9.实验与仿真](test/index.md)
 
 内存管理：
 
