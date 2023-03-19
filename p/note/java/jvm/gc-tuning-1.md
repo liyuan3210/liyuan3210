@@ -20,37 +20,48 @@ public class HelloGC {
 
 1. 区分概念：内存泄漏memory leak（不一定产生内存溢出），内存溢出out of memory
 
-2. java -XX:+PrintCommandLineFlags HelloGC    //-XX:+PrintCommandLineFlags打印默认参数
+2. 参数查看命令java -XX:+PrintCommandLineFlags
 
-3. java -Xmn10M -Xms40M -Xmx60M -XX:+PrintCommandLineFlags -XX:+PrintGC HelloGC 
+   **堆内存（堆内存不超过物理内存的3/4）**
 
-   -Xmn10M	:新生代大小
+   -XX:MaxHeapSize=15032385536 与-Xms14336M,
+
+   -XX:MinHeapSize=15032385536与-Xmx14336M 参数含义相等（一般设置相等，减少系统计算资源）
+
+   **年轻带（年轻代的大小不超过堆内存的3/8）**
+
+   -XX:NewSize=5637144576 / 1024 /1024 =	5376M	   //年轻带大小
+   -XX:MaxNewSize=5637144576 / 1024 /1024 = 5376M   //最大年轻带大小
+
+3. java -XX:+PrintCommandLineFlags HelloGC    //-XX:+PrintCommandLineFlags打印默认参数
+
+   -XX:InitialHeapSize=244714176 / 1024 / 1024 等于兆（M）	//起始堆大小
+
+   -XX:MaxHeapSize=3915426816 / 1024 / 1024 等于兆（M）	//最大堆大小
+
+4. java -Xmn10M -Xms40M -Xmx60M -XX:+PrintCommandLineFlags -XX:+PrintGC HelloGC 
 
    -Xms40M	:最小堆大小  -Xmx60M	:最大堆大小	//一般设置相等，减少系统计算资源
+
+   -Xmn10M	:新生代大小
 
    -XX:+PrintGC	:打印GC回收信息
 
    常见打印GC信息：PrintGCDetails PrintGCTimeStamps PrintGCCauses
 
-   
-
    查看cms垃圾回收：
 
-4. java -XX:+UseConcMarkSweepGC -XX:+PrintCommandLineFlags HelloGC        
+5. java -XX:+UseConcMarkSweepGC -XX:+PrintCommandLineFlags HelloGC        
 
-   
+6. java -XX:+PrintFlagsInitial 默认参数值
 
-5. java -XX:+PrintFlagsInitial 默认参数值
+7. java -XX:+PrintFlagsFinal 最终参数值
 
-6. java -XX:+PrintFlagsFinal 最终参数值
+8. java -XX:+PrintFlagsFinal | grep xxx 找到对应的参数
 
-7. java -XX:+PrintFlagsFinal | grep xxx 找到对应的参数
-
-8. java -XX:+PrintFlagsFinal -version |grep GC
+9. java -XX:+PrintFlagsFinal -version |grep GC
 
 垃圾日志查看分析：
-
-
 
 heap dump部分:
 
