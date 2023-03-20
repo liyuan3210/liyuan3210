@@ -5,6 +5,15 @@
 跨平台c开发
 https://www.cnblogs.com/renyuan/p/5031100.html
 
+C语言指针，内存管理
+https://www.bilibili.com/video/BV1Dt411R77A?p=4
+
+1）c语言内存4个区
+代码区
+静态区
+堆区
+栈区
+
 ### 一。gcc跨平台编译工具
  标准C
 

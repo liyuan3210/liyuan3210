@@ -154,3 +154,16 @@ https://downloads.sourceforge.net/gparted/gparted-live-1.4.0-6-amd64.iso
 准备u盘，下载启动制作工具
 电脑店：http://dnd.lzlcm.cn/
 大白菜：http://dbc.nxexvq.cn/
+
+十二。pc安卓模拟器
+
+pc模拟安卓
+https://www.bbsmax.com/A/RnJW7G2wJq
+安卓下载地址
+https://www.android-x86.org/download
+在PC上运行安卓（Android）应用程序的几个方法
+https://www.shuzhiduo.com/A/xl56jj9r5r/
+使用genymotion模拟器（安装genymotion过程中会自动安装VirtualBox）
+https://www.liyuan3210.com/p/note/new/dev_platform.html
+chrome插件限制问题
+https://www.likecs.com/show-307965087.html
