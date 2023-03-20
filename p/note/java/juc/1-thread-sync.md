@@ -48,28 +48,36 @@ sync (Object)
 volatile尽量修饰简单类型值，不要修饰Object（成员变量改变观察不到）引用值
 ```
 
-## 4.AtomicXXX(底层实现CAS):
+## 4.CAS（AtomicXXX底层实现CAS）:
 
 代码:com.liyuan3210.juc.c01.T15.T01_AtomicInteger
 
 ```
 AtomicXXX实现原理CAS(无锁优化，自旋锁)
 .Compare and Set 比较和设置
+
 .cas(V，Expected,NewValue) 要改的值，期望值，新值
     if V（要改的值）==E（期望值）
     V=New 相等设置新值
-    otherwise try again or fail	//否则再次尝试
+    otherwise try again or fail	//循环比较，否则再次尝试
     CPU原语支持			//cas底层unsafe
+    
 ．ABA问题
+	根据前面比较值还是期望值，但中间已经改变过，又改回来了，这就需要加version号来解决
     A 1.0
     B 2.0
     C 3.0
     int无所谓
     object对象指向引用发生改变（需要加version号来解决）
-
+    
+．其中的问题
+	在cas比较过程中，比较相等时可能被另外一个线程改了（Unsafe）
+	Unsafe调用的是CAS操作。
+	java层面用的乐观锁，但底汇编层用到了Lock cmpxchg悲观锁
+	
 ```
 
-## 5.CAS(底层实现Unsafe)
+## 5.Unsafe？？？
 
 代码:com.liyuan3210.juc.c01.T15.HelloUnsafe
 
