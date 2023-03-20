@@ -2,6 +2,8 @@
 
 ## 一．jvm调优hello world
 
+###### 堆溢出：
+
 ```java
 import java.util.List;
 import java.util.LinkedList;
@@ -63,7 +65,47 @@ public class HelloGC {
 
 垃圾日志查看分析：
 
+???
+
 heap dump部分:
+
+???
+
+###### 栈大小测试:
+
+```java
+/**
+ * jvm stack size test
+ //java -Xms4096m -Xmx4096m -Xmn2048m -Xss512m StackTest     //stack depth: 7856940
+ //java -Xms4096m -Xmx4096m -Xmn2048m -Xss1024m StackTest    //stack depth: 16240856    16239972
+ //java -Xms8192m -Xmx8192m -Xmn4096m -Xss1024m StackTest    //stack depth: 10293629    10289531
+
+ //java-XX:ThreadStackSize=1024 与-Xss类似
+ */
+public class StackTest {
+    private int count = 0;
+
+    public void recursiveCalls(String a){
+        count++;
+        System.out.println("stack depth: " + count);
+        recursiveCalls(a);
+    }
+    
+    public void test(){
+        try {
+            recursiveCalls("a");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        new StackTest().test();
+    }
+}
+
+```
+
 
 ## 二．jvm调优概念及目标
 
