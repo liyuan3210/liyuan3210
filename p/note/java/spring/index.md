@@ -16,7 +16,7 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 实例：https://github.com/liyuan3210/java/tree/master/spring/simple/src/main/java/com/liyuan3210/spring/simple/reflect
 
 2）.AOP(使用aspectj标注，底层实现用标准jdk动态代理)
-三种实现方式
+三种实现方式(详细见“设计模式”)
 *.spring-AspectJ
 *.jdk动态代理
 *.CGLIB
