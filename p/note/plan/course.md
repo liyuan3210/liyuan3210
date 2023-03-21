@@ -46,6 +46,10 @@
 
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
+    
+    X64处理器架构的汇编语言和操作系统基础
+    https://m.study.163.com/provider/480000001890841/index.htm?share=2&shareId=480000001890841
+    ？？？
 
 **7.编译原理**
 
