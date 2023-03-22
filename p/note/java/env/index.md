@@ -106,19 +106,34 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 >
 > PATH=%GRADLE_HOME%\bin
 
-使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录),
+使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录)
 
-**环境变量配置(非必)：**
+与idea兼容问题：
+> 可以查看安装的idea目录下（ideaIC-2021.1.1.win\plugins\gradle）默认支持的gradle版本
 
-GRADLE_USER_HOME=/home/liyuan/.gradle
+**环境变量配置GRADLE_USER_HOME(非必)：**
 
->项目配置build.gradle添加mavenLocal()(先从maven本地仓库mavenLocal()找,如找不到再从中央仓库mavenCentral() 找) 	
->
->	repositories {
->		mavenLocal()
->		maven { url'http://maven.aliyun.com/nexus/content/groups/public/' }	//阿里仓库代理
->		jcenter()
->	}
+类似maven的localRepository
+
+1.全局配置
+
+```
+allprojects {
+	repositories {
+		mavenLocal() 
+		maven { name "Alibaba" ; url "https://maven.aliyun.com/repository/public" } 
+		maven { name "Bstek" ; url "https://nexus.bsdn.org/content/groups/public/" } 
+		mavenCentral()
+	}
+	buildscript {
+		repositories { 
+			maven { name "Alibaba" ; url 'https://maven.aliyun.com/repository/public' } 
+			maven { name "Bstek" ; url 'https://nexus.bsdn.org/content/groups/public/' } 
+			maven { name "M2" ; url 'https://plugins.gradle.org/m2/' }
+		}
+	}
+}
+```
 
 
 
