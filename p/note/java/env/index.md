@@ -115,7 +115,9 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 
 类似maven的localRepository
 
-1.全局配置
+1.全局配置init.gradle
+
+在gradle安装目录..\init.d下新建init.gradle
 
 ```
 allprojects {
