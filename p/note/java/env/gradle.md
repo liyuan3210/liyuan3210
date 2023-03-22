@@ -61,9 +61,18 @@ gradle clean build	//清理并打包
 gradle build -x test	//跳过测试 
 
 ## 问题
-
+```
 1.图解idea不能新建JavaClass和Package解决办法(要选中java目录才行)
-
 https://blog.csdn.net/qq_36838191/article/details/80918200
-
 https://www.jb51.net/article/142791.htm
+
+2.Run with --stacktrace option to get the stack trace. Run with --info or --debug
+https://blog.csdn.net/qq_42071369/article/details/122626444
+
+3.gradle user home作用？？？
+https://www.yisu.com/zixun/309965.html
+
+* GRADLE_USER_HOME(环境变量,命令行gradlew目录，与gradle命令是不同的)：
+指定Gradle用户主目录位置，即.gradle目录位置。
+* Gradle user home(eclipse与idea都有自己的Gradle user home)：
+```
