@@ -16,7 +16,7 @@ https://www.bilibili.com/video/BV1yT41137Y7
 
 repositories {
 	mavenLocal()
-	maven { url'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven { url'https://maven.aliyun.com/nexus/content/groups/public/' }
 	jcenter()
 }
 
