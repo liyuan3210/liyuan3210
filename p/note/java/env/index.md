@@ -100,20 +100,20 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 
 下载二进制包：https://services.gradle.org/distributions/gradle-6.5.1-bin.zip
 
+考虑与idea兼容问题：
+> 可以查看安装的idea目录下（ideaIC-2021.1.1.win\plugins\gradle）默认支持的gradle版本
+
 解压并配置环境变量：
 
 > GRADLE_HOME=D:\soft\dev\gradle-5.6.3 	
 >
 > PATH=%GRADLE_HOME%\bin
 
-使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录)
-
-与idea兼容问题：
-> 可以查看安装的idea目录下（ideaIC-2021.1.1.win\plugins\gradle）默认支持的gradle版本
-
 **环境变量配置GRADLE_USER_HOME(非必)：**
 
-类似maven的localRepository
+默认在.gradle下，类似maven的localRepository
+
+使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录)
 
 1.全局配置init.gradle
 
