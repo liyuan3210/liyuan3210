@@ -82,7 +82,7 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 	     <id>nexus-aliyun</id>
 	     <mirrorOf>central</mirrorOf>
 	     <name>Nexus aliyun</name>
-	     <url>http://maven.aliyun.com/nexus/content/groups/public</url> 
+	     <url>https://maven.aliyun.com/nexus/content/groups/public</url> 
 	 </mirror>
 	指定仓库存储位置:
 	<settings>
@@ -113,11 +113,9 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 
 默认在.gradle下，类似maven的localRepository
 
-使用自定义缓存目录(默认在当前用户.gradle下.也可以是maven本地仓库地址,保证M2_HOME环境变量指定,也是maven安装目录)
-
 1.全局配置init.gradle
 
-在gradle安装目录..\init.d下新建init.gradle
+在gradle安装目录..\init.d下新建init.gradle(需要安装maven并配置M2_HOME环境变量)
 
 ```
 allprojects {

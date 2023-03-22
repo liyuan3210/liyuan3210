@@ -4,7 +4,13 @@ gradle视频教程
 
 https://www.bilibili.com/video/av31574438/?p=1
 
+gradle
+
 https://www.bilibili.com/video/BV1yT41137Y7
+
+maven
+
+https://www.bilibili.com/video/BV12q4y147e4
 
 ## 二．配置介绍
 
@@ -21,6 +27,8 @@ repositories {
 }
 
 配置全局：
+
+在gradle安装目录..\init.d下新建init.gradle(需要安装maven并配置M2_HOME环境变量)
 
 ```
 allprojects {
