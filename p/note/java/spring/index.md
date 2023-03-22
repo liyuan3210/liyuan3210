@@ -26,8 +26,29 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 
 #### 2.idea导入spring源码
 
-```
+版本：
 
+1.jdk17
+
+2.spring-framework6.0.8
+
+3.gradle7.6
+
+```
+1.A build scan was not published as you have not authenticated with server 'ge.spring.io'.
+https://blog.csdn.net/duqingqing5666/article/details/118503336
+问题解决方案：
+注释 settings.gradle
+文件下 id "io.spring.ge.conventions" version "0.0.7
+//id "io.spring.ge.conventions" version "0.0.7
+
+2. * What went wrong:
+Execution failed for task ':spring-jcl:compileJava'.
+> 错误: 无效的源发行版：17
+https://blog.csdn.net/weixin_58195194/article/details/125091309
+问题解决方案：
+	1.spring版本切换到5.3.x
+	2.升级jdk到jdk17
 ```
 
 #### 3.spring源码核心(添加插件)
