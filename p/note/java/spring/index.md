@@ -49,8 +49,11 @@ maven,gradle安装配置见：
 		2.2）File--->Settings--->搜索"File Encodings"(配置字符编码UTF-8)
 		2.3）File--->Settings--->搜索"gradle"（配置gradle）
 			见[图1.1]
-
-二。问题
+			
+二。添加一个子工程
+	？？？
+	
+三。问题
     1.A build scan was not published as you have not authenticated with server 'ge.spring.io'.
     https://blog.csdn.net/duqingqing5666/article/details/118503336
     问题解决方案：
@@ -79,7 +82,7 @@ maven,gradle安装配置见：
 2）快捷键
 ```
 
-#### 4.spring源码调试
+#### 4.spring源码debug
 
 ```
 1）调试方法
