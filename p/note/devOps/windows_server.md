@@ -207,21 +207,35 @@ https://blog.csdn.net/zhangdongren/article/details/82663977
 bash 进入linux子系统
 
 六.windows工具
-	1.编辑器
-		notepad++				https://notepad-plus-plus.org/zh/	(类似的编辑器:https://code.visualstudio.com/)
-	2.SVN客户端
-		TortoiseSVN				https://tortoisesvn.net
-	3.启动盘制作工具
+	2.启动盘制作工具
 		ultraiso(u盘启动盘制作工具)	//https://www.ultraiso.com/与https://cn.ultraiso.net/
-	4.svn服务端(windows)
-		VisualSVN				https://www.visualsvn.com			//实际https://www.visualsvn.com/server/
-	5.windwos SSH服务端
+	4.windwos SSH服务端
 		freesshd					http://www.freesshd.com/
-	6.hsk(花生壳)
-	7.vmware虚拟机
-		vmware12					//vmware类似的virtualbox(开源)		https://www.virtualbox.org
-七.安卓
-	爱扫描/超级盘点机 // http://www.iscanchina.com
-	掌上看家&掌上看家采集端
+	5.vmware虚拟机
+		vmware12					//vmware类似的virtualbox(开源)				https://www.virtualbox.org
 ```
+
+#### windows服务器工具
+
+```
+1.svn服务端(windows)
+	VisualSVN				https://www.visualsvn.com			//实际
+	客户端工具：
+	TortoiseSVN				https://tortoisesvn.net
+2.hsk(花生壳)
+	账号见密码本
+```
+
+#### windows常用工具(桌面)
+
+```
+1.编辑器
+	notepad++				https://notepad-plus-plus.org/zh/	
+2.开发工具	
+	vscode 					https://code.visualstudio.com
+3.7zip开源压缩解压工具
+	https://www.7-zip.org
+```
+
+
 
