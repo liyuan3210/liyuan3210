@@ -235,6 +235,9 @@ bash 进入linux子系统
 	vscode 					https://code.visualstudio.com
 3.7zip开源压缩解压工具
 	https://www.7-zip.org
+4.git客户端工具
+	客户端工具:https://gitforwindows.org(https://git-for-windows.github.io)
+	https://git-scm.com
 ```
 
 
