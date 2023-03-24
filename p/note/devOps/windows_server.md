@@ -230,7 +230,8 @@ bash 进入linux子系统
 
 ```
 1.编辑器
-	notepad++				https://notepad-plus-plus.org/zh/	
+	notepad++				https://notepad-plus-plus.org
+	https://github.com/notepad-plus-plus/notepad-plus-plus/
 2.开发工具	
 	vscode 					https://code.visualstudio.com
 3.7zip开源压缩解压工具
