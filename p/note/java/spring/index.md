@@ -78,7 +78,7 @@ maven,gradle安装配置见：
 		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
 		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
 		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置
-		工程添加aspectjrt.jar的lib引用
+		工程添加aspectjrt.jar的aspectjrt.jar引用
 		
 二。添加一个子工程
 	？？？
