@@ -587,3 +587,23 @@ https://ywnz.com/linuxjc/2553.html
 Linux下安装使用windows软件
 https://jingyan.baidu.com/article/200957616211eb8b0621b42d.html
 ```
+## ubuntu根目录爆满(解决办法)
+```
+	ubuntu下可以打开disk usage分析工具，查看
+1.）/var/log/journal
+	直接删除 /var/log/journal/ 目录下的日志文件
+2.）/var/lib/snapd/snaps
+	https://www.ytso.com/292732.html
+
+	脚本clean_snap.sh
+	#!/bin/bash
+	#Removes old revisions of snaps
+	#CLOSE ALL SNAPS BEFORE RUNNING THIS
+	set -eu
+	LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
+	while read snapname revision; do
+	    snap remove "$snapname" --revision="$revision"
+	done
+	命令执行
+	chmod +x clean_snap.sh
+```

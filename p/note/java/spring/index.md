@@ -77,36 +77,11 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 		4.3）配置环境变量
 		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
 		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
-		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）
+		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）？？？？？？
 		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
 		
 三。问题
-1.A build scan was not published as you have not authenticated with server 'ge.spring.io'.
-    https://blog.csdn.net/duqingqing5666/article/details/118503336
-    问题解决方案：
-    注释 settings.gradle
-    文件下 id "io.spring.ge.conventions" version "0.0.7
-    //id "io.spring.ge.conventions" version "0.0.7
-
-2.jdk版本问题(warnings found and -Werror specified)
-	需要切换到jdk11，jdk版本不能超过超过11（理论上向下兼容，奇怪），切换后报如下问题
-	CoroutinesUtils类会报method.isAccessible() && !KCallablesJvm.isAccessible(function)过期错误
-	解决办法：
-	方法上加上@SuppressWarnings("deprecation")
-	
-3. Error resolving plugin [id: 'io.spring.gradle-enterprise-conventions', version: '0.0.2']
-    https://blog.csdn.net/weixin_58195194/article/details/125091309
-    问题解决方案：
-        1.升级到jdk11
-        2.或者找到 settings.gradle 文件
-        注释掉 id "io.spring.gradle-enterprise-conventions" version "0.0.2"
-
-//一直未解决
-4.H2DatabasePopulatorTests（TimeoutException: executesHugeScriptInReasonableTime() timed out after 1 second）
-https://blog.csdn.net/loveyouyuan/article/details/121541324
-	解决办法(貌似不行)：
-	修改spring-jdbc模块下的spring-jdbc.gradle文件，找到optional(“com.h2database:h2”)，将optional
-改成compile
+	见源码工程里面笔记
 ```
 图1.1
 <img src="img/1.1.png" style="zoom:60%;" />
@@ -127,7 +102,8 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
         maven,gradle安装配置见../env/index.md
 
 二。构建
-待验证：
+
+待验证（不可行）：
 	修改spring-jdbc模块下的spring-jdbc.gradle文件，找到optional(“com.h2database:h2”)。
 	改成compile(“com.h2database:h2”)。
 	
