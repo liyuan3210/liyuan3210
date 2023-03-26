@@ -29,25 +29,22 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 
 #### 2.idea导入spring源码
 
-版本：
-
+###### 构建步骤spring-framework-5.3.26
 ```
-1）.jdk11
-	引用“https://github.com/spring-projects/spring-framework/wiki/Build-from-Source”
-	To build you will need Git and JDK 17. Be sure that your JAVA_HOME environment variable points to the jdk17 folder extracted from the JDK download.
-	高于jdk11会报错warnings found and -Werror specified,版本为最新6.x时jdk必须是jdk17
-2）.spring-framework5.3.26
-3）.gradle7.5.1
-4）.ideaIC-2022.3.3
-```
+一。版本：
+    1.版本列表
+        1）.jdk11
+            引用“https://github.com/spring-projects/spring-framework/wiki/Build-from-Source”
+            To build you will need Git and JDK 17. Be sure that your JAVA_HOME environment variable points to the jdk17 folder extracted from the JDK download.
+            高于jdk11会报错warnings found and -Werror specified,版本为最新6.x时jdk必须是jdk17
+        2）.spring-framework5.3.26
+        3）.gradle7.5.1
+        4）.ideaIC-2022.3.3
 
-构建步骤
+    2.安装配置
+        maven,gradle安装配置见../env/index.md
 
-```
-maven,gradle安装配置见：
-	../env/index.md
-	
-一。构建
+二。构建
 	1.克隆项目
 	$ git clone https://github.com/liyuan3210/spring
 	
@@ -57,33 +54,32 @@ maven,gradle安装配置见：
 		2.3）File--->Settings--->搜索"gradle"（配置gradle）
 			见[图1.1]
 			
-	3.构建
+	3.idea构建
         根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
-        ## Steps
+        ## Steps(官方引用)
+        //第一步：表示需要预编译spring-oxm，spring-core
         1. Precompile `spring-oxm` with `./gradlew :spring-oxm:compileTestJava`
+        //第二部：导入spring源码到idea
         2. Import into IntelliJ (File -> New -> Project from Existing Sources -> Navigate to directory -> Select build.gradle)
+        //如果idea没装AspectJ，先要从idea把spring-aspects工程移除（右键选中spring整个项目-->Load/UnLoad Moudles）
         3. When prompted exclude the `spring-aspects` module (or after the import via File-> Project Structure -> Modules)
         4. Code away
             gradle build
 		
-	4.安装AspectJ（非必要）
+	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了）
 		https://blog.csdn.net/qq_32705919/article/details/124236568
 		AspectJ介绍
 		https://www.hreshhao.com/getting-started-with-aspectj/
 		4.1）官方下载：
 		https://www.eclipse.org/aspectj/downloads.php
-		4.2）执行安装
+		4.2）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
 		$ java -jar aspectj-1.9.6.jar
 		4.3）配置环境变量
 		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
 		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
-		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置
-		工程添加aspectjrt.jar的aspectjrt.jar引用
+		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）
+		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
 		
-二。添加一个子工程
-	？？？
-
-
 三。问题
 1.A build scan was not published as you have not authenticated with server 'ge.spring.io'.
     https://blog.csdn.net/duqingqing5666/article/details/118503336
@@ -92,19 +88,20 @@ maven,gradle安装配置见：
     文件下 id "io.spring.ge.conventions" version "0.0.7
     //id "io.spring.ge.conventions" version "0.0.7
 
-2. Error resolving plugin [id: 'io.spring.gradle-enterprise-conventions', version: '0.0.2']
-    https://blog.csdn.net/weixin_58195194/article/details/125091309
-    问题解决方案：
-        1.升级到jdk11
-        2.或者找到 settings.gradle 文件
-        注释掉 id "io.spring.gradle-enterprise-conventions" version "0.0.2"
-        
-3.jdk版本问题(warnings found and -Werror specified)
+2.jdk版本问题(warnings found and -Werror specified)
 	需要切换到jdk11，jdk版本不能超过超过11（理论上向下兼容，奇怪），切换后报如下问题
 	CoroutinesUtils类会报method.isAccessible() && !KCallablesJvm.isAccessible(function)过期错误
 	解决办法：
 	方法上加上@SuppressWarnings("deprecation")
 	
+3. Error resolving plugin [id: 'io.spring.gradle-enterprise-conventions', version: '0.0.2']
+    https://blog.csdn.net/weixin_58195194/article/details/125091309
+    问题解决方案：
+        1.升级到jdk11
+        2.或者找到 settings.gradle 文件
+        注释掉 id "io.spring.gradle-enterprise-conventions" version "0.0.2"
+
+//一直未解决
 4.H2DatabasePopulatorTests（TimeoutException: executesHugeScriptInReasonableTime() timed out after 1 second）
 https://blog.csdn.net/loveyouyuan/article/details/121541324
 	解决办法(貌似不行)：
@@ -113,6 +110,39 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 ```
 图1.1
 <img src="img/1.1.png" style="zoom:60%;" />
+
+###### 构建步骤spring-framework-5.2.23
+```
+一。版本
+    1.版本列表
+        1）.jdk11
+            引用“https://github.com/spring-projects/spring-framework/wiki/Build-from-Source”
+            To build you will need Git and JDK 17. Be sure that your JAVA_HOME environment variable points to the jdk17 folder extracted from the JDK download.
+            高于jdk11会报错warnings found and -Werror specified,版本为最新6.x时jdk必须是jdk17
+        2）.spring-framework5.2.23
+        3）.gradle-5.6.4-bin.zip（降级）
+        4）.ideaIC-2022.3.3
+
+    2.安装配置
+        maven,gradle安装配置见../env/index.md
+
+二。构建
+待验证：
+	修改spring-jdbc模块下的spring-jdbc.gradle文件，找到optional(“com.h2database:h2”)。
+	改成compile(“com.h2database:h2”)。
+	
+三。问题
+//貌似还有
+4.H2DatabasePopulatorTests（TimeoutException: executesHugeScriptInReasonableTime() timed out after 1 second）
+https://blog.csdn.net/loveyouyuan/article/details/121541324
+	解决办法(貌似不行)：
+	修改spring-jdbc模块下的spring-jdbc.gradle文件，找到optional(“com.h2database:h2”)，将optional
+改成compile
+```
+###### 创建spring子工程并验证
+```
+
+```
 
 #### 3.spring源码核心(框架)
 
