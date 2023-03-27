@@ -4,7 +4,7 @@
 [suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
 [wget_curl_scp_cat_tail](#wget_curl_scp_cat_tail) <br/>
-[周志磊(马士兵教育)经典linux命令演示](#mashibing)
+[周志磊马士兵教育经典linux命令演示](#mashibing2) <br/>
 
 ### 常用命令
 
@@ -767,9 +767,7 @@ awk使用
 ```
 
 ### 周志磊笔记（mashing）
-
-<div id="mashibing"/>
-
+<div id="mashibing2"/>
 ```
 IO实操：
 df			//查看磁盘设备

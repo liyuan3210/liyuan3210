@@ -1,4 +1,4 @@
-# ssh免密登录及openssh
+# ssh免密登录，及openssh
 
 ```
 linux登录方式：
