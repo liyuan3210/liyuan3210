@@ -1,4 +1,4 @@
-# gitlab安装及github域名绑定配置...
+# GitHub,gitee,gitlab,git常用命令及配置
 
 [一.git开发配置,ssh免密登录,及openssh](#gituse1)<br/>
 [二.git命令使用](#gituse2)<br/>
@@ -561,7 +561,7 @@ A记录,TXT记录，CANME配置如下:
 
 ![](img\www-a-canme-txt.png)
 
-### 五。gitee马云API调用
+### 五.gitee马云API调用
 <div id="gituse5"/>
 ```
 github token ： 3966607594ddbf3fd007f12e02fa0290cae2a9c9
@@ -576,7 +576,7 @@ github token ： 3966607594ddbf3fd007f12e02fa0290cae2a9c9
 	2.添加issus
 	curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/repos/liyuan3210/issues' -d '{"access_token":"83832ab64bc489240c65f2fb94021202","repo":"pages","title":"API-Call-test","body":"test content haha","labels":"question"}'
 ```
-### 六。gitlab安装
+### 六.gitlab安装
 <div id="gituse6"/>
 ```
 

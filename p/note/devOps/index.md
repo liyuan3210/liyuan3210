@@ -8,7 +8,7 @@
 
 [2.kubernetes](kubernetes/index.md)
 
-[3.gitlab安装及github域名绑定配置...](gitlab_install.md)
+[3.github,gitee,git命令及开发环境配置.](github_gitee_gitlab.md)
 
 [4.mysql](mysql_install.md),[redis](redis_install.md),nginx
 

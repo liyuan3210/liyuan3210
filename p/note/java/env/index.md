@@ -1,8 +1,6 @@
 # 环境安装
 
-[*.git使用](git_use.md)
-
-[*.ssh免密登录及openssh](ssh_openssh.md)
+[*.git配置,ssh免密登陆及openssh](../../devOps/github_gitee_gitlab.md)
 
 [*.gpg加解密](gpg_use.md)
 
