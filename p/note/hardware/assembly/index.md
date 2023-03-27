@@ -22,9 +22,58 @@ x86汇编
 	https://github.com/fujiawei-dev/fixed-vhd-writer
 ```
 
-#### [一。8086实模式到保护模式](8086.md)
+#### [一。8086实模式到保护模式nasm](8086.md)
 
-#### masm（微软的编译器）
+nasm安装配置
+
+```
+nasm官网：https://nasm.us
+下载源码：nasm-2.15.05.tar.gz
+
+编译安装：
+$ ./configure --prefix=/opt/nasm
+$ make && make install
+
+配置环境变量：
+export NASM_HOME=/opt/nasm
+export $NASM_HOME/bin:$PATH
+
+实例编译运行：
+代码：
+hello.asm
+
+section .data
+  hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
+  helloLen:  equ $-hello             ; Length of the 'Hello world!' string
+                                     ; (I'll explain soon)
+ 
+section .text
+  global _start
+ 
+_start:
+  mov eax,4            ; The system call for write (sys_write)
+  mov ebx,1            ; File descriptor 1 - standard output
+  mov ecx,hello        ; Put the offset of hello in ecx
+  mov edx,helloLen     ; helloLen is a constant, so we don't need to say
+                       ;  mov edx,[helloLen] to get it's actual value
+  int 80h              ; Call the kernel
+ 
+  mov eax,1            ; The system call for exit (sys_exit)
+  mov ebx,0            ; Exit with return code of 0 (no error)
+  int 80h
+
+编译
+nasm -f elf64 hello.asm
+如果是32位系统就把elf64改为elf32
+
+链接
+ld -s -o hello hello.o
+
+运行
+./hello
+```
+
+#### 二。masm（微软的编译器）
 
 ```
 官网:

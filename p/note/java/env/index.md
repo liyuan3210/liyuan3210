@@ -238,6 +238,10 @@ https://code.visualstudio.com/
 ```
 linux平台只能源码安装
 
+linux安装python（网上参考）
+https://baijiahao.baidu.com/s?id=1742782855454338816&wfr=spider&for=pc
+http://wjhsh.net/yjp372928571-p-12758564.html
+
 1.下載源码 Python-3.9.16.tgz
 安装必须
 $ apt-get update && apt-get install git -y && apt-get install gcc -y && apt-get install make -y && apt-get install wget -y
@@ -256,14 +260,35 @@ $ sudo apt-get install build-essential gdb lcov pkg-config \
 $ mkdir /opt/python3
 $ ./configure --prefix=/opt/python3 && make && make install
 
-4.Pip更换源
-root用户的
-# mkdir /root/.pip
-# cd /root/.pip
-# vi pip.conf	//新增pip.conf配置文件
-# 更换源配置
-[global]
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+4.配置环境变量
+export PYTHON_HOME=/usr/local/python3
+export PATH=$PYTHON_HOME/bin:$PATH
+
+Pip更换源：
+		root用户的
+    # mkdir /root/.pip
+    # cd /root/.pip
+    # vi pip.conf	//新增pip.conf配置文件
+    # 更换源配置
+    [global]
+    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
+问题：
+    1.ImportError: cannot import name 'Mapping' from 'collections'
+    因为Python3.10版本以后对requests库进行调整，collections中不能直接调用方法Mapping，MutableMapping
+    * 由于Python的跨平台特性，因此兼容性最好的还是python3.4
+    https://www.muzhuangnet.com/show/13574.html
+
+    2.python, 解决：WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager
+    * 假设Python3安装在/usr/local/python3
+    $ cd /usr/local/python3
+    $ python3 -m venv tutorial-env
+    $ source tutorial-env/bin/activate
+```
+资料
+```
+https://www.bilibili.com/video/BV1qW4y1a7fU
+p94-p97 模块，包，第三房包概念
 ```
 ## 七.Emscripten环境安装
 
@@ -321,15 +346,18 @@ $ emcc.bat helloworld.cpp -o helloworld.html
 
 nodejs运行：
 $ node a.out.js或helloworld.js
-
-
+```
+资料
+```
 Emscripten简介及初体验
 		https://blog.csdn.net/cgs1999/article/details/109032278
 webAssembly调用c字节码
 		https://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html
 ```
 
+
 ## 七.golang环境安装
+
 ```
 官网：https://golang.google.cn
 
@@ -365,6 +393,9 @@ func main(){
 
 直接运行：go run hello.go
 编译： 	go build hello.go
+
+视频课程：
+https://www.bilibili.com/video/BV1ME411Y71o
 ```
 ## 八.rust语言安装
 ```
@@ -423,51 +454,11 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 [source.tuna]
 registry="https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
+视频课程：
+https://www.bilibili.com/video/BV1hp4y1k7SV
 ```
 ## 九.x86汇编
 ```
-nasm官网：https://nasm.us
-下载源码：nasm-2.15.05.tar.gz
-
-编译安装：
-$ ./configure --prefix=/opt/nasm
-$ make && make install
-
-配置环境变量：
-export NASM_HOME=/opt/nasm
-export $NASM_HOME/bin:$PATH
-
-实例编译运行：
-代码：
-hello.asm
-
-section .data
-  hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
-  helloLen:  equ $-hello             ; Length of the 'Hello world!' string
-                                     ; (I'll explain soon)
- 
-section .text
-  global _start
- 
-_start:
-  mov eax,4            ; The system call for write (sys_write)
-  mov ebx,1            ; File descriptor 1 - standard output
-  mov ecx,hello        ; Put the offset of hello in ecx
-  mov edx,helloLen     ; helloLen is a constant, so we don't need to say
-                       ;  mov edx,[helloLen] to get it's actual value
-  int 80h              ; Call the kernel
- 
-  mov eax,1            ; The system call for exit (sys_exit)
-  mov ebx,0            ; Exit with return code of 0 (no error)
-  int 80h
-
-编译
-nasm -f elf64 hello.asm
-如果是32位系统就把elf64改为elf32
-
-链接
-ld -s -o hello hello.o
-
-运行
-./hello
+见hardware/assembly
 ```
+

@@ -24,15 +24,6 @@ Linux C
 ### windows平台gcc环境编译
 
 ```
-nginx官方推荐：
-http://nginx.org/en/docs/howto_build_on_win32.html
-
-MSYS or MSYS2区别？
-https://blog.csdn.net/nodeman/article/details/106431752
-Cygwin、Msys（停止维护）、Msys2、MinGW、Mingw-w64、TDM-GCC 区别 ？
-https://www.cnblogs.com/flyinggod/p/12888060.html
-https://www.bilibili.com/video/BV1k34y1h76e
-
 一。windows环境安装（gcc）
 官网：
 	https://www.mingw-w64.org
@@ -40,11 +31,28 @@ https://www.bilibili.com/video/BV1k34y1h76e
 	首先选择下载菜单--->Sources下面进入SourceForge--->进入后选择Files（拉到最下面选择版本下载）
 Mingw-w64安装（posix-seh，win32-seh选择）：
     https://cloud.tencent.com/developer/article/2055102
+    https://blog.csdn.net/zy215215/article/details/123078689
     说明（64位系统建议选seh版本）：
     异常处理在开发中非常重要，在开发的过程中，大部分的时间会耗在处理各种异常情况上。seh 是新发明的，而 sjlj 则是古老的。seh 性能比较好，但不支持 32位。 sjlj 稳定性好，支持 32位。建议64位操作系统选择seh。
 下载地址：
 	https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/
+	
+二。参考资料
+nginx官方推荐：
+http://nginx.org/en/docs/howto_build_on_win32.html
+
+windows平台gcc环境编译
+http://nginx.org/en/docs/howto_build_on_win32.html
+MSYS or MSYS2区别？
+https://blog.csdn.net/nodeman/article/details/106431752
+Cygwin、Msys（停止维护）、Msys2、MinGW、Mingw-w64、TDM-GCC 区别 ？
+https://www.cnblogs.com/flyinggod/p/12888060.html
+https://www.bilibili.com/video/BV1k34y1h76e
+Mingw-w64安装及各个包选项区别
+https://blog.csdn.net/zy215215/article/details/123078689
 ```
+
+
 
 ### eclipse_mingw_gcc：
 
