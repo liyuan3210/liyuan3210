@@ -115,7 +115,66 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 	修改spring-jdbc模块下的spring-jdbc.gradle文件，找到optional(“com.h2database:h2”)，将optional
 改成compile
 ```
+###### 构建步骤spring-framework-6.0.7
+
+```
+一。版本
+    1.版本列表
+        1）.jdk18
+            引用“https://github.com/spring-projects/spring-framework/wiki/Build-from-Source”
+            To build you will need Git and JDK 17. Be sure that your JAVA_HOME environment variable points to the jdk17 folder extracted from the JDK download.
+            高于jdk11会报错warnings found and -Werror specified,版本为最新6.x时jdk必须是jdk17
+        2）.spring-framework-6.0.7
+        3）.gradle-7.6-bin.zip（升级）
+        4）.ideaIC-2022.3.3
+
+    2.安装配置
+        maven,gradle安装配置见../env/index.md
+
+二。构建
+	1.克隆项目
+	$ git clone https://github.com/liyuan3210/spring
+	
+	2.导入idea及配置
+		2.1）File--->Project Struture(配置工程jdk)
+		2.2）File--->Settings--->搜索"File Encodings"(配置字符编码UTF-8)
+		2.3）File--->Settings--->搜索"gradle"（配置gradle）
+	
+	3.idea构建
+        根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
+        ## Steps(官方引用)
+        //第一步：表示需要预编译spring-oxm，spring-core
+        1. Precompile `spring-oxm` with `./gradlew :spring-oxm:compileTestJava`
+        //第二部：导入spring源码到idea
+        2. Import into IntelliJ (File -> New -> Project from Existing Sources -> Navigate to directory -> Select build.gradle)
+        //如果idea没装AspectJ，先要从idea把spring-aspects工程移除（右键选中spring整个项目-->Load/UnLoad Moudles）
+        3. When prompted exclude the `spring-aspects` module (or after the import via File-> Project Structure -> Modules)
+        4. Code away
+            gradle build
+		
+	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了）
+		https://blog.csdn.net/qq_32705919/article/details/124236568
+		AspectJ介绍
+		https://www.hreshhao.com/getting-started-with-aspectj/
+		4.1）官方下载：
+		https://www.eclipse.org/aspectj/downloads.php
+		4.2）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
+		$ java -jar aspectj-1.9.6.jar
+		4.3）配置环境变量
+		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
+		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
+		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）？？？？？？
+		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
+
+三。问题
+1.载入spring-aspects工程，没引入aspectjrt.jar报错
+ReactorNetty2StompBrokerRelayIntegrationTests > relayReconnectsIfBrokerComesBackUp() FAILED
+    java.lang.AssertionError at AbstractStompBrokerRelayIntegrationTests.java:275
+    错误详细见笔记
+```
+
 ###### 创建spring子工程并验证
+
 ```
 
 ```
@@ -128,6 +187,8 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 1）idea的调试（debug）
 
 2）快捷键
+	2.1）查看当前接口或抽象类的实现：	ctrl+H
+	2.2) 查看此方法在哪调用：			ctrl+B
 ```
 
 #### 4.spring源码debug
