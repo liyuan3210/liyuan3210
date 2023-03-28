@@ -23,6 +23,21 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 *.spring-AspectJ
 *.jdk动态代理
 *.CGLIB
+2.1）aspectj动态代理安装如下
+	2.1.1).aspectj动态代理安装如下安装配置
+		AspectJ介绍
+		https://blog.csdn.net/qq_32705919/article/details/124236568
+		https://www.hreshhao.com/getting-started-with-aspectj/
+	2.1.2）官方下载：
+		https://www.eclipse.org/aspectj/downloads.php
+		2.3）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
+		$ java -jar aspectj-1.9.6.jar
+	2.1.3）配置环境变量
+		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
+		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
+		export 		   PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH
+	2.1.4）验证
+		$ ajc -v
 
 实例：https://github.com/liyuan3210/java/tree/master/spring/simple
 ```
@@ -67,18 +82,8 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
         4. Code away
             gradle build
 		
-	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了）
-		https://blog.csdn.net/qq_32705919/article/details/124236568
-		AspectJ介绍
-		https://www.hreshhao.com/getting-started-with-aspectj/
-		4.1）官方下载：
-		https://www.eclipse.org/aspectj/downloads.php
-		4.2）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
-		$ java -jar aspectj-1.9.6.jar
-		4.3）配置环境变量
-		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
-		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
-		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）？？？？？？
+	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了
+		安装见上面“知识必备”AOP章节2.1
 		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
 		
 三。问题
@@ -86,6 +91,7 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 ```
 图1.1
 <img src="img/1.1.png" style="zoom:60%;" />
+
 ```
 图1.1上其中，Build and run using与Run tests using可以设置成Default或Intelli IDEA都可以
 ```
@@ -158,17 +164,7 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
             gradle build
 		
 	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了）
-		https://blog.csdn.net/qq_32705919/article/details/124236568
-		AspectJ介绍
-		https://www.hreshhao.com/getting-started-with-aspectj/
-		4.1）官方下载：
-		https://www.eclipse.org/aspectj/downloads.php
-		4.2）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
-		$ java -jar aspectj-1.9.6.jar
-		4.3）配置环境变量
-		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
-		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
-		export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH		4.4）idea配置（工程添加aspectjrt.jar的引用）？？？？？？
+		安装见上面“知识必备”AOP章节2.1
 		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
 
 三。问题
