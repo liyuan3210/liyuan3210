@@ -53,6 +53,7 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 		2.2）File--->Settings--->搜索"File Encodings"(配置字符编码UTF-8)
 		2.3）File--->Settings--->搜索"gradle"（配置gradle）
 			见[图1.1]
+		2.3）Help--->Memory Settings--->设置大小2048M
 			
 	3.idea构建
         根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
@@ -85,7 +86,9 @@ https://www.bilibili.com/video/BV1C4411373T?p=1
 ```
 图1.1
 <img src="img/1.1.png" style="zoom:60%;" />
-
+```
+图1.1上其中，Build and run using与Run tests using可以设置成Default或Intelli IDEA都可以
+```
 ###### 构建步骤spring-framework-5.2.23
 ```
 一。版本
@@ -139,6 +142,8 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 		2.1）File--->Project Struture(配置工程jdk)
 		2.2）File--->Settings--->搜索"File Encodings"(配置字符编码UTF-8)
 		2.3）File--->Settings--->搜索"gradle"（配置gradle）
+			见[图1.1]
+		2.4）Help--->Memory Settings--->设置大小2048M
 	
 	3.idea构建
         根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
@@ -170,7 +175,14 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 1.载入spring-aspects工程，没引入aspectjrt.jar报错
 ReactorNetty2StompBrokerRelayIntegrationTests > relayReconnectsIfBrokerComesBackUp() FAILED
     java.lang.AssertionError at AbstractStompBrokerRelayIntegrationTests.java:275
-    错误详细见笔记
+    错误详细见笔记test2
+2.> Task :spring-core:test
+OpenJDK 64-Bit Server VM warning: Option AllowRedefinitionToAddDeleteMethods was deprecated in version 13.0 and will likely be removed in a future release.
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+> Task :spring-context:test
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
 ```
 
 ###### 创建spring子工程并验证
