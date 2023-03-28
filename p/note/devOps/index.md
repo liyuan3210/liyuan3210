@@ -12,13 +12,13 @@
 
 [4.mysql](mysql_install.md),[redis](redis_install.md),nginx
 
-[5.samba,nfs_win](samba-nfs_win.md)
-
 [6.vmware_virtualbox_network](vmware_virtualbox_network.md)
 
-[7.httpd_php_phpmyadmin](httpd_php_phpmyadmin.md)
+[8.linux应用服务安装](linux_app.md)
+	1).httpd_php_phpmyadmin<br/>
+	2).samba<br/>
+	3).subversion<br/>
 
-[8.subversion（svn）](subversion_install.md)
 
 [*.免费云数据库mysql](https://planetscale.com)
 
