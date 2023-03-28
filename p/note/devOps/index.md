@@ -14,9 +14,9 @@
 
 [5.虚拟机](virtual_machine.md)
 
-​	一.服务端linux虚拟机(kvm)
-​	二.桌面虚拟机
-​	三.linux远程桌面连接
+​	一.服务端linux虚拟机(kvm)<br/>
+​	二.桌面虚拟机<br/>
+​	三.linux远程桌面连接<br/>
 
 [6.linux应用服务安装](linux_app.md)
 	1).httpd_php_phpmyadmin<br/>
