@@ -5,7 +5,7 @@
 [三.githubOAuth实现用户登录](#gituse3)<br/>
 [四.github站点托管,CNAME配置,A记录,泛域名解析](#gituse4)<br/>
 [五.gitee马云API调用](#gituse5)<br/>
-[六.gitlab安装](#gituset6)<br/>
+[六.gitlab安装](#gituse6)<br/>
 [七.gitlab开发模式](#gituse7)
 
 ### 一.git开发配置,ssh免密登录,及openssh
@@ -119,7 +119,7 @@ linux登录方式：
 问题
 	1.Permissions 0664 for '.../id_rsa' are too open.
 	授权:chmod 600 id_rsa
-----------------------------------------------------------------------------
+-------------------------------------------------------------------------
 github SSH配置:
 	一.密码登录
 		1.创建公钥,私钥文件(如果已经创建了的就不用再次创建了)
@@ -181,9 +181,7 @@ github SSH配置:
 gitee码云
 	单个私有仓库公钥添加:只有读取权限
 	需要推送权限的需要在安全设置>SSH公钥>里面添加公钥
-	
 ```
-
 ### 二.git命令使用
 <div id="gituse2"/>
 ```
@@ -468,7 +466,6 @@ GUI工具(github公司推出的):https://desktop.github.com
 		http://blog.csdn.net/renfufei/article/details/37725057/
 		http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html
 ```
-
 ### 三.githubOAuth实现用户登录
 <div id="gituse3"/>
 ```
@@ -511,7 +508,6 @@ https://blog.csdn.net/kobe24lmlps/article/details/80838329
 	md转html
 https://blog.csdn.net/liujiaojiao666/article/details/86154677
 ```
-
 ### 四.github站点托管,CNAME配置,A记录,泛域名解析
 <div id="gituse4"/>
 ```
@@ -560,7 +556,6 @@ https://zhidao.baidu.com/question/332729665886275525.html
 A记录,TXT记录，CANME配置如下:
 
 ![](img\www-a-canme-txt.png)
-
 ### 五.gitee马云API调用
 <div id="gituse5"/>
 ```
@@ -649,7 +644,6 @@ github token ： 3966607594ddbf3fd007f12e02fa0290cae2a9c9
  gitlab添加用户权限
 	settings>members
 ```
-
 ### 七.gitlab开发模式
 <div id="gituse7"/>
 ```
@@ -702,7 +696,7 @@ github token ： 3966607594ddbf3fd007f12e02fa0290cae2a9c9
 			https://www.jianshu.com/p/26351f7c9380
 			Lepton：
 			https://github.com/hackjutsu/Lepton
-		
-		gist.github.com 被墙无法访问解决办法
-			https://www.cnblogs.com/ryans/p/8196151.html
+
+gist.github.com 被墙无法访问解决办法
+		https://www.cnblogs.com/ryans/p/8196151.html
 ```
