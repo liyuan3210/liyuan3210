@@ -1,5 +1,6 @@
-#### 仿真与实验
+### 仿真与实验
 
+```
 电阻
 https://zhidao.baidu.com/question/1392049924658595540.html
 开关
@@ -36,8 +37,12 @@ i = 5v / 10欧
 https://www.zhihu.com/question/430157773
 电容无极性和有极性能代替吗？
 https://www.bilibili.com/video/BV1RP411E7Ds
+```
 
 -----------------------------------------------------------------------------
+### 芯片文档
+
+```
 芯片查询网站
 http://www.alldatasheet.com
 产品打样
@@ -46,7 +51,11 @@ datasheet
 https://pdf.elecfans.com/
 硬件开源社区（电子发烧友论坛）：
 https://www.elecfans.com/
+```
 
+### 芯片文档查找
+
+```
 二极管
 1N4148
 https://www.tme.eu/Document/ff36ab5a5cc13f4a6657d6004a93571d/1N4148,4448,914B.pdf
@@ -71,3 +80,7 @@ https://pdf1.alldatasheet.com/datasheet-pdf/view/138719/JIANGSU/A42.html
 
 2N3904(H331) NPN
 https://html.alldatasheet.com/html-pdf/11470/ONSEMI/2N3904/180/1/2N3904.html
+```
+
+
+
