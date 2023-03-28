@@ -10,7 +10,7 @@ github：https://github.com/spring-projects/spring-framework
 
 代码：https://github.com/liyuan3210/spring
 
-#### 1.知识必备
+#### 1.知识必备x
 
 ```
 1）1.IOC控制反转(反射)
