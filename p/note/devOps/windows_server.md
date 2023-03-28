@@ -1,9 +1,11 @@
+# windows服务器
+
 1.windows常用命令
 2.windows的nfs
 3.windows服务器
 4.windows常用桌面工具
 
-### windows常用命令
+### 1.windows常用命令
 
 ```
 windows(凭据管理)
