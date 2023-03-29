@@ -86,11 +86,7 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 	<settings>
 		<localRepository>D:\soft\dev\maven-repository</localRepository>
 	</settings>
-[maven常用操作](maven.md)
-
-[上传jar至本地/中央仓库](maven-upload-center.md)
-
-[私服创建](maven-server.md)
+[maven详细](maven.md)
 
 ### 2.gradle
 
@@ -139,7 +135,7 @@ allprojects {
 
 > gradle -v
 
-#### [gradle使用](gradle.md)
+#### [gradle详细](gradle.md)
 
 #### idea与eclipse的配置
 

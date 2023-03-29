@@ -5,19 +5,24 @@
 跨平台c开发
 https://www.cnblogs.com/renyuan/p/5031100.html
 
-C语言指针，内存管理
-https://www.bilibili.com/video/BV1Dt411R77A?p=4
+### C语言指针，内存管理
 
+```
 1）c语言内存4个区
 代码区
 静态区
 堆区
 栈区
 
-### 一。gcc跨平台编译工具
+视频资料在：
+https://www.bilibili.com/video/BV1Dt411R77A?p=4
+或 百度云盘/liyuandf:共享资源/course/os
+```
+
+### 一。c语言环境
  标准C
 
-Windows C [安装微软vs](../../handle/dev_platform.md)
+Windows C [安装微软vs](../../java/env/dev_platform.md)
 
 Linux C
 
@@ -51,8 +56,6 @@ https://www.bilibili.com/video/BV1k34y1h76e
 Mingw-w64安装及各个包选项区别
 https://blog.csdn.net/zy215215/article/details/123078689
 ```
-
-
 
 ### eclipse_mingw_gcc：
 
