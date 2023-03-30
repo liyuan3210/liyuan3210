@@ -86,7 +86,7 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 	<settings>
 		<localRepository>D:\soft\dev\maven-repository</localRepository>
 	</settings>
-[maven详细](maven.md)
+#### [maven详细](maven.md)
 
 ### 2.gradle
 

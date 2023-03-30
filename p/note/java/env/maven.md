@@ -3,7 +3,13 @@
 一.常用命令
 二.上传jar至本地/中央仓库
 三.私服创建
+
+maven视频教程:
+
+https://www.bilibili.com/video/BV12q4y147e4
+
 ### 一.常用命令
+
 ```
 
 	前提:
