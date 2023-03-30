@@ -14,9 +14,9 @@ https://www.cnblogs.com/renyuan/p/5031100.html
 堆区
 栈区
 
-视频资料在：
+视频在：
 https://www.bilibili.com/video/BV1Dt411R77A?p=4
-或 百度云盘/liyuandf:共享资源/course/os
+百度云盘/liyuandf:共享资源/course/os/C语言指针与内存管理
 ```
 
 ### 一。c语言环境
