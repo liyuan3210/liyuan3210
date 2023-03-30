@@ -18,8 +18,6 @@ https://blog.csdn.net/qq_33612228/article/details/107563446
 
 elasticsearch安装:
 http://chenzhijun.me/2017/12/01/elasticsearch-install/
-
-
 ```
 
 
@@ -103,7 +101,14 @@ lucene片一旦确认,后面就改不了了
 分lucene片问题?
 
 
-安装
+
+
+-------------------------------------------------------
+
+
+
+
+一。安装
 单台机器启动多个实例
 https://blog.csdn.net/jeffli1993/article/details/99893914
 
@@ -128,13 +133,80 @@ network.host:192.168.1.x
 
 4.启动
 ./elasticsearch
+./elasticsearch -d 	//后台启动
 
+5.启动后浏览器访问
+http://ip:9200
 
-五.环境安装
+6.本机单个项目启动多个节点 OR 多个项目启动多个节点（生产推荐）
+./elasticsearch -E path.data=data1 -E path.logs=log1 -E node.name=node1 -E cluster.name=cluster_es
+./elasticsearch -E path.data=data2 -E path.logs=log2 -E node.name=node2 -E cluster.name=cluster_es
+./elasticsearch -E path.data=data3 -E path.logs=log3 -E node.name=node3 -E cluster.name=cluster_es
+
+7.问题：
+Exception in thread “main” java.lang.UnsupportedOperationException: The Security Manager is deprecated and will be removed in a future release
+at java.base/java.lang.System.setSecurityManager(System.java:416)
+at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:82)
+更换jdk(JAVA_HOME)，查看官方版本与jdk对应表
+
+8.环境安装
 启动后浏览器访问
 http://ip:9200
 
+
+
+二。kibana安装
+1.kibana解压安装启动
+$ ./kibana 
+
+默认配置config/kibana.yml文件：
+#elasticsearch.hosts: ["http://localhost:9200"]	//默认
+
+2.启动后浏览器访问
+http://127.0.0.1:5601
+右上角dev_tool工具
+
+
+三。head安装
+1.首先解压安装nodejs，并安装grunt
+$ npm install -g grunt-cli
+$ grunt -version
+
+2.下载head插件
+https://github.com/mobz/elasticsearch-head
+
+3.修改Gruntfile.js文件
+connect: {
+			server: {
+				options: {
+					hostname: '*',
+					port: 9100,
+					base: '.',
+					keepalive: true
+				}
+			}
+		}
+4.运行
+$ npm install 
+$ npm run start
+
+5.访问
+http://127.0.0.1:9100
+
+跨域问题，在ES 安装目录的 conf 文件夹下配置elasticsearch.yml
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+network.host: 0.0.0.0	//可选
+
+
+
+
+
+
+
 第三方插件(copy到plugins目录下面)
+中文分词验证
+https://blog.csdn.net/feinifi/article/details/114079973
 分词器
 elasticsearch-analysis-ik-1.8.0:(倒排索引,中文分词器)
 https://github.com/medcl/elasticsearch-analysis-ik
