@@ -31,8 +31,6 @@ https://www.bilibili.com/video/BV15Y411h7it
 I=U/R
 i = 5v / 10欧
 
-
-
 测量感值的方法
 https://www.zhihu.com/question/430157773
 电容无极性和有极性能代替吗？
