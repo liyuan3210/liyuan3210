@@ -12,6 +12,8 @@ AIO使用了Proactor模式，对比Proactor与Reactor模式？？？
 
 https://blog.csdn.net/KingCat666/article/details/77685608
 
+单Reactor实例：com.liyuan3210.netty.nio.groupchat
+
 ## 1.模型介绍
 
 ![](img/netty-3.1.png)

@@ -74,3 +74,4 @@ java零拷贝有mmap(内存映射)，sendFile
 
 *sendFIle可以利用DMA方式，减少cpu拷贝，mmap则不能(必须从内核拷贝到socket缓冲区)
 
+零拷贝实例：com.liyuan3210.netty.nio.zerocopy目录下（传统方式与零拷贝比较）

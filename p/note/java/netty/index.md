@@ -8,7 +8,7 @@ https://www.bilibili.com/video/BV1DJ411m7NR?from=search&seid=1792025567539850242
 
 链接: https://pan.baidu.com/s/1yMAtTG36W3ekVO_zqDnkew 提取码: his7
 
-[old笔记](netty.md)
+[old笔记](netty-old.md)
 
 ## 一.章节
 
