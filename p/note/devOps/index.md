@@ -23,5 +23,12 @@
 	2).samba<br/>
 	3).subversion<br/>
 
+[7.应用](app/audio_video.md)
+​	1).音频/视频处理
+
+[8.安全攻防](attack.md)
+​	1).kali系统攻防
+
+
 [*.免费云数据库mysql](https://planetscale.com)
 
