@@ -12,6 +12,7 @@
     原始资料：https://gitee.com/liyuan3210/book_source/tree/master/dsa
     代码：https://github.com/liyuan3210/java/tree/master/dsa
     流程图：https://github.com/liyuan3210/data/blob/master/drawio/dsa.drawio
+    liyuandf账号:共享资源>course>java>【Java】数据结构和算法,韩顺平(全195讲)
 
 **1.字符串匹配问题**
 

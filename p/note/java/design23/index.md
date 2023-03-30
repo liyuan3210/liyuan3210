@@ -3,6 +3,8 @@
 ## 资源
     代码：https://github.com/liyuan3210/java/tree/master/design23
     流程图：https://github.com/liyuan3210/data/blob/master/drawio/design23.drawio
+    原始资料：https://gitee.com/liyuan3210/book_source/tree/master/design23
+    liyuandf账号:共享资源>course>java>【Java】设计模式,韩顺平(全149讲)
 
 ## 概要
 
