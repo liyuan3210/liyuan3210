@@ -21,6 +21,7 @@ spring源码分析
 ```
 课程：https://www.bilibili.com/video/BV1FJ411A7mV?from=search&seid=9644786464389956787
 链接: https://pan.baidu.com/s/1rX3kbHaD9LF4-xRMo-J04w 提取码: qq64
+liyuandf账号:共享资源>course>java>【java】分布式事物
 ```
 
 ### 分布式数据库事物

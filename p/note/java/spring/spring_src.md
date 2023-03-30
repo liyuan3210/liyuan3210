@@ -16,6 +16,7 @@ github：https://github.com/spring-projects/spring-framework
 1）1.IOC控制反转(反射)
 https://www.bilibili.com/video/BV1C4411373T?p=1
 链接:https://pan.baidu.com/s/1o5s2sKa_FazhLKHmTLAO7g 提取码:te99
+liyuandf账号:共享资源>course>java>【java】反射
 实例：https://github.com/liyuan3210/java/tree/master/spring/simple/src/main/java/com/liyuan3210/spring/simple/reflect
 
 2）.AOP(使用aspectj标注，底层实现用标准jdk动态代理)
