@@ -66,4 +66,13 @@ A1B2C3各种实现
 
 ## 七.jMeter使用
 
+jmeter使用
+
 https://www.cnblogs.com/spareyaya/p/12807638.html
+
+```
+number。。。:一次发X次请求
+Ramp。。。。：0（点击压测开始一刹那发X次请求）或数字为 n（表示n秒要发X次请求）
+Loop。。。。：表示循环上面步骤多少次
+```
+
