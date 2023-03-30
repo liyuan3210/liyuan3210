@@ -20,7 +20,9 @@
 
 [5.NETWORK](network/index.md)网络
 
-[6.HARDWARE](hardware/index.md)硬件
+[6.OS](os/index.md)操作系统
+
+[7.HARDWARE](hardware/index.md)硬件
 
 ## 二．工具(官网下载/安装)
 
