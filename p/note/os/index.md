@@ -4,5 +4,5 @@
 
 ### [2.assembly](assembly/index.md)
 
-### [3.linux-kernel](linux-kernel)
+### [3.linux-kernel](linux-kernel/index.md)
 

@@ -1,5 +1,23 @@
 # jwt与spring_security
 
+1).jwt
+
+2).mybatisPlus
+
+3).spring_security
+
+```
+1.).spring_security课程
+https://www.bilibili.com/video/BV15a411A7kP?from=search&seid=7599475529802441512
+链接：https://pan.baidu.com/s/1atNzFMD9SYy[cv3](https://www.bilibili.com/read/cv3/)VwXW89eg 
+提取码：ndv3
+实例：https://github.com/liyuan3210/java/tree/master/jwt_spring-security/jwt-spring-security
+**微服务登录授权方案(未看):**
+https://www.bilibili.com/video/BV1VE411h7aL?from=search&seid=12553764359441323749
+2.).oauth2
+https://haokan.baidu.com/v?vid=4100768588022005153&pd=bjh&fr=bjhauthor&type=video
+```
+
 ## 一.jwt
 
 官网：
@@ -610,7 +628,7 @@ http.logout().logoutUrl("/logout").logoutSuccessUrl("/test/hello").permitAll();
 1.首先建表，可以自动生成，可以查看JdbcTokenRepositoryImpl类看到
 
 ```sql
-CREATE TABLE persistent_logins (
+CREATE TABLE persistent_logins (spring_security
     username VARCHAR(64) NOT NULL,
     series VARCHAR(64) PRIMARY KEY,
     token VARCHAR(64) NOT NULL,
