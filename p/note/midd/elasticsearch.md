@@ -40,6 +40,8 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
         http.cors.enabled: true 
         http.cors.allow-origin: "*"
         network.host: 0.0.0.0
+    单节点启动：
+    ./elasticsearch -E path.data=/home/ubuntu-a10/Desktop/soft/es/data1 -E path.logs=/home/ubuntu-a10/Desktop/soft/es/log1 -E node.name=node1 -E cluster.name=cluster_es -E discovery.type=single-node
 	2.1).本机单个项目启动多个节点（配置文件在命令行）
         ./elasticsearch -E path.data=data1 -E path.logs=log1 -E node.name=node1 -E cluster.name=cluster_es
         ./elasticsearch -E path.data=data2 -E path.logs=log2 -E node.name=node2 -E cluster.name=cluster_es
