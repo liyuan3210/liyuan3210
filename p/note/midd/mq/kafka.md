@@ -13,6 +13,10 @@
 kafka教程
 https://www.w3cschool.cn/apache_kafka/apache_kafka_quick_guide.html
 
+kafka3.x的改进
+
+https://www.jianshu.com/p/994e8b109cca
+
 ## 1.kafka架构图
 
 ![](img/kafka-1.png)
