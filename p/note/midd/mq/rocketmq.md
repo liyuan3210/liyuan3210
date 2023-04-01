@@ -24,7 +24,7 @@ https://www.bilibili.com/video/BV1L4411y7mn?from=search&seid=1484692832945318855
 
 2m-noslave:2主没有从
 
-**单机安装:**
+**1.单机安装:**
 
 ```
 1.下载rocketmq-all-4.8.0-bin-release.zip并解压到/opt/
@@ -33,7 +33,34 @@ unzip rocketmq-all-4.8.0-bin-release.zip -d /opt/rocketmq
 2.创建数据目录
 mkdir /opt/rocketmq/data&&mkdir /opt/rocketmq/data/commitlog&&mkdir /opt/rocketmq/data/consumequeue&&mkdir /opt/rocketmq/data/index
 
-3.进入conf/2m-2s-async目录配置broker-a.properties文件
+logs:存储日志目录
+store:存储数据文件目录
+	commitlog:存储消息信息
+	consumequeue：存储索引
+	index:存储索引
+问题？？？	
+1）checkpoint 文件存储路径
+storeCheckpoint=/opt/rocketmq/data/checkpoint
+2）abort 文件存储路径
+abortFile=/opt/rocketmq/data/abort
+
+3.替换rocketmq/conf下面所有xml路径（日志配置）
+sed -i 's#${user.home}#/opt/rocketmq#g' *.xml	//替换rocketmq/conf下面所有xml路径
+就上面的创建的logs目录（logs:存储日志目录）
+
+4.根据实际内存，配置内存大小
+vi /opt/rocketmq/bin/runbroker.sh
+# 开发环境配置 JVM Configuration
+JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m"
+
+vi /opt/rocketmq/bin/runserver.sh
+JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
+
+5.进入conf/2m-2s-async目录配置broker-a.properties文件
+    broker-a.properties			//a节点（此例子已这个文件来修改）
+    broker-a-s.properties		//a节点的从节点
+    broker-b.properties			//b节点
+    broker-b-s.properties		//b节点的从
 ```
 
 broker-a.properties配置文件(放到conf/2m-2s-sync目录)：
@@ -101,20 +128,9 @@ flushDiskType=ASYNC_FLUSH
 #pullMessageThreadPoolNums=128
 ```
 
-下一步：
+启动：
 
 ```
-4.替换rocketmq/conf下面所有xml路径
-sed -i 's#${user.home}#/opt/rocketmq#g' *.xml
-
-5.根据实际内存，配置内存大小
-vi /opt/rocketmq/bin/runbroker.sh
-# 开发环境配置 JVM Configuration
-JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m"
-
-vi /opt/rocketmq/bin/runserver.sh
-JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
-
 6.启动
 启动nameserver:
 nohup sh /opt/rocketmq/bin/mqnamesrv &
@@ -136,7 +152,7 @@ rocketmq-console
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
 
-**集群安装(**双主双从（同步双写,异步刷盘）)`工作中常用集群模式：`
+**2.集群安装(**双主双从（同步双写,异步刷盘）)`工作中常用集群模式：`
 
 ```
 双主双从（同步双写,异步刷盘）
@@ -145,10 +161,10 @@ java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.nam
 
 配置如下：
 
-四个重要参数：brokerName，brokerId，brokerRole，flushDiskType
+四个重要参数：brokerClusterName，brokerName，brokerId，brokerRole，flushDiskType
 
 ```
-////////////////////////////////////broker-a.properties
+////////////////////////////////////######broker-a.properties
 #所属集群名字
 brokerClusterName=rocketmq-cluster
 #broker名字，注意此处不同的配置文件填写的不一样
@@ -185,7 +201,7 @@ brokerRole=SLAVE
 #- SYNC_FLUSH 同步刷盘
 flushDiskType=ASYNC_FLUSH
 
-////////////////////////////////////broker-b.properties
+////////////////////////////////////######broker-b.properties
 #所属集群名字
 brokerClusterName=rocketmq-cluster
 #broker名字，注意此处不同的配置文件填写的不一样

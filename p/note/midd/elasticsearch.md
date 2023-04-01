@@ -63,7 +63,8 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
 	http://127.0.0.1:9200
 
 配置问题：
-1。启动elasticsearch报错 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+1。启动elasticsearch报错 
+	[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 	https://www.cnblogs.com/whyblogs/p/15089451.html
 错误原因（没用）：
     elasticsearch用户拥有的内存权限太小，至少需要262144；
