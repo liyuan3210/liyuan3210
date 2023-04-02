@@ -38,11 +38,8 @@ store:存储数据文件目录
 	commitlog:存储消息信息
 	consumequeue：存储索引
 	index:存储索引
-问题？？？	
-1）checkpoint 文件存储路径
-storeCheckpoint=/opt/rocketmq/data/checkpoint
-2）abort 文件存储路径
-abortFile=/opt/rocketmq/data/abort
+	abort(是文件，需要单独建目录):如果存在改文件则broker非正常关闭
+	checkpoint（是文件，需要单独建目录）:文件检查点，存储commitlog文件最后一次刷盘时间戳，consumequeue最后一次刷盘时间，index索引最后一次刷盘时间戳
 
 3.替换rocketmq/conf下面所有xml路径（日志配置）
 sed -i 's#${user.home}#/opt/rocketmq#g' *.xml	//替换rocketmq/conf下面所有xml路径
