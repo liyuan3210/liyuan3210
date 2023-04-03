@@ -1,5 +1,13 @@
 # mysql监控与优化
 
+### 索引
+
+```
+
+```
+
+
+
 ## 一.mysql监控
 
 1.show profile与profiles

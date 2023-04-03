@@ -175,6 +175,17 @@ kafka-topics.sh --zookeeper ip:2128 --alter --topic first --partitions 6
 
 ​			生产者加上enable.idempotence属性设置为true(**kafka会自动设置acks为-1**)
 
+## 事务
+
+```
+
+```
+## 顺序消费
+
+```
+
+```
+
 ## 6.consumer消费方式
 
 **kafka消费采取pull模式**，因为push模式很难适应消费速率不同的消费者，因为发消息是由broker决定的，
