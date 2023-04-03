@@ -322,5 +322,11 @@ nat123
 	https://git-scm.com
 ```
 
+###### 问题
+1.软件安装问题见如下图
+<img src="img/visualcpp.png" style="zoom:60%;" />
+解决办法，下载安装vc插件（百度云盘：../env/env-windows/VC_redist.x64.exe）
+https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
 
 
