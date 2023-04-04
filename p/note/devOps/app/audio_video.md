@@ -27,7 +27,7 @@ https://zhuanlan.zhihu.com/p/56693625
 
 适合windows,linux,mac:
     Gimp图片编辑软件
-    使用教程：https://www.bilibili.com/video/BV1bt411F7Ug
+    https://www.gimp.org
     Flatpak的构建安装（类似ubuntu系统的snap）
     https://zhuanlan.zhihu.com/p/55299546
 
@@ -36,7 +36,27 @@ https://zhuanlan.zhihu.com/p/56693625
     https://photodemon.org/
 ```
 
+#### 视频剪辑软件
+
+```
+适合windows,linux,mac:
+	https://www.shotcut.org
+```
+
+#### 开源视频播放器
+
+```
+开源播放器介绍
+	https://zhuanlan.zhihu.com/p/89701493
+1.VLC播放器
+	https://www.videolan.org/vlc/index.zh.html
+2.MPV播放器
+	https://mpv.io/
+```
+
+
 #### 录屏工具
+
 ```
 适合windows:
     https://www.captura.org/
