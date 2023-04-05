@@ -117,6 +117,8 @@ cglib动态代理（被代理类不需要实现任何接口，可以是一个单
 
 ![](img/composite.png)
 
+项目源码：HashMap源码
+
 实例：com.liyuan3210.design23.structure.composite2
 
 **6.外观模式**
