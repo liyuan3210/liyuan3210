@@ -21,7 +21,7 @@
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
 | 18）。翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang | devOps | 待处理 |
 | 19）。wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616 | devOps | 待处理 |
-| 20）。 |      |      |
+| 20）。QEMU + VSCODE内核源码调试（QEMU与Bochs） |      |      |
 | 21）。 |      |      |
 | 22）。 |      |      |
 | 23）。 |      |      |
