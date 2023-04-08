@@ -79,8 +79,8 @@ wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetri
 chmod +x winetricks
 //安装插件
 $ winetricks riched20 richtx32 corefonts cjkfonts
-//运行在指定wine容器？？？
-$ WINEARCH=win32 WINEPREFIX=/home/liyuan/Desktop/wine32 wine winetricks
+//运行使用WINEPREFIX指定wine容器
+$ WINEARCH=win32 WINEPREFIX=/home/liyuan/Desktop/wine32 sh winetricks mfc40
 缓存目录在当前用户下../.cache/winetricks
 ```
 
@@ -126,5 +126,34 @@ ubuntu查看并安装可安装版本：
     开源包搜索在菜单“AUR”,搜索deepin-wine-wechat
     3).深度软件商店安装
     https://consumer.huawei.com/cn/support/content/zh-cn00762888/
+    4).一般参考文献
+    https://blog.51cto.com/u_15730576/5930162
+    百度云盘/liyuandf:pub/wine插件/网络提供
+    百度云盘/liyuandf:pub/wine插件/20230408
+```
+### 三。微信安装
+
+```
+https://www.cnxclm.com/read-2682-1.html
+https://blog.csdn.net/u010164190/article/details/106785069
+```
+### 问题
+
+```
+1.question1
+liyuan@liyuan-VirtualBox:~/Desktop/tool$ 01c0:err:winediag:ntlm_check_version ntlm_auth was not found. Make sure that ntlm_auth >= 3.0.25 is in your path. Usually, you can find it in the winbind package of your distribution.
+01c0:err:ntlm:ntlm_LsaApInitializePackage no NTLM support, expect problems
+01c4:fixme:kernelbase:AppPolicyGetThreadInitializationType FFFFFFFA, 01A7FEF8
+01c8:fixme:sync:SetWaitableTimerEx (000000D0, 0733FE20, 0, 00000000, 00000000, 00000000, 6000) semi-stub
+wine: Unhandled exception 0x80000003 in thread 1c0 at address 077C7DF5 (thread 01c0), starting debugger...
+01c4:fixme:cryptasn:CryptDecodeObjectEx Unsupported decoder for lpszStructType 1.3.6.1.4.1.311.2.1.4
+01c4:fixme:cryptasn:CryptDecodeObjectEx Unsupported decoder for lpszStructType 1.3.6.1.4.1.311.2.1.4
+$ apt install winbind
+
+1.question2
+liyuan@liyuan-VirtualBox:~/Desktop/tool$ 01d0:fixme:sync:SetWaitableTimerEx (000000CC, 0743FE20, 0, 00000000, 00000000, 00000000, 5999) semi-stub
+01cc:fixme:cryptasn:CryptDecodeObjectEx Unsupported decoder for lpszStructType 1.3.6.1.4.1.311.2.1.4
+01cc:fixme:cryptasn:CryptDecodeObjectEx Unsupported decoder for lpszStructType 1.3.6.1.4.1.311.2.1.4
+wine: Unhandled exception 0x80000003 in thread 1c8 at address 07BD7DF5 (thread 01c8), starting debugger...
 ```
 
