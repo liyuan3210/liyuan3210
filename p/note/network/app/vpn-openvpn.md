@@ -2,6 +2,10 @@
 
 ## 一．openvpn服务端搭建
 
+下载windows客户端安装包并安装官网为（被墙了）:
+
+www.openvpn.net
+
 ```
 安装前准备
 	//安装openssl和lzo，lzo用于压缩通讯数据加快传输速度(可选)
@@ -223,10 +227,5 @@ https://www.jb51.net/os/windows/346447.html
 
 服务端 与 客户端都要修改
 proto tcp
-
-安装包下载地址
-http://www.cnblogs.com/lidabo/p/7027463.html
-
-下载windows客户端安装包并安装官网为:www.openvpn.net
 ```
 
