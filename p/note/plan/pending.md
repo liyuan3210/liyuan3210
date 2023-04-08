@@ -22,7 +22,7 @@
 | 18）。翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang | devOps | 待处理 |
 | 19）。wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897 | devOps | 待处理 |
 | 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 |      | 处理中 |
-| 21）。Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html |      | 处理中 |
+| 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联 |      | 处理中 |
 | 22）。 |      |      |
 | 23）。 |      |      |
 | 24）。 |      |      |
