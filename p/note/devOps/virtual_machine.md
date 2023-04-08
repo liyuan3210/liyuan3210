@@ -2,16 +2,17 @@
     1).介绍<br/>
     2).qemu-kvm安装<br/>
     3).qemu-kvm常用命令<br/>
-    4).桥接bridge-utils安装配置<br/>
+	4).qemu网络<br/>
+	5).桥接bridge-utils安装配置<br/>
 [二.桌面虚拟机](#vmware_virtualbox)<br/>
-	1).vmware<br/>
-	2).virtualbox<br/>
-	3).笔记本创建wifi热点与笔记本直连<br/>
+​	1).vmware<br/>
+​	2).virtualbox<br/>
+​	3).笔记本创建wifi热点与笔记本直连<br/>
 [三.linux远程桌面连接](#remote_desktop)<br/>
-    1).远程桌面介绍及方案<br/>
-    2).centos远程桌面安装配置<br/>
-    3).问题<br/>
-    4).其它远程桌面方<br/>
+​    1).远程桌面介绍及方案<br/>
+​    2).centos远程桌面安装配置<br/>
+​    3).问题<br/>
+​    4).其它远程桌面方<br/>
 
 # 一.服务端linux虚拟机(kvm)
 
@@ -55,8 +56,12 @@ https://pkgs.org/download/bridge-utils
 ### 2).qemu-kvm安装
 
 ```
+qemu官网
+https://www.qemu.org/
+
 1.qemu-kvm安装
 $ yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools
+windows安装（qemu路径添加到PATH环境变量）
 
 2.创建一个镜像
 qemu-img create test1.raw 2G
@@ -140,8 +145,40 @@ virt-install --name kvm_test --virt-type kvm --ram 2048 --cdrom=/home/liyuan/too
 $ virsh start centos7_sev
 $ virsh shutdown centos7_sev
 ```
+### 4).qemu网络
 
-### 4).桥接bridge-utils安装配置
+```
+启动磁盘
+qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2      //nat方式
+qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2 -net nic -net user    //等同如上
+下面是桥接方式
+qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2 -boot c -net nic -net tap,ifname=qemu-tap
+参数-smp 1解释
+https://blog.csdn.net/jersonborn521/article/details/102787109
+https://blog.csdn.net/whatday/article/details/78603725
+其中-net nic表示虚拟机（qemu）内的OS添加新的网卡。
+如果不添加，ubuntu中键入ifconfig将看不到eth0（即第一张网卡）。
+而-net tap,ifname=my-tap表示为虚拟机（qemu）外的系统指定网卡。
+
+网络
+https://blog.csdn.net/m0_43406494/article/details/124827927
+4.网络处理
+https://blog.csdn.net/jiangwei0512/article/details/122791901
+https://blog.csdn.net/qq_37887537/article/details/129384415
+win10系统怎么安装虚拟网卡 win10安装虚拟网卡方法【详细步骤】
+https://product.pconline.com.cn/itbk/software/dnyw/1492/14922107.html
+
+5.vpn下载
+github里搜索openvpn
+6.qemu网络模式
+QEMU支持的网络模式
+https://blog.csdn.net/whatday/article/details/78446196/
+user mode network
+https://article.itxueyuan.com/W1XE4M
+7.Windows 计算机如何添加虚拟网卡
+https://consumer.huawei.com/cn/support/content/zh-cn00693656/
+```
+### 5).桥接bridge-utils安装配置
 
 ```
 安装插件bridge-utils
@@ -197,7 +234,6 @@ virbr0		8000.525400dff118	yes		virbr0-nic
     要关闭防火墙
     systemctl stop firewalld.service
 ```
-
 # 二.桌面虚拟机
 <div id="vmware_virtualbox"/>
 ### 1).vmware
