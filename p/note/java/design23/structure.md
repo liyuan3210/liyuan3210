@@ -171,5 +171,7 @@ cglib动态代理（被代理类不需要实现任何接口，可以是一个单
 决了对象的开销问题
 ```
 
-实例:com.liyuan3210.design23.structure.flyweight
+项目源码：Integer源码
+
+实例:com.liyuan3210.design23.structure.flyweight2
 
