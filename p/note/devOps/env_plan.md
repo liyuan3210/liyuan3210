@@ -555,3 +555,25 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 11>mount  /dev/xvdb1  /data	挂载	(df -TH查看)
 12>/etc/fstab	//开机自动挂载
 ```
+
+# 五.winToGo,linuxToGo
+
+```
+普通U盘快速安装Wintogo教程
+https://www.bilibili.com/read/cv17650897
+《详细》使用ventoy制作linux to go和win to go放在u盘中《即走即用的便携式系统》，自带系统引导
+https://blog.csdn.net/qq_45366830/article/details/129612844
+
+【Ventoy】开源
+https://www.ventoy.net/cn/index.html
+
+【Wintogo辅助工具 】
+  windows:
+	 https://github.com/nkc3g4/wtg-assistant
+  linux:
+	https://github.com/ventoy/vtoyboot
+
+【Ventoy HDV支持插件】
+https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
+```
+

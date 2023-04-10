@@ -18,3 +18,17 @@ https://www.bilibili.com/video/BV1oW41167AV?p=28
 代码：https://github.com/liyuan3210/java/spring/simple
 ```
 
+###### 1.微服务项目
+
+```
+代码：https://github.com/liyuan3210/microservices
+OLD:https://github.com/liyuan3210/spring_cloud
+```
+
+### 三.问题
+
+###### 1.Redis四大缓存问题(击穿、穿透、雪崩、数据一致性)，还有spring cloud笔记
+```
+http://e.betheme.net/article/show-267028.html?action=onClick
+```
+
