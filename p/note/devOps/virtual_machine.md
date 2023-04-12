@@ -1,9 +1,12 @@
 一.服务端linux虚拟机(kvm)<br/>
-    1).介绍<br/>
-    2).qemu-kvm安装<br/>
-    3).qemu-kvm常用命令<br/>
-	4).qemu网络<br/>
-	5).桥接bridge-utils安装配置<br/>
+    1).虚拟机介绍<br/>
+		1.1.主要厂商虚拟技术<br/>
+		1.2.虚拟磁盘文件<br/>
+		1.3.虚拟文件格式的转换及操作<br/>
+​    2).qemu-kvm安装<br/>
+​    3).qemu-kvm常用命令<br/>
+​	4).qemu网络<br/>
+​	5).桥接bridge-utils安装配置<br/>
 [二.桌面虚拟机](#vmware_virtualbox)<br/>
 ​	1).vmware<br/>
 ​	2).virtualbox<br/>
@@ -16,48 +19,77 @@
 
 # 一.服务端linux虚拟机(kvm)
 
-### 1).介绍
+### 1).虚拟机介绍
+
+###### 1.1.主要厂商虚拟技术
+
 ```
 hypervisor centos
+	一种运行在物理服务器和操作系统之间的中间层软件，可以允许多个操作系统和应用共享一套基础物理硬件
 	https://blog.51cto.com/yangshufan/2130043
 	https://blog.csdn.net/u013946404/article/details/78739830
 	https://blog.csdn.net/bbc955625132551/article/details/71597863
-主要厂商虚拟技术
-	1.微软的hyper-v
-	2.vmware
-	3.linux开源的KVM,Xen,VirtualBSD等
-虚拟存储
-	raw qcow2 qed格式区别
-	http://blog.chinaunix.net/uid-14735472-id-4220089.html
+
+一.微软的hyper-v
+	微软的虚拟机，windows内核级别支持，需要开启才可用。
+	
+二.linux开源的KVM,Xen,VirtualBSD等
+	1.).KVM
+		核心支持是KVM（内核级支持），常配合qemu来用
+	2.).Xen
+	3.).VirtualBSD
+	
+三.夸平台桌面
+	1).vmware桌面
+	2).VirtualBox桌面
+	3).qemu
+		支持多种架构，操作系统之上的
 
 hyperv vmware hypervisor 
 	https://cloud.tencent.com/developer/article/1041633
+```
+###### 1.2.虚拟磁盘文件
+```
+一。主要虚拟磁盘文件
+
+1）.raw
+	老牌的格式了,性能上来说的话还是不错的,如果其它格式需要转换，有时候还是需要它做为中间格式，但会比较消耗网络带宽和I/O
+
+2）.qcow2
+	qcow2现在比较主流的一种虚拟化镜像格式，经过一代的优化，目前qcow2的性能上接近raw裸格式的性能，这个也算是redhat的官方渠道了
+	下面两个是qcow2过度：
+	2.1）.cow：曾经qemu的写时拷贝的镜像格式，目前由于历史遗留原因不支持窗口模式,从某种意义上来说是,个弃婴，还没得它成熟就死在腹中，后来被qcow格式所取代
+	2.2）.qcow一代的qemu的cow格式，刚刚出现的时候有比较好的特性，但其性能和raw格式对比还是有很大的差距，目前已经被新版本的qcow2取代。
 	
-命令行启动虚拟机
-	https://www.centos.bz/2017/08/kvm-virtualization-platform-deploy/
-----------------------------------------------------------------------------
-kvm桥连配置GUI
-https://yq.aliyun.com/articles/510788
-http://www.biyunfei.com/2019/07/17/397.html
+3）.vmdk
+	VMware的格式,性能不错
+	
+4）.vdi
+	VirtualBox的格式，也是不错的workstation级别的产品
+	
+5）.vhd,vhdx
+	微软出的一套虚拟文件系统
+		
+6）.img格式
+	类似iso
+	
+参考文献：
+	1）。raw qcow2 qed格式区别
+	http://blog.chinaunix.net/uid-14735472-id-4220089.html
+```
+###### 1.3.虚拟文件格式的转换及操作
 
-视频kvm桥连配置
-https://www.iqiyi.com/v_19rrf06thk.html
-https://www.jianshu.com/p/14ee5f13f3c7
-https://www.jianshu.com/p/e720a1dd26c5
-https://www.cnblogs.com/heyongboke/p/10337447.html
-
-安装kvm管理界面
-https://v.youku.com/v_show/id_XMzIyMzI5MjgwMA==.html
-
-bridge-utils下载
-https://pkgs.org/download/bridge-utils
 ```
 
+```
 ### 2).qemu-kvm安装
 
 ```
 qemu官网
 https://www.qemu.org/
+
+安装kvm管理界面
+https://v.youku.com/v_show/id_XMzIyMzI5MjgwMA==.html
 
 1.qemu-kvm安装
 $ yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools
@@ -181,6 +213,14 @@ https://consumer.huawei.com/cn/support/content/zh-cn00693656/
 ### 5).桥接bridge-utils安装配置
 
 ```
+bridge-utils下载
+https://pkgs.org/download/bridge-utils
+视频kvm桥连配置
+https://yq.aliyun.com/articles/510788
+https://www.jianshu.com/p/14ee5f13f3c7
+https://www.jianshu.com/p/e720a1dd26c5
+https://www.cnblogs.com/heyongboke/p/10337447.html
+
 安装插件bridge-utils
 $ brctl --version	#如果没此命令，就需要安装bridge-utils
 https://pkgs.org/download/bridge-utils	//centos8如果没有就下载centos7版本的.rpm

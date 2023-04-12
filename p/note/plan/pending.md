@@ -17,12 +17,12 @@
 | 13）。rust与golang语言原理了解 | 语言类 | 待处理 |
 | 14）。python包管理<br/>https://www.bilibili.com/video/BV1qW4y1a7fU<br/>p94-p97 模块，包，第三房包概念 | 语言类 | 待处理 |
 | 15）。C语言指针，内存管理 | 语言类 | 待处理 |
-| 16）。虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动 | devOps | 待处理 |
+| 16）。1.虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动<br/>2.qemu , qemu-kvm，kvm区别？？？<br/>https://blog.csdn.net/u011619480/article/details/127719913<br/>https://blog.51cto.com/u_15786574/5669932 | devOps | 待处理 |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
 | 18）。翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang | devOps | 待处理 |
 | 19）。wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897 | devOps | 待处理 |
-| 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 |      | 处理中 |
-| 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ |      | 处理中 |
+| 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 处理中 |
+| 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | 处理中 |
 | 22）。 |      |      |
 | 23）。 |      |      |
 | 24）。 |      |      |
