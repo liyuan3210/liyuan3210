@@ -5,8 +5,8 @@
 [三.分区MBR与GTP](#mbr_gtp)<br/>
 		1).分区概念<br/>
 		2).分区工具<br/>
-		3).使用<br/>
-		4).实际<br/>
+		3).分区规则<br/>
+		4).分区使用<br/>
 [四.虚拟机与存储](#vir_store)<br/>
 		1).虚拟机<br/>
 		2).存储<br/>
@@ -163,7 +163,7 @@ https://zhuanlan.zhihu.com/p/551730189
 大白菜：http://dbc.nxexvq.cn/
 ```
 
-### 3.usb写入工具
+### 3.分区工具
 
 	浏览器操作系统：
 	   https://github.com/DustinBrett/daedalOS.git
@@ -283,7 +283,7 @@ mkfs.vfat /dev/sdb1
 是分区号/dev/sdb1,而不是/dev/sdb
 ```
 
-### 4.最终分区方案
+### 4.分区规则
 
 因为一个硬盘mbr分区最多只能分4个主分区，包括扩展分区(扩展分区可以有多个)，所以安装多个操作系统时分区方案如下：
 
@@ -306,7 +306,7 @@ mkfs.vfat /dev/sdb1
 
 3.windows10(180G)
 
-#### 实际分区使用情况
+#### 5.分区使用
 
 ```
 1.debian安装问题
