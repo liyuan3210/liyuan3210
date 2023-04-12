@@ -330,6 +330,8 @@ A4
 ```
 https://www.gnu.org软件包子项目
 grub官方网站:https://www.gnu.org/software/grub/
+grub介绍与使用
+https://wiki.archlinux.org/index.php/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 ```
 
 ### 1.windows(usb安装)
@@ -360,10 +362,6 @@ https://www.aioboot.com/en/install-grub2-from-windows/
 
 EFI在linux中的安装
 
-grub介绍
-https://wiki.archlinux.org/index.php/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-
-
 linux安装grub efi
 https://www.jianshu.com/p/0ebf640c29bb
 https://www.cnblogs.com/callmelord/p/11420457.html
@@ -374,40 +372,38 @@ grub-install --target=i386-efi --efi-directory=/home/liyuan/usb --bootloader-id=
 ### 2.linux(ubuntu安装)
 
 ```
-安装grub-2.0(需root权限):
-1）解压grub-2.00.tar.gz
-2）安装所支持：
-	sudo apt-get install flex bison（运行此命令即可）
-	如下deb包：
-	bison_2.4.1.dfsg-3_i386.deb
-	flex_2.5.35-10ubuntu1_i386.deb
-	m4_1.4.16-1_i386.deb(只需要运行)
-3）编译及安装(进入解压后的目录) 
-  ./configure --prefix=/home/liyuan/grub
-  make install
-```
-
-### 3.老版本grub
-
-```
+一。安装grub-2.0(需root权限):
+    1）解压grub-2.00.tar.gz
+    2）安装所支持：
+        sudo apt-get install flex bison（运行此命令即可）
+        如下deb包：
+        bison_2.4.1.dfsg-3_i386.deb
+        flex_2.5.35-10ubuntu1_i386.deb
+        m4_1.4.16-1_i386.deb(只需要运行)
+    3）编译及安装(进入解压后的目录) 
+      ./configure --prefix=/home/liyuan/grub
+      make install
+	4）还可以使用apt安装
+		？？？
+二。写入u盘并进行引导
 安装grub到u盘(进入grub安装根目录/sbin,执行下面命令)：
-1）安装grub到u盘（：
-新建usb挂载目录
-cd /home/liyuan
-mkdir usb
-mount /dev/sdb1 usb		//挂载u盘
+1）安装grub到u盘：
+    新建usb挂载目录
+    cd /home/liyuan
+    mkdir usb
+    mount /dev/sdb1 usb		//挂载u盘
 
 2)安装grub
-//注意用的是/dev/sdb而不是/dev/sdb1
-./grub-install --root-directory=/home/liyuan/usb /dev/sdb
-或者
-./grub-install --force --no-floppy --root-directory=/home/liyuan/usb /dev/sdb
+    //注意用的是/dev/sdb而不是/dev/sdb1
+    ./grub-install --root-directory=/home/liyuan/usb /dev/sdb
+    或者
+    ./grub-install --force --no-floppy --root-directory=/home/liyuan/usb /dev/sdb
 
 3)可以从源码grub-2.02/docs拷贝grub.cfg模板文件到u盘的/boot/grub目录下面进行修改
 
 4)还可以直接新建配置文件grub.cfg到u盘的/boot/grub/下面，u盘启动盘就制作完成了
-ubuntu-16.04-desktop-amd64.iso u盘目录:			G:\boot 
-initrd-4.12.9 bzImage u盘目录: 					G:\linux4.12.9	
+    ubuntu-16.04-desktop-amd64.iso u盘目录:			G:\boot 
+    initrd-4.12.9 bzImage u盘目录: 					G:\linux4.12.9	
 
 #
 # Sample GRUB configuration file
@@ -432,34 +428,9 @@ menuentry 'My ubuntu-16.04 iso' --class ubuntu --class gnu-linux --class gnu --c
 }
 
 ubuntu-16.04 iso具体文件可以查看iso压缩文件
-
-			NOTE:
-update-grub:
-更新本机grub文件
-
-查看磁盘uuid:
-ls -l /dev/disk/by-uuid
-
-进入grub命令行(可以进行手动引导,可以尝试一下)
-
-可以了解一下这种方式的功能
-[root@linux: ~] # dd if=/home/liyuan/up/boot/grub/stage1 of=/dev/sdb bs=512 count=1
-[root@linux: ~] # dd if=/home/liyuan/up/boot/grub/stage2 of=/dev/sdb bs=512 seek=1
-
-fdisk分区
-http://blog.csdn.net/wangzengdi/article/details/28109907
-
-----------------------------------------------------------------------------------------------------
-编译安装出现的问题error: ‘gets’ undeclared here (not in a function):
-解决办法：
-1.stdio.in.h找到这个文件
-2.修改_GL_WARN_ON_USE (gets, "gets is a securityhole - use fgets instead");这行为如下:
-#if defined(__GLIBC__) &&!defined(__UCLIBC__) &&!__GLIBC_PREREQ(2, 16)
-_GL_WARN_ON_USE (gets, "gets is a security hole -use fgets instead");
-#endif
 ```
 
-### 4.grub.cfg配置
+### 3.grub.cfg配置
 
 ```
 windows grub2
@@ -479,6 +450,34 @@ menuentry "Boot Windoze" {
   linux16 /boot/memdisk iso
   initrd16 /Winblows.iso
 }
+```
+
+### 4.老版本grub
+
+```
+NOTE:
+update-grub:
+更新本机grub文件
+
+查看磁盘uuid:
+ls -l /dev/disk/by-uuid
+
+进入grub命令行(可以进行手动引导,可以尝试一下)
+
+可以了解一下这种方式的功能
+[root@linux: ~] # dd if=/home/liyuan/up/boot/grub/stage1 of=/dev/sdb bs=512 count=1
+[root@linux: ~] # dd if=/home/liyuan/up/boot/grub/stage2 of=/dev/sdb bs=512 seek=1
+
+fdisk分区
+http://blog.csdn.net/wangzengdi/article/details/28109907
+----------------------------------------------------------------------------------------------------
+编译安装出现的问题error: ‘gets’ undeclared here (not in a function):
+解决办法：
+1.stdio.in.h找到这个文件
+2.修改_GL_WARN_ON_USE (gets, "gets is a securityhole - use fgets instead");这行为如下:
+#if defined(__GLIBC__) &&!defined(__UCLIBC__) &&!__GLIBC_PREREQ(2, 16)
+_GL_WARN_ON_USE (gets, "gets is a security hole -use fgets instead");
+#endif
 ```
 
 # 四.虚拟机与存储
