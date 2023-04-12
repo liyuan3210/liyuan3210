@@ -138,6 +138,8 @@ cglib动态代理（被代理类不需要实现任何接口，可以是一个单
 模式
 ```
 
+项目源码：Mybatis中的Configuration去创建MetaObject对象使用到外观模式
+
 实例:com.liyuan3210.design23.structure.facade2
 
 **7.享元模式**
