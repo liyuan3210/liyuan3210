@@ -351,7 +351,6 @@ grub-install.exe --target=i386-pc --boot-directory=f:\ --recheck \\.\PHYSICALDRI
 grub-install.exe --target=x86_64-efi --efi-directory=f: --boot-directory=f: --removable
 --recheck                        #如果存在磁盘映射，将删除磁盘映射
 
-
 2.grub-install.exe --boot-directory=f:\ --efi-directory=f: --removable --target=x86_64-efi
 3.grub-install.exe --boot-directory=f:\ --efi-directory=f: --removable --target=i386-efi
 --removable   #安装装置是可移动设备。此选项仅适用于EFI。安装多系统可以不用，可移动设备必须用此参数
@@ -372,6 +371,8 @@ grub-install --target=i386-efi --efi-directory=/home/liyuan/usb --bootloader-id=
 ### 2.linux(ubuntu安装)
 
 ```
+网络参考：
+https://www.ngui.cc/zz/2401587.html?action=onClick
 一。安装grub-2.0(需root权限):
     1）解压grub-2.00.tar.gz
     2）安装所支持：
