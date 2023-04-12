@@ -566,6 +566,8 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 	1.如果虚拟磁盘文件是vdi文件，需要把文件添加后缀名.vtoy，否则启动时文件看不到
 	2.在Blos中先在Security->Secure Boot->Secure Boot->选择了Disabled
 
+工具：百度云盘：云硬盘>env>public>wintogo
+
 ### winToGo
 
 ```
