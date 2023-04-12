@@ -36,6 +36,12 @@ hypervisor centos
 二.linux开源的KVM,Xen,VirtualBSD等
 	1.).KVM
 		核心支持是KVM（内核级支持），常配合qemu来用
+		qemu,qemu-kvm,kvm区别???
+		qemu:操作系统之上的虚拟平台(支持多cpu架构)，但性能比较差
+		kvm：linux内核级别虚拟化技术，性能高，通常要配合用户程序qemu来使用
+		qemu-kvm：用户管理使用qemu,底层运行基于kvm
+		https://blog.csdn.net/u011619480/article/details/127719913
+		https://blog.51cto.com/u_15786574/5669932
 	2.).Xen
 	3.).VirtualBSD
 	
@@ -91,6 +97,17 @@ https://www.qemu.org/
 安装kvm管理界面
 https://v.youku.com/v_show/id_XMzIyMzI5MjgwMA==.html
 
+虚拟机组成部分：
+    https://www.cnblogs.com/goldsunshine/p/12668632.html
+    qemu-kvm：qemu模拟器
+    qemu-img：qemu磁盘image管理器
+    virt-install：用来创建虚拟机的命令行工具
+    libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor
+    virt-viewer：图形控制台
+
+    $ service libvirtd start	//启动libvirt
+    $ virt-manager				//调用图形管理界面
+
 1.qemu-kvm安装
 $ yum -y install kvm python-virtinst libvirt  bridge-utils virt-manager qemu-kvm-tools
 windows安装（qemu路径添加到PATH环境变量）
@@ -106,6 +123,7 @@ $ qemu-img info test1.raw
 4.镜像格式转换
 raw:默认格式，不支持快照功能。镜像大小可以增大缩小
 qcow2:支持快照，镜像只能增大，不能缩小
+
 $ qemu-img convert -p -f raw -O qcow2 test1.raw test1.qcow2
 -p 显示转换进度，-f 原有镜像格式，-O 输出镜像格式 输入文件 输出文件
 主要用于将不同虚拟化产品的虚拟机镜像格式进行转换，例如VMware的vmdk转换成kvm用的qcow2格式
@@ -114,7 +132,7 @@ $ qemu-img convert -p -f raw -O qcow2 test1.raw test1.qcow2
 ### 3).qemu-kvm常用命令
 
 ```
-5.快照
+5.快照管理
 查看镜像信息
 $ qemu-img info centos7_sev.qcow2
 1.查看快照
@@ -130,13 +148,13 @@ $ qemu-img convert -f qcow2 -O qcow2 -s snapshot1-init centos7_sev.qcow2 centos7
 $ qemu-img check test1.qcow2
 
 6.镜像大小修改
-1.raw格式
-qemu-img resize test1.raw  +2G
-qemu-img resize test1.raw  3G
-2.qcow2格式
-qemu-img resize test2.qcow2 +2G
+    6.1）.raw格式
+    qemu-img resize test1.raw  +2G
+    qemu-img resize test1.raw  3G
+    6.2）.qcow2格式
+    qemu-img resize test2.qcow2 +2G
 
-------------------------------------
+------------------------------------虚拟机管理
 7.查看所有虚拟机
 $ virsh list --all
 virsh pool-list --all	//列出所有存储池
@@ -145,70 +163,66 @@ virsh pool-list --all	//列出所有存储池
 $ virsh start centos7_sev
 $ virsh shutdown centos7_sev
 
-创建虚拟机(centos qemu-kvm命令创建虚拟机)
-https://blog.csdn.net/weixin_34212762/article/details/92179634
-
-虚拟机组成部分
-https://www.cnblogs.com/goldsunshine/p/12668632.html
-qemu-kvm：qemu模拟器
-qemu-img：qemu磁盘image管理器
-virt-install：用来创建虚拟机的命令行工具
-libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor
-virt-viewer：图形控制台
-
-$ virt-manager		//调用图形管理界面
-
-kvm虚拟机安装：
-？？？？
-
-创建虚拟机
-//qemu-img create -f qcow2 fedora.img 10G
+9.创建虚拟机
+	9.1）create磁盘
+	$ qemu-img create kvm_test.qcow2 -f qcow2 40G
+	9.2）create虚拟机
+	virt-install --10ame kvm_test --virt-type kvm --ram 2048 --cdrom=/home/liyuan/tool/os/ubuntu-18.04.3-desktop-amd64.iso --disk path=/home/liyuan/soft/mach_vm/testvm/kvm_test.qcow2 --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole
+	
 创建虚拟机
 https://www.cnblogs.com/yexiaochong/p/6029315.html
+https://blog.csdn.net/weixin_34212762/article/details/92179634
 安装虚拟机并启动服务
 https://blog.csdn.net/sukysun125/article/details/89474962
 参数详细
 https://blog.51cto.com/u_11555417/2341874
-1.create磁盘
-$ qemu-img create kvm_test.qcow2 -f qcow2 40G
-2.create虚拟机
-virt-install --name kvm_test --virt-type kvm --ram 2048 --cdrom=/home/liyuan/tool/os/ubuntu-18.04.3-desktop-amd64.iso --disk path=/home/liyuan/soft/mach_vm/testvm/kvm_test.qcow2 --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole
-3.启动停止
+
+10.启动停止
 $ virsh start centos7_sev
 $ virsh shutdown centos7_sev
 ```
-### 4).qemu网络
+### 4).qemu/网络
 
 ```
-启动磁盘
+1.启动磁盘
 qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2      //nat方式
 qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2 -net nic -net user    //等同如上
-下面是桥接方式
+
+2.下面是桥接方式(还有问题)
+https://blog.csdn.net/m0_43406494/article/details/124827927
 qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2 -boot c -net nic -net tap,ifname=qemu-tap
+
+3.cpu核心配置(还有问题)
 参数-smp 1解释
 https://blog.csdn.net/jersonborn521/article/details/102787109
 https://blog.csdn.net/whatday/article/details/78603725
-其中-net nic表示虚拟机（qemu）内的OS添加新的网卡。
-如果不添加，ubuntu中键入ifconfig将看不到eth0（即第一张网卡）。
-而-net tap,ifname=my-tap表示为虚拟机（qemu）外的系统指定网卡。
 
-网络
-https://blog.csdn.net/m0_43406494/article/details/124827927
+smp:    是指在一个计算机上汇集了一组处理器(多CPU),各CPU之间共享内存子系统以及总线结构。在这种技术的支持下，一个服务器系统可以同时运行多个处理器，并共享内存和其他的主机资源。像双至强，也就是我们所说的二路，这是在对称处理器系统中最常见的一种（至强MP可以支持到四路，AMD Opteron可以支持1-8路）。也有少数是16路的。但是一般来讲，SMP结构的机器可扩展性较差，很难做到100个以上多处理器，常规的一般是8个到16个，不过这对于多数的用户来说已经够用了。在高性能服务器和工作站级主板架构中最为常见，像UNIX服务器可支持最多256个CPU的系统，其实qemu从代码设计上也是最大支持256个virtual cpu。
+sockets:    就是主板上插cpu的槽的数目，也就是可以插入的物理CPU的个数。
+cores:    就是我们平时说的“核“，每个物理CPU可以双核，四核等等。
+threads:    就是每个core的硬件线程数，即超线程
+A4核心：物理核心：1个，总核心数：2个
+//A4机器，正常
+qemu-system-x86_64w -m 2048 -smp 1,cores=1,threads=1,sockets=1 -drive file=centos7_sev.qcow2 -net nic -net user
+//A4机器，跑不起来
+qemu-system-x86_64w -m 2048 -smp 1,cores=1,threads=2,sockets=1 -drive file=centos7_sev.qcow2 -net nic -net user
+//A4机器，跑不起来
+qemu-system-x86_64w -m 2048 -smp 1,cores=2,threads=1,sockets=1 -drive file=centos7_sev.qcow2 -net nic -net user
+验证在实际多cpu机器调整cpu参数？？？
+
 4.网络处理
 https://blog.csdn.net/jiangwei0512/article/details/122791901
 https://blog.csdn.net/qq_37887537/article/details/129384415
-win10系统怎么安装虚拟网卡 win10安装虚拟网卡方法【详细步骤】
-https://product.pconline.com.cn/itbk/software/dnyw/1492/14922107.html
-
-5.vpn下载
-github里搜索openvpn
-6.qemu网络模式
-QEMU支持的网络模式
-https://blog.csdn.net/whatday/article/details/78446196/
-user mode network
-https://article.itxueyuan.com/W1XE4M
-7.Windows 计算机如何添加虚拟网卡
-https://consumer.huawei.com/cn/support/content/zh-cn00693656/
+    4.1).QEMU支持的网络模式
+    https://blog.csdn.net/whatday/article/details/78446196/
+    https://article.itxueyuan.com/W1XE4M
+    4.2).Windows 计算机如何添加虚拟网卡
+    https://product.pconline.com.cn/itbk/software/dnyw/1492/14922107.html
+    https://consumer.huawei.com/cn/support/content/zh-cn00693656/
+    4.3).虚拟设备之TUN和TAP？？？？
+    https://zhuanlan.zhihu.com/p/260405786
+    4.4）.vpn下载
+    github里搜索openvpn
 ```
 ### 5).桥接bridge-utils安装配置
 

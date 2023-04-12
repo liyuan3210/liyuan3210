@@ -10,6 +10,10 @@
 [四.虚拟机与存储](#vir_store)<br/>
 		1).虚拟机<br/>
 		2).存储<br/>
+[五.winToGo,linuxToGo](#wintogo)<br/>
+		1).winToGo<br/>
+		2).linuxToGo<br/>
+		3).问题<br/>
 
 # 一.linux系统分类
 <div id="unix_linux"/>
@@ -558,6 +562,12 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 
 # 五.winToGo,linuxToGo
 
+注意：
+	1.如果虚拟磁盘文件是vdi文件，需要把文件添加后缀名.vtoy，否则启动时文件看不到
+	2.在Blos中先在Security->Secure Boot->Secure Boot->选择了Disabled
+
+### winToGo
+
 ```
 普通U盘快速安装Wintogo教程
 https://www.bilibili.com/read/cv17650897
@@ -566,14 +576,80 @@ https://blog.csdn.net/qq_45366830/article/details/129612844
 
 【Ventoy】开源
 https://www.ventoy.net/cn/index.html
+https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
 
 【Wintogo辅助工具 】
-  windows:
-	 https://github.com/nkc3g4/wtg-assistant
-  linux:
-	https://github.com/ventoy/vtoyboot
+https://github.com/nkc3g4/wtg-assistant
 
-【Ventoy HDV支持插件】
-https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
+set1:
+	鼠标右键“我的电脑”，选择"管理"->“计算机管理”选择存储“磁盘管理”->选中一个磁盘，右上角“磁盘管理->更多操作”->下拉选“创建VHD”(选择是否固定大小，并选择虚拟磁盘文件保存路径)
+	
+set2:
+	使用wtg-assistant工具，选择windows ISO文件写入set1步骤创建的VHD文件
+	
+set3:
+	插入优盘，使用ventoy制作u盘启动工具，windows貌似要把优盘格式化为ntfs(fat32)
+	
+set4:
+	4.1.优盘根目录下创建ventoy目录，下载ventoy_vhdboot.zip把ventoy_vhdboot.img文件copy到ventoy目录下。
+	4.2.再把写入的VHD文件拷贝到优盘根目录下，至此wintogo优盘启动制作完成
+	
+```
+
+### linuxToGo
+
+```
+【VirtualBox】
+需要用到VirtualBox
+
+【Ventoy】开源
+https://www.ventoy.net/cn/index.html
+
+【Wintogo辅助工具 】
+https://github.com/ventoy/vtoyboot
+
+set1:
+	首先使用VirtualBox创建虚拟机与VHD磁盘，并安装好linux系统至VHD。
+	
+set2:
+	进入VirtualBox安装好的linux系统，下载vtoyboot并解压，执行如下：
+	$ sudo bash vtoyboot.sh
+
+set3:
+	3.1）插入优盘，使用ventoy制作u盘启动工具，优盘使用exfat格式
+	3.2）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
+```
+
+### 制作优盘mac启动盘
+
+```
+使用如下工具可以制作：
+	https://www.disktool.cn/wintogo.html
+可制作在mac电脑上运行的wintogo
+```
+
+
+
+### 问题
+
+###### 1.U盘变成只读,无法格式化,怎么办?
+```
+U盘变成只读,无法格式化,怎么办?
+https://www.disktool.cn/content-center/remove-write-protection-from-usb-1016.html
+
+1.修改注册表
+https://zhidao.baidu.com/question/1828014833204420148.html
+添加注册表信息：
+reg add HKLM\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies /v WriteProtect /t REG_DWORD /d 00000000
+如果想再次保护U盘不被写入，可以执行下面的命令：
+reg add HKLM\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies /v WriteProtect /t REG_DWORD /d 00000001
+
+2.DiskPart命令
+▪list disk - 将显示所有连接到计算机的磁盘，包括内部硬盘驱动器。
+▪select disk n - 其中n是U盘的驱动器号。你可以使用大小来确定哪一个是它。
+▪attributes disk clear readonly - 更改USB的属性，删除只读属性。
+
+3.分区助手(重新分区)
+https://www.disktool.cn/download.html
 ```
 
