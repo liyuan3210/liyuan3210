@@ -200,7 +200,8 @@ https://zhuanlan.zhihu.com/p/551730189
 
 ```
 windows:
-https://zhuanlan.zhihu.com/p/551730189
+https://www.diskgenius.cn/download.php
+https://www.disktool.cn/download.html
 
 linux:
 https://gparted.org/
