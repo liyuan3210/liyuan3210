@@ -568,7 +568,7 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 
 工具：百度云盘：云硬盘>env>public>wintogo
 
-### winToGo
+### winToGo(实用wtg-assistant比较慢)
 
 ```
 普通U盘快速安装Wintogo教程
@@ -598,6 +598,8 @@ set4:
 	
 ```
 
+windows的还可以使用https://www.disktool.cn/wintogo.html工具直接安装到优盘
+
 ### linuxToGo
 
 ```
@@ -622,7 +624,7 @@ set3:
 	3.2）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
 ```
 
-### 制作优盘mac启动盘
+### 制作优盘mac启动盘(直接安装到优盘)
 
 ```
 使用如下工具可以制作：
@@ -630,7 +632,14 @@ set3:
 可制作在mac电脑上运行的wintogo
 ```
 
+### 尝试
 
+```
+1.windows不使用cn_windows_10_enterprise_x64_dvd_6846957.iso镜像，使用网上下载的最新镜像windows_10_professional_x64_2023.iso
+用VirtualBox创建
+
+2.使用gparted分区grub安装到优盘
+```
 
 ### 问题
 
