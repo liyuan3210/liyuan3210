@@ -91,10 +91,7 @@ hyperv vmware hypervisor
 ### 2).qemu-kvm安装
 
 ```
-qemu官网
-https://www.qemu.org/
-
-安装kvm管理界面
+安装qemu-kvm管理界面
 https://v.youku.com/v_show/id_XMzIyMzI5MjgwMA==.html
 
 虚拟机组成部分：
@@ -184,6 +181,15 @@ $ virsh shutdown centos7_sev
 ### 4).qemu/网络
 
 ```
+qemu官网:
+https://www.qemu.org/
+
+windows下安装：
+官方下载安装包，解压安装，配置path环境变量即可
+
+linux下安装：
+安装完qemu-kvm既有qemu用户态命令，本身qemu-kvm需要qemu的配合
+
 1.启动磁盘
 qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2      //nat方式
 qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2 -net nic -net user    //等同如上
