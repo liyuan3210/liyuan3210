@@ -126,6 +126,12 @@ https://blog.csdn.net/neyes/article/details/6129027/
 <div id="mbr_gtp"/>
 ### 1.分区概念（ MBR分区概念）
 
+###### 常见文件系统格式：
+
+ fat32:早期windows系统格式，单个文件大小不能超过4G 
+ ntfs：windows替代fat32的文件系统，单个文件可以超过4G
+ exFAT：适合优盘，exFAT可以支持更多设备和操作系统,它比FAT32支持的单个文件大
+ ext4: linux系统默认文件系统
 **主分区：**
 主分区也叫引导分区，是系统安装的分区,如windows的c盘，linux的`/`挂载目录，一个硬盘只能建4个主分区(包括扩展分区)
 
@@ -567,9 +573,33 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 	1.如果虚拟磁盘文件是vdi文件，需要把文件添加后缀名.vtoy，否则启动时文件看不到
 	2.在Blos中先在Security->Secure Boot->Secure Boot->选择了Disabled
 
+引导（最终方案）：
+	制作wintogo为了在同一移动存储设备上既能引导windows，又能引导linux，外设需要格式化为ntfs格式（exfat不能引导windows）
+		windows(Mac与一般机器)> 用wintogo制作的vhd文件（如果成功的话，可以挂载到VirtualBox分析gtp分区？？？）
+		ubuntu>  VirtualBox制作的vhd格式（固定大小vhd），最后需要加.vtoy后缀
+		windows> VirtualBox制作的vhd格式（固定大小vhd），vhdx貌似有问题
+
 工具：百度云盘：云硬盘>env>public>wintogo
 
-### winToGo(实用wtg-assistant比较慢)
+###### VHD快照
+
+```
+Vhd快照操作：
+	vhd-util是个linux下的开源软件，通过封装libvhd库函数，提供vhd镜像相关操作。例如可用于创建vhd镜像、快照等功能。
+	分支仓库
+	https://github.com/microsoft/azure-vhd-utils
+	VirtualBox：
+	VBoxManage modifyhd --resize <size in MB>
+	https://www.oomake.com/question/4372630
+
+	qemu：
+	https://www.cnblogs.com/yanfen/p/14777232.html
+	qemu-img resize <path-to-raw-file> size
+```
+
+
+
+### winToGo
 
 ```
 普通U盘快速安装Wintogo教程
@@ -596,10 +626,16 @@ set3:
 set4:
 	4.1.优盘根目录下创建ventoy目录，下载ventoy_vhdboot.zip把ventoy_vhdboot.img文件copy到ventoy目录下。
 	4.2.再把写入的VHD文件拷贝到优盘根目录下，至此wintogo优盘启动制作完成
-	
 ```
 
-windows的还可以使用https://www.disktool.cn/wintogo.html工具直接安装到优盘
+###### windows的还可以使用https://www.disktool.cn/wintogo.html工具直接安装到优盘
+
+###### esd转wim
+1.install.esd转install.wim
+https://blog.csdn.net/qq_35229961/article/details/103024144
+	1.1）esd decrypter工具（esd转wim工具）
+	https://github.com/Chuyu-Team/Dism-Multi-language
+	1.2）wintogo工具选install.wim就可以直接安装
 
 ### linuxToGo
 
@@ -621,9 +657,52 @@ set2:
 	$ sudo bash vtoyboot.sh
 
 set3:
-	3.1）插入优盘，使用ventoy制作u盘启动工具，优盘使用exfat格式
-	3.2）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
+	3.1）插入优盘，使用ventoy制作u盘启动工具，优盘使用ntfs格式(为了在同一个优盘既能引导windows,linux),因为优盘exfat格式引导windows貌似不行
+	3.2）把VirtualBox创建的虚拟系统VHD文件添加.vtoy后缀，否则文件识别不了还有引导报错
+	3.3）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
 ```
+
+### wintogo(mac本，普通机器)
+
+mac机器开机从优盘引导：开机按住option
+
+mac机器开机安全设置(从外设引导需要密码)：开机按住command + R
+
+```
+1.下载wintogo工具
+https://www.disktool.cn/wintogo.html
+
+2.安装好后可以选择给“mac设备”,"windows设备（一般机器）"制作wintogo
+选择mac设备，需要准备好windows安装镜像，优盘
+注意：
+现在貌似只有cn_windows_10_enterprise_x64_dvd_6846957.iso可以，在“windows之家”下载的都是ghost的，貌似不行
+
+3.选择"mac设备"可以在mac(intel)引导，也可以在普通机器上引导
+```
+
+###### mac制作wintogo需要支持的windows驱动包获取
+
+```
+一。使用mac做wintogo移动启动，需要下载apple提供的windows驱动
+mac安装windows
+https://www.iqiyi.com/v_1rshytlyxvc.html
+
+1.进入mac系统，进入“启动转换助理”
+如果mac硬盘空间不够，可以准备并格式化一个移动优盘，格式为MS-DOS(FAT)
+然后启动“启动转换助理”，进入点击菜单“操作”，再点击“下载windows支持软件”并选择存储的位置（选移动优盘）
+
+2.等待完成后，mac下载的符合当前机器的驱动程序就下载到了选择的 移动优盘里面
+Wintogo制作好，通过Mac引导进入windows会有一些驱动没装上包含wifi,安装下载的驱动即可
+驱动已下载：百度云盘/liyuandf:云硬盘>env>driver>WindowsSupport.zip
+
+二。apple官网参考
+首先进入苹果官网>菜单栏选“技术支持”>搜索内容中点进“在 Mac 上下载并安装 Windows 支持软件”
+下载到usb
+https://support.apple.com/zh-cn/HT204923
+https://support.apple.com/zh-cn/guide/bootcamp-assistant/welcome/mac
+```
+
+
 
 ### 制作优盘mac启动盘(直接安装到优盘)
 
@@ -644,7 +723,72 @@ set3:
 
 ### 问题
 
-###### 1.U盘变成只读,无法格式化,怎么办?
+###### 1.windows使用问题
+
+```
+1.系统默认问题
+windows10开启administrator登陆
+https://zhidao.baidu.com/question/818645681578524892.html
+net user administrator /active:yes
+
+2.Win10系统打开应用时提示“无法使用内置管理员账户打开”
+https://blog.csdn.net/qq_63852611/article/details/126354682
+https://zhuanlan.zhihu.com/p/575842781
+https://soft.zol.com.cn/jingyan/5_all.html
+	1）.cmd下运行“gpedit.msc”并点击“确定”
+	在组策略编辑界面中，依次展开“Windows设置”-“安全设置”-“本地策略”-“安全选项”
+
+	2）.在右侧找到“用户帐户控制：用于内置管理员账户的管理员批准模式”项并右击，从其右键菜单中选择“属性”项以打开“属性”窗口
+	将“本地安全策略”栏目中的“启用”项进行勾选，并点击“确定”以保存退出
+
+3.百度网盘错误提示 “驱动器中没有磁盘 请在驱动器 D:中插入磁盘”
+https://pc.geren-jianli.org/k8Dkv62zb/
+https://product.pconline.com.cn/itbk/software/dnwt/1703/8914464.html
+	3.1)打开磁盘管理器：右键点“计算机”-“管理”-“磁盘管理器”，进入磁盘管理器，找到出问题的盘符
+	3.2)禁用此盘：右键点击“属性”，找到“驱动程序”标签项，点击“禁用”。即可解决此问题。
+	
+4.驱动精灵安装不上去（问题）
+	4.1.应用程序无法启动,因为应用程序的并行配置不正确。有关详细信息，请参阅应用程序事件日志，或使用命令行sxstrace.exe工具.
+	https://baijiahao.baidu.com/s?id=1697276343632123335&wfr=spider&for=pc
+	4.2.安装Visual studio 2008 里面的VC_x86Runtime.exe
+	https://www.bbsmax.com/A/gGdXK3nE54/
+```
+
+###### 2.引导盘后windows非常慢(磁盘100%)
+
+```
+一。解决windows10启动磁盘满问题
+https://zhidao.baidu.com/question/1998384507575390547.html
+https://www.xitongtang.com/class/win10/14664.html
+https://www.xtzjcz.com/pc/246594.html
+https://baijiahao.baidu.com/s?id=1740747857499279147&wfr=spider&for=pc
+https://jingyan.baidu.com/article/f71d603793621f5bb741d100.html
+https://www.160.com/article/4081.html
+http://www.65ly.com/a/19/1671432446437592.html
+
+services.msc（禁用）
+
+“HomeGoup Listener”，“HomeGroup Provider”
+家庭组是占用硬盘的原因之一。有用户反映在关闭家庭组后，硬盘占用率从90%降到10%左右，但对没加入家庭组的用户来说，这个方法也许无法解决问题。
+退出windows10家庭组？？？
+https://jingyan.baidu.com/article/9225544654b02cc41748f45f.html
+
+Superfetch
+是为传统的机械式磁盘设计，它允许内存以极快的速度载入一部分常用程序运行所需的数据片段，从而提升系统和程序运行速度。
+
+Windows Update
+windows更新
+
+Windows Defender？？？
+Windows Defender会定期扫描硬盘，在过去版本中，这项功能可以被关闭，但是升级Win10预览版9860后却无法关闭定期扫描功能，导致硬盘占用率居高不下，系统整体卡顿。用户可以尝试使用组策略限制Defender的定时扫描或关闭Defender来解决问题。
+在搜索栏输入gpedit.msc打开组策略编辑器，定位到“计算机配置-管理模板-Windows组建-Windows Defender-扫描”中的“指定每周的不同天运行计划扫描”配置为“已启用”根据帮助中的内容选择设置。或直接在Windows Defender设置内在管理选项中将其关闭。
+
+打开以太网，取消ipv6(勾取消掉)？？？
+https://www.xitongtang.com/class/win10/14664.html
+```
+
+###### 3.U盘变成只读,无法格式化,怎么办?
+
 ```
 U盘变成只读,无法格式化,怎么办?
 https://www.disktool.cn/content-center/remove-write-protection-from-usb-1016.html

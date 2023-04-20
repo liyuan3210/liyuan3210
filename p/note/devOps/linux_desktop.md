@@ -548,7 +548,8 @@ $ git config --global pull.rebase false
 https://blog.csdn.net/weixin_42881768/article/details/119236014
 
 （3）重装ios系统
-	?
+	mac机器开机从优盘引导：开机按住option
+	mac机器开机安全设置(从外设引导需要密码)：开机按住command + R
 （4）安装brew
 	https://www.jianshu.com/p/9252d4d2e824
 	brew install jmeter	//安装jmeter
