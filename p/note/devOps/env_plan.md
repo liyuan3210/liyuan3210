@@ -206,8 +206,8 @@ https://zhuanlan.zhihu.com/p/551730189
 
 ```
 windows:
-https://www.diskgenius.cn/download.php
-https://www.disktool.cn/download.html
+https://www.diskgenius.cn/download.php		//常用的分区工具
+https://www.disktool.cn/download.html		//这个要关注才行
 
 linux:
 https://gparted.org		//分区工具，分区前要设置MBR,GPT分区
@@ -756,21 +756,14 @@ https://support.apple.com/zh-cn/guide/bootcamp-assistant/welcome/mac
 
 
 
-### 制作优盘mac启动盘(直接安装到优盘)
-
-```
-使用如下工具可以制作：
-	https://www.disktool.cn/wintogo.html
-可制作在mac电脑上运行的wintogo
-```
-
 ### 尝试
 
 ```
-1.windows不使用cn_windows_10_enterprise_x64_dvd_6846957.iso镜像，使用网上下载的最新镜像windows_10_professional_x64_2023.iso
-用VirtualBox创建
+1.使用网上下载的最新镜像windows_10_professional_x64_2023.iso安装到优盘
 
-2.使用gparted分区grub安装到优盘
+2.grub引导vhd
+
+3.vhd快照操作
 ```
 
 ### 问题
