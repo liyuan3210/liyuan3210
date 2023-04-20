@@ -1,6 +1,6 @@
 # 环境规划：
 
-[一.linux系统分类](#unix_linux)<br/>
+<br/>
 [二.grub使用](#grubuse)<br/>
 [三.分区MBR与GTP](#mbr_gtp)<br/>
 		1).分区概念<br/>
@@ -13,7 +13,8 @@
 [五.winToGo,linuxToGo](#wintogo)<br/>
 		1).winToGo<br/>
 		2).linuxToGo<br/>
-		3).问题<br/>
+		3).wintogo(mac本，普通机器)<br/>
+​		4).问题<br/>
 
 # 一.linux系统分类
 <div id="unix_linux"/>
@@ -629,13 +630,14 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 
 引导（最终方案）：
 	制作wintogo为了在同一移动存储设备上既能引导windows，又能引导linux，外设需要格式化为ntfs格式（exfat不能引导windows）
-		windows(Mac与一般机器)> 用wintogo制作的vhd文件（如果成功的话，可以挂载到VirtualBox分析gtp分区？？？）
-		ubuntu>  VirtualBox制作的vhd格式（固定大小vhd），最后需要加.vtoy后缀
-		windows> VirtualBox制作的vhd格式（固定大小vhd），vhdx貌似有问题
+		windows直接写入外设(Mac本，普通机器) > 用wintogo制作的vhd文件（如果成功的话，可以挂载到VirtualBox分析gtp分区？？？）
+		ubuntu >  VirtualBox制作的vhd格式（固定大小vhd，动态大小貌似有问题），最后需要加.vtoy后缀
+		windows > VirtualBox制作的vhd格式（固定大小vhd，可以动态大小），vhdx貌似有问题
+		可以试试vhdx格式是否可以引导？？？（vbox推荐vhdx动态大小）
 
 工具：百度云盘：云硬盘>env>public>wintogo
 
-###### VHD快照
+###### VHD快照???
 
 ```
 Vhd快照操作：
@@ -646,7 +648,7 @@ Vhd快照操作：
 	VBoxManage modifyhd --resize <size in MB>
 	https://www.oomake.com/question/4372630
 
-	qemu：
+	qemu-img：
 	https://www.cnblogs.com/yanfen/p/14777232.html
 	qemu-img resize <path-to-raw-file> size
 ```
@@ -714,7 +716,7 @@ set3:
 	3.3）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
 ```
 
-### wintogo(mac本，普通机器)
+### wintogo直接写入外设(mac本，普通机器)
 
 mac机器开机从优盘引导：开机按住option
 
