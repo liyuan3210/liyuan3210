@@ -337,8 +337,62 @@ A4
 ```
 https://www.gnu.org软件包子项目
 grub官方网站:https://www.gnu.org/software/grub/
-grub介绍与使用
+
+UEFI引导+GPT分区的方式
 https://wiki.archlinux.org/index.php/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+https://wiki.archlinux.org/index.php/GRUB_(简体中文)
+https://wiki.archlinuxcn.org/wiki/分区#分区表
+混合 UEFI GPT + BIOS GPT/MBR 启动
+https://wiki.archlinuxcn.org/wiki/多引导USB设备#简单安装
+参考：
+https://www.ngui.cc/zz/2401587.html?action=onClick
+https://blog.csdn.net/WMX843230304WMX/article/details/90620168
+https://blog.nanpuyue.com/2016/033.html
+https://www.jianshu.com/p/00a216480183
+windows系统下：
+http://www.taodudu.cc/news/show-4612466.html
+windows下分区工具
+https://www.diskgenius.cn/download.php
+
+一。grub制作USB启动盘
+
+1、使用 GParted 分区U盘：
+分区 500M , 并且设置标识 boot esp , fat32格式
+第二个分区剩余全部，ntfs格式（可以读写大于4G的文件）
+
+终端输入命令fdisk -l 查看结果：
+终端输入命令blkid 查看结果：
+
+2.扇区末尾1M空间使用命令 gdisk 打上标记 bios_grub ,格式化方式——未格式化
+sudo gdisk /dev/sdb
+GParted查看结果
+
+boot esp 标记支持 EFI 启动
+bios_grub 标记支持 BIOS 启动
+
+3.安装grub到U盘
+	3.1） 挂载U盘分区 /dev/sdb1 到 /mnt:
+	sudo mount /dev/sdb1 /mnt
+	3.2）grub安装到MBR
+	sudo grub-install --target=i386-pc --recheck --boot-directory=/mnt/boot /dev/sdb
+	3.3）grub安装到ESP,特别注意--removable参数，安装到移动设备上一定要用这个参数
+	sudo grub-install --target x86_64-efi --efi-directory /mnt --boot-directory=/mnt/boot --removable
+
+特别注意:
+Ubuntu的grub默认的target是i386-pc，这个target包含在grub-pc这个包，如果你的系统使用BIOS+MBR安装，这个包默认是存在的。x86_64-efi这个target包含在grub-efi这个包，只有你的系统使用UEFI+GPT方式安装这个包才会存在。如果某个target报错，错误信息类似于grub-install: error: /usr/lib/grub/x86_64-efi/modinfo.sh doesn’t exist. Please specify --target or --directory. 这样的话，就需要安装grub-pc或grub-efi之后再试。
+安装到ESP要加–removable这个参数 这个参数专门针对于可移动设备，一定要加
+bios_grub标记的分区 如果按照上面的分区过程操作了，增加了这个标记的分区，安装grub的时候会自动识别这个标记的分区并成功安装grub，否则报错:
+Installing for i386-pc platform.
+grub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won't be possible.
+grub-install: warning: 无法嵌入。在此次安装中 GRUB 只能通过使用块列表安装。但是块列表是不可信赖的，不推荐使用。.
+grub-install：错误： will not proceed with blocklists.
+
+4.添加grub菜单
+sudo grub-mkconfig -o /mnt/boot/grub/grub.cfg
+然后基于你自己的电脑和U盘修改 /mnt/boot/grub/grub.cfg
+
+5.提取ubuntu16.04lts.iso 镜像到 /dev/sdb2
+启电脑，选择U盘启动，大功告成
 ```
 
 ### 1.windows(usb安装)
@@ -596,8 +650,6 @@ Vhd快照操作：
 	https://www.cnblogs.com/yanfen/p/14777232.html
 	qemu-img resize <path-to-raw-file> size
 ```
-
-
 
 ### winToGo
 
