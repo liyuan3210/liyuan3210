@@ -653,7 +653,7 @@ Vhd快照操作：
 	qemu-img resize <path-to-raw-file> size
 ```
 
-### winToGo
+### winToGo（手动vhd）
 
 ```
 普通U盘快速安装Wintogo教程
@@ -665,8 +665,8 @@ https://blog.csdn.net/qq_45366830/article/details/129612844
 https://www.ventoy.net/cn/index.html
 https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
 
-【Wintogo辅助工具 】
-https://github.com/nkc3g4/wtg-assistant
+【Wintogo辅助工具】写入install.wim
+https://github.com/nkc3g4/wtg-assistant			//先进的install.esd镜像写不了，需要install.wim(单独写这个文件到优盘驱动装不上去)
 
 set1:
 	鼠标右键“我的电脑”，选择"管理"->“计算机管理”选择存储“磁盘管理”->选中一个磁盘，右上角“磁盘管理->更多操作”->下拉选“创建VHD”(选择是否固定大小，并选择虚拟磁盘文件保存路径)
@@ -682,8 +682,6 @@ set4:
 	4.2.再把写入的VHD文件拷贝到优盘根目录下，至此wintogo优盘启动制作完成
 ```
 
-###### windows的还可以使用https://www.disktool.cn/wintogo.html工具直接安装到优盘
-
 ###### esd转wim
 1.install.esd转install.wim
 https://blog.csdn.net/qq_35229961/article/details/103024144
@@ -691,7 +689,7 @@ https://blog.csdn.net/qq_35229961/article/details/103024144
 	https://github.com/Chuyu-Team/Dism-Multi-language
 	1.2）wintogo工具选install.wim就可以直接安装
 
-### linuxToGo
+### linuxToGo（vbox创建）
 
 ```
 【VirtualBox】
@@ -717,6 +715,8 @@ set3:
 ```
 
 ### wintogo直接写入外设(mac本，普通机器)
+
+工具下载(直接写入)：https://www.disktool.cn/wintogo.html
 
 mac机器开机从优盘引导：开机按住option
 
@@ -756,9 +756,7 @@ https://support.apple.com/zh-cn/HT204923
 https://support.apple.com/zh-cn/guide/bootcamp-assistant/welcome/mac
 ```
 
-
-
-### 尝试
+### 待解决
 
 ```
 1.使用网上下载的最新镜像windows_10_professional_x64_2023.iso安装到优盘
