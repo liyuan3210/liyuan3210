@@ -210,7 +210,7 @@ https://www.diskgenius.cn/download.php
 https://www.disktool.cn/download.html
 
 linux:
-https://gparted.org/
+https://gparted.org		//分区工具，分区前要设置MBR,GPT分区
 ```
 
 ###### fdisk格式化：
