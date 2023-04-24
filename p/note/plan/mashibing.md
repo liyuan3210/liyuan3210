@@ -92,9 +92,31 @@ https://www.bilibili.com/video/BV1ib411Y7zz?p=3
 		https://ke.qq.com/course/167847
 		linux binutils
 			https://www.crifan.com/files/doc/docbook/binutils_intro/release/html/binutils_intro.html
-			
-	张孝祥视频
-		http://www.icoolxue.com/album/show/38/
 	
 	p2p理论
 		https://www.bilibili.com/video/av25760470/?redirectFrom=h5
+# 三.中间件
+
+```
+mysql:
+        https://www.mashibing.com/subject/1?courseNo=66&courseVersionId=1107        //基础
+        https://www.mashibing.com/subject/1?courseNo=1860&courseVersionId=2515    //调优
+    
+redis:
+        https://www.mashibing.com/subject/1?courseNo=1936&courseVersionId=2615    //核心技术实战
+    
+MQ(kafka)
+    kafka
+        https://www.mashibing.com/subject/1?courseNo=295&courseVersionId=1308    //实战
+        https://www.mashibing.com/subject/1?courseNo=2161&courseVersionId=2863    //核心技术
+    rocket
+        https://www.mashibing.com/subject/1?courseNo=1628&courseVersionId=2165    //基础
+        https://www.mashibing.com/subject/1?courseNo=417&courseVersionId=1317    //实战与源码
+		
+nginx:
+    https://www.mashibing.com/subject/1?courseNo=1468&courseVersionId=1220    //实战
+	
+Elasticsearch:
+    https://www.mashibing.com/subject/1?courseNo=412&courseVersionId=1312    //实战
+```
+
