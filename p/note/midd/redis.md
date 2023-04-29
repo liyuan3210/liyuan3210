@@ -43,9 +43,9 @@ CF.DEL ooxx	//删除
         
         算法：
         	LRU(Least Recently Used):最近最少使用（最长时间）
-        	LFU(Least Frequently Used):最不经常使用（最少次）
+        	LFU(Least Frequently Used):最近不经常使用（最少次）
         	random:随机
-        	TTL(Time to live):生存时间
+        	TTL(Time to live):在设置了过期时间key里面，找最早过期时间key
         
         回收策略：		
             noeviction: 当内存限制达到,再向redis添加数据，会直接返回错误。
