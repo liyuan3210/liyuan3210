@@ -40,6 +40,13 @@ CF.DEL ooxx	//删除
     1>.key值设置有效期
     2>.回收策略
         redis使用的内存使用最大限制:maxmemory <bytes>
+        
+        算法：
+        	LRU(Least Recently Used):最近最少使用（最长时间）
+        	LFU(Least Frequently Used):最不经常使用（最少次）
+        	random:随机
+        	TTL(Time to live):生存时间
+        
         回收策略：		
             noeviction: 当内存限制达到,再向redis添加数据，会直接返回错误。
             allkeys-lru:使用LRU算法。最少使用的缓存数据将被丢弃。
