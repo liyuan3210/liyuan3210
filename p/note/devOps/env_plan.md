@@ -109,14 +109,22 @@ https://blog.csdn.net/neyes/article/details/6129027/
 ### 4.当前主力系统
 ```
 1.linux(推荐)
-		服务器:centos(推荐)
+		服务器:centos
 			https://www.centos.org/
+		服务器:centos(替代品)
+			https://rockylinux.org/
+			https://almalinux.org/
 		桌	面:ubuntu(推荐)
 			https://ubuntu.com/
 
 2.windwos(当前)
 		服务器:windows_server_2012
-		桌	面:windows7,windows10
+		桌	面:windows7,windows10,windows11
+				百度搜索“windows11”下载（提供相应的usb工具）
+		usb制作工具（windows）:
+		https://zhuanlan.zhihu.com/p/551730189
+			电脑店：http://dnd.lzlcm.cn/
+			大白菜：http://dbc.nxexvq.cn/
 ```
 ### 5.windows(开源dos系统)
 
@@ -162,12 +170,6 @@ https://gparted.org/
 https://xinzhi.wenda.so.com/m/a/1542627025209463
 新版本fdisk可以识别gpt格式分区
 https://www.zhangweijie.net/post/2017/11/12/2906.html
-
-windows分区工具：
-https://zhuanlan.zhihu.com/p/551730189
-准备u盘，下载启动制作工具
-电脑店：http://dnd.lzlcm.cn/
-大白菜：http://dbc.nxexvq.cn/
 ```
 
 ### 3.usb工具
@@ -207,8 +209,8 @@ https://zhuanlan.zhihu.com/p/551730189
 
 ```
 windows:
-https://www.diskgenius.cn/download.php		//常用的分区工具
-https://www.disktool.cn/download.html		//这个要关注才行
+https://www.diskgenius.cn/download.php		//常用的分区工具(推荐)
+	https://www.disktool.cn/download.html		//这个要关注才行
 
 linux:
 https://gparted.org		//分区工具，分区前要设置MBR,GPT分区
