@@ -170,7 +170,7 @@ https://zhuanlan.zhihu.com/p/551730189
 大白菜：http://dbc.nxexvq.cn/
 ```
 
-### 3.分区工具
+### 3.usb工具
 
 	浏览器操作系统：
 	   https://github.com/DustinBrett/daedalOS.git
@@ -203,7 +203,7 @@ https://zhuanlan.zhihu.com/p/551730189
 			fdisk -l	//查看u盘物理路径(/dev/sdb)
 			dd if=/home/xxx/xxx.iso of=/dev/sdb status=progress
 
-### 3.分区工具(linux)
+### 3.分区工具
 
 ```
 windows:
