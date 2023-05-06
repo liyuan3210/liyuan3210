@@ -6,3 +6,10 @@
 
 ### [3.linux-kernel](linux-kernel/index.md)
 
+### 待解决
+
+```
+1.select poll epoll原理
+
+```
+
