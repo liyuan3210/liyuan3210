@@ -10,6 +10,8 @@
 
 ```
 1.select poll epoll原理
+https://www.bilibili.com/video/BV1qJ411w7du
+https://www.cnblogs.com/yuanwebpage/p/12916424.html
 
 ```
 
