@@ -84,7 +84,7 @@ apache-groovy-sdk-3.0.4.zip			//all，二进制包，源文件，文档
 	 </mirror>
 	指定仓库存储位置:
 	<settings>
-		<localRepository>D:\soft\dev\maven-repository</localRepository>
+		<localRepository>D:\soft\dev\mvnrepo</localRepository>
 	</settings>
 
 #### [maven详细](maven.md)
