@@ -1,10 +1,12 @@
 #### 待处理问题
 
+<font color="red">红色（优先）</font>，<font color="blue">蓝色（已处理）</font> 
+
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
-| 1）。wine安装配置并安装微信等 | devOps | 处理中 |
-| 2）。Linux常用分区工具<br/>https://www.lxlinux.net/6469.html<br/>https://gparted.org/<br/>硬盘GPT分区与MBR分区的区别<br/>https://xinzhi.wenda.so.com/m/a/1542627025209463<br/>新版本fdisk可以识别gpt格式分区<br/>https://www.zhangweijie.net/post/2017/11/12/2906.html<br/>相比于MBR模式,GPT模式拥有对2TB以上的原生支持。GPT不存在扩展分区和逻辑分区,所有分区全都是主分区,且理论上可存在的主分区个数是无限的。 | devOps | 已处理 |
-| 3）。windows常用分区软件<br/>https://zhuanlan.zhihu.com/p/551730189<br/>windows安装：<br/>系统之家下载windows镜像<br/>https://windows.xnayw.cn/win1064.html<br/>https://downloads.sourceforge.net/gparted/gparted-live-1.4.0-6-amd64.iso<br/>准备u盘，下载启动制作工具<br/>电脑店：http://dnd.lzlcm.cn/<br/>大白菜：http://dbc.nxexvq.cn/ | devOps | 已处理 |
+| 1）。wine安装配置并安装微信等 | devOps | <font color="red">处理中</font> |
+| 2）。Linux常用分区工具<br/>https://www.lxlinux.net/6469.html<br/>https://gparted.org/<br/>硬盘GPT分区与MBR分区的区别<br/>https://xinzhi.wenda.so.com/m/a/1542627025209463<br/>新版本fdisk可以识别gpt格式分区<br/>https://www.zhangweijie.net/post/2017/11/12/2906.html<br/>相比于MBR模式,GPT模式拥有对2TB以上的原生支持。GPT不存在扩展分区和逻辑分区,所有分区全都是主分区,且理论上可存在的主分区个数是无限的。 | devOps | <font color="blue">已处理</font> |
+| 3）。windows常用分区软件<br/>https://zhuanlan.zhihu.com/p/551730189<br/>windows安装：<br/>系统之家下载windows镜像<br/>https://windows.xnayw.cn/win1064.html<br/>https://downloads.sourceforge.net/gparted/gparted-live-1.4.0-6-amd64.iso<br/>准备u盘，下载启动制作工具<br/>电脑店：http://dnd.lzlcm.cn/<br/>大白菜：http://dbc.nxexvq.cn/ | devOps | <font color="blue">已处理</font> |
 | 4）。安卓安装termux安装<br/>termux安装，引出问题：F-Droid的安装&&替换TUNA清华源（F-Droid介绍）<br/>https://www.bilibili.com/video/BV1XT4y1w7Uw/ | devOps | 待处理 |
 | 5）。pc安卓模拟器pc模拟安卓<br/>https://www.bbsmax.com/A/RnJW7G2wJq<br/>安卓下载地址<br/>https://www.android-x86.org/download<br/>在PC上运行安卓（Android）应用程序的几个方法<br/>https://www.shuzhiduo.com/A/xl56jj9r5r/<br/>使用genymotion模拟器（安装genymotion过程中会自动安装VirtualBox）<br/>https://www.liyuan3210.com/p/note/new/dev_platform.html<br/>chrome插件限制问题<br/>https://www.likecs.com/show-307965087.html | devOps | 待处理 |
 | 6）。Windows打开WLS2, Mingw-w64编译安装nginx<br/>并windows下安装docker,podman,Containerd<br/>https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md<br/>https://www.cnblogs.com/jxldjsn/p/15799514.html | devOps | 待处理 |
@@ -19,8 +21,8 @@
 | 15）。C语言指针，内存管理 | 语言类 | 待处理 |
 | 16）。1.虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动<br/>2.qemu , qemu-kvm，kvm区别？？？<br/>https://blog.csdn.net/u011619480/article/details/127719913<br/>https://blog.51cto.com/u_15786574/5669932 | devOps | 待处理 |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
-| 18）。翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang | devOps | 待处理 |
-| 19）。wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897 | devOps | 待处理 |
+| 18）。1.翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang<br/>2。chatgpt注册使用(了解) | devOps | <font color="red">处理中</font> |
+| 19）。1.wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897<br/>2.windows10，11（系统之家...）安装到mac启动，安装到wintogo<br/>https://windows.wxjyxkj.cn/ | devOps | <font color="red">处理中</font> |
 | 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 处理中 |
 | 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | 处理中 |
 | 22）。select poll epoll原理 | 内核 | 处理中 |
