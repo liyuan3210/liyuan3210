@@ -590,8 +590,10 @@ KMP算法介绍
 2>.N个顶点，一定有N-1条边,包含全部顶点
 ```
 
-求最小生成树的算法主要是**普里姆算法**和**克鲁斯卡尔算法**
+最小生成树:
+<img src="img/mst.png" style="zoom:50%;" />
 
+求最小生成树的算法主要是**普里姆算法**和**克鲁斯卡尔算法**
 <img src="img/prim.png" style="zoom:50%;" />
 
 算法步骤详细见笔记里面pdf
@@ -603,7 +605,6 @@ KMP算法介绍
 实例：com.liyuan3210.dsa.algorithm.prim
 
 ###### 7.克鲁斯卡尔算法(kruskal)
-
 <img src="img/kruskal.png" style="zoom:50%;" />
 
 公交站问题：
