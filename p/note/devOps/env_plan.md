@@ -773,9 +773,9 @@ https://support.apple.com/zh-cn/guide/bootcamp-assistant/welcome/mac
 ###### 1.windows使用问题
 
 ```
-1.系统默认问题
-windows10开启administrator登陆
+1.系统默认问题(windows10开启administrator登陆)
 https://zhidao.baidu.com/question/818645681578524892.html
+搜索“cmd”,右键 以管理员打开cmd，执行如下命令
 net user administrator /active:yes
 
 2.Win10系统打开应用时提示“无法使用内置管理员账户打开”
