@@ -626,6 +626,9 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 
 # 五.winToGo,linuxToGo
 
+工具：百度云盘：云硬盘>env>public>wintogo
+
+```
 注意：
 	1.如果虚拟磁盘文件是vdi文件，需要把文件添加后缀名.vtoy，否则启动时文件看不到
 	2.在Blos中先在Security->Secure Boot->Secure Boot->选择了Disabled
@@ -636,8 +639,7 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 		ubuntu >  VirtualBox制作的vhd格式（固定大小vhd，动态大小貌似有问题），最后需要加.vtoy后缀
 		windows > VirtualBox制作的vhd格式（固定大小vhd，可以动态大小），vhdx貌似有问题
 		可以试试vhdx格式是否可以引导？？？（vbox推荐vhdx动态大小）
-
-工具：百度云盘：云硬盘>env>public>wintogo
+```
 
 ###### VHD快照???
 
