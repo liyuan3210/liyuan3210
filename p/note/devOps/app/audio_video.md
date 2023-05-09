@@ -70,6 +70,10 @@ https://zhuanlan.zhihu.com/p/56693625
 录屏直播(windows，mac,linux)
     obs官网：
     https://obsproject.com/
+    windows安装问题：
+    	windows上安装选择obs，与obs版本有关系。
+    	安装cn_windows_10_enterprise_x86_dvd_6846962.iso支持的obs版本：OBS-Studio-27.2.4-Full-x64.zip。
+    	安装最新的obs，需要安装最新的windows10版本。
 ```
 #### bilibili视频，腾讯视频下载工具
 ```
