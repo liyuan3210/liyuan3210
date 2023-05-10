@@ -120,8 +120,6 @@ This application requires one of the following versions of the .NET Framework
 ###### OBS-Studio
 
 ```
-
-
 录屏直播(windows，mac,linux)
     obs官网：
     https://obsproject.com/
