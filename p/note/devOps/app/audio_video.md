@@ -60,9 +60,9 @@ https://zhuanlan.zhihu.com/p/56693625
 
 ```
 适合windows:
-    https://www.captura.org/
-    https://mathewsachin.github.io/Captura
-    Captura与ffmpeg下载
+    ffmpeg官网：http://ffmpeg.org/
+    captura官网：https://mathewsachin.github.io/Captura
+    Captura与ffmpeg下载:
     https://github.com/MathewSachin/Captura/releases/download/v8.0.0/Captura-Portable.zip
     https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
     录屏软件 Captura 及 FFmpeg 安装配置教程
@@ -140,6 +140,9 @@ pip install you-get
 you-get http://url
 ```
 #### ffmpeg工具使用
+
+官网：http://ffmpeg.org/
+
 ```
 视频转码：
 ffmpeg -i 喜欢你.mov 喜欢你.mp4
