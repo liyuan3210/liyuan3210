@@ -72,6 +72,11 @@ windows安装
    	4.验证
 		$ sudo docker run hello-world
 		
+	问题：
+	1.linux内核版本与docker版本不兼容问题（升级ubuntu22.04,docker-23.0.6启动后台报错问题）
+	INFO[2023-05-10T14:48:57.631976125+08:00] loading plugin "io.containerd.internal.v1.tracing"...  type=io.containerd.internal.v1
+ERRO[2023-05-10T14:48:57.632011992+08:00] failed to initialize a tracing processor "otlp"  error="no OpenTelemetry endpoint: skip plugin"
+		
 三.镜像私服安装registry
 	https://docs.docker.com/registry/#basic-commands	//官方安装步骤
 	https://docs.docker.com/registry/deploying/

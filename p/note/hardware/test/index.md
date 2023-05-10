@@ -1,5 +1,15 @@
 ### 仿真与实验
 
+###### Multisim14安装
+
+```
+详细见：
+百度云盘/liyuandf:云硬盘>env>hardware>multisim()
+```
+
+###### 笔记
+
+
 ```
 电阻
 https://zhidao.baidu.com/question/1392049924658595540.html

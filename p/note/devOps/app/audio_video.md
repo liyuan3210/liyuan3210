@@ -54,8 +54,9 @@ https://zhuanlan.zhihu.com/p/56693625
 	https://mpv.io/
 ```
 
-
 #### 录屏工具
+
+###### captura安装使用
 
 ```
 适合windows:
@@ -66,6 +67,60 @@ https://zhuanlan.zhihu.com/p/56693625
     https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
     录屏软件 Captura 及 FFmpeg 安装配置教程
     https://zhuanlan.zhihu.com/p/294895620?utm_source=qq
+
+1.工具准备
+Captura下载：
+https://github.com/MathewSachin/Captura/releases/download/v8.0.0/Captura-Portable.zip
+ffmpeg下载：
+https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+
+2.解压安装
+Captura解压安装：
+解压至安装目录
+ffmpeg解压安装，配置path环境变量：
+解压至安装目录并配置path
+
+3.运行
+进入Captura安装目录，运行captura.exe
+
+4.配置验证
+Audio(翻译):
+	//实时播放录制的音频
+	Playback recorded audio in real-time	
+	//为每个音频源分离文件
+	Separate files for every audio source
+界面如下：
+	见[图1.1]
+1.课程正常录屏与录音，，Audio项不同如下
+	见[图1.2]
+2.实时播放录制的音频并录屏(Full screec)or仅录音(only Audio)，Audio项不同如下
+	见[图1.3]
+```
+
+图1.1
+<img src="img/captura1.png" style="zoom: 50%;" />
+
+图1.2
+<img src="img/captura2.png" style="zoom: 80%;" />
+
+图1.3
+<img src="img/captura3.png" style="zoom: 80%;" />
+
+问题：
+
+```
+问题如下：
+原因是操作系统运行环境比较老，与最新captura版本不配。
+This application requires one of the following versions of the .NET Framework
+见[图1.4]
+```
+图1.4
+<img src="img/captura4.png" style="zoom: 80%;" />
+
+###### OBS-Studio
+
+```
+
 
 录屏直播(windows，mac,linux)
     obs官网：
