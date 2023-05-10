@@ -637,6 +637,8 @@ https://v.youku.com/v_show/id_XMjM1Njc2NjI2NA==.html?
 	制作wintogo为了在同一移动存储设备上既能引导windows，又能引导linux，外设需要格式化为ntfs格式（exfat不能引导windows）
 		windows直接写入外设(Mac本，普通机器) > 用wintogo制作的vhd文件（如果成功的话，可以挂载到VirtualBox分析gtp分区？？？）
 		ubuntu >  VirtualBox制作的vhd格式（固定大小vhd，动态大小貌似有问题），最后需要加.vtoy后缀
+				linux下必须使用固定大小，内核级审计后必须重新执行vtoyboot脚本
+				官网参考：https://www.ventoy.net/cn/plugin_vtoyboot.html
 		windows > VirtualBox制作的vhd格式（固定大小vhd，可以动态大小），vhdx貌似有问题
 		可以试试vhdx格式是否可以引导？？？（vbox推荐vhdx动态大小）
 ```
@@ -687,11 +689,13 @@ set4:
 ```
 
 ###### esd转wim
+```
 1.install.esd转install.wim
 https://blog.csdn.net/qq_35229961/article/details/103024144
 	1.1）esd decrypter工具（esd转wim工具）
 	https://github.com/Chuyu-Team/Dism-Multi-language
 	1.2）wintogo工具选install.wim就可以直接安装
+```
 
 ### linuxToGo（vbox创建）
 
