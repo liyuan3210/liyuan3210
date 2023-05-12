@@ -7,17 +7,11 @@
 
 [3.数字电路](digital/index.md)
 
-[4.汇编](assembly/index.md)
+[4.51单片机](51chip/index.md)
 
-[5.linux内核](linux-kernel/index.md)
+5.开源硬件（物联网平台）
 
-[6.51单片机](51chip/index.md)
-
-7.开源硬件（物联网平台）
-
-[8.gcc跨平台](gcc/index.md)
-
-[9.实验与仿真](test/index.md)
+[6.实验与仿真](test/index.md)
 
 内存管理：
 
