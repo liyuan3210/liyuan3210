@@ -1,6 +1,6 @@
 # 环境规划：
 
-<br/>
+一.linux系统分类<br/>
 [二.grub使用](#grubuse)<br/>
 [三.分区MBR与GTP](#mbr_gtp)<br/>
 		1).分区概念<br/>
@@ -14,7 +14,11 @@
 		1).winToGo<br/>
 		2).linuxToGo<br/>
 		3).wintogo(mac本，普通机器)<br/>
-​		4).问题<br/>
+		4).问题<br/>
+
+[六.windows系统破解](#win_crack)
+		1).windows系统LTSC与LTSB版本区别<br/>
+		2).windows系统破解方法及区别介绍<br/>
 
 # 一.linux系统分类
 <div id="unix_linux"/>
@@ -733,6 +737,7 @@ mac机器开机安全设置(从外设引导需要密码)：开机按住command +
 ```
 1.下载wintogo工具
 https://www.disktool.cn/wintogo.html
+运行wintogo,进行到“系统镜像”，可以点击上面“本地没有镜像请点击这里下载”，下载最新能写入的windows镜像
 
 2.安装好后可以选择给“mac设备”,"windows设备（一般机器）"制作wintogo
 选择mac设备，需要准备好windows安装镜像，优盘
@@ -862,4 +867,60 @@ reg add HKLM\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies /v WriteProt
 3.分区助手(重新分区)
 https://www.disktool.cn/download.html
 ```
+
+# 六.windows系统破解(方法)
+
+<div id="win_crack"/>
+
+引用：https://www.dians.net/thread-504.htm
+
+###### windows系统LTSC与LTSB版本区别
+
+```
+1、win10LTSC是win10LTSB2016的升级版，是微软发布的企业长期服务版本。
+LTSB：就是超级纯净版，为确保稳定性，只会推送安全性更新，而不添加新的功能。
+LTSB版：无Edge浏览器、小娜，无磁贴，可选是否下载和安装补丁，其它版都不能自选补丁，适合办公。
+```
+
+####	windows系统破解方法及区别介绍
+
+###### 查看是否激活:
+
+可以按 Win + I 打开设置，在更新与安全 – 激活中查看自己当前的激活状态。
+
+```
+1）数字许可证激活
+通过数字许可证激活的电脑，重装系统后只要联网，或登录绑定的微软账户，系统就会自动激活。
+
+2) KMS服务器激活
+	2.1）KMS服务器
+		KMS（密钥管理服务），是微软提供给企业、学校、政府等组织的激活方式。相当于批发。组织向微软付费后，可以在内部局域网中，搭建了一个用于激活的 KMS 服务器。
+	2.2）KMS38
+		这是一种冷门的激活方式，其原理和数字许可证差不多。但数字许可证不能激活 Windows Server（服务器系统），而 KMS 38 可以。
+		
+	* KMS服务器最简单激活实现方法：
+	可以下载工具，其实简单几行CMD就能激活系统。按 Win+Q 打开搜索，输入 CMD 并以管理员身份运行,然后在打开的窗口中依次输入下面的命令：
+	$ slmgr /skms kms.chinancce.com
+	$ slmgr /ato
+	注意，第 1 行代码中的 kms.chinancce.com，是爱学习的大佬搭建的 KMS  激活服务器，可能会失效。
+	如果不好使，可以自行百度别的 KMS 服务地址替换,正如上文所说，KMS 激活的特点是，180 后激活可能会失效。
+	
+3）云萌激活工具
+	官网：https://cmwtat.cloudmoe.com/cn.html
+	GitHub 发布页：
+	https://github.com/TGSAN/CMWTAT_Digital_Edition
+	这是一款许可证激活工具。小淙单方面认为这是最优秀的，激活学习工具。它可以激活系统，也能激活 Office，还可以在不同版本间转换，最主要的是有图形化界面，简单易用。下载后右键，以管理员身份运行工具；
+	
+4.）微软激活脚本
+	GitHub 发布页：
+	https://github.com/massgravel/Microsoft-Activation-Scripts/releases
+	这款工具提供数字许可证、KMS 和 KMS38 三种激活方式。同时支持 Windows 10 系统、Office 和 Server 的激活。遗憾的是，没有图形界面。
+	打开发布页后，记住解压密码（密码在github的releases页面已标注）并下载最新的版本（文章发布时为1.4版，你看到这篇文章时可能已经更新）；
+
+5）小马、暴风等（不推荐）
+```
+
+
+
+
 
