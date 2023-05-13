@@ -48,10 +48,13 @@ https://zhuanlan.zhihu.com/p/56693625
 ```
 开源播放器介绍
 	https://zhuanlan.zhihu.com/p/89701493
+	下面播放器可以在windows,linux下运行跨平台
 1.VLC播放器
 	https://www.videolan.org/vlc/index.zh.html
 2.MPV播放器
 	https://mpv.io/
+3.SMPlayer播放器（支持Youtube格式）
+	https://www.smplayer.info/
 ```
 
 #### 录屏工具
