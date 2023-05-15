@@ -44,12 +44,22 @@
 
 **6.x86汇编语言**
 
+    一。李忠
     计算机语言 x86汇编语言（原书作者李忠）
     https://www.bilibili.com/video/BV1xE411N74T
     
     X64处理器架构的汇编语言和操作系统基础
     https://m.study.163.com/provider/480000001890841/index.htm?share=2&shareId=480000001890841
     ？？？
+    二。李述铜
+    B站视频
+    https://space.bilibili.com/473486810
+    官网
+    https://www.yuque.com/lishutong-docs
+    https://www.yuque.com/lishutong-docs/diyx86os/wmacrq
+    资料
+    https://gitee.com/lishutong-01ketang/diy-x86os
+    已同步至：https://gitee.com/liyuan3210/diy-x86os
 
 **7.编译原理**
 

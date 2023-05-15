@@ -54,5 +54,12 @@ $ git config --system core.longpaths true
 $ git add .
 $ git commit
 关闭运行的git的cmd窗口重新打开
+
+3.INTEL芯片文档下载(IA32模式)
+官网：https://www.intel.com
+根据如下视频，“c05.01创建GDT表及其表项”章节
+https://www.bilibili.com/video/BV1jV4y1H7Gj
+文档：Intel64 and IA-32 Architectures Software Developer`s Manual
+32位保护模式查阅,只关注卷3(Volume3)文档,2,3,4,5,6,7,8,9即可
 ```
 
