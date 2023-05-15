@@ -86,8 +86,59 @@ hyperv vmware hypervisor
 ###### 1.3.虚拟文件格式的转换及操作
 
 ```
+？？？
+```
+###### 1.4.虚拟磁盘写入引导程序，并qemu命令启动机器
 
 ```
+windows qemu命令:
+	qemu-system-x86_64w -m 2048 -smp 1 -drive file=centos7_sev.qcow2
+
+ubuntu qemu命令：
+	安装
+	sudo apt install qemu-system-x86
+	qemu使用启动虚拟磁盘
+	qemu-system-x86_64 -m 2048 -smp 1 -drive file=assembly.vhd
+
+安装nasm
+sudo apt install nasm
+编译（引导代码见最下面）
+nasm -f bin test.asm -o test.bin
+
+1.创建img文件
+dd if=/dev/zero of=test.img bs=1M count=1024
+2.将文件格式化为ext4格式
+mkfs -t ext4 test.img=
+3.挂载.img文件到mnt目录
+sudo mount -o loop test.img /mnt
+4.bin文件写入img(dd写入)
+#写入img
+	dd if=test.bin of=test.img bs=512 count=1 conv=notrunc
+#写入vhd
+	dd if=test.bin of=assembly.vhd bs=512 count=1 conv=notrunc
+
+5.启动验证
+qemu-system-x86_64 -m 2048 -smp 1 -drive file=test.img
+
+
+引导代码如下(屏幕上第一行从左到右输入字符串“liyuan”)：
+start:
+	mov ax,0xb800
+	mov ds,ax
+	mov byte [0x00],'l'
+	mov byte [0x02],'i'
+	mov byte [0x04],'y'
+	mov byte [0x06],'u'
+	mov byte [0x08],'a'
+	mov byte [0x0a],'n'
+	jmp $
+	
+current:
+	times 510-(current-start) db 0
+	
+	db 0x55, 0xaa
+```
+
 ### 2).qemu-kvm安装
 
 ```
