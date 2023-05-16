@@ -1,8 +1,8 @@
 # jwt与spring_security
 
-代码**：https://github.com/liyuan3210/java/tree/master/frame/demo
+**代码**：https://github.com/liyuan3210/java/tree/master/frame/demo
 
-下面三个工程都在上面仓库路径
+下面三个工程都在上面仓库路径，可以参考当前仓库根目录下jwt_spring-security里面例子
 
 1).jwt
 
