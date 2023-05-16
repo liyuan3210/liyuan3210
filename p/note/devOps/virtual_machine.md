@@ -3,6 +3,7 @@
 		1.1.主要厂商虚拟技术<br/>
 		1.2.虚拟磁盘文件<br/>
 		1.3.虚拟文件格式的转换及操作<br/>
+		1.4.linux下qemu+nasm+dd方式调试8086汇编<br/>
 ​    2).qemu-kvm安装<br/>
 ​    3).qemu-kvm常用命令<br/>
 ​	4).qemu网络<br/>
@@ -88,7 +89,9 @@ hyperv vmware hypervisor
 ```
 ？？？
 ```
-###### 1.4.虚拟磁盘写入引导程序，并qemu命令启动机器
+###### 1.4.linux下qemu+nasm+dd方式调试8086汇编
+
+虚拟磁盘写入引导程序，并qemu命令启动机器
 
 ```
 windows qemu命令:
