@@ -16,7 +16,7 @@
 		3).wintogo(mac本，普通机器)<br/>
 		4).问题<br/>
 
-[六.windows系统破解](#win_crack)
+[六.windows系统破解](#win_crack)<br/>
 		1).windows系统LTSC与LTSB版本区别<br/>
 		2).windows系统破解方法及区别介绍<br/>
 
@@ -897,6 +897,10 @@ slmgr.vbs -dlv
 
 查看是否永久激活:
 slmgr.vbs -x pr
+
+执行破解程序需要关闭如下项：
+搜索“Windows Defender”->“设置”里面关闭“实时保护”
+推荐最好关闭“windows update”服务(某些windows发型版需要关闭)
 ```
 
 ##### 激活方式
