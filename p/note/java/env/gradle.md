@@ -1,11 +1,5 @@
 # gradle使用
 
-gradle视频教程 	
-
-https://www.bilibili.com/video/av31574438
-
-https://www.bilibili.com/video/BV1yT41137Y7
-
 ## 二．配置介绍
 
 **gradle基于groovy语言**

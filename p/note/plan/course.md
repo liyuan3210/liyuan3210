@@ -141,8 +141,18 @@ https://www.bilibili.com/video/BV1c4411d7jb
 	nacos,rabbitmq,sentinel,seata,consul,erlang等课程需要的软件及jar包都在这
 	liyuandf账号:共享资源>course>微服务>nacos,rabbitmq,sentinel,seata,consul,erlang
 
+**5.工具类**
+
+    1).maven	--->>>new
+    https://www.bilibili.com/video/BV12q4y147e4
+    2).gradle	--->>>new
+    https://www.bilibili.com/video/av31574438
+    3).jmeter	--->>>new	
+    https://www.bilibili.com/video/BV1ty4y1q72g
+
 
 ## kali渗透(黑客攻击)
+
     清华顶级黑客教学，渗透实操到漏洞利用；网络安全白帽Kali渗透测试工具使用
     https://www.bilibili.com/video/BV1dh411s7vP
 

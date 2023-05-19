@@ -128,6 +128,3 @@ postman的Authorization <br/>
 https://zhuanlan.zhihu.com/p/470189410<br/>
 jmeter 新增带token的http请求<br/>
 https://blog.csdn.net/fwk19840301/article/details/123046759<br/>
-
-B站资料<br/>
-https://www.bilibili.com/video/BV1ty4y1q72g
