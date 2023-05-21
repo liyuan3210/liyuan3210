@@ -23,6 +23,8 @@
 ```
 翻墙工具（合集）
 https://github.com/bannedbook/fanqiang
+https://github.com/Alvin9999/new-pac
+https://github.com/freefq/free
 ```
 
 [4.squid（服务器代理）](app/squid.md)
