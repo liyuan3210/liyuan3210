@@ -15,7 +15,6 @@
 		2).linuxToGo<br/>
 		3).wintogo(mac本，普通机器)<br/>
 		4).问题<br/>
-
 [六.windows系统破解](#win_crack)<br/>
 		1).windows系统LTSC与LTSB版本区别<br/>
 		2).windows系统破解方法及区别介绍<br/>
@@ -811,6 +810,12 @@ https://product.pconline.com.cn/itbk/software/dnwt/1703/8914464.html
 	https://baijiahao.baidu.com/s?id=1697276343632123335&wfr=spider&for=pc
 	4.2.安装Visual studio 2008 里面的VC_x86Runtime.exe
 	https://www.bbsmax.com/A/gGdXK3nE54/
+	
+5.运行某个进程时，屏幕一直转，打开任务管理器有一个进程“允许将UI用于管理应用程序 的进程”。
+解决办法：
+首先直接在任务管理器界面杀掉进程，然后执行如下操作
+windows defender->设置->实时保护（关闭）就可以了。
+程序能安装运行起来后，在开启。
 ```
 
 ###### 2.引导盘后windows非常慢(磁盘100%)
