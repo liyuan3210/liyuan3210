@@ -137,7 +137,7 @@ This application requires one of the following versions of the .NET Framework
 	https://github.com/JayCJP/downloadTcVideo.git
 b站视频（python支持）：
 	https://github.com/yutto-dev/bilili.git
-视频下载工具you-get（python支持）：
+视频下载工具you-get（python支持），支持B站，youtobe等视频：
 	参考文献
 	https://zhuanlan.zhihu.com/p/575687926
 	开源工具
