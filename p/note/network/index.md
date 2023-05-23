@@ -20,12 +20,7 @@
 
 [3.vpn网络（pptpd）](app/vpn-pptpd.md)
 
-```
-翻墙工具（合集）
-https://github.com/bannedbook/fanqiang
-https://github.com/Alvin9999/new-pac
-https://github.com/freefq/free
-```
+
 
 [4.squid（服务器代理）](app/squid.md)
 
@@ -36,6 +31,22 @@ https://github.com/freefq/free
 [7.软路由](app/route.md)
 
 ​		1）集线器，交换机，路由器区别
+
+## 三.翻墙工具
+
+```
+翻墙工具（合集）
+https://github.com/bannedbook/fanqiang(比较全)
+https://github.com/Alvin9999/new-pac
+https://github.com/freefq/free
+
+1）windows一键翻墙
+
+2）linux翻墙
+
+3）mac翻墙
+
+```
 
 #### 工具:
 
