@@ -133,14 +133,19 @@ This application requires one of the following versions of the .NET Framework
 ```
 #### bilibili视频，腾讯视频下载工具
 ```
-腾讯视频：
-https://github.com/JayCJP/downloadTcVideo.git
-b站视频：
-https://github.com/yutto-dev/bilili.git
-pyton工具（视频下载工具）：
-https://zhuanlan.zhihu.com/p/575687926
-pip install you-get 
-you-get http://url
+腾讯视频（yarn or npm）：
+	https://github.com/JayCJP/downloadTcVideo.git
+b站视频（python支持）：
+	https://github.com/yutto-dev/bilili.git
+视频下载工具you-get（python支持）：
+	参考文献
+	https://zhuanlan.zhihu.com/p/575687926
+	开源工具
+	https://github.com/soimort/you-get
+	https://github.com/gudu12306/GUI-for-you-get
+	使用
+	pip install you-get 
+	you-get http://url
 ```
 #### ffmpeg工具使用
 
