@@ -33,7 +33,7 @@
 ## 三.翻墙工具
 
 ```
-“方式1（VMess）”翻墙工具（合集）
+翻墙工具（合集）
 https://github.com/bannedbook/fanqiang(比较全)
 https://github.com/Alvin9999/new-pac
 https://github.com/freefq/free
@@ -43,9 +43,11 @@ V2ray机场：
 	https://cdn.v2free.top/auth/register?code=cd79
 	账号：
 	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+	
 1）windows翻墙
 	1.1）ChromeGo.7z
-	https://github.com/bannedbook/fanqiang/releases
+		https://github.com/bannedbook/fanqiang/releases
+		https://d1a.wenxin-ai.top/FirefoxFQ.7z
 	1.2）v2rayn.zip
 	https://v2free.org/ssr-download/v2rayn.zip
 		添加节点：
