@@ -41,8 +41,9 @@ https://www.bilibili.com/video/BV15Y411h7it
 I=U/R
 i = 5v / 10欧
 
-测量感值的方法
+测量感值的方法（万用表没有电感档位，怎么测量电感感值）
 https://www.zhihu.com/question/430157773
+https://www.bilibili.com/video/BV1424y1y7j1
 电容无极性和有极性能代替吗？
 https://www.bilibili.com/video/BV1RP411E7Ds
 ```
