@@ -71,8 +71,8 @@
 4.相量法的应用
 
 ```
-图8.7
-<img src="img/8/8.1.png" style="zoom:60%;" />
+图8.6
+<img src="img/8/8.6.png" style="zoom:60%;" />
 
 图8.7
 <img src="img/8/8.7.png" style="zoom:60%;" />、
