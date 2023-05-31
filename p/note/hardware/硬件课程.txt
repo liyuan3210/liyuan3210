@@ -15,6 +15,8 @@
 	2.复合电路
 	3.多级放大电路
 	4.频率响应
+		数学（对数）
+		H参数与π模型
 	5.负反馈
 
 
@@ -35,4 +37,6 @@
 		电感线圈制作
 	2.直流怎么样变成交流？？？
 	3.什么是输入电阻，输出电阻，内阻？？？
+		https://www.bilibili.com/video/BV1cu411m7Ro
+		https://www.bilibili.com/video/BV15B4y1b7nY
 	4.什么是高通，低通电路
