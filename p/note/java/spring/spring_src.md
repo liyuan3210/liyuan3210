@@ -74,7 +74,7 @@ liyuandf账号:共享资源>course>java>【java】反射
 	3.idea构建
         根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
         ## Steps(官方引用)
-        //第一步：表示需要预编译spring-oxm，spring-core(先预编译spring-oxm,然后再预编译spring-oxm)
+        //第一步：表示需要预编译spring-oxm，spring-core(先预编译spring-oxm,然后再预编译spring-core)
         1. Precompile `spring-oxm` with `./gradlew :spring-oxm:compileTestJava`
         //第二部：导入spring源码到idea
         2. Import into IntelliJ (File -> New -> Project from Existing Sources -> Navigate to directory -> Select build.gradle)
@@ -155,7 +155,7 @@ https://blog.csdn.net/loveyouyuan/article/details/121541324
 	3.idea构建
         根据工程下.../spring-framework-5.3.26/import-into-idea.md构建
         ## Steps(官方引用)
-        //第一步：表示需要预编译spring-oxm，spring-core(先预编译spring-oxm,然后再预编译spring-oxm)
+        //第一步：表示需要预编译spring-oxm，spring-core(先预编译spring-oxm,然后再预编译spring-core)
         1. Precompile `spring-oxm` with `./gradlew :spring-oxm:compileTestJava`
         //第二部：导入spring源码到idea
         2. Import into IntelliJ (File -> New -> Project from Existing Sources -> Navigate to directory -> Select build.gradle)
