@@ -10,6 +10,16 @@ spring源码分析
 1).jwt
 2).mybatisPlus
 3).spring_security
+4).spring-boot-starter自定义模块方案
+    创建自定义模块Spring-Boot-Starter
+    https://blog.csdn.net/aiwangtingyun/article/details/126557756
+    https://www.bilibili.com/video/BV1ae4y1P7dz
+    ↓
+    JAVA SPI
+    https://blog.csdn.net/qq_35789269/article/details/128336478
+    ↓
+    设计模式体现SPI？？？
+    策略模式
 ```
 ## [三.微服务](spring_cloud.md)
 
