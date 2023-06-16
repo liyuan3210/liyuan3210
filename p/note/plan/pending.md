@@ -25,7 +25,7 @@
 | 19）。1.wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897<br/>2.windows10，11（系统之家...）安装到mac启动，安装到wintogo<br/>https://windows.wxjyxkj.cn/ | devOps | <font color="blue">已处理</font> |
 | 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 处理中 |
 | 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | 处理中 |
-| 22）。select poll epoll原理 | 内核 | 处理中 |
+| 22）。select poll epoll原理<br/>https://www.bilibili.com/video/BV1qJ411w7du<br/>https://www.cnblogs.com/yuanwebpage/p/12916424.html | 内核 | 处理中 |
 | 23）。spring-boot-starter自定义模块，java的SPI机制 | java | 待处理 |
 | 24）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
 | 25）。 |      |      |
