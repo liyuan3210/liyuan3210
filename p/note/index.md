@@ -8,8 +8,6 @@
 [*.windows_server服务器常用操作](devOps/windows_server.md)
 
 ## 一．技术栈
-[* new](new/index.md)
-
 [1.UI](ui/index.md) 前端
 
 [2.JAVA](java/index.md)java核心
