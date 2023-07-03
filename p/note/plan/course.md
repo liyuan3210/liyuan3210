@@ -118,6 +118,9 @@ https://www.bilibili.com/video/BV1c4411d7jb
     韩顺平:
     https://www.bilibili.com/video/BV1B4411H76f
     
+    数据结构与算法分析(c语言描述)
+    代码：https://users.cs.fiu.edu/~weiss/dsaa_c2e/files.html
+    
     力扣（github账号）
     https://leetcode.cn
 
