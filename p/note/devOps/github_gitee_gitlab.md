@@ -39,7 +39,7 @@ linux登录方式：
 	2.免密登录(无密码免登录)
 		A(客户端)免登录B(服务端)
 		
-		1>在A机器命令生id_rsa.pub公钥与id_rsa私钥
+		1>在A机器命令生成id_rsa.pub公钥与id_rsa私钥
 		ssh-keygen -t rsa -P ""
 		或
 		ssh-keygen
