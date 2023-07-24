@@ -1,30 +1,24 @@
 # english
 
-## 资源:
+### 资料
 
+```
+1.资源
 http://www.tingroom.com/
 
-## blibli零基础语法入门50课
-
+2.blibli零基础语法入门50课
 https://www.bilibili.com/video/BV1Rs411b7pk?from=search&seid=18004709688712620455
 
-## app背单词工具
-
+3.app背单词工具
 https://www.zhihu.com/question/20108974/answer/956684763?utm_source=wechat_session
 
-@有道背单词
-
-## 四六级托福雅思区别？
-
+4.四六级托福雅思区别？
 https://baijiahao.baidu.com/s?id=1650899912471893925&wfr=spider&for=pc
 
-@托福9K+单词量
-
-## 资源地址
-
+5.资源地址
 1.http://www.duolingo.cn/　多邻国 
-
 2.https://www.ted.com/	演讲
+```
 
 ## 一.语法及基础
 
@@ -34,7 +28,12 @@ grammar
 
 word
 
-## 三．try see docment and listen short viod
+## 三.发音
+
+
+
+## 四.阅读
+try see docment and listen short viod
 
 
 
