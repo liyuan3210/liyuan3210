@@ -28,7 +28,7 @@
 | 22）。select poll epoll原理<br/>https://www.bilibili.com/video/BV1qJ411w7du<br/>https://www.cnblogs.com/yuanwebpage/p/12916424.html | 内核 | 处理中 |
 | 23）。spring-boot-starter自定义模块，java的SPI机制 | java | 待处理 |
 | 24）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
-| 25）。 |      |      |
+| 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | 网络 | 待处理 |
 | 26）。 |      |      |
 | 27）。 |      |      |
 | 28）。 |      |      |
