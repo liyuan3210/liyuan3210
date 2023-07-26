@@ -27,20 +27,3 @@ curl https://api.openai.com/v1/chat/completions
 docker-compose-ui工具（docker方面）
 https://devpress.csdn.net/cloudnative/62f934efc6770329307fd8fc.html
 ```
-
-###### 2.AI,人工智能,机器学习
-
-```
-小白篇：一文搞懂AI是如何学习的？
-https://baijiahao.baidu.com/s?id=1762630345819622814&wfr=spider&for=pc
-
-人工智能，机器学习，推荐书籍
-https://item.jd.com/12732035.html#none
-
-深度学习四大框架之争(Tensorflow、Pytorch、Keras和Paddle)
-https://baijiahao.baidu.com/s?id=1733159772977730209&wfr=spider&for=pc
-```
-
-
-
-

@@ -30,6 +30,3 @@
 [8.安全攻防](attack.md)
 ​	1).kali系统攻防
 
-
-[*.免费云数据库mysql](https://planetscale.com)
-

@@ -66,7 +66,7 @@
 				https://www.shotcut.org
 			2.7.6).gimp（图片处理工具）
 				https://www.gimp.org
-
+	
 	3.dev
 		3.1).jdk
 			https://openjdk.org/
