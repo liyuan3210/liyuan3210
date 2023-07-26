@@ -4,6 +4,12 @@
 
 http://nginx.org
 
+nginx图形管理工具(还有网关管理工具Konga)
+
+https://nginxproxymanager.com/
+
+https://blog.51cto.com/waringid/5849206
+
 ## 一．nginx安装
 
 1. windows安装
