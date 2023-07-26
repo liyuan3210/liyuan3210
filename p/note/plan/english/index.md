@@ -20,19 +20,19 @@ https://baijiahao.baidu.com/s?id=1650899912471893925&wfr=spider&for=pc
 2.https://www.ted.com/	演讲
 ```
 
-## 一.语法及基础
+## 一.语法基础
 
 grammar
 
-## 二.单词量
+## 二.发音
+
+发音
+
+## 三.单词量
 
 word
 
-## 三.发音
-
-
-
-## 四.阅读
+## 四.听力与短文
 try see docment and listen short viod
 
 
