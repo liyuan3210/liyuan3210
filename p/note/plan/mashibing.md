@@ -123,3 +123,28 @@ Elasticsearch:
     https://www.mashibing.com/subject/1?courseNo=412&courseVersionId=1312    //实战
 ```
 
+###### 多线程高并发
+
+新课程
+
+https://www.mashibing.com/subject/1?courseNo=205&courseVersionId=2315
+
+```
+一。多线程高并发“在B站搜索 java多线程与高并发”
+1.有线程池
+牛皮！马士兵老师只用了400分钟就把线程与锁、并发、线程池、程序、缓存行讲的清清楚楚，彻底搞懂Java多线程与高并
+https://www.bilibili.com/video/BV1qR4y1H7ZY
+
+2.最多播放量
+马士兵老师亲授：多线程与高并发从入门到精通，一次彻底搞懂Java多线程与高并发！（ 跳槽涨薪 | 进大厂）
+https://www.bilibili.com/video/BV12i4y1m7V2
+
+3.全套
+二十年IT老兵马士兵用16个小时终于把多线程与高并发讲明白了，从入门到精通带你彻底搞懂Java多线程与高并发	16
+https://www.bilibili.com/video/BV1SW4y1Z7Nj
+
+4.三个版本
+马士兵三个版本的多线程与高并发，从入门到精通
+https://www.bilibili.com/video/BV1KN4112727
+```
+
