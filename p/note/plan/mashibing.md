@@ -123,11 +123,13 @@ Elasticsearch:
     https://www.mashibing.com/subject/1?courseNo=412&courseVersionId=1312    //实战
 ```
 
-###### 多线程高并发
+###### 多线程高并发，jvm
 
 ```
-新课程
+多线程高并发
 https://www.mashibing.com/subject/1?courseNo=205&courseVersionId=2315
+jvm
+https://www.mashibing.com/subject/1?courseNo=419&courseVersionId=1319
 
 一。多线程高并发“在B站搜索 java多线程与高并发”
 1.有线程池
