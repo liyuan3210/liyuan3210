@@ -144,7 +144,8 @@ nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a.pr
 项目
 https://github.com/apache/rocketmq-externals.git
 工程：
-rocketmq-console
+rocketmq-console	//老的
+https://github.com/apache/rocketmq-dashboard	//rocketmq-console改名并迁移到rocketmq-dashboard
 
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
