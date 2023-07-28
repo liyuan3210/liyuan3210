@@ -121,6 +121,10 @@ nginx:
 	
 Elasticsearch:
     https://www.mashibing.com/subject/1?courseNo=412&courseVersionId=1312    //实战
+    
+
+二进制方式部署Kubernetes
+	https://www.mashibing.com/subject/1?courseNo=1178&courseVersionId=1787
 ```
 
 ###### 多线程高并发，jvm
