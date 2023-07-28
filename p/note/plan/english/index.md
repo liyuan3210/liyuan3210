@@ -30,7 +30,11 @@ grammar
 
 ## 三.单词量
 
-word
+扇贝英语(微信登录)
+
+https://www.shanbay.com/
+
+
 
 ## 四.听力与短文
 try see docment and listen short viod
