@@ -7,6 +7,26 @@ https://docs.oracle.com/javase/8/docs/api/index.html
 https://github.com/liyuan3210/java/juc
 ```
 
+### 概要
+
+```
+一。线程基础
+
+二。并发编程的三大特征
+
+三。锁
+
+四。阻塞队列
+
+五。线程池
+
+六。并发集合
+
+七。JUC并发工具
+
+八。异步编程
+```
+
 ## [一．线程，synchronized基础](1-thread-sync.md)
 
 代码：com.liyuan3210.juc.c00	，	com.liyuan3210.juc.c01
