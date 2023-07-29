@@ -66,10 +66,10 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
 	9300端口（es内部通信端口，如果一个集群有多个节点加入，端口进行自增）
 
 配置问题：
-1。启动elasticsearch报错 
+1。启动elasticsearch报错 （应该在宿主机上配置，而不是docker容器里面（容器里面配置无效））
 	[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 	https://www.cnblogs.com/whyblogs/p/15089451.html
-错误原因（应该在宿主机上配置，而不是docker容器里面（容器里面配置无效））：
+错误原因：
     elasticsearch用户拥有的内存权限太小，至少需要262144；
     切换到root用户：
     su root
@@ -168,6 +168,21 @@ $ npm run start
 
 5.访问
 http://127.0.0.1:9100
+```
+
+###### 4.ik分词器插件安装
+
+```
+插件地址
+https://github.com/medcl/elasticsearch-analysis-ik
+elasticsearch-analysis-ik-7.10.2.zip
+
+1.根据es版本下载对应ik插件
+
+2.在es目录“../elasticsearch-7.10.2/plugins”下创建ik目录
+mk ik
+
+3.解压elasticsearch-analysis-ik-7.10.2.zip至创建好的ik目录下
 ```
 
 
