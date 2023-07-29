@@ -48,7 +48,7 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
         ./elasticsearch -E path.data=data3 -E path.logs=log3 -E node.name=node3 -E cluster.name=cluster_es
         还要配置config/elasticsearch.yml:
         https://www.jianshu.com/p/ac5816776204
-        cluster.initial_master_nodes: ["node1", "node2", "node3"]
+        cluster.initial_master_nodes: ["127.0.0.1"]		//如果在容器部署集群，直接填“127.0.0.1”，一般只写一个，也可以用逗号隔开写多个
 	2.2).多个项目启动多个节点（生产推荐）
         ./elasticsearch	-d	//后台启动
         ./elasticsearch	-d	//后台启动
@@ -56,28 +56,33 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
         配置文件elasticsearch.yml
         cluster.name: elasticsearch-es		//集群名称,放开修改
         node.name:node1				//当前集群节点名字,放开
-        network.host:192.168.1.1	//本机ip,放开修改
+        network.host:192.168.1.1	//本机局域网ip，或0.0.0.0
         http.port:9200				//客户端与客户端通信端口,放开
 
 3.启动后浏览器访问
-	http://127.0.0.1:9200
+	http://127.0.0.1:9200	
+默认端口：
+	9200端口（浏览器访问端口，如果一个集群有多个节点加入，端口进行自增）
+	9300端口（es内部通信端口，如果一个集群有多个节点加入，端口进行自增）
 
 配置问题：
 1。启动elasticsearch报错 
 	[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 	https://www.cnblogs.com/whyblogs/p/15089451.html
-错误原因（没用）：
+错误原因（应该在宿主机上配置，而不是docker容器里面（容器里面配置无效））：
     elasticsearch用户拥有的内存权限太小，至少需要262144；
-    (1)切换到root用户：
+    切换到root用户：
     su root
-    (2)输入命令（临时生效）：
+    (1)输入命令（临时生效）：
     sysctl -w vm.max_map_count=262144
     检查修改结果：
     sysctl -a|grep vm.max_map_count
-    (3)修改 /etc/sysctl.conf文件(永久生效)
-    vim /etc/sysctl.conf
+    (2)修改 /etc/sysctl.conf文件(永久生效)
+    echo 'vm.max_map_count=262144' >>  /etc/sysctl.conf
+    或
+    vim /etc/sysctl.conf 添加如下行
     vm.max_map_count=262144
-    (4)使其生效
+    使其生效
     sysctl -p
 
 2.配置jvm堆大小config/jvm.options(不能太小)
