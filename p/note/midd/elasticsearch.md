@@ -37,9 +37,9 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
 2.启动
 	跨域问题（否则插件无法访问）：
 	跨域问题，在ES 安装目录的 conf 文件夹下配置config/elasticsearch.yml
+		network.host: 0.0.0.0
         http.cors.enabled: true 
         http.cors.allow-origin: "*"
-        network.host: 0.0.0.0
     *).单节点启动：
     ./elasticsearch -E path.data=/home/ubuntu-a10/Desktop/soft/es/data1 -E path.logs=/home/ubuntu-a10/Desktop/soft/es/log1 -E node.name=node1 -E cluster.name=cluster_es -E discovery.type=single-node
 	2.1).本机单个项目启动多个节点（配置文件在命令行）
@@ -126,7 +126,9 @@ network.host:192.168.1.x
 $ ./kibana 
 
 默认配置config/kibana.yml文件：
-#elasticsearch.hosts: ["http://localhost:9200"]	//默认
+#elasticsearch.hosts: ["http://localhost:9200"]	//默认不需要修改
+##server.host: "localhost"						//默认需要改成如下
+server.host: "0.0.0.0"
 
 2.启动后浏览器访问
 http://127.0.0.1:5601
