@@ -37,7 +37,8 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
 2.启动
 	跨域问题（否则插件无法访问）：
 	跨域问题，在ES 安装目录的 conf 文件夹下配置config/elasticsearch.yml
-		network.host: 0.0.0.0
+		//single-node模式只要配置如下三项
+		network.host: 0.0.0.0		//如果是单机多节点启动，需要把这项配置成局域网ip
         http.cors.enabled: true 
         http.cors.allow-origin: "*"
     *).单节点启动：
@@ -46,9 +47,11 @@ http://chenzhijun.me/2017/12/01/elasticsearch-install/
         ./elasticsearch -E path.data=data1 -E path.logs=log1 -E node.name=node1 -E cluster.name=cluster_es
         ./elasticsearch -E path.data=data2 -E path.logs=log2 -E node.name=node2 -E cluster.name=cluster_es
         ./elasticsearch -E path.data=data3 -E path.logs=log3 -E node.name=node3 -E cluster.name=cluster_es
-        还要配置config/elasticsearch.yml:
-        https://www.jianshu.com/p/ac5816776204
-        cluster.initial_master_nodes: ["127.0.0.1"]		//如果在容器部署集群，直接填“127.0.0.1”，一般只写一个，也可以用逗号隔开写多个
+        配置config/elasticsearch.yml:
+        	单机多节点见如下配置，下面的nodeX不是操作系统配置的hosts,而是上面./elasticsearch命令启动时node.name的名字
+        	discovery.seed_hosts: ["node1", "node2", "node3"]		//集群所有节点
+			cluster.initial_master_nodes: ["node1"]					//启动初始化时哪个节点作为master
+			//还可以配置节点单独作为master节点，但不作为数据节点，也可以设置节点为master节点同时还为数据节点
 	2.2).多个项目启动多个节点（生产推荐）
         ./elasticsearch	-d	//后台启动
         ./elasticsearch	-d	//后台启动
