@@ -143,11 +143,12 @@ nohup sh /opt/rocketmq/bin/mqbroker -c /opt/rocketmq/conf/2m-2s-sync/broker-a.pr
 ```
 项目
 https://github.com/apache/rocketmq-externals.git
-工程：
-rocketmq-console	//老的
-https://github.com/apache/rocketmq-dashboard	//rocketmq-console改名并迁移到rocketmq-dashboard
-
+https://github.com/apache/rocketmq-dashboard	//rocketmq-console改名并迁移到rocketmq-dashboard	
+rocketmq-console工程（老的）：
 java -jar rocketmq-console-ng-2.0.0.jar --server.port=8081 --rocketmq.config.namesrvAddr=127.0.0.1:9876
+
+rocketmq-dashboard工程：
+
 ```
 
 **2.集群安装(**双主双从（同步双写,异步刷盘）)`工作中常用集群模式：`
@@ -336,6 +337,7 @@ set "JAVA_OPT=%JAVA_OPT% -cp %CLASSPATH%"//这一行技术
 
 插件部署
 https://github.com/apache/rocketmq-externals.git
+https://github.com/apache/rocketmq-dashboard	//rocketmq-console改名并迁移到rocketmq-dashboard	
 下载完后rocketmq-externals\rocketmq-console\src\main\resources\application.properties
 修改两项:
 c	//插件工程端口
