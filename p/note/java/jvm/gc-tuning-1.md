@@ -24,16 +24,24 @@ public class HelloGC {
 
 2. 参数查看命令java -XX:+PrintCommandLineFlags
 
-   **堆内存（堆内存不超过物理内存的3/4）**
+   **堆内存（堆内存不超过物理内存的3/4）**（一般设置相等，减少系统计算资源）
 
-   -XX:MaxHeapSize=15032385536 与-Xms14336M,
+   -XX:MaxHeapSize=15032385536 与-Xmx14336M,
 
-   -XX:MinHeapSize=15032385536与-Xmx14336M 参数含义相等（一般设置相等，减少系统计算资源）
+   -XX:MinHeapSize=15032385536与 参数-Xms14336M含义相等（Xms相当于同时设置**最小堆大小** `MinHeapSize` 和**初始堆大小** `InitialHeapSize`）
+
+   **栈大小(每个线程)**
+   等同于 - XX:ThreadStackSize
 
    **年轻带（年轻代的大小不超过堆内存的3/8）**
-
+	Xmn设置新生代大小,等同于同时设置NewSize和MaxNewSize
    -XX:NewSize=5637144576 / 1024 /1024 =	5376M	   //年轻带大小
    -XX:MaxNewSize=5637144576 / 1024 /1024 = 5376M   //最大年轻带大小
+   
+   **元空间大小(1.8后物理内存决定)**
+   
+   保存java字节码内存区域，-XX:MetaspaceSize=512m
+
 
 3. java -XX:+PrintCommandLineFlags HelloGC    //-XX:+PrintCommandLineFlags打印默认参数
 
