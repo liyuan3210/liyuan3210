@@ -12,19 +12,19 @@
 | 6）。Windows打开WLS2, Mingw-w64编译安装nginx<br/>并windows下安装docker,podman,Containerd<br/>https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md<br/>https://www.cnblogs.com/jxldjsn/p/15799514.html | devOps | 待处理 |
 | 7）。Kubernetes二进制安装（Containerd）<br/>https://www.bilibili.com/video/BV16Z4y1b74y<br/>https://www.bilibili.com/video/BV15g411Y7fs<br/>Containerd容器<br/>https://www.bilibili.com/video/BV1RW4y1x71u<br/>二进制安装Containerd<br/>https://www.bilibili.com/video/BV1N94y1Q7Nj<br/>Containerd操作<br/>https://www.cnblogs.com/yangmeichong/p/16661444.html<br/>容器云/云原生架构成长路线：<br/>https://pan.baidu.com/s/1jDdp3nUz5HF2yTJJ2SuvCQ?pwd=6666<br/>https://www.processon.com/view/link/62bc5d965653bb7bf57c5ccd#map  <br/>containerd:<br/>wget https://github.com/containerd/containerd/releases/download/v1.6.10/containerd-1.6.10-linux-amd64.tar.gz<br/>runc:https://github.com/opencontainers/runc/releases<br/>$ install -m 755 runc.amd64 /usr/local/sbin/runc<br/>解压到目录/usr/local/sbin<br/>cni:https://github.com/containernetworking/plugins/releases<br/>解压到目录/opt/cni/bin | devOps | 待处理 |
 | 8）。mq(rocketmq4.x,kafka2.x)安装更新<br/>mq(rocketmq5.x,kafka3.x)原理，镜像制作 | devOps | 待处理 |
-| 9）。es集群安装及docker镜像制作 | devOps | 待处理 |
+| 9）。es集群安装及docker镜像制作 | devOps | <font color="blue">已处理</font> |
 | 10）。jfrog是啥？？？jfrog是一个二进制存储管理仓库<br/>Flatpak类似ubuntu系统的snap | 工具类 | 待处理 |
 | 11）。c，j s并发 | 语言类 | 待处理 |
 | 12）。nodejs框架（mvc框架） | 语言类 | 待处理 |
 | 13）。rust与golang语言原理了解 | 语言类 | 待处理 |
 | 14）。python包管理<br/>https://www.bilibili.com/video/BV1qW4y1a7fU<br/>p94-p97 模块，包，第三房包概念 | 语言类 | 待处理 |
 | 15）。C语言指针，内存管理 | 语言类 | 待处理 |
-| 16）。1.虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动<br/>2.qemu , qemu-kvm，kvm区别？？？<br/>https://blog.csdn.net/u011619480/article/details/127719913<br/>https://blog.51cto.com/u_15786574/5669932 | devOps | 待处理 |
+| 16）。1.虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动<br/>2.qemu , qemu-kvm，kvm区别？？？<br/>https://blog.csdn.net/u011619480/article/details/127719913<br/>https://blog.51cto.com/u_15786574/5669932 | devOps | <font color="blue">已处理</font> |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
 | 18）。1.翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang<br/>2。chatgpt注册使用(了解) | devOps | <font color="blue">已处理</font> |
 | 19）。1.wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897<br/>2.windows10，11（系统之家...）安装到mac启动，安装到wintogo<br/>https://windows.wxjyxkj.cn/ | devOps | <font color="blue">已处理</font> |
 | 20）。1.1）QEMU + VSCODE内核源码调试（QEMU与Bochs）。<br/>1.2）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 处理中 |
-| 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | 处理中 |
+| 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | <font color="blue">已处理</font> |
 | 22）。select poll epoll原理<br/>https://www.bilibili.com/video/BV1qJ411w7du<br/>https://www.cnblogs.com/yuanwebpage/p/12916424.html | 内核 | 处理中 |
 | 23）。spring-boot-starter自定义模块，java的SPI机制 | java | 待处理 |
 | 24）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
