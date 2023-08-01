@@ -188,6 +188,64 @@ mk ik
 3.解压elasticsearch-analysis-ik-7.10.2.zip至创建好的ik目录下
 ```
 
+### es核心
+
+```
+1.es节点角色
+	master:候选节点
+	data:数据节点
+	data_content:数据内容节点
+	data_hot:热节点
+	data_warm:索引不再定期更新，但仍可查询
+	data_code:冷节点，制度索引
+	Ingest:预处理节点，作用类似于Logstash中的Filter
+	ml:机器学习节点
+	remote_cluster_client:候选客户端节点
+	transform:转换节点
+	voting_only:仅投票节点
+	
+2.es分片
+	分片主要分主分片，副本分片。副本分片是不允许直接修改数据的，只能从主分片进行同步。
+	副本分片主要是增加数据安全与可用性，提高数据并发查询效率
+    2.1)一个索引包含一个或多个分片，在7.0前默认5个主分片，每个主分片一个副本；7.0后默认一个主分片。副本可以在索引创建之后修改数量，但是主分片的数量一旦确定不可修改， 只能创建索引
+    2.2）每个分片都是一个Lucene实例， 有完整的创建索引和处理请求的能力
+    2.3）ES会自动再nodes上做分片均衡
+    2.4）一个doc不可能同时存在于多个主分片中，但是当每个主分片的副本数量不为一时，可以同时存在于多个副本中。
+    2.5）每个主分片和其副本分片不能同时存在于同一个节点上，所以最低的可用配置是两个节点互为主备。
+    
+3.索引
+database(数据库)	index(索引库)
+table(表)			type(类型)在8.0版本会完全删除
+row(行)				document(文档)
+column(列)			field(字段)
+
+kibana使用：
+    # 查询索引product所有数据
+    GET /product/_search
+    # 查询所有索引信息
+    GET _cat/indices?v
+    # 向索引product添加一条id为2的数据
+    # 在7.x以后统一使用“_doc”类型
+    PUT /product/_doc/2
+    {
+      "name":"李四",
+      "des":"描述",
+      "age":11
+    }
+    # 修改数据
+    # put修改，没有传的字段es会直接置空，如果要单独修改某一个字段可以使用post
+    # 或POST /product/_update/2SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    POST /product/_doc/2/_update
+    {
+    "des":"描述2"
+    }
+    # 删除数据
+    DELETE /product/_doc/2
+
+六.RESTAPI
+创建库,表,新增数据可以通过REST接口进行访问操作
+```
+
 
 
 ### 原理
@@ -277,19 +335,6 @@ vi plugin-descriptor.properties
 elasticsearch.version=x.x.x(对应elasticsearch版本)
 
 
-elasticsearch-head：
-https://github.com/mobz/elasticsearch-head
-http://ip:9200/_plugin/head/
-
-
-database(数据库)	index(索引库)
-table(表)			type(类型)
-row(行)				document(文档)
-column(列)			field(字段)
-
-六.RESTAPI
-创建库,表,新增数据可以通过REST接口进行访问操作
-
 七.项目demo
 
 组件使用
@@ -308,10 +353,6 @@ elasticsearch基于lucene（全文检索工具包）框架实现
 	基于b+tree实现，用来保存分词（ik中文分词）后的单词列表，关联文档id
 2.倒排列表（posting list）
 	记录了文档id,位置（单词在文档位置），偏移量
-
-
-
-
 
 
 ```
