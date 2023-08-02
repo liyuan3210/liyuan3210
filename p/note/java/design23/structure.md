@@ -6,7 +6,7 @@
 
 jdk动态代理（被代理的类需要实现接口，代理类不需要实现接口）
 
-cglib动态代理（被代理类不需要实现任何接口，可以是一个单独的类,但被代理的类不能为final（还有目标对象方法不能为final或static））
+cglib动态代理（被代理类不需要实现任何接口，可以是一个单独的类,但被代理的类不能为final（还有目标对象方法不能为final或static））,动态代理还有aspectj
 
 实例：com.liyuan3210.design23.structure.proxy2
 

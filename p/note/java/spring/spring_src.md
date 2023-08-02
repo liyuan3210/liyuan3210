@@ -24,6 +24,7 @@ liyuandf账号:共享资源>course>java>【java】反射
 *.spring-AspectJ
 *.jdk动态代理
 *.CGLIB
+*.静态代理
 2.1）aspectj动态代理安装如下
 	2.1.1).aspectj动态代理安装如下安装配置
 		AspectJ介绍
