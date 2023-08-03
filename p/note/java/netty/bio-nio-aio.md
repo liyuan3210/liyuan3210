@@ -46,3 +46,9 @@ NIO三大核心组件：
 
 3.FileChannel nio文件io（NIO文件读取）
 
+## BIO模型实例：
+
+```
+com.liyuan3210.netty.bio.BIOServer			
+```
+

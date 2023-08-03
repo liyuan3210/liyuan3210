@@ -60,9 +60,9 @@ FileChannel，DatagramChannel，ServerSocketChannel与SocketChannel
 
 **实例：**
 
-1.聊天系统	//NIOServer.java与NIOClient.java
+1.聊天系统	//**NIOServer.java与NIOClient.java（简单nio）**
 
-2.聊天系统	//groupchat包下
+2.聊天系统	//**groupchat包下（NIO实现聊天工具）**
 
 3.零拷贝案例分析  //zerocopy包下
 
