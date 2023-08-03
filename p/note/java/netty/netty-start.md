@@ -157,6 +157,10 @@ http协议升级websocket协议
 
 ### 10. google protoBuff编码解码(效率高解决跨语言问题)
 
+Protocol Buffers官网：https://protobuf.dev/
+https://github.com/protocolbuffers/protobuf
+百度云盘/liyuandf：云硬盘>env>env-linux>midd>netty>protobuf
+
 **编码与解码数据流向：**
 
 1.客户端向服务端发送数据
