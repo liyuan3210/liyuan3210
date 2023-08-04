@@ -41,9 +41,11 @@
 	ps a
 ```
 
-## 二．伪分布式安装(单台机器)
+## 二．HDFS伪分布式安装(单台机器)
 
 <img src="img/hadoop_v2-v3.png" style="zoom: 80%;" />
+
+**1) 单机安装hdfs**
 
 ```
 hadoop配置../etc/hadoop(伪分布式安装)
@@ -51,7 +53,7 @@ hadoop配置../etc/hadoop(伪分布式安装)
 
 	hadoop-env.sh
 		3.x要对进程角色,环境变量进行限制,最下面配置(echo $JAVA_HOME)
-		export JAVA_HOME=/home/liyuan/soft/jre1.8.0_162
+		export JAVA_HOME=/opt/jdk-11.0.2
 		export HDFS_NAMENODE_USER=liyuan
 		export HDFS_DATANODE_USER=liyuan
 		export HDFS_SECONDARYNAMENODE_USER=liyuan
@@ -60,30 +62,32 @@ hadoop配置../etc/hadoop(伪分布式安装)
 		<configuration>
 			<property>
 				<name>fs.defaultFS</name>
-				<value>hdfs://node1:9820</value>
+				<value>hdfs://node1或172.18.1.20:9820</value>
 			</property>
-			//hadoop.tmp.dir问题(hdfs-site里面,在namenode下面),所以要改变目录
+			//hadoop.tmp.dir目录下面包含namenode,datanode节点信息。tmp名字貌似取的有点不妥,需要指定目录
 			<property>
 				<name>hadoop.tmp.dir</name>
-				<value>/home/liyuan/soft/hd3</value>
+				<value>/data/hadoop</value>
 			</property>
 		</configuration>
 
-	hdfs-site.xml//配置副本(伪分布式不要写1以上)
+	hdfs-site.xml(伪分布式不要写1以上)
 		<configuration>
+			//配置副本
 			<property>
 				<name>dfs.replication</name>
 				<value>1</value>
 			</property>
-			<property>		//secondary文件合并工作
+			//secondary文件合并工作
+			<property>
 				<name>dfs.namenode.secondary.http-address</name>	
-				<value>node1:9868</value>
+				<value>node1或172.18.1.20:9868</修改配置value>
 			</property>
 		</configuration>
 		
 	workers配置从节点(在3.x中的配置)2.x中是slave
 	默认为localhost,单台伪分布式可以不用配置
-	192.168.157.65
+	172.18.1.20
 
 	伪分布式启动
 	格式化(头一次启动时)
@@ -96,10 +100,12 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	sbin/stop-dfs.sh
 
 	浏览器访问
-	http://192.168.5.18:9870
+	http://172.18.1.20:9870
 ```
 
-## 三．配置全分布式(多台机器)
+## 三．HDFS配置全分布式(多台机器)
+
+**2）多台机器安装hdfs**
 
 ```
 环境
@@ -109,9 +115,10 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	node3									X
 	node4									X
 
-	配置
+	修改配置（基于上节配置做调整）：
 		hadoop-env.sh不变
 		core-site.xml不变
+	非必配项：
 		hdfs-site.xml
 			dfs.replication	共3台机器,副本可以设置为2
 			dfs.namenode.secondary.http-address	可以设置secondary为66机器(非namenode节点)
@@ -139,16 +146,16 @@ hadoop配置../etc/hadoop(伪分布式安装)
 					<value>liyuan</value>
 				</property>
 			
-	workers配置(也可以配置node1上去)
+	1）workers配置(只配置从节点)
 		node2
 		node3
 		node4
 		
-	分发
+	2）分发
 		使用scp命令
 			scp -r /home/liyuan/soft/hadoop-3.1.2  liyuan@192.168.157.166:/home/liyuan/soft/
 
-	启动
+	3）启动
 		格式化(头一次启动时)
 		bin/hdfs namenode -format
 
@@ -175,7 +182,60 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	?
 ```
 
-## 四．HA配置
+## 五. YARN单机，分布式安装
+
+**3).YARN单机安装**
+
+```
+1.）etc/hadoop/mapred-site.xml:
+<property>
+	<name>mapreduce.framework.name</name>
+	<value>yarn</value>
+</property>
+<property>
+	<name>mapreduce.application.classpath</name>
+	<value>/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/mapreduce/lib/*</value>
+</property>
+
+2）etc/hadoop/yarn-site.xml
+<property>
+	<name>yarn.nodemanager.aux-services</name>
+	<value>mapreduce_shuffle</value>
+</property>
+<property>
+	<name>yarn.nodemanager.env-whitelist</name>
+<value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME</value>
+</property>
+
+3）配置hadoop-env.sh
+export YARN_RESOURCEMANAGER_USER=root
+export YARN_NODEMANAGER_USER=root
+
+4）启动
+$ sbin/start-yarn.sh
+
+YARN管理控制台
+http://172.18.1.20:8088/
+```
+
+**4).YARN分布式安装**
+
+```
+基于上面“4）YARN单机安装”不变
+
+1.hadoop/etc/hadoop/workers配置(只配置从节点)
+	node2或IP
+	node3或IP
+	node4或IP
+	
+2）启动
+$ sbin/start-yarn.sh
+
+YARN管理控制台
+http://172.18.1.20:8088/
+```
+
+## 四．HDFS配置HA
 
 ```
 环境
@@ -327,7 +387,7 @@ hadoop配置../etc/hadoop(伪分布式安装)
 		hdfs --daemon stop zkfc
 ```
 
-## 五．YARN配置HA
+## 六．YARN配置HA
 
 ```
 环境
