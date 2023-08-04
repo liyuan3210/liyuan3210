@@ -43,6 +43,8 @@
 
 ## 二．伪分布式安装(单台机器)
 
+<img src="img/hadoop_v2-v3.png" style="zoom: 80%;" />
+
 ```
 hadoop配置../etc/hadoop(伪分布式安装)
 	解压后可以把share/doc删掉
