@@ -529,14 +529,8 @@ http://172.18.1.20:8088/
 			
 	查看yarn浏览器:
 	http://192.168.157.168:8088
-	
-	测试hadoop例子程序
-		cd ../share/hadoop/mapreduce
-		运行
-		hadoop jar hadoop-mapreduce-examples-xxxxx.jar wordcount /hdfs文件(数据目录或文件) /root/不存在或空的目录
-		
-		hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /data /root/不存在或空的目录
-		
+
+////////////////////
 		
 错误问题(beyond the 'VIRTUAL' memory limit):
 	https://www.cnblogs.com/scw2901/p/4331682.html
@@ -570,7 +564,13 @@ http://172.18.1.20:8088/
 ## 六．dev
 
 ```
-客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
+1).测试hadoop例子程序
+		cd ../share/hadoop/mapreduce
+		运行
+		hadoop jar hadoop-mapreduce-examples-xxxxx.jar wordcount /hdfs文件(数据目录或文件) /root/不存在或空的目录
+		hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /data /root/不存在或空的目录
+		
+2).客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
 		hadoop-client-api-3.1.2.jar
 		hadoop-client-runtime-3.1.2.jar
 		hadoop-client-minicluster-3.1.2.jar	//做单元测试
