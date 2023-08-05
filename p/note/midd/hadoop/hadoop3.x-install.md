@@ -1,5 +1,7 @@
 # hadoop3.x安装
 
+## HDFS与YARN都可以单独启动
+
 ## 一．环境配置
 
 ```
@@ -46,6 +48,8 @@
 <img src="img/hadoop_v2-v3.png" style="zoom: 80%;" />
 
 **1) 单机安装hdfs**
+
+参考：hadoop-3.3.6/share/doc/hadoop/hadoop-project-dist/hadoop-common/SingleCluster.html
 
 ```
 hadoop配置../etc/hadoop(伪分布式安装)
@@ -108,7 +112,7 @@ hadoop配置../etc/hadoop(伪分布式安装)
 **2）多台机器安装hdfs**
 
 ```
-环境
+环境（docker容器为了方便，把secondary放在了ndoe1节点）
 							NN		SNN		DN
 	node1(主)				X
 	node2(secondary)				X		X
@@ -153,7 +157,7 @@ hadoop配置../etc/hadoop(伪分布式安装)
 		
 	2）分发
 		使用scp命令
-			scp -r /home/liyuan/soft/hadoop-3.1.2  liyuan@192.168.157.166:/home/liyuan/soft/
+			scp -r /home/liyuan/soft/hadoop-3.1.2  liyuan@172.18.1.20:/home/liyuan/soft/
 
 	3）启动
 		格式化(头一次启动时)
@@ -182,12 +186,19 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	?
 ```
 
-## 五. YARN单机，分布式安装
+## 五. YARN单机，分布式HA安装
 
 **3).YARN单机安装**
 
+参考YARN部分：
+
+hadoop-3.3.6/share/doc/hadoop/hadoop-project-dist/hadoop-common/SingleCluster.html
+
 ```
+0.)准备好zookeeper资源
+
 1.）etc/hadoop/mapred-site.xml:
+从官网copy过来有$HADOOP_MAPRED_HOME环境变量要配置，或者直接写绝对路径
 <property>
 	<name>mapreduce.framework.name</name>
 	<value>yarn</value>
@@ -218,17 +229,55 @@ YARN管理控制台
 http://172.18.1.20:8088/
 ```
 
-**4).YARN分布式安装**
+**4).YARN分布式HA安装**
+
+参考：
+
+hadoop-3.3.6/share/doc/hadoop/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html
 
 ```
 基于上面“4）YARN单机安装”不变
 
-1.hadoop/etc/hadoop/workers配置(只配置从节点)
+1）hadoop/etc/hadoop/workers配置(只配置从节点)
 	node2或IP
 	node3或IP
 	node4或IP
 	
-2）启动
+2）etc/hadoop/yarn-site.xml
+<property>
+  <name>yarn.resourcemanager.ha.enabled</name>
+  <value>true</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.cluster-id</name>
+  <value>cluster1</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.ha.rm-ids</name>
+  <value>rm1,rm2</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.hostname.rm1</name>
+  <value>master1</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.hostname.rm2</name>
+  <value>master2</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.webapp.address.rm1</name>
+  <value>master1:8088</value>
+</property>
+<property>
+  <name>yarn.resourcemanager.webapp.address.rm2</name>
+  <value>master2:8088</value>
+</property>
+<property>
+  <name>hadoop.zk.address</name>
+  <value>zk1:2181,zk2:2181,zk3:2181</value>
+</property>
+
+2）启动(如果hdfs在node1启动，那yarn的ha启用建议在其他node2节点启动)
 $ sbin/start-yarn.sh
 
 YARN管理控制台
