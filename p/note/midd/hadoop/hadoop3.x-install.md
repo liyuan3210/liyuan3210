@@ -564,6 +564,9 @@ http://172.18.1.20:8088/
 ## 六．dev
 
 ```
+idea导出jar:
+https://cloud.tencent.com/developer/article/2248452
+
 1).测试hadoop例子程序
 		cd ../share/hadoop/mapreduce
 		运行
