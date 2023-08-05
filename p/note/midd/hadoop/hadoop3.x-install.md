@@ -277,9 +277,8 @@ hadoop-3.3.6/share/doc/hadoop/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.htm
   <value>zk1:2181,zk2:2181,zk3:2181</value>
 </property>
 
-2）启动(如果hdfs在node1启动，那yarn的ha启用建议在其他node2节点启动)
+3）启动(如果hdfs在node1启动，那yarn的ha启用建议在其他node2节点启动)
 $ sbin/start-yarn.sh
-
 YARN管理控制台
 http://172.18.1.20:8088/
 ```
@@ -566,13 +565,12 @@ http://172.18.1.20:8088/
 				start-dfs.sh(包含启动namenode)
 		4.分布式启动yarn
 				start-yarn.sh
-	20190808hadoop目录结构(soft目录下面):
-		hd2(hadoop2.x HDFS文件目录)
-		hd3(hadoop3.x HDFS文件目录)
-		ha2(hadoop2.x yarn计算文件目录)
-		ha3(hadoop3.x yarn计算文件目录)
-		
-	客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
+```
+
+## 六．dev
+
+```
+客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
 		hadoop-client-api-3.1.2.jar
 		hadoop-client-runtime-3.1.2.jar
 		hadoop-client-minicluster-3.1.2.jar	//做单元测试
@@ -580,8 +578,7 @@ http://172.18.1.20:8088/
 	运行方式
 	java -classpath mywc.jar mywc.Test2 a b c
 	
-	
-	编写类:
+编写类:
 		1.客户端main
 		2.map
 		3.reduce
@@ -589,35 +586,4 @@ http://172.18.1.20:8088/
 		　　<name>mapreduce.reduce.java.opts</name>
 		　　<value>-Xmx256M</value>
 		</property>
-```
-
-## 六．dev
-
-```
-20190808环境启动步骤:
-		1.在hosts配置ip对应的节点node,并scp分发
-		2.首先要启动zk服务node2,node3,node4
-		3.分布式启动hdfs
-				start-dfs.sh(包含启动namenode)
-		4.分布式启动yarn
-				start-yarn.sh
-	20190808hadoop目录结构(soft目录下面):
-		hd2(hadoop2.x HDFS文件目录)
-		hd3(hadoop3.x HDFS文件目录)
-		ha2(hadoop2.x yarn计算文件目录)
-		ha3(hadoop3.x yarn计算文件目录)
-		
-	客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
-		hadoop-client-api-3.1.2.jar
-		hadoop-client-runtime-3.1.2.jar
-		hadoop-client-minicluster-3.1.2.jar	//做单元测试
-	
-	运行方式
-	java -classpath mywc.jar mywc.Test2 a b c
-	
-	
-	编写类:
-		1.客户端main
-		2.map
-		3.reduce
 ```
