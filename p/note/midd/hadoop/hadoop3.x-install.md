@@ -186,7 +186,7 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	?
 ```
 
-## 五. YARN单机，分布式HA安装
+## 四. YARN单机，分布式HA安装
 
 **3).YARN单机安装**
 
@@ -283,7 +283,7 @@ YARN管理控制台
 http://172.18.1.20:8088/
 ```
 
-## 四．HDFS配置HA
+## 五．HDFS配置HA
 
 ```
 环境：
@@ -403,40 +403,73 @@ http://172.18.1.20:8088/
 		scp core-site.xml hdfs-site.xml hadoop-env.sh liyuan@node3:/home/liyuan/soft/hadoop-3.1.2/etc/hadoop
 		scp core-site.xml hdfs-site.xml hadoop-env.sh liyuan@node4:/home/liyuan/soft/hadoop-3.1.2/etc/hadoop
 	
-	HA格式化
-		两种
-			1.之前有过格式化元数据信息,最简单同步执行(备节点执行)
+    5）启动
+        5.1.启动journalnode(每个节点node1,node2,node3手动启动)
+            hdfs --daemon start journalnode
+        停止journalnode	
+            hdfs --daemon stop journalnode
+        5.2.node1格式化(主节点任意选择一台格式化)
+            hdfs namenode -format
+            	查看集群id
+            	cat soft/ha3/dfs/name/current/V*
+        5.3.node1执行启动namenode
+          	hadoop-daemon.sh start namenode
+          	也可以使用hdfs --daemon start
+        5.4.node2执行同步
+          	hdfs namenode -bootstrapStandby
+          		再查看集群Id(与node1相同)
+            	cat soft/ha3/dfs/name/current/V*
+        5.5.node1格式化zk,创建注册目录(前提让zk集群启动起来)
+          hdfs zkfc -formatZK
+        5.6.启动集群(再次启动hdfs集群启动此命令)
+           start-dfs.sh(包含启动两个namenode)
+		
+	HA格式化，两种情况（格式化）
+			1.之前有过格式化namenode元数据信息,在备节点执行同步(备节点执行)
 			hdfs namenode -initializeSharedEdits
-			2.重新格式化一个namenode节点(当前使用的)
+			2.之前没有格式化namenode元数据信息，在主节点执行(当前使用的)
 			hdfs namenode -bootstrapStandby
-			
-	1.启动journalnode(每个节点node1,node2,node3手动启动)
-		hdfs --daemon start journalnode
-	停止journalnode	
-		hdfs --daemon stop journalnode
-	2.node1格式化(主节点任意选择一台格式化)
-		hdfs namenode -format
-		查看集群id
-		cat soft/ha3/dfs/name/current/V*
-	3.node1执行启动namenode
-	  hadoop-daemon.sh start namenode
-	  也可以使用hdfs --daemon start
-	4.node2执行同步
-	  hdfs namenode -bootstrapStandby
-		再查看集群Id(与node1相同)
-		cat soft/ha3/dfs/name/current/V*
-	5.node1格式化zk,创建注册目录(前提让zk集群启动起来)
-	  hdfs zkfc -formatZK
-	6.启动集群(再次启动hdfs集群启动此命令)
-		start-dfs.sh(包含启动两个namenode)
-	6）测试
+	测试
 		干掉node1(active状态的节点),观测切换情况
 		hdfs --daemon stop namenode
 		启动node1
 		hdfs --daemon start namenode
 		干掉node2 zkfc
 		hdfs --daemon stop zkfc
+		
 ```
+
+## 六．mapreduce客户端开发
+
+```
+idea导出jar:
+https://cloud.tencent.com/developer/article/2248452
+
+1).测试hadoop例子程序
+		cd ../share/hadoop/mapreduce
+		运行
+		hadoop jar hadoop-mapreduce-examples-xxxxx.jar wordcount /hdfs文件(数据目录或文件) /root/不存在或空的目录
+		hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /data /root/不存在或空的目录
+		
+2).客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
+		hadoop-client-api-3.1.2.jar
+		hadoop-client-runtime-3.1.2.jar
+		hadoop-client-minicluster-3.1.2.jar	//做单元测试
+	
+	运行方式
+	java -classpath mywc.jar mywc.Test2 a b c
+	
+编写类:
+		1.客户端main
+		2.map
+		3.reduce
+		<property>
+		　　<name>mapreduce.reduce.java.opts</name>
+		　　<value>-Xmx256M</value>
+		</property>
+```
+
+-----------------------------------------------------------------------------------------------end
 
 ## 六．YARN配置HA
 
@@ -562,34 +595,4 @@ http://172.18.1.20:8088/
 				start-dfs.sh(包含启动namenode)
 		4.分布式启动yarn
 				start-yarn.sh
-```
-
-## 六．dev
-
-```
-idea导出jar:
-https://cloud.tencent.com/developer/article/2248452
-
-1).测试hadoop例子程序
-		cd ../share/hadoop/mapreduce
-		运行
-		hadoop jar hadoop-mapreduce-examples-xxxxx.jar wordcount /hdfs文件(数据目录或文件) /root/不存在或空的目录
-		hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /data /root/不存在或空的目录
-		
-2).客户端开发依赖包../hadoop-3.1.2/share/hadoop/client/
-		hadoop-client-api-3.1.2.jar
-		hadoop-client-runtime-3.1.2.jar
-		hadoop-client-minicluster-3.1.2.jar	//做单元测试
-	
-	运行方式
-	java -classpath mywc.jar mywc.Test2 a b c
-	
-编写类:
-		1.客户端main
-		2.map
-		3.reduce
-		<property>
-		　　<name>mapreduce.reduce.java.opts</name>
-		　　<value>-Xmx256M</value>
-		</property>
 ```
