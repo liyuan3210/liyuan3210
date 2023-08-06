@@ -58,9 +58,9 @@ hadoop配置../etc/hadoop(伪分布式安装)
 	hadoop-env.sh
 		3.x要对进程角色,环境变量进行限制,最下面配置(echo $JAVA_HOME)
 		export JAVA_HOME=/opt/jdk-11.0.2
-		export HDFS_NAMENODE_USER=liyuan
-		export HDFS_DATANODE_USER=liyuan
-		export HDFS_SECONDARYNAMENODE_USER=liyuan
+		export HDFS_NAMENODE_USER=root
+		export HDFS_DATANODE_USER=root
+		export HDFS_SECONDARYNAMENODE_USER=root
 
 	core-site.xml//3.x后端口默认是9820
 		<configuration>
@@ -82,10 +82,10 @@ hadoop配置../etc/hadoop(伪分布式安装)
 				<name>dfs.replication</name>
 				<value>1</value>
 			</property>
-			//secondary文件合并工作
+			<!-- secondary文件合并工作,这个最好配置在非主节点上 -->
 			<property>
 				<name>dfs.namenode.secondary.http-address</name>	
-				<value>node1或172.18.1.20:9868</修改配置value>
+				<value>node2或172.18.1.20:9868</修改配置value>
 			</property>
 		</configuration>
 		
@@ -289,56 +289,59 @@ http://172.18.1.20:8088/
 环境
 				NN-1		NN-2		DN		ZK		ZKFC		JNN
 	node1(主)	X										X			X
-	node2(备)				X			X		X		X			X
-	node3								X		X					X	
+	node2(备)				X		   X	   X		X			X
+	node3								X		X					 X	
 	node4								X		X	
 	
 	解释:
 		zk: zookeeper(可以单独部署)
-		ZKFC: 必须与namenode在一起,健康检查namenode(active)
+		ZKFC: 必须与namenode在一起,防止健康检查namenode网络不通导(active)
 		JNN: 存储共享日志信息(集群存在,信息同步)
-
-	QJM(NFS已过时)
-	https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
-
-	1.node1
-	cd ../hadoop-3.1.2/etc
-	cp -r hadoop hadoop-full	//首先进行备份
-
-	hadoop-env.sh修改
-		#export HDFS_SECONDARYNAMENODE_USER=liyuan
-		export HDFS_ZKFC_USER=liyuan
-		export HDFS_JOURNALNODE_USER=liyuan
 		
-	core-site.xml修改
+	QJM(NFS已过时)：
+	hadoop-3.3.6/share/doc/hadoop/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
+
+部署步骤（基于上面基于步骤调整）：
+	1）hadoop-env.sh修改（注释掉SECONDARYNAMENODE，再添加如下两项）
+		#export HDFS_SECONDARYNAMENODE_USER=root	
+		export HDFS_ZKFC_USER=root
+		export HDFS_JOURNALNODE_USER=root
+		
+	2）core-site.xml修改
 		<configuration>
+			<!-- 改成mycluster -->
 			<property>
 				<name>fs.defaultFS</name>
 				<value>hdfs://mycluster</value>
 			</property>
+			<!-- 修改数据目录 -->
 			<property>
 				<name>hadoop.tmp.dir</name>
-				<value>/home/liyuan/soft/ha3</value> //修改hahdtmp目录
+				<value>/opt/hadoop/ha</value>
 			</property>
+			<!-- 添加 -->
 			<property>
 				<name>ha.zookeeper.quorum</name>
 				<value>node2:2181,node3:2181,node4:2181</value>
 			</property>
 		</configuration>
 
-	hdfs-site.xml修改
+	3）hdfs-site.xml修改
 		<configuration>
 			<!-- 把这个secondary配置去掉
 			<property>		
 				<name>dfs.namenode.secondary.http-address</name>	
-				<value>192.168.157.65:9868</value>
+				<value>172.18.1.20:9868</value>
 			</property>
 			-->
+			<!-- 添加mycluster -->
 			<property>
 				<name>dfs.nameservices</name>
 				<value>mycluster</value>
 			</property>
-			<property>	//mycluster要与上面定义的value对应
+			<!-- 添加mycluster，mycluster要与上面定义的value对应 -->
+			<!-- 添加.nn1,nn2属于逻辑名称，不是配置的hosts主机名，与上下文对于就ok -->
+			<property>
 				<name>dfs.ha.namenodes.mycluster</name>
 				<value>nn1,nn2</value>
 			</property>
@@ -371,24 +374,24 @@ http://172.18.1.20:8088/
 				<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
 			</property>
 			
-			//namenode1由于网络原因触发zk事件namenode2变为active,当namenode1网络恢复会有两个namenode
-			//首先会强制切换另外一个为standby,然后提升备选namenode
-			//切换状态时候需要一个隔离方法,远程控制对法机器变为standby,所以需要指定id_rsa
+			<!-- namenode1由于网络原因触发zk事件namenode2变为active,当namenode1网络恢复会有两个namenode -->
+			<!-- 首先会强制切换另外一个为standby,然后提升备选namenode -->
+			<!-- 切换状态时候需要一个隔离方法,远程控制对法机器变为standby,所以需要指定id_rsa -->
 			<property>
 				<name>dfs.ha.fencing.methods</name>
 				<value>sshfence</value>
 			</property>
 			<property>
 				<name>dfs.ha.fencing.ssh.private-key-files</name>
-				<value>/home/liyuan/.ssh/id_rsa</value>
+				<value>/root/.ssh/id_rsa</value>
 			</property>
-			
-			<property>	//Journal edits日志存储路径
+			<!-- Journal edits日志存储路径 -->
+			<property>
 				<name>dfs.journalnode.edits.dir</name>
-				<value>/home/liyuan/soft/ha3/journalnode</value>
+				<value>/data/hadoop/journalnode</value>
 			</property>
-			
-			<property>	//自动故障转移
+			<!-- 自动故障转移 -->
+			<property>
 				<name>dfs.ha.automatic-failover.enabled</name>
 				<value>true</value>
 			</property>
