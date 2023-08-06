@@ -286,19 +286,19 @@ http://172.18.1.20:8088/
 ## 四．HDFS配置HA
 
 ```
-环境
+环境：
 				NN-1		NN-2		DN		ZK		ZKFC		JNN
 	node1(主)	X										X			X
 	node2(备)				X		   X	   X		X			X
 	node3								X		X					 X	
 	node4								X		X	
 	
-	解释:
+解释:
 		zk: zookeeper(可以单独部署)
 		ZKFC: 必须与namenode在一起,防止健康检查namenode网络不通导(active)
 		JNN: 存储共享日志信息(集群存在,信息同步)
 		
-	QJM(NFS已过时)：
+参考QJM(NFS已过时)：
 	hadoop-3.3.6/share/doc/hadoop/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
 
 部署步骤（基于上面基于步骤调整）：
@@ -397,7 +397,7 @@ http://172.18.1.20:8088/
 			</property>
 		</configuration>
 		
-	分发
+	4）分发
 		在当前目录
 		scp core-site.xml hdfs-site.xml hadoop-env.sh liyuan@node2:/home/liyuan/soft/hadoop-3.1.2/etc/hadoop
 		scp core-site.xml hdfs-site.xml hadoop-env.sh liyuan@node3:/home/liyuan/soft/hadoop-3.1.2/etc/hadoop
@@ -429,7 +429,7 @@ http://172.18.1.20:8088/
 	  hdfs zkfc -formatZK
 	6.启动集群(再次启动hdfs集群启动此命令)
 		start-dfs.sh(包含启动两个namenode)
-	7.测试
+	6）测试
 		干掉node1(active状态的节点),观测切换情况
 		hdfs --daemon stop namenode
 		启动node1
