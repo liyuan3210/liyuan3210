@@ -76,7 +76,8 @@ sysctl --system # 生效
         $ sysctl --system
     7>时间同步(每个节点执行)
         yum install ntpdate -y
-        ntpdate time.windows.com	//同步时间
+        ntpdate time.windows.com		//同步时间
+        crontab -e						//制定时间同步计划
         0 12 * * * * /usr/sbin/ntpdate 192.168.0.1	//定时器同步
         集群时间同步方案
         https://www.cnblogs.com/liushui-sky/p/9203657.html
