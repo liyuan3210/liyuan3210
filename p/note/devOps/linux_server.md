@@ -1,5 +1,5 @@
 # linux服务器常用命令
-[ubuntu](#ubuntu)<br/>
+[ubuntu/debian](#ubuntu)<br/>
 [centos/rockylinux](#centos)<br/>
 [suse](#suse)<br/>
 [tar,rar,zip压缩,解压](#tar_rar_zip) <br/>
@@ -350,7 +350,7 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
 
-### ubuntu:
+### ubuntu/debian:
 <div id="ubuntu"/>
 ```
 官网: https://ubuntu.com/
@@ -396,6 +396,58 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
 		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
 		命令生效:source /etc/profile
+-------------------------------------------------------------------------
+debian
+1.debian安装完无法使用apt命令
+https://blog.csdn.net/jiaqi_327/article/details/21610397
+	1）.vi /etc/apt/sources.list
+	先对文件做备份再编辑sources.list
+	cp sources.list sources.list.back
+
+	2）.配置/etc/apt/sources.list文件
+	//下面注释掉
+	deb cdrom:[Debian GNU/Linux 7.4.0 _Wheezy_ - Official i386 DVD Binary-1 20    140208-12:26]/ wheezy contrib main
+	//加入代码 
+	deb http://http.us.debian.org/debian/ stable main
+	3）.执行更新命令
+	apt-get update
+	
+	debian配置阿里源
+		注释所有项目，添加如下
+		deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+		deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+		deb https://mirrors.aliyun.com/debian-security/ bullseye-security main
+		deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main
+		deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+		deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+		deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+		deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+
+2.无法直接使用shutdown,ifconfig命令，需要如下
+/sbin/shutdown，/sbin/ifconfig等
+
+3.网络配置：
+	网络配置参考
+	https://tool.4xseo.com/a/243.html
+1）.添加虚拟机virtualbox三个网卡，链接方式如下:
+	1.1）.网络地址转换（NAT）
+	1.2）.仅主机（Host-Only）网络，选择好虚拟机创建好的网络
+	1.3）.桥接网卡，局域网中的ip（这个可以不用配置）
+	这样设置进入电脑后，网络对外是可以ping通，但是没有对外ip，需要如下配置:
+
+2）.首先查看电脑网卡情况
+$ ip addr
+上面命令查看会有enp0s8，enp0s9两个网卡，我们就可以做如下配置
+
+3）.配置/etc/network/interfaces文件
+auto enp0s8
+iface enp0s8 inet dhcp
+
+auto enp0s9
+iface enp0s9 inet dhcp
+
+4）.重启网络生效
+systemctl restart networking
 ```
 
 ### centos/rockylinux：
