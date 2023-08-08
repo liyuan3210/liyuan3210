@@ -10,116 +10,85 @@
 
 ### 一.git开发配置,ssh免密登录,及openssh
 <div id="gituse1"/>
-```
-linux登录方式：
-	安装ssh(确认是root用户)
-	apt-get install openssh-server
-	ps aux | grep sshd 查看是否启动成功
+##### ssh安装，远程登录，仓库克隆
 
-	1.密码登录
-		命令行登录:
-		ssh -l root 192.168.11.214 -p 22
-		或
-		ssh root@192.168.11.214
-		
-		利用ssh协议git仓库克隆(创建基础仓库见git笔记)
-		git clone linux用户@192.168.5.21:/srv/r2.git r2								//默认端口22
-		git clone ssh://liyuan@liyuan.imblog.in:40025/home/liyuan/git/src.git src	//指定端口
-		
-		SSH Secure工具登录:
-		"algorithm negotiation failed"问题(配置):
-		/etc/ssh/sshd_config最后一行添加如下：
-		Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc
-		MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96
-		KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org
-		
-		重启生效:
-		service sshd restart
+```
+1.服务安装ssh(确认是root用户)
+	$ apt-get install openssh-server
+	$ ps aux | grep sshd 查看是否启动成功
+	启动服务:
+	$ systemctl start sshd
+2. 远程登录方式:
+	$ ssh -l root 192.168.11.214 -p 22	//指定root用户与22端口
+	或
+	$ ssh root@192.168.11.214				//默认22端口
+3.克隆仓库
+	$ git clone linux用户@192.168.5.21:/srv/r2.git r2	// srv是系统的根目录
+```
+
+##### ssh秘钥生成，配置免密登录
+
+```
+1.免密登录(无密码免登录)
+	A(客户端)免登录B(服务端)
 	
-	2.免密登录(无密码免登录)
-		A(客户端)免登录B(服务端)
-		
-		1>在A机器命令生成id_rsa.pub公钥与id_rsa私钥
-		ssh-keygen -t rsa -P ""
-		或
-		ssh-keygen
-		
-		一直回车
-		
-		2>B机器配置
-		把生成的公钥copy至B机器做如下操作(.ssh目录的权限必须是700,authorized_keys文件权限必须是600)
-		//没有.ssh文件夹需要自己新建
-		cat /home/liyuan/.ssh/id_rsa.pub >> /home/liyuan/.ssh/authorized_keys
-		
-		B机器配置修改
-		vi /etc/ssh/sshd_config
-		AuthorizedKeysFile		%h/.ssh/authorized_keys //注释拿掉
-		
-		重启生效
-		service sshd restart
-		
-		3>A机器配置(客户端访问者配置)
-		在.ssh目录创建config 或者
-		配置/etc/ssh/ssh_config文件
-		Host centos
-		 Port 27807
-		 User liyuan
-		 HostName 15256m136e.imwork.net
-		 PreferredAuthentications publickey
-		 IdentityFile C:\Users\liyuan\.ssh\id_rsa_nopwd_centos
-		
-		本地验证？
-		ssh local
-		
-		然后在A上就可以免登录B了
-		ssh liyuan@B机器IP地址
-		
-		windows多个秘钥对配置:
-		http://blog.csdn.net/huluedeai/article/details/51417289
-	3.git ssh配置
-		在.ssh目录下新建config文件添加如下配置:
+	1.1)在A机器命令生成id_rsa.pub公钥与id_rsa私钥（文件在当前用户.ssh目录下）
+	$ ssh-keygen -t rsa -P "" 
+	或
+	$ ssh-keygen //一直回车
+	
+	1.2）从A机器拷贝公钥文件至B机器并重命名authorized_keys放在B机器.ssh目录(.ssh目录权限必须是700,authorized_keys文件权限必须是600)
+	//A机器重命名id_rsa.pub文件(没有.ssh文件夹需可以自己新建)
+	$ cat /home/liyuan/.ssh/id_rsa.pub>>> >> /home/liyuan/.ssh/authorized_keys
+	//在A机器通过scp命令发送到B机器，并给权限
+	$ chmod -R 700 .ssh还有chmod -R 600 authorized_keys
+	重启B机器sshd服务:
+	$ systemctl restart sshd
+	
+	1.3) 配置A机器，B机器vi /etc/ssh/sshd_config		//两台都要配置
+	AuthorizedKeysFile		%h/.ssh/authorized_keys //注释拿掉
+	两台重启服务:
+	$ systemctl restart sshd
+	
+	1.4）验证
+		ssh localhost
+	
+	1.5）结论
+		* 远程登录A源机器需要私钥id_rsa
+		* 远程登录B目标机需要公钥id_rsa.pub>>>authorized_keys
+		* 如果两台需要相互访问，那公钥与私钥都需要拷贝至.ssh目录
+```
+
+##### git配置免密提交,github免密详细配置
+
+```
+1.git ssh配置
+		1.1）在.ssh目录下新建config文件添加如下配置:
+		github需要github账号通过公钥id_rsa_git.pub进行登记
 		# github key
-		Host my_github
+		Host mygithub
 			Port 22
 			User git
 			HostName github.com
 			PreferredAuthentications publickey
 			IdentityFile C:\Users\liyuan\.ssh\id_rsa_git	//私钥文件
+		如果是自己服务器搭建ssh,那只需要根据上面把ssh免密登录配置好就行
 		# linux ssh
-		Host my_ssh
+		Host myssh
 			Port 22
 			User git
 			HostName 192.168.80.164
 			PreferredAuthentications publickey
 			IdentityFile C:\Users\liyuan\.ssh\id_rsa_ssh	//私钥文件
-		
-		客户端配置
-		在.ssh目录创建config 或者
-		配置/etc/ssh/ssh_config文件
-		
-		服务端配置
-		/etc/ssh/sshd_config
 			
 		使用实例：
-		git clone git@my_github:liyuan3210/test.git test
-		ssh liyuan@my_ssh
-	4.集群批量配置(可以相互访问)
-		创建.ssh目录,配置好秘钥对 与 config。
-			Host node1
-			 Port 22
-			 User liyuan
-			 HostName node1
-			 PreferredAuthentications publickey
-			 IdentityFile /home/liyuan/.ssh/id_rsa_nopwd
-			Host node2
-			 ...
-			Host node3
-			 ...
+		git clone git@mygithub:liyuan3210/test.git test
+		ssh liyuan@myssh
 	
 问题
 	1.Permissions 0664 for '.../id_rsa' are too open.
 	授权:chmod 600 id_rsa
--------------------------------------------------------------------------
+----------------------------------github免密登录详细配置
 github SSH配置:
 	一.密码登录
 		1.创建公钥,私钥文件(如果已经创建了的就不用再次创建了)

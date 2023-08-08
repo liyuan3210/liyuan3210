@@ -137,7 +137,7 @@
 
 		移除脚本
 		sudo update-rc.d -f svnd.sh remove
-----------------------------------------------------------------------------
+--------------------------------------------------------crontab定时器
 nano编辑器使用
 	ctrl+O:保存写入
 	ctrl+x:退出
@@ -153,29 +153,7 @@ nano编辑器使用
 	
 	重启crontab
 	service cron restart/start/stop
-----------------------------------------------------------------------------
-安装时常见的问题及解决方法                               
-	1.根据提示创建指定的目录
-	mkdir /var/log/mysql
-	chown -R ly:ly /var/log/mysql
-
-	2.根据提示用locate xx找到已有的库文件，创建软链接
-	ln -s /usr/lib/x86_64-linux-gnu/原有找到的路径 /usr/lib64/需要加入的路径
-
-	·LD_LIBRARY_PATH添加系统共享路径
-
-	·cannot find -lc(通常解决方法)
-	/usr/bin/ld: cannot find -lc
-	/usr/bin/ld: cannot find -lltdl
-	/usr/bin/ld: cannot find -lXtst
-	解决方法：
-	错误1缺少libc的LIB
-	错误2缺少libltdl的LIB
-	错误3缺少libXtst的LIB
-
-	ubuntu在线安装插件方法
-	sudo apt-get install libaio1
-
+--------------------------------------------------jdk环境变量配置
 SVN,JRE环境变量配置old：
 	修改文件:/etc/profile
 	
@@ -189,57 +167,11 @@ SVN,JRE环境变量配置old：
 		export JAVA_HOME=/home/liyuan/soft/jre1.8.0_162
 		export PATH=$JAVA_HOME/bin:$PATH
 		export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH
-----------------------------------------------------------------------------
-linux ip配置：
-RedHat(静态ip配置)
-	依次修改以下文件：
-		/etc/sysconfig/network
-		/etc/sysconfig/network-scripts/ifcfg-eth0
-
-	1./etc/sysconfig/network
-		NETWORKING=yes
-		NETWORKING_IPV6=no
-		HOSTNAME=WKM                  #主机名
-		GATEWAY=192.168.53.1       #默认网关
-
-	2./etc/sysconfig/network-scripts/ifcfg-eth0
-		DEVICE=eth0                       #设备名称
-		NETMASK=255.255.255.0             #子网掩码
-		IPADDR=192.168.53.147             #IP地址
-		BOOTPROTO=static                  #【none | static | bootp | dhcp】引导时不使用协议|静态分配|
-
-	3.重启生效
-		使IP地址生效：
-	   /sbin/ifdown eth0
-	   /sbin/ifup eth0
-	   
-	   配置dns解析
-	   echo "nameserver 211.98.1.28">> /etc/resolv.conf 
-	   
-	   通知网关更新信息：
-	   /etc/init.d/network restart
-
-ubuntu16静态ip配置?????还有问题
-	1.编辑配置文件
-		vi /etc/network/interfaces
-
-	2.内容
-	auto eth0
-	iface eth0 inet static
-	address 192.168.174.4 #ip地址
-	netmask 255.255.255.0
-	gateway 192.168.174.2 #网关
-	dns-nameserver 192.168.157.2 #dns服务器
-
-	3.重启(生效)
-		/etc/init.d/networking restart
-
-	4.ubuntu host配置
+------------------------------所有操作系统配置hosts
+	host配置（ip与域名绑定）
 		vi /etc/hosts
 		ip 域名
-		
-	http://420dec74.ngrok.io/ftp/02.swf
-	
+------------------------------杂项
 	查看网关
 		1.ip route show
 		2.route -n 或 netstat -rn
@@ -260,33 +192,28 @@ ubuntu16静态ip配置?????还有问题
 	
 查看usb设备
 	lsusb
-----------------------------------------------------------------------------
-服务管理systemctl
-	systemctl enable kubelet docker
-	systemctl start docker		//启动docker服务
+------------------------服务管理工具systemctl
+systemctl是Linux系统中的一个命令行工具，用于控制systemd系统和服务管理器。
+systemd是现代Linux发行版的默认初始化系统，用于引导用户空间并管理系统进程。
 
-	systemctl is-enabled servicename.service #查询服务是否开机启动
-	systemctl enable *.service #开机运行服务
-	systemctl disable *.service #取消开机运行
-	systemctl start *.service #启动服务
-	systemctl stop *.service #停止服务
-	systemctl restart *.service #重启服务
-	systemctl reload *.service #重新加载服务配置文件
-	systemctl status *.service #查询服务运行状态
+服务管理systemctl
+	//不带.service形式操作
+	systemctl enable kubelet sshd
+	systemctl start sshd					#启动sshd服务
+	//带.service
+	systemctl enable --now sshd.service	 #启动并开机启动
+	systemctl enable sshd.service #开机运行服务
+	systemctl disable sshd.service #取消开机运行
+	systemctl start sshd.service #启动服务
+	systemctl stop sshd.service #停止服务
+	systemctl restart sshd.service #重启服务
+	systemctl reload sshd.service #重新加载服务配置文件
+	systemctl status sshd.service #查询服务运行状态
 	
 下载centos docker镜像
 	https://blog.csdn.net/qq_43285577/article/details/83413046
 	centos docker镜像下载地址
 	https://hub.docker.com/_/centos/
-	
-centos安装google chrome
-	1.wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-	2.su root
-	3.dnf localinstall google-chrome-stable_current_x86_64.rpm
-	保证dnf命令安装：
-	$ yum install epel-release
-	$ yum install dnf
-	$ dnf --version
 
 问题
 1.centos7解决开机不启动网卡问题(刚装完centos7后会出现的问题)
@@ -299,55 +226,6 @@ https://www.cnblogs.com/qiang-qiang/p/10652921.html
 vi /etc/ssh/sshd_config
 UseDNS=no (#注释拿掉,值改为no)
 systemctl restart sshd	(重启生效)
-
-----------------------------------------------------------------------------
-linux王者归来
-http://www.tup.com.cn/booksCenter/book_05630601.html
-* linux分区概念（ MBR分区概念）
-1>.主分区：
-主分区也叫引导分区，是系统安装的分区,如windows的c盘，linux的`/`挂载目录，一个硬盘只能建4个主分区(包括扩展分区)
-2>.扩展分区：
-扩展分区是一个概念，实际在硬盘中是看不到的，也无法直接使用扩展分区，扩展分区下可以划分`逻辑分区`
-3>.逻辑分区：
-扩展分区上可以建多个逻辑分区，是一块存储介质，和操作系统，主分区没什么关系，是`独立的`
-4>.激活分区：
-一个硬盘最多可以有4个主分区，你可以在4个主分区上都安装系统，而系统从硬盘启动启动时，并不知道你打算从哪个分区启动系统。所以，需要将其中一个设为“活动”属性
-5>.MBR与GPT(uefi)分区的区别
-http://www.360doc.com/content/18/0901/23/11935121_783145790.shtml
-
-* linux分区方案
-	https://jingyan.baidu.com/article/c33e3f48ec471aea15cbb538.html
-	分区命令:https://www.cnblogs.com/hanson1/p/7102206.html
-	https://blog.csdn.net/explore_world/article/details/79081587
-	https://wenku.baidu.com/view/9a4f5c71647d27284a735118.html
-	
-	分区方案(总硬盘大小486G)：
-		/				//类似windows的C分,主分区,系统和软件(实际分配160G)
-		/swap			//交换分区 内存*2(实际分配16G)
-		/boot			//内核引导文件存放分区建议60-120M(实际使用170M)(实际分配2G)
-		/home			//类似windows的D分区(实际分配311G)
-	ubuntu18分区问题(需要分EFI分区,2G足够)错误信息如下:
-		No EFI system partition was found。...
-	高级部分：
-		/tmp				//临时文件目录,对于多用户系统或网络服务来说是有必要的.即使程序运行时产生大量的临时文件,或者用户进行了错误操作
-		文件系统的其它部分乃是安全的.因为文件系统的这一部分仍然承受着读写操作,所以它通常会比其它部分更容易出现问题
-		/var/log			//系统日志分区,如果建立这单独分区,这样即使系统的日志文件出现了问题,也不会影响操作系统的主分区
-
-		/usr				//系统存放软件地方,如有可能将最大空间分给它
-		/opt				//用户存放第三方软件的目录,不过还是习惯存放在/usr/local
-		/var 				//该目录存放的文件经常变动,/var/www/shop部署程序
-		/sbin			//是root管理员执行,系统管理员执行的命令
-		/srv 				//一些服务启动后,这些服务需要访问的数据目录,如www服务器需要的网页可以放在/srv/www
-
-	lost+found 可以删除么?
-
-linux分布式
-	1.LVM文件系统(HA-LVM解决容错问题)
-	2.LVS集群
-----------------------------------------------------------------------------
-GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
-	https://zhidao.baidu.com/question/271278332.html
-	https://www.cnblogs.com/chenmingjun/p/8506995.html
 ```
 
 ### ubuntu/debian:
@@ -389,15 +267,46 @@ GNOME(速度快稳定,适合服务器) 与 KDE(软件丰富)
 	版本介绍（网上资料）：
 	https://www.cnblogs.com/EasonJim/p/7119331.html
 	
-三。服务启动/停止
-
-四。环境变量配置
+三。环境变量配置
 		·/etc/profile:所有用户,当用户使用UI第一次登录时才执行。
 		·/etc/bash.bashrc:所有用户shell，所属于所有用户，当用户打开一个shell时执行。
 		·~/.bashrc: 专属用户自己的bash信息，用户打开一个shell时执行
 		命令生效:source /etc/profile
--------------------------------------------------------------------------
-debian
+---------------------------------安装debian存命令行问题
+1.无法直接使用shutdown,ifconfig命令，需要如下/sbin/shutdown，/sbin/ifconfig等。
+配置环境变量vi .bashrc
+export PATH=/sbin:$PATH
+
+2.网络配置：
+	网络配置参考
+	https://tool.4xseo.com/a/243.html
+1）.添加虚拟机virtualbox三个网卡，链接方式如下:
+	1.1）.网络地址转换（NAT）
+	1.2）.仅主机（Host-Only）网络，选择好虚拟机创建好的网络
+	1.3）.桥接网卡，局域网中的ip（这个可以不用配置）
+	这样设置进入电脑后，网络对外是可以ping通，但是没有对外ip，需要如下配置:
+
+2）.根据下面配置一下网络
+------------------------------ubuntu，debian配置dhcp与静态ip
+	首先得到网卡名称：ip addr or ls /sys/class/net/，以下假设网卡名为eth0，实际中应替换为自己实际的名称。	
+	1.编辑配置文件
+		vi /etc/network/interfaces
+	2.使用DHCP方式，在文件底部添加
+		auto eth0
+		allow-hotplug eth0
+		iface eth0 inet dhcp
+	2.手动设置IP(静态ip)
+	auto eth0
+	iface eth0 inet static
+    	address 192.168.0.7
+    	netmask 255.255.255.0
+    	gateway 192.168.0.254
+    	# dns-nameserver 192.168.157.2
+
+	3.重启(生效)
+		/etc/init.d/networking restart
+		$ systemctl restart networking
+------------------------------debian配置阿里源（无法使用apt源问题）
 1.debian安装完无法使用apt命令
 https://blog.csdn.net/jiaqi_327/article/details/21610397
 	1）.vi /etc/apt/sources.list
@@ -422,38 +331,21 @@ https://blog.csdn.net/jiaqi_327/article/details/21610397
 		deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
 		deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
 		deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
-
-2.无法直接使用shutdown,ifconfig命令，需要如下
-/sbin/shutdown，/sbin/ifconfig等
-
-3.网络配置：
-	网络配置参考
-	https://tool.4xseo.com/a/243.html
-1）.添加虚拟机virtualbox三个网卡，链接方式如下:
-	1.1）.网络地址转换（NAT）
-	1.2）.仅主机（Host-Only）网络，选择好虚拟机创建好的网络
-	1.3）.桥接网卡，局域网中的ip（这个可以不用配置）
-	这样设置进入电脑后，网络对外是可以ping通，但是没有对外ip，需要如下配置:
-
-2）.首先查看电脑网卡情况
-$ ip addr
-上面命令查看会有enp0s8，enp0s9两个网卡，我们就可以做如下配置
-
-3）.配置/etc/network/interfaces文件
-auto enp0s8
-iface enp0s8 inet dhcp
-
-auto enp0s9
-iface enp0s9 inet dhcp
-
-4）.重启网络生效
-systemctl restart networking
 ```
 
 ### centos/rockylinux：
 <div id="centos"/>
 ```
 官网: https://www.centos.org
+
+centos安装google chrome
+	1.wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+	2.su root
+	3.dnf localinstall google-chrome-stable_current_x86_64.rpm
+	保证dnf命令安装：
+	$ yum install epel-release
+	$ yum install dnf
+	$ dnf --version
 
 当我们下载CentOS 7 时会发现有几个版本可以选择，如下：
 	1、CentOS-7-DVD版本：DVD是标准安装盘，一般下载这个就可以了。
