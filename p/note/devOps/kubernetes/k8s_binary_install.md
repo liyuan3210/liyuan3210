@@ -336,7 +336,7 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 EOF
 
-#考本etcd.service文件到启动目录
+#拷贝etcd.service文件到各个节点启动目录
 cp etcd.service /usr/lib/systemd/system/
 ```
 
