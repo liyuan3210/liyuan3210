@@ -48,6 +48,7 @@ mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
 
 ```
 1>创建ca-config.json文件/自签证书颁发机构（CA）
+生成默认的：$ cfssl print-defaults config > ca-config.json
 cat > ca-config.json<< EOF
 {
   "signing": {
@@ -81,9 +82,14 @@ cat > ca-csr.json<< EOF
     {
       "C": "CN",
       "L": "ShangHai",
-      "ST": "ShangHai"
+      "ST": "ShangHai",
+      "O": "liyuan3210",
+	  "OU": "CN"
     }
-  ]
+  ],
+  "ca":{
+		"expiry": "87600h"
+  }
 }
 EOF
 
@@ -96,6 +102,7 @@ cat > server-csr.json<< EOF
 {
   "CN": "etcd",
   "hosts": [
+    "127.0.0.1",
     "192.168.122.242",
     "192.168.122.84",
     "192.168.122.177"
@@ -108,7 +115,9 @@ cat > server-csr.json<< EOF
     {
       "C": "CN",
       "L": "ShangHai",
-      "ST": "ShangHai"
+      "ST": "ShangHai",
+      "O": "liyuan3210",
+      "OU": "CN"
     }
   ]
 }
