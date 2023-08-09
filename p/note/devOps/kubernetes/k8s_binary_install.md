@@ -96,14 +96,9 @@ cat > server-csr.json<< EOF
 {
   "CN": "etcd",
   "hosts": [
-    "127.0.0.1",
-    "192.168.56.107",
-    "192.168.56.111",
-    "192.168.56.112",
-	"192.168.56.113",
-	"192.168.56.114",
-	"192.168.56.115",
-	"192.168.56.116"
+    "192.168.122.242",
+    "192.168.122.84",
+    "192.168.122.177"
   ],
   "key": {
     "algo": "rsa",
@@ -113,9 +108,7 @@ cat > server-csr.json<< EOF
     {
       "C": "CN",
       "L": "ShangHai",
-      "ST": "ShangHai",
-      "O": "liyuan3210",
-	  "OU": "CN"
+      "ST": "ShangHai"
     }
   ]
 }
@@ -244,7 +237,6 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kube
 # 查看
 ls kube-proxy*pem
 kube-proxy-key.pem kube-proxy.pem
-
 ```
 
 
@@ -257,7 +249,7 @@ wget https://github.com/etcd-io/etcd/releases/download/v3.4.9/etcd-v3.4.9-linux-
 
 tar xzvf etcd-v3.4.9-linux-amd64.tar.gz  //解压后安装只需etcd	， etcdctl两个执行文件即可
 
-创建etcd自定义安装目录：
+在/opt创建etcd自定义安装目录：
 
 mkdir etcd&&mkdir etcd/bin etcd/cfg etcd/ssl
 
@@ -365,6 +357,7 @@ systemctl enable etcd
 8>节点etcdctl命令数据访问验证
 
 ```
+创建/opt/etcd/client目录
 1>生成client配置文件
 cfssl print-defaults csr > client.json
 2>创建ca-config.json文件
@@ -388,7 +381,7 @@ cat > ca-config.json<< EOF
   }
 }
 EOF
-2>拷贝文件到跟目录下
+2>在/opt/etcd/ssl拷贝如下文件到/opt/etcd/client目录
 	ca-key.pem  ca.pem
 3>生成文件
 	cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client.json | cfssljson -bare client
@@ -397,17 +390,17 @@ EOF
 数据访问验证：
 
 ```
+首先进入etcd命令目录下/opt/etcd
 添加值：
-etcdctl --cacert=/root/etcdclient2/ca.pem \
---cert=/root/etcdclient2/client.pem \
---key=/root/etcdclient2/client-key.pem \
+./etcdctl --cacert=/opt/etcd/client/ca.pem \
+--cert=/opt/etcd/client/client.pem \
+--key=/opt/etcd/client/client-key.pem \
 --endpoints https://192.168.122.84:2379 put foo2 hello
 取值：
-etcdctl --cacert=/root/etcdclient2/ca.pem \
---cert=/root/etcdclient2/client.pem \
---key=/root/etcdclient2/client-key.pem \
---endpoints https://192.168.122.242:2379 \
-get foo2 hello
+./etcdctl --cacert=/opt/etcd/client/ca.pem \
+--cert=/opt/etcd/client/client.pem \
+--key=/opt/etcd/client/client-key.pem \
+--endpoints https://192.168.122.242:2379 get foo2 hello
 ```
 
 
