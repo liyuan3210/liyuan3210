@@ -26,7 +26,9 @@
 
 6.keepalived的LVS高可用搭建
 
-[7.软路由](app/route.md)
+7.keepalived的haproxy高可用搭建
+
+[8.软路由](app/route.md)
 
 ​		1）集线器，交换机，路由器区别
 
