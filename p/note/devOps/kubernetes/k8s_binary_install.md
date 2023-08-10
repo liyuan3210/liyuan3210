@@ -464,7 +464,6 @@ EOF
 **需要改的字段：**
 
 ```
-etcdservers	//etcd集群ip
 bind-address //主节点Ip
 advertise-address //主节点Ip
 ```
