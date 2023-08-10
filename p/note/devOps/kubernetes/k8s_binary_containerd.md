@@ -157,7 +157,7 @@ ETCD_NAME="etcd-1"
 ETCD_DATA_DIR="/opt/etcd/data"
 ETCD_LISTEN_PEER_URLS="https://192.168.56.112:2380"
 ETCD_LISTEN_CLIENT_URLS="https://192.168.56.112:2379,https://127.0.0.1:2379"
-Clustering]
+#[Clustering]
 ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.56.112:2380"
 ETCD_ADVERTISE_CLIENT_URLS="https://192.168.56.112:2379"
 ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.56.112:2380,etcd-2=https://192.168.56.113:2380,etcd-3=https://192.168.56.114:2380"
@@ -198,21 +198,21 @@ EOF
 
 2.7）安装包,ssl,配置文件同步到节点
 
-```
+```bash
 # 同步集群证书文件/opt/ssl
-$ scp -r /opt/ssl root@node3:/opt/
-$ scp -r /opt/ssl root@node4:/opt/
-$ scp -r /opt/ssl root@node5:/opt/
+scp -r /opt/ssl root@node3:/opt/
+scp -r /opt/ssl root@node4:/opt/
+scp -r /opt/ssl root@node5:/opt/
 
 # 同步etcd 程序，ssl,cfg文件
-$ scp -r /opt/etcd root@node3:/opt/
-$ scp -r /opt/etcd root@node4:/opt/
-$ scp -r /opt/etcd root@node5:/opt/
+scp -r /opt/etcd root@node3:/opt/
+scp -r /opt/etcd root@node4:/opt/
+scp -r /opt/etcd root@node5:/opt/
 
 # 同步服务启动程序
-$ scp /opt/etcd/cfg/etcd.service root@node3:/usr/lib/systemd/system/
-$ scp /opt/etcd/cfg/etcd.service root@node4:/usr/lib/systemd/system/
-$ scp /opt/etcd/cfg/etcd.service root@node5:/usr/lib/systemd/system/
+scp /opt/etcd/cfg/etcd.service root@node3:/usr/lib/systemd/system/
+scp /opt/etcd/cfg/etcd.service root@node4:/usr/lib/systemd/system/
+scp /opt/etcd/cfg/etcd.service root@node5:/usr/lib/systemd/system/
 ```
 
 注意要修改各个节点的/opt/etcd/cfg/etcd.conf文件
@@ -230,7 +230,7 @@ ETCD_INITIAL_CLUSTER				//集群节点数组
 2.8）启动各个节点
 
 ```
-$ systemctl daemon-reload && systemctl enable --now etcd
+$ systemctl daemon-reload && systemctl enable --now etcd && systemctl status etcd
 ```
 
 ###### 3.ectd集群验证
@@ -252,12 +252,12 @@ $ systemctl daemon-reload && systemctl enable --now etcd
 
 3.1）etcd健康检查
 
-```
+```bash
 # 健康检查
-$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380 endpoint health
+$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints="https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380" endpoint health
 
 # 性能检查
-$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380 endpoint check perf
+$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints=https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380 check perf
 ```
 
 
