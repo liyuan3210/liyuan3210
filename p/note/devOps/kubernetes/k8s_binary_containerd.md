@@ -1253,5 +1253,71 @@ for i in k8s-master2 k8s-master3 k8s-worker1;do scp  kube-proxy.service $i:/usr/
 systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status kube-proxy
 ```
 
+##### 四.网络组件calico，CoreDNS部署及ngxin部署验证
+
+```
+一。网络组件calico，CoreDNS部署及ngxin部署验证
+	
+	1.calico安装部署
+	wget https://docs.projectcalico.org/v3.19/manifests/calico.yaml
+	修改文件
+	3683             - name: CALICO_IPV4POOL_CIDR
+	3684               value: "10.244.0.0/16"
+	执行文件
+	$ kubectl apply -f calico.yaml
+	查看
+	$ kubectl get pods -A
+	
+	2.CoreDNS安装部署
+	$ wget https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/coredns/coredns.yaml.base
+	$ cp coredns.yaml.base  coredns.yaml
+	执行文件
+	kubectl apply -f coredns.yaml
+	
+	3.部署验证
+cat >  nginx.yaml  << "EOF"
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-web
+spec:
+  replicas: 2
+  selector:
+    name: nginx
+  template:
+    metadata:
+      labels:
+        name: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.19.6
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-nodeport
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001
+      protocol: TCP
+  type: NodePort
+  selector:
+    name: nginx
+EOF
+	
+	执行文件：
+	kubectl apply -f nginx.yaml
+	验证：
+	$ kubectl get pods -o wide
+	$ kubectl get all
+	
+```
+
 
 
