@@ -254,10 +254,10 @@ $ systemctl daemon-reload && systemctl enable --now etcd && systemctl status etc
 
 ```bash
 # 健康检查
-$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints="https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380" endpoint health
+$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints="https://192.168.56.112:2379,https://192.168.56.113:2379,https://192.168.56.114:2379" endpoint health
 
 # 性能检查
-$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints=https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380 check perf
+$ ETCDCTL_API=3 /opt/etcd/etcdctl --write-out=table --cacert=/opt/ssl/ca.pem --cert=/opt/etcd/ssl/etcd.pem --key=/opt/etcd/ssl/etcd-key.pem --endpoints=https://192.168.56.112:2379,https://192.168.56.113:2379,https://192.168.56.114:2379 check perf
 ```
 
 ##### 二。安装kubernetes主节点(master)
@@ -344,8 +344,8 @@ $ ls kube-apiserver*pem	//查看
 2.3）.生成token文件
 
 ```bash
-$ cat > token.csv << EOF 
-$(head -c 16 /dev/urandom | od -An -t x | tr -d ' '),kubelet-bootstrap,10001,"system:kubelet-bootstrap" 
+$ cat > /opt/kubernetes/ssl/token.csv << EOF
+$(head -c 16 /dev/urandom | od -An -t x | tr -d ' '),kubelet-bootstrap,10001,"system:kubelet-bootstrap"
 EOF
 # 说明：
 # 创建TLS机制所需要token
@@ -369,33 +369,42 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --runtime-config=api/all=true \
   --enable-bootstrap-token-auth \
   --service-cluster-ip-range=10.96.0.0/16 \
-  --token-auth-file=/etc/kubernetes/ssl/token.csv \
+  --token-auth-file=/opt/kubernetes/ssl/token.csv \
   --service-node-port-range=30000-32767 \
-  --tls-cert-file=/etc/kubernetes/ssl/kube-apiserver.pem  \
-  --tls-private-key-file=/etc/kubernetes/ssl/kube-apiserver-key.pem \
-  --client-ca-file=/etc/kubernetes/ssl/ca.pem \
-  --kubelet-client-certificate=/etc/kubernetes/ssl/kube-apiserver.pem \
-  --kubelet-client-key=/etc/kubernetes/ssl/kube-apiserver-key.pem \
-  --service-account-key-file=/etc/kubernetes/ssl/ca-key.pem \
-  --service-account-signing-key-file=/etc/kubernetes/ssl/ca-key.pem  \
+  --tls-cert-file=/opt/kubernetes/ssl/kube-apiserver.pem  \
+  --tls-private-key-file=/opt/kubernetes/ssl/kube-apiserver-key.pem \
+  --client-ca-file=/opt/ssl/ca.pem \
+  --kubelet-client-certificate=/opt/kubernetes/ssl/kube-apiserver.pem \
+  --kubelet-client-key=/opt/kubernetes/ssl/kube-apiserver-key.pem \
+  --service-account-key-file=/opt/ssl/ca-key.pem \
+  --service-account-signing-key-file=/opt/ssl/ca-key.pem  \
   --service-account-issuer=api \
-  --etcd-cafile=/etc/etcd/ssl/ca.pem \
-  --etcd-certfile=/etc/etcd/ssl/etcd.pem \
-  --etcd-keyfile=/etc/etcd/ssl/etcd-key.pem \
-  --etcd-servers=https://192.168.56.112:2380,https://192.168.56.113:2380,https://192.168.56.114:2380 \
+  --etcd-cafile=/opt/ssl/ca.pem \
+  --etcd-certfile=/opt/etcd/ssl/etcd.pem \
+  --etcd-keyfile=/opt/etcd/ssl/etcd-key.pem \
+  --etcd-servers=https://192.168.56.112:2379,https://192.168.56.113:2379,https://192.168.56.114:2379 \
   --enable-swagger-ui=true \
   --allow-privileged=true \
   --apiserver-count=3 \
   --audit-log-maxage=30 \
   --audit-log-maxbackup=3 \
   --audit-log-maxsize=100 \
-  --audit-log-path=/var/log/kube-apiserver-audit.log \
+  --audit-log-path=/opt/kubernetes/logs/kube-apiserver-audit.log \
   --event-ttl=1h \
   --alsologtostderr=true \
   --logtostderr=false \
-  --log-dir=/var/log/kubernetes \
+  --log-dir=/opt/kubernetes/logs/kube-apiserver \
   --v=4"
 EOF
+
+# 不认识的标识（最新k8s版本）
+  --insecure-port=0 \
+  https://zhuanlan.zhihu.com/p/598823122
+  --enable-swagger-ui=true \
+  https://blog.csdn.net/yuezhilangniao/article/details/120171212
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/opt/kubernetes/logs/kube-apiserver \
 ```
 
 2.5）.创建kube-apiserver服务启动文件
