@@ -876,9 +876,28 @@ $ tar -xf cri-containerd-cni-1.7.3-linux-amd64.tar.gz -C /
 创建containerd目录
 $ mkdir /etc/containerd
 
-生成配置文件
+默认生成配置文件
 $ containerd config default > /etc/containerd/config.toml
 
+下面仅默认生成的文件需要执行
+sed -i 's@systemd_cgroup = false@systemd_cgroup = true@' /etc/containerd/config.toml
+sed -i 's@k8s.gcr.io/pause:3.6@registry.aliyuncs.com/google_containers/pause:3.6@' /etc/containerd/config.toml
+```
 
+1.3）下载 runc（可以使用which runc查看替换位置）
+
+进行下载:
+https://github.com/opencontainers/runc
+
+```
+$ chmod +x runc.amd64
+$ mv runc.amd64 /usr/local/sbin/runc
+```
+
+1.4）启动containerd
+
+```
+$ systemctl enable --now containerd		//启动
+$ systemctl status containerd			//查看状态
 ```
 
