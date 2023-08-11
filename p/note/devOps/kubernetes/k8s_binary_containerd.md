@@ -456,3 +456,93 @@ systemctl daemon-reload && systemctl enable --now kube-apiserver && systemctl st
 ```
 
 使用journalctl -xe查看启动错误信息
+
+###### 3.部署kubectl
+
+3.1）创建kubectl证书请求文件
+
+```json
+cat > /opt/kubernetes/ssl/admin-csr.json<< EOF
+{
+  "CN": "admin",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "ShangHai",
+      "ST": "ShangHai",
+      "O": "system.masters",
+      "OU": "system"
+    }
+  ]
+}
+EOF
+# 说明：
+# 	后续kube-apiserver使用RBAC对客户端（如kubelet,kube-proxy,pod）请求进行授权.
+# 	kube-apiserver预定义了一些RBAC使用的RoleBindings,如cluster-admin将Group system:masters与Role Cluster-admin绑定.
+# 	该Role授予了调用kube-apiserver的所有API的权限.
+# 	上面文件"O"指定该证书的Group为system:masters,kubelet使用该证书访问kube-apiserver时，由于证书被CA签名，所以认证通过，同时由于证书用户组经过预授权的system:masters,所以被授予访问所有的API的权限；
+# 	注:
+# 	这个admin证书，是将来生成管理员用的kubeconfig配置文件用的，现在我们一般建议使用RBAC来对kubernetes进行角色权限控制，
+# 	kubernetes将证书中的CN字段作为user,O字段作为Group；
+# 	"O"："system:masters",必须是system:masters，否则后面kubectl create clusterrolebinding报错。
+```
+
+3.2）生成证书
+
+```
+$ cfssl gencert -ca=/opt/ssl/ca.pem -ca-key=/opt/ssl/ca-key.pem -config=/opt/ssl/ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin
+$ ls admin*pem	//查看
+```
+
+3.3）生成kubeconfig配置文件(总共四步，生成kube.config文件)
+
+```bash
+# kube.config为kubectl的配置文件，包含访问apiserver的所有信息，如apiserver地址，CA证书和自身使用的证书
+//配置哪个集群,证书
+$ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube.config
+//证书角色管理员
+$ kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=kube.config
+//设置安全上下文
+$ kubectl config set-context kubernetes --cluster=kubernetes --user=admin --kubeconfig=kube.config
+//设置安全上下文
+$ kubectl config set-context kubernetes --kubeconfig=kube.config
+```
+
+3.4）准备kubectl配置文件并进行角色绑定
+
+```bash
+$ mkdir ~/.kube
+$ cp kube.config ~/.kube/config
+$ kubectl create clusterrolebinding kube-apiserver:kubelete-apis --clusterrole=system:kubelet-api-admin --user kubernetes --kubeconfig=/root/.kube/config
+```
+
+3.5)查看集群状态
+
+```bash
+export KUBECONFIG=$HOME/.kube/config
+
+查看集群信息
+kubectl cluster-info
+
+查看集群组件状态
+kubectl get componentstatuses
+
+查看命名空间中资源对象
+kubectl get all --all-namespaces
+```
+
+3.6)同步到剩下master节点
+
+```
+在node2,node3执行:
+$ mkdir /root/.kube
+拷贝：
+scp /root/.kube/config node2:/root/.kube/config
+scp /root/.kube/config node3:/root/.kube/config
+```
+
