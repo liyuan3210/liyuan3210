@@ -854,3 +854,31 @@ systemctl enable --now kube-scheduler
 systemctl status kube-scheduler
 ```
 
+##### 三.安装kubernetes工作节点(worker)
+
+###### 1.下载安装containerd
+
+1.1）下载containerd安装包
+
+https://github.com/containerd/containerd
+
+需要下载cri-containerd-cni版本的(包含cri,cni组件),ri-containerd-cni-1.7.3-linux-amd64.tar.gz
+
+1.2）解压安装(解压到跟目录/,因为包含了etc,opt,usr)
+
+```
+$ tar -xf cri-containerd-cni-1.7.3-linux-amd64.tar.gz -C /
+```
+
+1.2）生成配置文件并修改
+
+```
+创建containerd目录
+$ mkdir /etc/containerd
+
+生成配置文件
+$ containerd config default > /etc/containerd/config.toml
+
+
+```
+
