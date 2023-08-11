@@ -358,6 +358,7 @@ EOF
 2.4）.创建kube-apiserver.conf配置文件（不同节点配置不同）
 
 ```bash
+# kubernetes-v1.27.4版本
 cat > /opt/kubernetes/cfg/kube-apiserver.conf << "EOF"
 KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
   --anonymous-auth=false \
@@ -648,6 +649,7 @@ $ kubectl config set-context system:kube-controller-manager --kubeconfig=kube-co
 4.4）.创建kube-controller-manager.conf配置文件
 
 ```bash
+# kubernetes-v1.27.4版本
 cat > /opt/kubernetes/cfg/kube-controller-manager.conf << "EOF"
 KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --secure-port=10257 \
@@ -682,6 +684,35 @@ EOF
 --alsologtostderr=true
 --logtostderr=false
 --log-dir=/opt/kubernetes/logs
+
+# kubernetes-v1.21.14版本
+cat > /opt/kubernetes/cfg/kube-controller-manager.conf << "EOF"
+KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
+  --secure-port=10257 \
+  --bind-address=127.0.0.1 \
+  --kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+  --service-cluster-ip-range=10.96.0.0/16 \
+  --cluster-name=kubernetes \
+  --cluster-signing-cert-file=/opt/ssl/ca.pem \
+  --cluster-signing-key-file=/opt/ssl/ca-key.pem \
+  --allocate-node-cidrs=true \
+  --cluster-cidr=10.244.0.0/16 \
+  --experimental-cluster-signing-duration=87600h \
+  --root-ca-file=/etc/kubernetes/ssl/ca.pem \
+  --service-account-private-key-file=/opt/ssl/ca-key.pem \
+  --leader-elect=true \
+  --feature-gates=RotateKubeletServerCertificate=true \
+  --controllers=*,bootstrapsigner,tokencleaner \
+  --horizontal-pod-autoscaler-use-rest-clients=true \
+  --horizontal-pod-autoscaler-sync-period=10s \
+  --tls-cert-file=/opt/kubernetes/ssl/kube-controller-manager.pem \
+  --tls-private-key-file=/opt/kubernetes/ssl/kube-controller-manager-key.pem \
+  --use-service-account-credentials=true \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/opt/kubernetes/logs \
+  --v=2"
+EOF
 ```
 
 4.5）.创建kube-controller-manager.service服务启动文件
