@@ -760,3 +760,97 @@ $ systemctl daemon-reload && systemctl enable --now kube-controller-manager && s
 $ kubectl get componentstatuses
 ```
 
+###### 5.部署kube-scheduler
+
+5.1）创建kube-scheduler-csr.json请求文件
+
+```json
+cat >  /opt/kubernetes/ssl/kube-scheduler-csr.json<< EOF
+{
+  "CN": "system:kube-scheduler",
+  "hosts": [
+	"127.0.0.1",
+    "192.168.56.107",
+    "192.168.56.111",
+    "192.168.56.112",
+	"192.168.56.113",
+	"192.168.56.114"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "ShangHai",
+      "ST": "ShangHai",
+      "O": "system:kube-scheduler",
+      "OU": "system"
+    }
+  ]
+}
+EOF
+```
+
+5.2）创建kube-scheduler证书文件
+
+```bash
+$ cfssl gencert -ca=/opt/ssl/ca.pem -ca-key=/opt/ssl/ca-key.pem -config=/opt/ssl/ca-config.json -profile=kubernetes kube-scheduler-csr.json | cfssljson -bare kube-scheduler
+$ ls kube-scheduler*pem	//查看
+```
+
+5.3）创建kube-scheduler的kubeconfig
+
+```bash
+# 配置哪个集群,证书
+kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.10.100:6443 --kubeconfig=kube-scheduler.kubeconfig
+# 证书角色管理员
+kubectl config set-credentials system:kube-scheduler --client-certificate=/opt/kubernetes/ssl/kube-scheduler.pem --client-key=/opt/kubernetes/ssl/kube-scheduler-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube-scheduler.kubeconfig
+#设置安全上下文
+kubectl config set-context system:kube-scheduler --cluster=kubernetes --user=system:kube-scheduler --kubeconfig=kube-scheduler.kubeconfig
+# 设置安全上下文
+kubectl config use-context system:kube-scheduler --kubeconfig=kube-scheduler.kubeconfig
+```
+
+5.4）.创建服务配置文件kube-scheduler.conf
+
+```
+cat > /opt/kubernetes/cfg/kube-scheduler.conf << EOF
+KUBE_SCHEDULER_OPTS="--address=127.0.0.1" \
+--kubeconfig=/opt/kubernetes/ssl/kube-scheduler.kubeconfig \
+--leader-elect=true \
+--alsologtostderr=true \
+--logtostderr=false \
+--log-dir=/opt/kubernetes/logs \
+--v=2"
+EOF
+```
+
+5.5）.创建服务启动文件kube-scheduler.service
+
+```
+cat > /opt/kubernetes/cfg/kube-scheduler.service << EOF
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://github.com/kubernetes/kubernetes
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-scheduler.conf
+ExecStart=/opt/kubernetes/bin/kube-scheduler \$KUBE_SCHEDULER_OPTS
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+5.6）.考本文件到各个节点并启动
+
+```
+scp -r /opt/kubernetes root@node2:/opt/kubernetes
+
+systemctl daemon-reload
+systemctl enable --now kube-scheduler
+systemctl status kube-scheduler
+```
+
