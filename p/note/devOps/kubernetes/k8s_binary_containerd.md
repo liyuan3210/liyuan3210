@@ -659,7 +659,7 @@ EOF
 
 4.6）.分发到各个master服务器并启动
 
-```
+```bash
 查看证书
 $ openssl x509 -in /opt/kubernetes/ssl/kube-controller-manager.pem -noout -text
 
@@ -671,13 +671,13 @@ scp /opt/kubernetes/cfg/kube-controller-manager.service root@node2:/usr/lib/syst
 
 服务启动
 
-```
+```bash
 $ systemctl daemon-reload && systemctl enable --now kube-controller-manager && systemctl status kube-controller-manager
 ```
 
 查看状态
 
-```
+```bash
 $ kubectl get componentstatuses
 ```
 
