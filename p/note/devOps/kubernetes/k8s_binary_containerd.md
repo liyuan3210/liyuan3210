@@ -391,7 +391,6 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --event-ttl=1h \
   --v=4"
 EOF
-
 # 不认识的标识（最新k8s版本）
   --insecure-port=0 \
   https://zhuanlan.zhihu.com/p/598823122
@@ -400,6 +399,46 @@ EOF
   --alsologtostderr=true \
   --logtostderr=false \
   --log-dir=/opt/kubernetes/logs/kube-apiserver \
+
+# kubernetes-v1.21.14版本
+cat > /opt/kubernetes/cfg/kube-apiserver.conf << "EOF"
+KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
+  --anonymous-auth=false \
+  --bind-address=192.168.56.107 \
+  --secure-port=6443 \
+  --advertise-address=192.168.56.107 \
+  --insecure-port=0 \
+  --authorization-mode=Node,RBAC \
+  --runtime-config=api/all=true \
+  --enable-bootstrap-token-auth \
+  --service-cluster-ip-range=10.96.0.0/16 \
+  --token-auth-file=/opt/kubernetes/ssl/token.csv \
+  --service-node-port-range=30000-32767 \
+  --tls-cert-file=/opt/kubernetes/ssl/kube-apiserver.pem  \
+  --tls-private-key-file=/opt/kubernetes/ssl/kube-apiserver-key.pem \
+  --client-ca-file=/opt/ssl/ca.pem \
+  --kubelet-client-certificate=/opt/kubernetes/ssl/kube-apiserver.pem \
+  --kubelet-client-key=/opt/kubernetes/ssl/kube-apiserver-key.pem \
+  --service-account-key-file=/opt/ssl/ca-key.pem \
+  --service-account-signing-key-file=/opt/ssl/ca-key.pem  \
+  --service-account-issuer=api \
+  --etcd-cafile=/opt/ssl/ca.pem \
+  --etcd-certfile=/opt/etcd/ssl/etcd.pem \
+  --etcd-keyfile=/opt/etcd/ssl/etcd-key.pem \
+  --etcd-servers=https://192.168.56.112:2379,https://192.168.56.113:2379,https://192.168.56.114:2379 \
+  --enable-swagger-ui=true \
+  --allow-privileged=true \
+  --apiserver-count=3 \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/opt/kubernetes/logs/kube-apiserver-audit.log \
+  --event-ttl=1h \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/opt/kubernetes/logs \
+  --v=4"
+EOF
 ```
 
 2.5）.创建kube-apiserver服务启动文件
