@@ -548,3 +548,136 @@ scp /root/.kube/config node2:/root/.kube/config
 scp /root/.kube/config node3:/root/.kube/config
 ```
 
+###### 4.部署kube-controller-manager
+
+4.1）创建kube-controller-manager证书请求文件
+
+```json
+cat > /opt/kubernetes/ssl/kube-controller-manager-csr.json<< EOF
+{
+  "CN": "system:kube-controller-manager",
+  "hosts": [
+	"127.0.0.1",
+    "192.168.56.107",
+    "192.168.56.111",
+    "192.168.56.112",
+	"192.168.56.113",
+	"192.168.56.114"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "ShangHai",
+      "ST": "ShangHai",
+      "O": "system:kube-controller-manager",
+      "OU": "system"
+    }
+  ]
+}
+EOF
+# 说明：
+#	hosts 列包含所有kube-controller-manager节点ip
+#	CN为system:kube-controller-manager；
+#	O为system:kube-controller-manager，kubernetes内置的ClusterRoleBindings system:kube-controller-manager赋予kube-controller-manager工作所需权限
+```
+
+4.2）.创建kube-controller-manager证书文件
+
+```bash
+$ cfssl gencert -ca=/opt/ssl/ca.pem -ca-key=/opt/ssl/ca-key.pem -config=/opt/ssl/ca-config.json -profile=kubernetes kube-controller-manager-csr.json | cfssljson -bare kube-controller-manager
+$ ls kube-controller-manager*pem	//查看
+```
+
+4.3）.创建kube-controller-manager.kubeconfig文件(如果需要在节点实现控制器管理，就需要此步创建)
+
+```bash
+//配置哪个集群,证书
+$ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube-controller-manager.kubeconfig
+//证书角色管理员
+$ kubectl config set-credentials system:kube-controller-manager --client-certificate=/opt/kubernetes/ssl/kube-controller-manager.pem --client-key=/opt/kubernetes/ssl/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=kube-controller-manager.kubeconfig
+//设置安全上下文
+$ kubectl config set-context system:kube-controller-manager --cluster=kubernetes --user=system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
+//设置安全上下文
+$ kubectl config set-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
+# 注意：需要同步到各个master节点
+```
+
+4.4）.创建kube-controller-manager.conf配置文件
+
+```bash
+cat > /opt/kubernetes/ssl/kube-controller-manager.conf << "EOF"
+KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
+  --secure-port=10257 \
+  --bind-address=127.0.0.1 \
+  --kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+  --service-cluster-ip-range=10.96.0.0/16 \
+  --cluster-name=kubernetes \
+  --cluster-signing-cert-file=/opt/ssl/ca.pem \
+  --cluster-signing-key-file=/opt/ssl/ca-key.pem \
+  --allocate-node-cidrs=true \
+  --cluster-cidr=10.244.0.0/16 \
+  --experimental-cluster-signing-duration=87600h \
+  --root-ca-file=/opt/ssl/ca.pem \
+  --service-account-private-key-file=/opt/ssl/ca-key.pem \
+  --leader-elect=true \
+  --feature-gates=RotateKubeletServerCertificate=true \
+  --controllers=*,bootstrapsigner,tokencleaner \
+  --horizontal-pod-autoscaler-use-rest-clients=true \
+  --horizontal-pod-autoscaler-sync-period=10s \
+  --tls-cert-file=/opt/kubernetes/ssl/kube-controller-manager.pem \
+  --tls-private-key-file=/opt/kubernetes/ssl/kube-controller-manager-key.pem \
+  --use-service-account-credentials=true \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/opt/kubernetes/logs \
+  --v=2"
+EOF
+```
+
+4.5）.创建kube-controller-manager.service服务启动文件
+
+```bash
+cat > /opt/kubernetes/cfg/kube-controller-manager.service << "EOF"
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+EnvironmentFile=/opt/kubernetes/cfg/kube-controller-manager.conf
+ExecStart=/usr/local/bin/kube-controller-manager $KUBE_CONTROLLER_MANAGER_OPTS
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+4.6）.分发到各个master服务器并启动
+
+```
+查看证书
+$ openssl x509 -in /opt/kubernetes/ssl/kube-controller-manager.pem -noout -text
+
+文件同步
+scp /opt/kubernetes/ssl/kube-controller-manager*.pem root@node2:/opt/kubernetes/ssl/
+scp /opt/kubernetes/cfg/* root@node2:/opt/kubernetes/cfg/
+scp /opt/kubernetes/cfg/kube-controller-manager.service root@node2:/usr/lib/systemd/system/
+```
+
+服务启动
+
+```
+$ systemctl daemon-reload && systemctl enable --now kube-controller-manager && systemctl status kube-controller-manager
+```
+
+查看状态
+
+```
+$ kubectl get componentstatuses
+```
+
