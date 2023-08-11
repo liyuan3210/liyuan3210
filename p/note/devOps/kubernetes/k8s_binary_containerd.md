@@ -455,7 +455,7 @@ scp /opt/etcd/ssl root@node2:/opt/etcd/ssl
 systemctl daemon-reload && systemctl enable --now kube-apiserver && systemctl status kube-apiserver
 ```
 
-使用journalctl -xe查看启动错误信息
+**使用journalctl -xe查看启动错误信息**
 
 ###### 3.部署kubectl
 
@@ -506,7 +506,7 @@ $ ls admin*pem	//查看
 //配置哪个集群,证书
 $ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube.config
 //证书角色管理员
-$ kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=kube.config
+$ kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube.config
 //设置安全上下文
 $ kubectl config set-context kubernetes --cluster=kubernetes --user=admin --kubeconfig=kube.config
 //设置安全上下文
@@ -598,7 +598,7 @@ $ ls kube-controller-manager*pem	//查看
 //配置哪个集群,证书
 $ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube-controller-manager.kubeconfig
 //证书角色管理员
-$ kubectl config set-credentials system:kube-controller-manager --client-certificate=/opt/kubernetes/ssl/kube-controller-manager.pem --client-key=/opt/kubernetes/ssl/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=kube-controller-manager.kubeconfig
+$ kubectl config set-credentials system:kube-controller-manager --client-certificate=/opt/kubernetes/ssl/kube-controller-manager.pem --client-key=/opt/kubernetes/ssl/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig
 //设置安全上下文
 $ kubectl config set-context system:kube-controller-manager --cluster=kubernetes --user=system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
 //设置安全上下文
@@ -609,7 +609,7 @@ $ kubectl config set-context system:kube-controller-manager --kubeconfig=kube-co
 4.4）.创建kube-controller-manager.conf配置文件
 
 ```bash
-cat > /opt/kubernetes/ssl/kube-controller-manager.conf << "EOF"
+cat > /opt/kubernetes/cfg/kube-controller-manager.conf << "EOF"
 KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --secure-port=10257 \
   --bind-address=127.0.0.1 \
@@ -633,9 +633,16 @@ KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --use-service-account-credentials=true \
   --alsologtostderr=true \
   --logtostderr=false \
-  --log-dir=/opt/kubernetes/logs \
   --v=2"
 EOF
+
+# 不认识的标识（最新k8s版本）
+--port=10252
+--experimental-cluster-signing-duration=87600h
+--horizontal-pod-autoscaler-use-rest-clients=true
+--alsologtostderr=true
+--logtostderr=false
+--log-dir=/opt/kubernetes/logs
 ```
 
 4.5）.创建kube-controller-manager.service服务启动文件
@@ -664,7 +671,7 @@ EOF
 $ openssl x509 -in /opt/kubernetes/ssl/kube-controller-manager.pem -noout -text
 
 文件同步
-scp /opt/kubernetes/ssl/kube-controller-manager*.pem root@node2:/opt/kubernetes/ssl/
+scp /opt/kubernetes/ssl/* root@node2:/opt/kubernetes/ssl/
 scp /opt/kubernetes/cfg/* root@node2:/opt/kubernetes/cfg/
 scp /opt/kubernetes/cfg/kube-controller-manager.service root@node2:/usr/lib/systemd/system/
 ```
@@ -674,6 +681,8 @@ scp /opt/kubernetes/cfg/kube-controller-manager.service root@node2:/usr/lib/syst
 ```bash
 $ systemctl daemon-reload && systemctl enable --now kube-controller-manager && systemctl status kube-controller-manager
 ```
+
+**使用journalctl -xe查看启动错误信息**
 
 查看状态
 
