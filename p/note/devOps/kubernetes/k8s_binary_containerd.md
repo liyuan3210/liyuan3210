@@ -364,7 +364,6 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --bind-address=192.168.56.107 \
   --secure-port=6443 \
   --advertise-address=192.168.56.107 \
-  --insecure-port=0 \
   --authorization-mode=Node,RBAC \
   --runtime-config=api/all=true \
   --enable-bootstrap-token-auth \
@@ -383,7 +382,6 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --etcd-certfile=/opt/etcd/ssl/etcd.pem \
   --etcd-keyfile=/opt/etcd/ssl/etcd-key.pem \
   --etcd-servers=https://192.168.56.112:2379,https://192.168.56.113:2379,https://192.168.56.114:2379 \
-  --enable-swagger-ui=true \
   --allow-privileged=true \
   --apiserver-count=3 \
   --audit-log-maxage=30 \
@@ -391,9 +389,6 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --audit-log-maxsize=100 \
   --audit-log-path=/opt/kubernetes/logs/kube-apiserver-audit.log \
   --event-ttl=1h \
-  --alsologtostderr=true \
-  --logtostderr=false \
-  --log-dir=/opt/kubernetes/logs/kube-apiserver \
   --v=4"
 EOF
 
