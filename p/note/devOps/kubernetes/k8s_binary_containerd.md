@@ -888,6 +888,108 @@ sed -i 's@systemd_cgroup = false@systemd_cgroup = true@' /etc/containerd/config.
 sed -i 's@k8s.gcr.io/pause:3.6@registry.aliyuncs.com/google_containers/pause:3.6@' /etc/containerd/config.toml
 ```
 
+实际/etc/containerd/config.toml内容(可直接使用这个文件，省去上面生成默认与sed步骤)：
+
+```bash
+cat >/etc/containerd/config.toml<<EOF
+root = "/var/lib/containerd"
+state = "/run/containerd"
+oom_score = -999
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  uid = 0
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+
+[debug]
+  address = ""
+  uid = 0
+  gid = 0
+  level = ""
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[cgroup]
+  path = ""
+
+[plugins]
+  [plugins.cgroups]
+    no_prometheus = false
+  [plugins.cri]
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    enable_selinux = false
+    sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.6"
+    stats_collect_period = 10
+    systemd_cgroup = true
+    enable_tls_streaming = false
+    max_container_log_line_size = 16384
+    [plugins.cri.containerd]
+      snapshotter = "overlayfs"
+      no_pivot = false
+      [plugins.cri.containerd.default_runtime]
+        runtime_type = "io.containerd.runtime.v1.linux"
+        runtime_engine = ""
+        runtime_root = ""
+      [plugins.cri.containerd.untrusted_workload_runtime]
+        runtime_type = ""
+        runtime_engine = ""
+        runtime_root = ""
+    [plugins.cri.cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = "/etc/cni/net.d/10-default.conf"
+    [plugins.cri.registry]
+      [plugins.cri.registry.mirrors]
+        [plugins.cri.registry.mirrors."docker.io"]
+          endpoint = [
+            "https://docker.mirrors.ustc.edu.cn",
+            "http://hub-mirror.c.163.com"
+          ]
+        [plugins.cri.registry.mirrors."gcr.io"]
+          endpoint = [
+            "https://gcr.mirrors.ustc.edu.cn"
+          ]
+        [plugins.cri.registry.mirrors."k8s.gcr.io"]
+          endpoint = [
+            "https://gcr.mirrors.ustc.edu.cn/google-containers/"
+          ]
+        [plugins.cri.registry.mirrors."quay.io"]
+          endpoint = [
+            "https://quay.mirrors.ustc.edu.cn"
+          ]
+        [plugins.cri.registry.mirrors."harbor.kubemsb.com"]
+          endpoint = [
+            "http://harbor.kubemsb.com"
+          ]
+    [plugins.cri.x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+  [plugins.diff-service]
+    default = ["walking"]
+  [plugins.linux]
+    shim = "containerd-shim"
+    runtime = "runc"
+    runtime_root = ""
+    no_shim = false
+    shim_debug = false
+  [plugins.opt]
+    path = "/opt/containerd"
+  [plugins.restart]
+    interval = "10s"
+  [plugins.scheduler]
+    pause_threshold = 0.02
+    deletion_threshold = 0
+    mutation_threshold = 100
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+EOF
+```
+
 1.3）下载 runc（可以使用which runc查看替换位置）
 
 进行下载:
@@ -904,4 +1006,252 @@ $ mv runc.amd64 /usr/local/sbin/runc
 $ systemctl enable --now containerd		//启动
 $ systemctl status containerd			//查看状态
 ```
+
+###### 2.部署kubelet
+
+2.1）创建kubelet-bootstrap.kubeconfig
+
+```bash
+# 取出csv文件token值,cd /opt/kubernetes/ssl/
+BOOTSTRAP_TOKEN=$(awk -F "," '{print $1}' /opt/kubernetes/ssl/token.csv)
+
+kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+
+kubectl config set-credentials kubelet-bootstrap --token=${BOOTSTRAP_TOKEN} --kubeconfig=kubelet-bootstrap.kubeconfig
+
+kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+
+kubectl config use-context default --kubeconfig=kubelet-bootstrap.kubeconfig
+```
+
+角色绑定
+
+```bash
+kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=kubelet-bootstrap
+
+kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+```
+
+验证
+
+```bash
+kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=kubelet-bootstrap
+
+kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+```
+
+2.2）创建kubelet配置文件(不同节点配置有所不同)
+
+```json
+cat > /opt/kubernetes/cfg/kubelet.json << "EOF"
+{
+  "kind": "KubeletConfiguration",
+  "apiVersion": "kubelet.config.k8s.io/v1beta1",
+  "authentication": {
+    "x509": {
+      "clientCAFile": "/opt/ssl/ca.pem"
+    },
+    "webhook": {
+      "enabled": true,
+      "cacheTTL": "2m0s"
+    },
+    "anonymous": {
+      "enabled": false
+    }
+  },
+  "authorization": {
+    "mode": "Webhook",
+    "webhook": {
+      "cacheAuthorizedTTL": "5m0s",
+      "cacheUnauthorizedTTL": "30s"
+    }
+  },
+  "address": "192.168.56.107",
+  "port": 10250,
+  "readOnlyPort": 10255,
+  "cgroupDriver": "systemd",                    
+  "hairpinMode": "promiscuous-bridge",
+  "serializeImagePulls": false,
+  "clusterDomain": "cluster.local.",
+  "clusterDNS": ["10.96.0.2"]
+}
+EOF
+
+#说明：
+#	kubelet.json中address需要修改为当前主机IP地址。
+```
+
+2.3）创建kubelet服务启动文件
+
+```bash
+cat > /opt/kubernetes/cfg/kubelet.service << "EOF"
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/kubernetes/kubernetes
+After=containerd.service
+Requires=containerd.service
+
+[Service]
+WorkingDirectory=/var/lib/kubelet
+ExecStart=/usr/local/bin/kubelet \
+  --bootstrap-kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig \
+  --cert-dir=/opt/kubernetes/ssl \
+  --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \
+  --config=/opt/kubernetes/cfg/kubelet.json \
+  --cni-bin-dir=/opt/cni/bin \
+  --cni-conf-dir=/etc/cni/net.d \
+  --container-runtime=remote \
+  --container-runtime-endpoint=unix:///run/containerd/containerd.sock \
+  --network-plugin=cni \
+  --rotate-certificates \
+  --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.2 \
+  --root-dir=/etc/cni/net.d \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/var/log/kubernetes \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+2.4）同步到集群节点
+
+```bash
+cp kubelet-bootstrap.kubeconfig /etc/kubernetes/
+cp kubelet.json /etc/kubernetes/
+cp kubelet.service /usr/lib/systemd/system/
+
+for i in  k8s-master2 k8s-master3 k8s-worker1;do scp kubelet-bootstrap.kubeconfig kubelet.json $i:/etc/kubernetes/;done
+for i in  k8s-master2 k8s-master3 k8s-worker1;do scp ca.pem $i:/etc/kubernetes/ssl/;done
+for i in k8s-master2 k8s-master3 k8s-worker1;do scp kubelet.service $i:/usr/lib/systemd/system/;done
+```
+
+2.5）启动
+
+```bash
+创建目录（可能要创建）
+mkdir -p /var/lib/kubelet
+mkdir -p /var/log/kubernetes
+	
+systemctl daemon-reload
+systemctl enable --now kubelet
+```
+
+2.6）检查
+
+```bash
+$ kubectl get nodes
+$ kubectl get csr
+```
+
+###### 3.部署kube-proxy
+
+3.1）创建kube-proxy证书请求文件
+
+```bash
+cat > /opt/kubernetes/ssl/kube-proxy-csr.json << "EOF"
+{
+  "CN": "system:kube-proxy",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "Beijing",
+      "L": "Beijing",
+      "O": "kubemsb",
+      "OU": "CN"
+    }
+  ]
+}
+EOF
+```
+
+3.2）生成证书
+
+```bash
+$ cfssl gencert -ca=/opt/ssl/ca.pem -ca-key=/opt/ssl/ca-key.pem -config=/opt/ssl/ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
+$ ls kube-proxy*pem	//查看
+```
+
+3.3）创建kubeconfig文件
+
+```bash
+kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube-proxy.kubeconfig
+
+kubectl config set-credentials kube-proxy --client-certificate=/opt/kubernetes/ssl/kube-proxy.pem --client-key=/opt/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig
+
+kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
+
+kubectl config use-context default --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig
+```
+
+3.4）创建服务配置文件（不同节点修改成不同ip）
+
+```bash
+cat > /opt/kubernetes/cfg/kube-proxy.yaml << "EOF"
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 192.168.56.113
+clientConnection:
+  kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
+clusterCIDR: 10.244.0.0/16
+healthzBindAddress: 192.168.56.113:10256
+kind: KubeProxyConfiguration
+metricsBindAddress: 192.168.56.113:10249
+mode: "ipvs"
+EOF
+```
+
+3.5）创建服务启动文件
+
+```bash
+cat >  /opt/kubernetes/cfg/kube-proxy.service << "EOF"
+[Unit]
+Description=Kubernetes Kube-Proxy Server
+Documentation=https://github.com/kubernetes/kubernetes
+After=network.target
+
+[Service]
+WorkingDirectory=/var/lib/kube-proxy
+ExecStart=/usr/local/bin/kube-proxy \
+  --config=/opt/kubernetes/cfg/kube-proxy.yaml \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/var/log/kubernetes \
+  --v=2
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+3.6）同步文件到集群节点
+
+```
+cp kube-proxy*.pem /etc/kubernetes/ssl/
+cp kube-proxy.kubeconfig kube-proxy.yaml /etc/kubernetes/
+cp kube-proxy.service /usr/lib/systemd/system/
+	
+for i in k8s-master2 k8s-master3 k8s-worker1;do scp kube-proxy.kubeconfig kube-proxy.yaml $i:/etc/kubernetes/;done
+for i in k8s-master2 k8s-master3 k8s-worker1;do scp  kube-proxy.service $i:/usr/lib/systemd/system/;done
+```
+
+注意：同步文件后需要根据节点ip修改kube-proxy.yaml文件
+
+3.7)启动
+
+```
+systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status kube-proxy
+```
+
+
 
