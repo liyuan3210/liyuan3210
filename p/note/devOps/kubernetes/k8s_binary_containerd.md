@@ -518,6 +518,8 @@ $ kubectl config set-context kubernetes --kubeconfig=kube.config
 ```bash
 $ mkdir ~/.kube
 $ cp kube.config ~/.kube/config
+# 下面执行有问题
+# error: failed to create clusterrolebinding: Post "http://localhost:8080/apis/rbac.authorization.k8s.io/v1/clusterrolebindings?fieldManager=kubectl-create&fieldValidation=Strict": dial tcp [::1]:8080: connect: connection refused
 $ kubectl create clusterrolebinding kube-apiserver:kubelete-apis --clusterrole=system:kubelet-api-admin --user kubernetes --kubeconfig=/root/.kube/config
 ```
 
