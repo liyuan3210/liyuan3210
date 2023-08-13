@@ -694,6 +694,7 @@ cat > /opt/kubernetes/cfg/kube-controller-manager.conf << "EOF"
 KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --secure-port=10257 \
   --bind-address=127.0.0.1 \
+  --master=127.0.0.1:8080 \
   --kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
   --service-cluster-ip-range=10.96.0.0/16 \
   --cluster-name=kubernetes \
@@ -717,6 +718,9 @@ KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --log-dir=/opt/kubernetes/logs \
   --v=2"
 EOF
+#注意：
+#	与视频教程相比需要加上”--master=127.0.0.1:8080 \“ 项才可启动成功，否则报如下问题
+#   no configuration has been provided, try setting KUBERNETES_MASTER environment variable
 ```
 
 4.5）.创建kube-controller-manager.service服务启动文件
