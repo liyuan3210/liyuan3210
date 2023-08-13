@@ -840,7 +840,7 @@ Description=Kubernetes Scheduler
 Documentation=https://github.com/kubernetes/kubernetes
 [Service]
 EnvironmentFile=/opt/kubernetes/cfg/kube-scheduler.conf
-ExecStart=/opt/kubernetes/bin/kube-scheduler \$KUBE_SCHEDULER_OPTS
+ExecStart=/usr/local/bin/kube-scheduler \$KUBE_SCHEDULER_OPTS
 Restart=on-failure
 RestartSec=5
 [Install]
