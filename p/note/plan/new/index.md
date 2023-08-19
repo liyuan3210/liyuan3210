@@ -20,6 +20,13 @@ https://baijiahao.baidu.com/s?id=1733159772977730209&wfr=spider&for=pc
 https://www.bilibili.com/video/BV1hs4y1B7vb
 【整整600集】北大教授196小时讲完的AI人工智能从入门到项目实战全套教程，全程干货无废话！
 https://www.bilibili.com/video/BV14a4y1V7YJ
+
+一。AI,机器学习，深度学习概念区分
+
+AI
+	机器学习
+			深度学习
+            		cv,nlp,vc(语音识别)
 ```
 
 ###### [2.区块链，ipfs](block_chain-ipfs.md)
