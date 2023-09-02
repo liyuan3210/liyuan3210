@@ -1,5 +1,21 @@
 # kubernetes二进制高可用部署(Runtime Containerd)
 
+##### 问题文档
+
+```
+1.下载：
+kubernetes官网->右上角选择好version->选择Documentation->下方Download Kubernetes->选择左边“Release Notes”->选择“Changelog”->选中要下载的版本Changelog->就可以下载Client,Server,Node还有容器镜像了
+
+2.组件启动参数：
+kubernetes官网->右上角选择好version->选择Documentation->左菜单选择“Reference>Component Tools”->就可以查看每个组件的启动参数了
+
+3.配置容器运行环境
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
+4.Customizing components with the kubeadm API
+Kubernetes Documentation > Getting started > Production environment > Installing Kubernetes with deployment tools > Bootstrapping clusters with kubeadm > Customizing components with the kubeadm API
+```
+
 ##### kuernetes架构
 
 
