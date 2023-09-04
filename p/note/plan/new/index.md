@@ -27,6 +27,12 @@ AI
 	机器学习
 			深度学习
             		cv,nlp,vc(语音识别)
+            		
+深度学习代表算法(神经网络)
+神经网络就是线性回归
+
+网站：
+http://playground.tensorflow.org/
 ```
 
 ###### [2.区块链，ipfs](block_chain-ipfs.md)
