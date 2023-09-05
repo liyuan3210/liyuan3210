@@ -45,8 +45,9 @@
 	重启B机器sshd服务:
 	$ systemctl restart sshd
 	
-	1.3) 配置A机器，B机器vi /etc/ssh/sshd_config		//两台都要配置
-	AuthorizedKeysFile		%h/.ssh/authorized_keys //注释拿掉
+	1.3) 配置A机器，B机器并配置root远程登录vi /etc/ssh/sshd_config		//两台都要配置
+	PermitRootLogin yes  	 		//添加项
+	PubkeyAuthentication yes	 	//注释拿掉，或者AuthorizedKeysFile		%h/.ssh/authorized_keys //注释拿掉
 	两台重启服务:
 	$ systemctl restart sshd
 	
