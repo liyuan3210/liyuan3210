@@ -512,8 +512,8 @@ cp /opt/kubernetes/cfg/kube-apiserver.service /usr/lib/systemd/system/
 scp /opt/kubernetes/cfg/kube-apiserver.service root@node2:/usr/lib/systemd/system/
 scp /opt/kubernetes/cfg/kube-apiserver.service root@node3:/usr/lib/systemd/system/
 
-# 拷贝etcd/ssl信息（保证master节点都有etcd/ssl证书文件）
-scp /opt/etcd/ssl root@node2:/opt/etcd/ssl
+# 拷贝/opt/ssl信息（保证master节点都有/opt/ssl证书文件）
+scp -r /opt/ssl root@node2:/opt/ssl
 ```
 
 修改各个节点kube-apiserver.conf文件
