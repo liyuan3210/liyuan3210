@@ -36,6 +36,21 @@ Service网络:		10.96.0.0/16
 Pod网络:			10.244.0.0/16
 ```
 
+##### linux文件存放目录
+
+```
+软件存放目录/opt：
+	/opt/ssl			//公共ssl使用文件
+	/opt/etcd			//etcd安装目录
+		ssl
+		cfg
+		data
+	/opt/kubernetes
+		ssl
+		cfg
+		logs
+```
+
 ##### 一。安装cfssl生成集群ca并安装etcd集群
 
 ###### 1.安装cfssl并生成集群证书
