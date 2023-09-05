@@ -39,7 +39,7 @@
 	
 	1.2）从A机器拷贝公钥文件至B机器并重命名authorized_keys放在B机器.ssh目录(.ssh目录权限必须是700,authorized_keys文件权限必须是600)
 	//A机器重命名id_rsa.pub文件(没有.ssh文件夹需可以自己新建)
-	$ cat /home/liyuan/.ssh/id_rsa.pub>>> >> /home/liyuan/.ssh/authorized_keys
+	$ cat /home/liyuan/.ssh/id_rsa.pub >> /home/liyuan/.ssh/authorized_keys
 	//在A机器通过scp命令发送到B机器，并给权限
 	$ chmod -R 700 .ssh还有chmod -R 600 authorized_keys
 	重启B机器sshd服务:
