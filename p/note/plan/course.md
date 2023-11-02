@@ -30,7 +30,13 @@
 
     《高等数学》同济版 全程教学视频（宋浩老师）（new) --->>>new
     https://www.bilibili.com/video/BV1Eb411u7Fw
-    包含(线性代数，微积分，概率论与数理统计)
+    《线性代数》，《微积分》，《概率论与数理统计》与《高等数学关系》
+    
+    电路，模电需要懂（微积分）：
+    《微积分》《高等数学》全程教学视频--宋浩老师
+    https://www.bilibili.com/video/BV1UW411k7Jv
+    《微积分》习题全集【宋浩老师】
+    https://www.bilibili.com/video/BV12441127XS	
 
 
 **5.linux内核**
