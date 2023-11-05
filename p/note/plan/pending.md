@@ -31,7 +31,7 @@
 | 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | 网络 | 待处理 |
 | 26）。todesk跨平台远程管理工具(试用)<br/>https://www.todesk.com/ | 网络 | 待处理 |
 | 27）。serverless架构及使用场景 | NEW | 待处理 |
-| 28）。 |      |      |
+| 28）。github加速器<br>http://www.inspinia.net/a/743694.html | NEW | 待处理 |
 |      |      |      |
 |      |      |      |
 |      |      |      |
