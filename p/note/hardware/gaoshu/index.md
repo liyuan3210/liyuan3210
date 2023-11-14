@@ -11,6 +11,14 @@ https://www.imathtool.com/
 https://github.com/zhangkai0621/vue-math-edit
 ```
 
+#### 基础
+
+```
+1.三角函数sin,csin,cos
+2.对数log
+3.2的底
+```
+
 #### 1.极限
 
 ```
