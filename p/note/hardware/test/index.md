@@ -46,6 +46,9 @@ https://www.zhihu.com/question/430157773
 https://www.bilibili.com/video/BV1424y1y7j1
 电容无极性和有极性能代替吗？
 https://www.bilibili.com/video/BV1RP411E7Ds
+
+电感磁通单位
+https://zhidao.baidu.com/question/1711371083633756220.html
 ```
 
 -----------------------------------------------------------------------------

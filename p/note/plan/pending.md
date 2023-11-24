@@ -18,7 +18,7 @@
 | 12）。nodejs框架（mvc框架） | 语言类 | 待处理 |
 | 13）。rust与golang语言原理了解 | 语言类 | 待处理 |
 | 14）。python包管理<br/>https://www.bilibili.com/video/BV1qW4y1a7fU<br/>p94-p97 模块，包，第三房包概念 | 语言类 | 待处理 |
-| 15）。C语言指针，内存管理 | 语言类 | 待处理 |
+| 15）。C语言指针，内存管理<br/>https://www.bilibili.com/video/BV1Dt411R77A?p=4<br/>我的网盘>共享资源>course>os>c语言指针与内存管理 | 语言类 | 待处理 |
 | 16）。1.虚拟磁盘文件格式整理（vhd，qcow2，qcow，...），kvm安装并启动<br/>2.qemu , qemu-kvm，kvm区别？？？<br/>https://blog.csdn.net/u011619480/article/details/127719913<br/>https://blog.51cto.com/u_15786574/5669932 | devOps | <font color="blue">已处理</font> |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
 | 18）。1.翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang<br/>2。chatgpt注册使用(了解) | devOps | <font color="blue">已处理</font> |
