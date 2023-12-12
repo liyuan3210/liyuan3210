@@ -17,6 +17,7 @@ https://github.com/zhangkai0621/vue-math-edit
 1.勾股定理
 
 2.三角函数sin,csin,cos
+https://www.bilibili.com/video/BV1oL41177sh
 
 3.对数log
 
