@@ -154,3 +154,81 @@ https://www.bilibili.com/video/BV1SW4y1Z7Nj
 马士兵三个版本的多线程与高并发，从入门到精通
 https://www.bilibili.com/video/BV1KN4112727
 ```
+
+# history
+
+```
+
+VIP地址资料链接： 
+    http://www.mashibing.com/vip.html
+课程安排链接：     
+    https://s1.mashibing.com/selectuser
+直播间
+    https://ke.qq.com/webcourse/index.html#cid=399017&term_id=100475965&taid=3608794731255465&from=41
+
+一.spring源码设计训练营
+    训练营第一天链接：https://pan.baidu.com/s/1tYZ8_Ihe794BXSwbLJU92g  提取码：a19k
+    回放链接:https://pan.baidu.com/s/17fGZcZZa-uMQ6InFgwCXdA 密码:5ntd
+----------------------------------------------------------------------------------------------------
+职业规划师_马小七老师:
+2019-6-12---马士兵老师-职业路径规划 ---链接：https://pan.baidu.com/s/1XhUVuqYO0iPv7oDzRoPJvw 
+提取码：sryy
+
+职业规划师_马小七老师:
+发波福利
+
+职业规划师_马小七老师:
+5g链接：https://pan.baidu.com/s/1vGI2lpMKViDmMN2zT1YWHw 
+提取码：kdgt 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+
+职业规划师_马小七老师:
+
+vip部分资源（高并发，redis等）
+链接：https://pan.baidu.com/s/1btihQjfz-vgcTtp1Vi0_cg 
+提取码：2y50 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+大数据资源链接：https://pan.baidu.com/s/1BeN2MOHwuHQIE_Pjn-SZNg 
+提取码：lxrj 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+
+架构资源
+8.2马老师深入jvm-jdk12最核心
+链接：https://pan.baidu.com/s/1Vxy1epLoCG_w9_UM_O0lJg 
+提取码：994c 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+spring cloud试听课  （网约车项目第二节 微服务间调用和熔断降级）链接：https://pan.baidu.com/s/1Wu7CTcuklgmpBRzWw4G1dg 提取码：4x5l
+
+基础资源
+http://m.ke.qq.com/courseDetail.html?_bid=167&_wv=3&course_id=423902&term_id=100505967&taid=&from=androidapp#from=androidapp
+
+人工智能试听
+http://m.ke.qq.com/courseDetail.html?_bid=167&_wv=3&course_id=423416&term_id=100505428&taid=&from=androidapp#from=androidapp
+人工智能数学
+链接: https://pan.baidu.com/s/1tVPyLpZ34YY1ylUD8eHdWg 提取码: r777 复制这段内容后打开百度网盘手机App，操作更方便哦
+
+
+xo一.课程
+2019-6-12---马士兵老师-职业路径规划 
+https://pan.baidu.com/s/1XhUVuqYO0iPv7oDzRoPJvw 提取码：sryy
+
+5g链接：
+https://pan.baidu.com/s/1vGI2lpMKViDmMN2zT1YWHw 提取码：kdgt 
+
+vip部分资源（高并发，redis等）
+https://pan.baidu.com/s/1btihQjfz-vgcTtp1Vi0_cg 提取码：2y50
+ 
+大数据资源链接：
+https://pan.baidu.com/s/1BeN2MOHwuHQIE_Pjn-SZNg 提取码：lxrj 
+
+架构资源
+8.2马老师深入jvm-jdk12最核心
+https://pan.baidu.com/s/1Vxy1epLoCG_w9_UM_O0lJg  提取码：994c 
+
+spring cloud试听课  （网约车项目第二节 微服务间调用和熔断降级）
+https://pan.baidu.com/s/1Wu7CTcuklgmpBRzWw4G1dg 提取码：4x5l
+
+人工智能数学
+https://pan.baidu.com/s/1tVPyLpZ34YY1ylUD8eHdWg 提取码: r777 
+```
+
