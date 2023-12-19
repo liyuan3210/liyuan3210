@@ -52,6 +52,15 @@ hypervisor centos
 	3).qemu
 		支持多种架构，操作系统之上的
 
+四.裸机安装方案
+	不需要直接在裸机安装操作系统方式
+	* PVE EXSi UNRAID常用虚拟机对比
+		1).pve虚拟机官网（免费开源）
+		https://pve.proxmox.com/wiki/Main_Page
+		2).EXSi虚拟机（商业版）
+		Vmware旗下的，60天试用期
+		3).UNRAID虚拟机（收费）
+	
 hyperv vmware hypervisor 
 	https://cloud.tencent.com/developer/article/1041633
 ```
