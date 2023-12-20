@@ -12,15 +12,11 @@
 
 [2.JAVA](java/index.md)java核心
 
-[3.MIDD](midd/index.md)中间件
+[3.DEVOPS](devops/index.md)运维
 
-[4.DevOps](devOps/index.md)运维
+[4.OS](os/index.md)操作系统
 
-[5.NETWORK](network/index.md)网络
-
-[6.OS](os/index.md)操作系统
-
-[7.HARDWARE](hardware/index.md)硬件
+[5.HARDWARE](hardware/index.md)硬件
 
 ## 二．工具(官网下载/安装)
 
