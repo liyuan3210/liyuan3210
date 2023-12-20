@@ -1,11 +1,11 @@
 # 笔记首页
 ## 服务器操作
 
-[*.linux服务器常用命令](devOps/linux_server.md)
+[*.linux服务器常用命令](devops/linux_server.md)
 
-[*.utuntu与ios常用桌面软件安装](devOps/linux_desktop.md)
+[*.utuntu与ios常用桌面软件安装](devops/linux_desktop.md)
 
-[*.windows_server服务器常用操作](devOps/windows_server.md)
+[*.windows_server服务器常用操作](devops/windows_server.md)
 
 ## 一．技术栈
 [1.UI](ui/index.md) 前端
