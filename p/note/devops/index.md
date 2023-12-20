@@ -10,8 +10,6 @@
 
 [3.github,gitee,git命令及开发环境配置.](github_gitee_gitlab.md)
 
-[4.mysql](mysql_install.md),[redis](redis_install.md),nginx
-
 [5.虚拟机](virtual_machine.md)
 
 ​	一.服务端linux虚拟机(kvm)<br/>
