@@ -4,7 +4,7 @@
 
 ## 一．运维基础
 
-[1.docker](docker/index.md)
+[1.docker](kubernetes/docker.md)
 
 [2.kubernetes](kubernetes/index.md)
 
