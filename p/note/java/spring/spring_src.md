@@ -46,7 +46,10 @@ liyuandf账号:共享资源>course>java>【java】反射
 			CLASSPATH:	.;D:\Java_About\Java_component\aspectj-1.8.14\lib\aspectjrt.jar
         * 验证ajc命令：
             $ ajc -v
+            ajc.exe 可以理解为 javac.exe 命令，都用于编译 Java 程序，区别是 ajc.exe 命令可识别 AspectJ 的语法；
 	2.1.2）示例
+		* 要求：
+		有一个业务类HelloWorld，我们要求不改动业务代码HelloWorld的前提下，执行HelloWorld前后添加自定义处理逻辑，代码方案如下。
         * 代码：
         HelloWorld.java
         public class HelloWorld {
@@ -68,8 +71,13 @@ liyuandf账号:共享资源>course>java>【java】反射
         }
         *编译
         $ ajc -d . HelloWorld.java TxAspect.aj
+        //没有指定CLASSPATH环境变量情况
+        $ ajc -classpath C:/soft/dev/aspectj-1.9.6/lib/aspectjrt.jar -d . HelloWorld.java TxAspect.aj
         *运行
         $ java HelloWorld
+        //没有指定CLASSPATH环境变量情况（有问题）
+        //java.lang.ClassNotFoundException: HelloWorld
+        $ java -cp "C:/soft/dev/aspectj-1.9.6/lib/aspectjrt.jar" HelloWorld
 	
 	2.1.3）aspectj开发介绍(idea,eclipse)
 		* Eclipse 的 AJDT 插件（AspectJ Development Tools）来开发 AspectJ 应用
