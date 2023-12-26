@@ -87,6 +87,12 @@ liyuandf账号:共享资源>course>java>【java】反射
 	4.安装AspectJ（安装好后就可以load整个spring-aspects到工程进行构建了
 		安装见上面“知识必备”AOP章节2.1
 		菜单选择File-->Project Structure-->Libraries-->添加aspectjrt.jar
+	
+	注意（spring-framework-5.3.26版本，只限此版本）
+    必须在报错类方法上添加SuppressWarnings注解才能正常调试。
+    CoroutinesUtils类会报method.isAccessible() && !KCallablesJvm.isAccessible(function)过期错误
+	解决办法：
+	方法上加上@SuppressWarnings("deprecation")
 		
 三。问题
 	见源码工程里面笔记
