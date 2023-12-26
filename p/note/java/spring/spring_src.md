@@ -20,26 +20,66 @@ liyuandf账号:共享资源>course>java>【java】反射
 实例：https://github.com/liyuan3210/java/tree/master/spring/simple/src/main/java/com/liyuan3210/spring/simple/reflect
 
 2）.AOP(使用aspectj标注，底层实现用标准jdk动态代理)
-三种实现方式(详细见“设计模式”)
-*.spring-AspectJ
+三种代理模式(详细见“设计模式”)
 *.jdk动态代理
 *.CGLIB
 *.静态代理
 2.1）aspectj动态代理安装如下
-	2.1.1).aspectj动态代理安装如下安装配置
-		AspectJ介绍
+	参考：
 		https://blog.csdn.net/qq_32705919/article/details/124236568
 		https://www.hreshhao.com/getting-started-with-aspectj/
-	2.1.2）官方下载：
-		https://www.eclipse.org/aspectj/downloads.php
-		2.3）执行安装(预先准备好aspectj安装目录，安装过程中要指定jdk目录，aspectj安装目录)
-		$ java -jar aspectj-1.9.6.jar
-	2.1.3）配置环境变量
-		export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
-		export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
-		export 		   PATH=$JAVA_HOME/bin:$M2_HOME/bin:$NODEJS_HOME/bin:$GRADLE_HOME/bin:$NASM_HOME/bin:$AJC_HOME/bin:$NASM_WT:$PATH
-	2.1.4）验证
-		$ ajc -v
+		https://zhuanlan.zhihu.com/p/421776645
+	2.1.1).AspectJ介绍与安装
+		AspectJ 是最早、功能比较强大的 AOP 实现之一，对整套 AOP 机制都有较好的实现，很多其他语言的 AOP 实现，也借鉴或采纳了 AspectJ 中很多设计。在 Java 领域，AspectJ 中的很多语法结构基本上已成为 AOP 领域的标准。
+        * 官网：
+            https://www.eclipse.org/aspectj/downloads.php
+        * 下载：
+            aspectj-1.8.14.jar
+        * 安装：
+            java -jar aspectj-1.8.14.jar
+            安装时会选择当前使用的jdk安装目录，及aspectj安装目录
+        * 环境变量配置：
+        	export AJC_HOME=/home/ubuntu-a10/Desktop/soft/dev/aspectj
+			export CLASSPATH=.:$AJC_HOME/lib/aspectjrt.jar
+			export PATH=$JAVA_HOME/bin:$GRADLE_HOME/bin:$AJC_HOME/bin:$PATH
+			//下面是windows
+			CLASSPATH:	.;D:\Java_About\Java_component\aspectj-1.8.14\lib\aspectjrt.jar
+        * 验证ajc命令：
+            $ ajc -v
+	2.1.2）示例
+        * 代码：
+        HelloWorld.java
+        public class HelloWorld {
+            public void sayHello(){
+                System.out.println("Hello AspectJ");
+            }
+            public static void main(String[] args) {
+                HelloWorld hello = new HelloWorld();
+                hello.sayHello();
+            }
+        }
+        TxAspect.aj
+        public aspect TxAspect {
+            void around():call(void HelloWorld.sayHello()){
+                System.out.println("start Transaction process");
+                proceed();
+                System.out.println("end Transaction process");
+            }
+        }
+        *编译
+        $ ajc -d . HelloWorld.java TxAspect.aj
+        *运行
+        $ java HelloWorld
+	
+	2.1.3）aspectj开发介绍(idea,eclipse)
+		* Eclipse 的 AJDT 插件（AspectJ Development Tools）来开发 AspectJ 应用
+		* 只有专业版(Ultimate)的 IntelliJ IDEA 才支持 AspectJ 的开发
+			在专业版 IDEA 中开发 AspectJ，需要确保下述插件被激活：
+			File -> settings - > plugins
+				*.Spring AOP/@AspectJ
+				*.AspectJ Support
+		* 开发时工程需要添加aspectjrt.jar依赖（工程添加后是不是就可以不用配置CLASSPATH了？？？）
+			maven工程添加aspectjrt的pom依赖
 
 实例：https://github.com/liyuan3210/java/tree/master/spring/simple
 ```
