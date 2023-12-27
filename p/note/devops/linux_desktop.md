@@ -504,14 +504,17 @@ apt源切换:
 	选中:"已启用"，安全层："RDP"。
 	
 二.环境变量配置
+	/etc/profile		全局（不推荐）
+	/etc/bashrc			全局
+	../.bash_profile	当前用户
 	1.打开终端，如果是第一次配置环境变量，需要创建 .bash_profile 文件
-	touch .bash_profile
-
-	编辑文件
-	open -e .bash_profile
-
-	使文件生效
-	source .bash_profile
+        touch .bash_profile
+        编辑文件
+        open -e .bash_profile
+        使文件生效
+        source .bash_profile
+     2.mac配置文件（CLASSPATH问题）
+     配置JAVA_HOME,PATH等不需要export,但在配置CLASSPATH变量时候需要使用export导出，否则java执行命令时候会报找不到jar
 	
 三.打开指定目录
 	open .	//打开当前目录
@@ -530,10 +533,6 @@ apt源切换:
 
 	3.mac eclipse 安装
 	https://blog.csdn.net/cloud_xy/article/details/88623975
-	
-macbook air 2017 sd卡升级方案
-	https://post.smzdm.com/p/48758/
-
 
 五.系统问题
 （1）mac升级后报错
@@ -567,18 +566,8 @@ docker run --name mysql --net dev-net --ip 172.18.1.10 -p 3306:3306 -v /Users/yu
 # install redis: 172.18.1.11
 docker run --name redis --net dev-net --ip 172.18.1.11 -p 6379:6379 -v /Users/yuanli/data/redis/6379:/data -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/redis:v1 --requirepass "123456"
 
-# install sentinel: 172.18.1.15
-docker run --name sentinel --net dev-net --ip 172.18.1.15 -p 8083:8083 -v /Users/yuanli/data/sentinel/data:/data  -it -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/sentinel:v1
-访问：
-http://127.0.0.1:8083/
-访问账号与密码
-sentinel	/	sentinel
-
-# install nacos: 172.18.1.16
-docker run --name nacos --net dev-net --ip 172.18.1.16 -p 8848:8848 -v /Users/yuanli/data/nacos/data:/opt/nacos/data -it -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/nacos:v1
-启动好访问:
-http://127.0.0.1:8848/nacos
-帐号/密码： nacos / nacos
+注意：
+	mac下面需要通过-p 3306:3306来暴露到宿主机端口映射
 ```
 ## Wine(让windows程序exe能在linux,unix运行的中间件)
 
