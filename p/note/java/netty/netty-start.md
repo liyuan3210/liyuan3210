@@ -1,5 +1,14 @@
 ## 三.Netty模型介绍
 
+##### netty源码构建
+
+https://blog.csdn.net/yebichao/article/details/129173658
+
+netty源码导入idea -> 先编译common模块然后整体编译???
+
+https://www.cnblogs.com/h--d/p/14891785.html
+
+
 ## Reactor模式(线程模型)
 
 Reactor是**基于多路复用（nio）**的线程模型
