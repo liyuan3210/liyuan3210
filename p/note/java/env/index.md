@@ -464,7 +464,7 @@ Visual Studio  Enterprise
 
 microsoft visual studio 2017账号
 li.yuan3210@163.com
-Ly19890726123abc
+see password file
  
 安装好Community版本后，就可以创建项目了
 
@@ -547,7 +547,7 @@ adb,fastboot等工具包
 7.第三方模拟器(官方模拟器让人心碎)
 https://www.genymotion.com
 user:liyuan3210
-pwd:72333354123
+pwd:see password file
 免费版的(free personal use)
 
 常用配置
