@@ -81,6 +81,10 @@ liyuandf账号:共享资源>course>java>【java】反射
 	
 	2.1.3）aspectj开发介绍(idea,eclipse)
 		* Eclipse 的 AJDT 插件（AspectJ Development Tools）来开发 AspectJ 应用
+			AJDT 插件下载：
+				https://www.eclipse.org/ajdt/downloads/
+			注意：
+				下载的eclipse版本要与AJDT版本对应，否则AJDT不能正常安装。根据AJDT官网貌似好久没更新了，只能用比较老的eclipse,老的eclipse下载方法（直接在百度搜索“Eclipse 4.3下载”）
 		* 只有专业版(Ultimate)的 IntelliJ IDEA 才支持 AspectJ 的开发
 			在专业版 IDEA 中开发 AspectJ，需要确保下述插件被激活：
 			File -> settings - > plugins
