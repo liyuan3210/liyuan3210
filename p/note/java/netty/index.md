@@ -4,26 +4,148 @@
 课程:
 https://www.bilibili.com/video/BV1DJ411m7NR?from=search&seid=17920255675398502421
 资源链接: https://pan.baidu.com/s/1yMAtTG36W3ekVO_zqDnkew 提取码: his7
-百度云盘：liyuandf账号:共享资源>course>java>【Java】Netty,韩顺平(全116讲)
+百度云盘：liyuandf账号:云网盘>Course>java>【Java】Netty,韩顺平(全116讲)
 代码：https://github.com/liyuan3210/java/tree/master/netty/netty_base_atguigu
 原始资料：https://gitee.com/liyuan3210/book_source/netty/netty_atguigu
 ```
 
-## 一.章节
+## 一.内容
 
-[1.bio,nio,aio介绍](bio-nio-aio.md)
+### 1.bio,nio,aio介绍（三种io方式）
 
-三种io方式
+##### 1）.BIO模型
 
-[2.nio入门](nio.md)
+同步并阻塞(传统阻塞型),一个连接服务端创建一个线程处理
 
-buffer	channel	selector梳理？？？
+##### 2）.java NIO模型(JDK1.4后提供nio)
 
-[3.netty入门](netty-start.md)
+同步非阻塞，服务模式为一个线程处理多个请求（连接），客户端请求都会注册到多路复用器上，多路复用轮询到连接有IO请求就进行处理
 
-netty核心及类关系？？？
+```
+一个(单线程)或多个(reactor线程池)管理轮询(询问),服务端连接并管理连接读写
+```
 
-## IM即时聊天工具
+NIO三大核心组件：
+
+1>.Selector（１个选择器）
+
+2>.Channel（多个通道）
+
+3>.Buffer（多个缓冲区）
+
+##### 3）.java AIO模型(没流行起来)
+
+异步非阻塞，采用了Proactor模式，简化了程序编写，有效的请求才启动线程，特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用1
+
+```
+一个(单线程)或多个(reactor线程池)异步模式(有连接os操作系统会主动告诉)，
+使用了观察者模式(回调函数),服务端连接并管理连接读写
+
+有AIO为什么还会有NIO?
+·在netty里面甚至没有用AIO,用的是NIO.
+·AIO,NIO在linux底层都是用的epoll实现,
+很多情况AIO多了一层轮询封装(epoll本身是),
+所以netty使用NIO封装
+·AIO与netty模型一样
+·windows AIO是自己单独实现的,win使用AIO会比linux效率高
+·netty只关心linux实现,NIO实现
+```
+
+##### 三种io方式:
+
+1.FileOutputStream	基础普通io
+
+2.BufferedOutputStream  buffer文件IO
+
+3.FileChannel nio文件io（NIO文件读取）
+
+##### BIO模型实例：
+
+```
+com.liyuan3210.netty.bio.BIOServer			
+```
+
+### 2.nio入门(NIO核心三大组件Buffer,Channel,Selector)
+
+<img src="img/nio-2.1.png" style="zoom: 50%;" />
+
+##### 1）.Buffer(缓冲区)
+
+NIO程序－＞Buffer缓冲区－＞文件
+
+​	数据存储在hb数组里面
+
+四个重要属性：
+
+​	Capacity	容量
+
+​	Limit	限制读取长度
+
+​	Position	下一个要读取的位置
+
+​	Mark	标记
+
+程序是直接操作Buffer的，不能直接操作文件
+
+**实例**：
+
+1.BasicBuffer.java	//intbuffer读写数据
+
+**java包**：java.nio
+
+##### 2）.Channel（通道）
+
+可以想成一个连接
+
+**实例：**
+
+1.本地文件写数据	//NIOFileChannel01.java
+
+2.本地文件读数据	//NIOFileChannel02.java
+
+3.使用一个buffer完成文件读取 	//NIOFileChannel03.java
+
+4.使用transferFrom完成文件拷贝	//NIOFileChannel04.java
+
+5.类型化（读出的类型必须按照写入的类型来读出），只读（只能读取不能写入否则报异常） //NIOByteBufferPutGet.java
+
+6.创建只读buffer   //ReadOnlyBuffer.java
+
+6.ＭappedByteBuffer（可以让文件直接在内存中修改（堆外内存），操作系统不需要拷贝一次，同步到文件由ＮＩＯ完成）？？？//MappedByteBufferTest.java
+
+7.scattering 和gathering,读，写创建buffer数组（分散和聚合）？？？	//ScatteringAndGatheringTest.java
+
+**java包**：java.channel
+
+**常用的channel有**：
+
+FileChannel，DatagramChannel，ServerSocketChannel与SocketChannel
+
+##### 3）.Selector（选择器）
+
+能够检测多个通道上是否有事件发生，多个Channel注册到Selector，如果Channel有事件发生，便获取事件对事件进行处理
+
+**实例：**
+
+1.聊天系统	//**NIOServer.java与NIOClient.java（简单nio）**
+
+2.聊天系统	//**groupchat包下（NIO实现聊天工具）**
+
+3.零拷贝案例分析  //zerocopy包下
+
+java零拷贝有mmap(内存映射)，sendFile
+
+*mmap适合小数据量读写，sendFile适合大文件传输
+
+*mmap需要4次上下文切换，3次数据拷贝，sendFile需要3次上下文切换,最少2次数据拷贝
+
+*sendFIle可以利用DMA方式，减少cpu拷贝，mmap则不能(必须从内核拷贝到socket缓冲区)
+
+零拷贝实例：com.liyuan3210.netty.nio.zerocopy目录下（传统方式与零拷贝比较）
+
+### [3.netty入门](netty-start.md)(netty核心及类关系)
+
+## 二.IM即时聊天工具
 
 ```
 聊天工具
