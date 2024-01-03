@@ -38,6 +38,7 @@ openjdk(开源免费):
 
 ```
 官网: http://www.groovy-lang.org
+	groovy语言可以与java语言无缝对接
 前提:
 	安装配置好jdk
 	groovy是基于jdk的,所以要先安装配置好jdk
