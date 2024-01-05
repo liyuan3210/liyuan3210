@@ -72,11 +72,52 @@ authentication_method=token
 token=123456
 ```
 
-
-
 ## 二．ngrok
 
-#### 搭建私有ngrok
+#### 邮箱ngrok.com
+
+```
+官网：https://ngrok.com
+邮箱登录(ngrok帐号密码)：
+li.yuan3210@163.com
+465049568@qq.com
+liyuan123456_cool@163.com
+li.yuan198907@gmail.com
+```
+
+使用：
+
+```
+启动映射(8080是web服务)
+ngrok http 8080
+
+控制台入口
+http://127.0.0.1:4040
+
+1.Installing your Authtoken(ngrok.yml重命名http可以开多个)
+ngrok.exe authtoken 5ZKAemtTQJYHzXbV1eDkt_45vpRJEq3P4T7Ly3i1dns
+
+2.Listening on
+ngrok.exe tcp 3316
+
+linux保持启动：
+	http://blog.csdn.net/xs910115/article/details/50097717
+
+https://blog.csdn.net/zhangguo5/article/details/77848658?utm_source=5ibc.net&utm_medium=referral
+
+国内ngrok:
+	http://blog.csdn.net/linshichen/article/details/52670385
+```
+
+#### cpolar(国内类似ngrok的工具)
+
+```
+官网：
+https://www.cpolar.com/
+
+```
+
+#### 搭建私有ngrok（长时间使用容易内存溢出，不推荐服务器使用）
 
 ```
 官网源码：https://github.com/inconshreveable/ngrok
@@ -201,44 +242,6 @@ ngrok服务端搭建:
 		ngrok https://gopkg.in/yaml.v1?go-get=1: timeout
 		解决方法:
 		执行install build-essential mercurial
-```
-
-#### 邮箱ngrok.com
-
-```
-官网：https://ngrok.com
-邮箱登录(ngrok帐号密码)：
-li.yuan3210@163.com
-465049568@qq.com
-liyuan123456_cool@163.com
-li.yuan198907@gmail.com
-```
-
-使用：
-
-```
-启动映射(8080是web服务)
-ngrok http 8080
-
-控制台入口
-http://127.0.0.1:4040
-
-1.Installing your Authtoken(ngrok.yml重命名http可以开多个)
-ngrok.exe authtoken 5ZKAemtTQJYHzXbV1eDkt_45vpRJEq3P4T7Ly3i1dns
-
-2.Listening on
-ngrok.exe tcp 3316
-
-
-linux保持启动：
-	http://blog.csdn.net/xs910115/article/details/50097717
-
-
-https://blog.csdn.net/zhangguo5/article/details/77848658?utm_source=5ibc.net&utm_medium=referral
-
-
-国内ngrok:
-	http://blog.csdn.net/linshichen/article/details/52670385
 ```
 
 ## 三．其他
