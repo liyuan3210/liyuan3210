@@ -1,7 +1,7 @@
 # html样式css
 
 云盘:
-liyuandf@共享资源/基础技能/前端UI/html视频教程
+liyuandf@云硬盘/Course/ui/html视频教程
 
 ```
 					一.html常用标签

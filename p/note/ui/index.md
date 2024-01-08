@@ -6,7 +6,9 @@ https://github.com/liyuan3210/ui
 
 ## 一．基础
 
-[1.bootstrap生态](bootstrap.md)
+[1.bootstrap生态，js插件](bootstrap.md)
+
+barQr-code条形码，webAssembly(js调用c)，svg
 
 [2.nodejs环境](env_nodejs.md)
 
@@ -18,7 +20,5 @@ https://github.com/liyuan3210/ui
 
 [7.css-less与sass（css动态处理语言）](html_css.md)
 
-[8.plugs（插件，js插件）](js_plugs.md)
-
-​			barQr-code条形码，webAssembly(js调用c)，svg，[hexo](hexo.md)
+[8.hexo博客系统](hexo.md)
 
