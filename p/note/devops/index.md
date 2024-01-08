@@ -22,7 +22,7 @@
 	2).samba<br/>
 	3).subversion<br/>
 
-[7.应用](app/audio_video.md)
+[7.应用](app/index.md)
 ​	1).音频/视频处理
 
 [8.安全攻防](attack.md)
