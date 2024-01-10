@@ -259,7 +259,8 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 	2.2) 查看此方法在哪调用：		   ctrl+B
 	2.3）查看当前类变量，方法		   alt+7
 	2.4）查看当前工程类				 shift(连续按两下)
-	2.5）全局搜索文件里的字符		   ctrl+shift+R
+	2.5）全局搜索文件里的字符		   ctrl+shift+R 或 ctrl+shift+F
+	2.6）返回跟进的上一个代码位置	  ctrl+alt+"←"
 ```
 
 #### 4.spring源码debug
