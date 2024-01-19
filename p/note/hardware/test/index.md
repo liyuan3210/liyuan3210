@@ -1,3 +1,5 @@
+[安卓(android)开发](android.md)
+
 ### 仿真与实验
 
 ###### Multisim14安装
@@ -164,5 +166,40 @@ https://www.bilibili.com/video/BV1as411H7Ya?p=25
 4.什么是高通，低通电路
 	https://zhidao.baidu.com/question/497077057.html
 	简单而言，低通就是低频信号可以通过，高频信号被滤掉，高通为高频信号可以通过，低频被隔掉，但是根据不同频率，滤除效果不一样。
+```
+
+#### 五。模块
+
+###### 1.移动光猫（移动光猫密码）
+
+```
+网上超级用户破解
+超级用户名：CMCCAdmin
+密码：aDm8H%MdA
+	
+其它功能：
+	1.改桥接模式
+	2.当路由器
+	3.usb文件共享
+	
+问题：
+	1.telnet连接？
+	
+H2-3s
+http://www.chinadsl.net/forum.php?mod=viewthread&tid=165314&ordertype=2
+```
+
+###### 2.物连网wifi模块方案
+
+```
+ESP8266 WiFi / NodeMCU
+https://www.ibm.com/developerworks/cn/iot/library/iot-nodemcu-open-why-use/index.html?ca=drs-&utm_source=tuicool&utm_medium=referral
+https://github.com/nodemcu/nodemcu-firmware
+
+常见wifi模块芯片
+https://tieba.baidu.com/p/5889454502?red_tag=2976067593
+
+ASIC与FPGA的最大区别是什么(可否相互替代)
+http://m.elecfans.com/article/635174.html
 ```
 

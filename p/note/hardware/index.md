@@ -56,9 +56,9 @@ https://www.likecs.com/show-805013.html
 
 [2.android连调adb](plan/android-adb.md)
 
-[3.废弃光猫破解与刷机](plan/light-cat.md)
+[3.废弃光猫破解与刷机](test/index.md)
 
-[4.物联网wifi模块ESP8266](plan/wifi-ESP8266.md)
+[4.物联网wifi模块ESP8266](test/index.md)
 
 [5.安卓ssh客户端](https://github.com/connectbot/connectbot)
 
