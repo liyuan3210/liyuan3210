@@ -54,7 +54,7 @@ https://www.likecs.com/show-805013.html
 
 1.硬件,OS方案
 
-[2.android连调adb](plan/android-adb.md)
+[2.android连调adb](test/android.md)
 
 [3.废弃光猫破解与刷机](test/index.md)
 
