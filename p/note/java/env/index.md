@@ -194,7 +194,7 @@ File->Project Structure
 	2.3）查看当前类变量，方法		   alt+7
 	2.4）查看当前工程类				 shift(连续按两下)
 	2.5）全局搜索文件里的字符		   ctrl+shift+R 或 ctrl+shift+F
-	2.6）返回跟进的上一个代码位置	  ctrl+alt+"←"
+	2.6）返回跟进的上一个代码位置	  alt+"←"
 
 2）工程导入
 	。。。。。。
