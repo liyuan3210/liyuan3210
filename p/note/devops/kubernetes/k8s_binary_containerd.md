@@ -14,6 +14,9 @@ https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
 4.Customizing components with the kubeadm API
 Kubernetes Documentation > Getting started > Production environment > Installing Kubernetes with deployment tools > Bootstrapping clusters with kubeadm > Customizing components with the kubeadm API
+
+5.自己笔记参考：
+https://gitee.com/liyuan3210/book_source/tree/master/k8s
 ```
 
 ##### kuernetes架构
