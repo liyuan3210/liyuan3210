@@ -18,29 +18,7 @@
 
 [5.HARDWARE](hardware/index.md)硬件
 
-## 二．工具(官网下载/安装)
-
-[typora:](https://www.typora.io)轻量markdown工具
-
-* 或者[vnote:](https://vnote.readthedocs.io)树形目录管理及编辑
-
-[draw:](https://www.diagrams.net)画图工具
-
-[notepad:](https://notepad-plus-plus.org/)notepad是windows编辑工具
-
-```
-ubuntu版本(不适用)：
-sudo add-apt-repository ppa:notepadqq-team/notepadqq	//添加安装包
-sudo apt-get update	//更新最新版本，这步用户自己选择，可以直接用老版本的
-sudo apt-get install notepadqq	//安装
-```
-
-[keepass:](https://keepass.info/)密码管理工具
-
-* 官网：https://keepass.info/
-* 详细见私有库：https://github.com/liyuan3210/data/blob/master/db/keePass/readme.txt
-
-## 三.新闻事件
+## 二.新闻事件
 
 2022.08.02: 佩洛西访台，华东战区实弹演习
 

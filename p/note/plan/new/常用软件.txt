@@ -37,34 +37,39 @@
 	2.public
 		2.1).Typora(最新已收费，破解版)
 			https://www.typoraio.cn/
+			替代者：https://www.marktext.cc/
+			https://github.com/marktext/marktext
 		2.2).google chrome
 			https://www.google.cn/intl/zh-CN/chrome/
 		2.3).wps
 			https://platform.wps.cn/
-		2.4).virtualbox
+		2.4).draw
+			https://www.drawio.com/
+		2.5).virtualbox
 			https://www.virtualbox.org/
-		2.5).KeePass
+		2.6).KeePass
 			https://keepass.info/
-		2.6).常用办公
+			https://github.com/liyuan3210/data/blob/master/db/keePass/readme.txt
+		2.7).常用办公
 			百度云盘，微信，sogou
-		2.7).video（视频图像处理工具）
-			2.7.1).OBS-Studio(录屏工具)
+		2.8).video（视频图像处理工具）
+			2.8.1).OBS-Studio(录屏工具)
 				https://obsproject.com
 				windows下老版本只能运行低版本OBS-Studio
-			2.7.2).Captura(录屏工具)
+			2.8.2).Captura(录屏工具)
 				https://github.com/MathewSachin/Captura/releases/download/v8.0.0/Captura-Portable.zip
-			2.7.3).ffmpeg视频音频处理工具
+			2.8.3).ffmpeg视频音频处理工具
 				http://ffmpeg.org/
-			2.7.4).player（开源视频播放器）
+			2.8.4).player（开源视频播放器）
 				* vlc
 				https://www.videolan.org/vlc/index.zh.html
 				* mpv
 				https://mpv.io/
 				* SMPlayer（支持Youtube格式）
 				https://www.smplayer.info/
-			2.7.5).shotcut（视频剪辑工具）
+			2.8.5).shotcut（视频剪辑工具）
 				https://www.shotcut.org
-			2.7.6).gimp（图片处理工具）
+			2.8.6).gimp（图片处理工具）
 				https://www.gimp.org
 	
 	3.dev
@@ -91,7 +96,6 @@
 	1.specific
 	2.public
 	3.dev
-	
 	
 公共部分
 	1).wintogo（移动启动盘制作）
