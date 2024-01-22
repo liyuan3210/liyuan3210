@@ -2,7 +2,7 @@
 
 一.linux
 	1.specific
-		暂无
+		见windows项
 	2.public
 		见windows项
 	3.dev
