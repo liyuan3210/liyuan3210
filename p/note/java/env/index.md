@@ -182,11 +182,11 @@ https://www.jetbrains.com/idea/
 
 ```
 idea导入项目：
-File->new->Project from existing sources（选择对应工作目录 或 类型项目）
-idea环境配置：
-File->Settings
-idea项目配置：
-File->Project Structure
+    File->new->Project from existing sources（选择对应工作目录 或 类型项目）
+    idea环境配置：
+    File->Settings
+    idea项目配置：
+    File->Project Structure
 
 1）快捷键
 	1.1）查看当前接口或抽象类的实现：	ctrl+H

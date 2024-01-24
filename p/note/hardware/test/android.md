@@ -154,3 +154,27 @@ http://blog.csdn.net/beiminglei/article/details/17399333
 		https://blog.csdn.net/qq_32157729/article/details/88743881
 ```
 
+#### 3.手机（安卓）root与termux
+
+```
+1）root方式
+	https://zhuanlan.zhihu.com/p/657049426?utm_id=0
+2）安卓root工具(magisk)
+    https://magiskmanager.com/
+ 安卓手机ROOT Magisk与KernelSU
+    https://baijiahao.baidu.com/s?id=1785237312738839581&wfr=spider&for=pc
+3）termux无需root
+    https://www.jianshu.com/p/2b7c0b7ac57d
+	官方：下载地址https://f-droid.org/en/packages/com.termux/
+	源码：GitHub https://github.com/termux/termux-app/
+4）adb进入linux命令模式        
+5）adb是否能获得root权限？？？
+    如果你说的是用ADB指令给手机root权限，不能如果你说的是手机已经活动root权限了给adb root权限，可以
+6）为什么现在安卓手机root的人越来越少了？
+    https://baijiahao.baidu.com/s?id=1719943485776817641&wfr=spider&for=pc
+7）安卓开源软件F-Droid
+	f-droid是一个开源免费的的安卓应用商店
+        https://f-droid.org/
+        https://github.com/f-droid
+```
+
