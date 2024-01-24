@@ -189,15 +189,28 @@ idea项目配置：
 File->Project Structure
 
 1）快捷键
-	2.1）查看当前接口或抽象类的实现：	ctrl+H
-	2.2) 查看此方法在哪调用：		   ctrl+B
-	2.3）查看当前类变量，方法		   alt+7
-	2.4）查看当前工程类				 shift(连续按两下)
-	2.5）全局搜索文件里的字符		   ctrl+shift+R 或 ctrl+shift+F
-	2.6）返回跟进的上一个代码位置	  alt+"←"
+	1.1）查看当前接口或抽象类的实现：	ctrl+H
+	1.2) 查看此方法在哪调用：		   ctrl+B
+	1.3）查看当前类变量，方法		   alt+7
+	1.4）查看当前工程类				 shift(连续按两下)
+	1.5）全局搜索文件里的字符		   ctrl+shift+R 或 ctrl+shift+F
+	1.6）返回跟进的上一个代码位置	  alt+"←"
 
 2）工程导入
-	。。。。。。
+	2.1）。File -> Open（打开一个目录，不会构建工程）
+    2.2）。File -> New - > project from existing Source(直接打开工程并构建)
+    	Create module from existing sources
+    	Import module from external model
+    2.3）。File -> Project Settings -> Modules(模块方式导入)
+    	Create module from existing sources
+    	Import module from external model
+    	
+3）工程跳过测试方法
+	maven工程idea右上侧，有个跳过测试按钮
+	
+问题：
+	idea工程失效问题(File->settings->build,excution...->compiler->shared buid vm optoin)
+	配置项：-Djps.track.ap.dependencies=false
 
 参考：
 https://blog.csdn.net/flyingdream123/article/details/77622421/

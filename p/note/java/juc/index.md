@@ -107,6 +107,10 @@ https://jmeter.apache.org/
 右键点击TestPlan->添加->线程（用户）->线程组
 3.2）创建http请求
 完成后选择线程组(Thread Group)，在这个线程组上点击右键，添加->取样器（sampler）->HTTP请求
+接口数据(貌似二选一)：1）Parameters	2）Body Data	
+3.3）报错（Content type 'text/plain;charset=UTF-8' not supported"）
+选中“http请求头右键”添加->配置原件(config element)->HTTP信息头管理器(Http header manager)，配置如下：
+Content-Type	|		application/json;charset=UTF-8
 
 4.添加“查看结果树”（View Results Tree）与“聚合报告”（Summary Report）
 查看结果树，聚合报告 可以放在“测试计划”，“线程组”，“Http请求”。
@@ -118,7 +122,6 @@ http://127.0.0.1:8080/jwt/login
 6.根据获取token 配置授权，调用授权接口
 选中“http请求头右键”添加->配置原件(config element)->HTTP信息头管理器(Http header manager)Authorization
 http://127.0.0.1:8080/jwt/hello
-
 
 
 
