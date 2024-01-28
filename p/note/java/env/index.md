@@ -1,5 +1,7 @@
 # 环境安装
 
+## [工具链](tools.md)
+
 [*.git配置,ssh免密登陆及openssh](../../devOps/github_gitee_gitlab.md)
 
 [*.gpg加解密](gpg_use.md)
