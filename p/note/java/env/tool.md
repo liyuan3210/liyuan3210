@@ -2,17 +2,96 @@
 
 ### 一。windows平台
 
-###### 1.specific（平台特有）
+###### 1.specific（平台独有）
 
 ```
-
+1.1).npp
+	https://github.com/notepad-plus-plus/notepad-plus-plus
+1.2).7z
+	https://7-zip.org/
+1.3).git
+	客户端工具:https://gitforwindows.org
+	或 https://git-scm.com
+1.4).VNC-viewer
+	https://www.realvnc.com/en/connect/download/viewer/
+1.5).xshell(破解版)
+1.6).mingw
+	https://www.mingw-w64.org/
+	下载详细见../os/gcc/
+1.7).qemu
+	https://www.qemu.org/
+1.8).服务端工具
+	1.8.1）svn服务端
+	VisualSVN				https://www.visualsvn.com
+	客户端工具：
+	TortoiseSVN				https://tortoisesvn.net
+	1.8.2）hsk（花生壳）
+	账号见密码本
 ```
 
-###### 2.public（各平台都支持）
+###### 2.public（跨平台）
+
+```
+2.1).Typora(最新已收费，破解版)
+	https://www.typoraio.cn/
+	替代者：https://www.marktext.cc/
+	https://github.com/marktext/marktext
+2.2).google chrome
+	https://www.google.cn/intl/zh-CN/chrome/
+2.3).wps
+	https://platform.wps.cn/
+2.4).draw
+	https://www.drawio.com/
+2.5).virtualbox
+	https://www.virtualbox.org/
+2.6).KeePass
+	https://keepass.info/
+	https://github.com/liyuan3210/data/blob/master/db/keePass/readme.txt
+2.7).常用办公
+	百度云盘，微信，sogou
+2.8).video（视频图像处理工具）
+	2.8.1).OBS-Studio(录屏工具)
+		https://obsproject.com
+		windows下老版本只能运行低版本OBS-Studio
+	2.8.2).Captura(录屏工具)
+		https://github.com/MathewSachin/Captura/releases/download/v8.0.0/Captura-Portable.zip
+	2.8.3).ffmpeg视频音频处理工具
+		http://ffmpeg.org/
+	2.8.4).player（开源视频播放器）
+		* vlc
+		https://www.videolan.org/vlc/index.zh.html
+		* mpv
+		https://mpv.io/
+		* SMPlayer（支持Youtube格式）
+		https://www.smplayer.info/
+	2.8.5).shotcut（视频剪辑工具）
+		https://www.shotcut.org
+	2.8.6).gimp（图片处理工具）
+		https://www.gimp.org
+```
 
 ###### 3.dev（开发工具）
 
-
+```
+3.1).jdk
+	https://openjdk.org/
+3.2).idea（community免费版）
+	https://www.jetbrains.com/idea/download/
+3.3).eclipse
+	https://www.eclipse.org/
+3.4).maven,gradle,jmeter（公用部分）
+	为公用包，官网详细见上面linux
+3.4).vscode
+	https://code.visualstudio.com/
+3.5).dbeaver-ce
+	https://dbeaver.io/download/
+3.6).postman
+	https://www.postman.com/
+3.7).nodejs
+	https://nodejs.org/
+3.8).python
+	https://www.python.org/
+```
 
 ### 二。linux平台
 

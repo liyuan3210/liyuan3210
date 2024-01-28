@@ -303,25 +303,6 @@ nat123
 2.hsk(花生壳)
 	账号见密码本
 ```
-
-### 4.windows常用桌面工具
-
-```
-1.编辑器
-	notepad++				https://notepad-plus-plus.org
-	https://github.com/notepad-plus-plus/notepad-plus-plus/
-2.开发工具	
-	vscode 					https://code.visualstudio.com
-3.7zip开源压缩解压工具
-	https://www.7-zip.org
-4.git客户端工具
-	客户端工具:
-	https://gitforwindows.org或https://git-for-windows.github.io
-	https://github.com/git-for-windows/git
-	还有
-	https://git-scm.com
-```
-
 ###### 问题
 1.软件安装问题见如下图
 <img src="img/visualcpp.png" style="zoom:60%;" />
