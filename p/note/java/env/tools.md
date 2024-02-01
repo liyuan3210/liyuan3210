@@ -25,6 +25,7 @@
 	VisualSVN				https://www.visualsvn.com
 	客户端工具：
 	TortoiseSVN				https://tortoisesvn.net
+										https://tortoisesvn.en.softonic.com
 	1.8.2）hsk（花生壳）
 	账号见密码本
 ```
