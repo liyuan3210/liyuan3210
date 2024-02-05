@@ -25,11 +25,53 @@ https://gitee.com/liyuan3210/book_source/tree/master/k8s
 
 ##### 集群环境
 
+```
+集群机器规划
+		node1 	node2 	node3 		node4 	node5 	node6 	node7
+k8s:	master	master	master/node	node	node
+etcd:					etcd		etcd	etcd
+```
 
+##### 软件版本
 
-##### 软件节点
-
-
+```
+需要下载的docker
+	1.kubernetes	v1.21.10
+	2.etcd			v3.5.2
+	3.calico		v3.19.4
+		https://github.com/projectcalico/calico
+	4.coredns		v1.8.4
+		https://github.com/coredns/coredns
+	5.docker		v20.10.13
+	6.haproxy		v5.18	//版本是否有问题
+	7.keepalived	v3.5	//版本是否有问题
+	
+需要下载的docker
+	1.kubernetes	v1.21.10
+	2.etcd			v3.5.2
+	3.calico		v3.19.4
+		https://github.com/projectcalico/calico
+	4.coredns		v1.8.4
+		https://github.com/coredns/coredns
+	5.containerd	v20.10.13
+	6.haproxy		v5.18	//版本是否有问题
+	7.keepalived	v3.5	//版本是否有问题
+	
+当前实际下载版本
+	1.kubernetes	v1.27.4
+	2.etcd			v3.5.9
+	3.calico		v3.26.1
+		https://github.com/projectcalico/calico
+	4.coredns		1.10.1
+		https://github.com/coredns/coredns
+	5.容器(根据实际情况来)
+		docker		v24.0.5
+		containerd	v24.0.5
+	6.haproxy		v2.8.1
+		http://www.haproxy.org/
+	7.keepalived	v2.2.8
+		https://www.keepalived.org/
+```
 
 ##### 网络分配
 
