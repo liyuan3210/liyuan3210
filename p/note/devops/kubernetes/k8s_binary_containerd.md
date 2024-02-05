@@ -28,7 +28,7 @@ https://gitee.com/liyuan3210/book_source/tree/master/k8s
 ```
 集群机器规划
 		node1 	node2 	node3 		node4 	node5 	node6 	node7
-k8s:	master	master	master/node	node	node
+k8s:	master	master	master		node	node
 etcd:					etcd		etcd	etcd
 ```
 
@@ -184,6 +184,7 @@ $ tar -xzvf etcd-v3.5.9-linux-amd64.tar.gz
 $ mv etcd-v3.5.9-linux-amd64 /opt/etcd
 ```
 2.2）/opt/etcd下创建需要的目录
+
 ```bash
 $ mkdir /opt/etcd/ssl && mkdir /opt/etcd/cfg && mkdir /opt/etcd/data
 ```
@@ -359,6 +360,7 @@ scp kube-apiserver kube-controller-manager kube-scheduler kubectl node2:/usr/loc
 scp kube-apiserver kube-controller-manager kube-scheduler kubectl node3:/usr/local/bin
 # node节点：
 scp kubelet kube-proxy node4:/usr/local/bin
+scp kubelet kube-proxy node5:/usr/local/bin
 ```
 
 1.3).创建需要的目录
