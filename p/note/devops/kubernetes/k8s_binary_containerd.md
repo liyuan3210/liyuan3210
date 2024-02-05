@@ -371,7 +371,7 @@ $ mkdir /opt/kubernetes&&mkdir /opt/kubernetes/ssl&&mkdir /opt/kubernetes/logs&&
 
 ###### 2.安装部署kube-apiserver
 
-2.1）.创建kube-apiserver-csr.json请求文件
+2.1）.进入/opt/kubernetes/ssl目录，创建kube-apiserver-csr.json请求文件
 
 ```json
 cat > /opt/kubernetes/ssl/kube-apiserver-csr.json<< EOF
