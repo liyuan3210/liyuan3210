@@ -940,9 +940,7 @@ EOF
 
 5.6）.考本文件到各个节点并启动
 
-```
-scp -r /opt/kubernetes root@node2:/opt/kubernetes
-或
+```bash
 文件同步
 scp /opt/kubernetes/ssl/* root@node2:/opt/kubernetes/ssl/
 scp /opt/kubernetes/cfg/* root@node2:/opt/kubernetes/cfg/
@@ -951,6 +949,7 @@ scp /opt/kubernetes/cfg/kube-scheduler.service root@node2:/usr/lib/systemd/syste
 systemctl daemon-reload
 systemctl enable --now kube-scheduler
 systemctl status kube-scheduler
+$ systemctl daemon-reload && systemctl enable --now kube-scheduler && systemctl status kube-scheduler
 ```
 
 ##### 三.安装kubernetes工作节点(worker)
