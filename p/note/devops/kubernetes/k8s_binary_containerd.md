@@ -627,12 +627,12 @@ $ ls admin*pem	//查看
 
 ```bash
 # kube.config为kubectl的配置文件，包含访问apiserver的所有信息，如apiserver地址，CA证书和自身使用的证书
+//进入cfg目录
+$ cd /opt/kubernetes/cfg/
 //配置哪个集群,证书
 $ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube.config
 //证书角色管理员
 $ kubectl config set-credentials admin --client-certificate=/opt/kubernetes/ssl/admin.pem --client-key=/opt/kubernetes/ssl/admin-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube.config
-或
-$ kubectl config set-credentials admin --client-certificate=/opt/kubernetes/ssl/admin.pem --client-key=/opt/kubernetes/ssl/admin-key.pem --embed-certs=true --kubeconfig=kube.config
 //设置安全上下文
 $ kubectl config set-context kubernetes --cluster=kubernetes --user=admin --kubeconfig=kube.config
 //设置安全上下文
