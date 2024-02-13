@@ -728,7 +728,7 @@ $ kubectl config set-credentials system:kube-controller-manager --client-certifi
 //设置安全上下文
 $ kubectl config set-context system:kube-controller-manager --cluster=kubernetes --user=system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
 //设置安全上下文
-$ kubectl config set-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
+$ kubectl config use-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
 # 注意：需要同步到各个master节点
 ```
 
