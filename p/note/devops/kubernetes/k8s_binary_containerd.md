@@ -636,7 +636,7 @@ $ kubectl config set-credentials admin --client-certificate=/opt/kubernetes/ssl/
 //设置安全上下文
 $ kubectl config set-context kubernetes --cluster=kubernetes --user=admin --kubeconfig=kube.config
 //设置安全上下文
-$ kubectl config set-context kubernetes --kubeconfig=kube.config
+$ kubectl config use-context kubernetes --kubeconfig=kube.config
 ```
 
 3.4）准备kubectl配置文件并进行角色绑定
