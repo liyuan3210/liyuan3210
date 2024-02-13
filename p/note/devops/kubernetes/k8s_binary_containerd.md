@@ -599,7 +599,7 @@ cat > /opt/kubernetes/ssl/admin-csr.json<< EOF
       "C": "CN",
       "L": "ShangHai",
       "ST": "ShangHai",
-      "O": "system.masters",
+      "O": "system:masters",
       "OU": "system"
     }
   ]
