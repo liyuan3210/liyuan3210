@@ -1177,6 +1177,8 @@ $ systemctl status containerd			//查看状态
 2.1）创建kubelet-bootstrap.kubeconfig
 
 ```bash
+//进入cfg目录
+$ cd /opt/kubernetes/cfg/
 # 取出csv文件token值,cd /opt/kubernetes/ssl/
 BOOTSTRAP_TOKEN=$(awk -F "," '{print $1}' /opt/kubernetes/ssl/token.csv)
 
@@ -1192,17 +1194,17 @@ kubectl config use-context default --kubeconfig=kubelet-bootstrap.kubeconfig
 角色绑定
 
 ```bash
-kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=kubelet-bootstrap
+$ kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=kubelet-bootstrap
 
-kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+$ kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
 ```
 
 验证
 
 ```bash
-kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=kubelet-bootstrap
+$ kubectl describe clusterrolebinding cluster-system-anonymous
 
-kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+$ kubectl describe clusterrolebinding kubelet-bootstrap
 ```
 
 2.2）创建kubelet配置文件(不同节点配置有所不同)
