@@ -970,7 +970,7 @@ $ tar -xf cri-containerd-cni-1.7.3-linux-amd64.tar.gz -C /
 
 1.2）生成配置文件并修改
 
-```
+```bash
 创建containerd目录
 $ mkdir /etc/containerd
 
@@ -1101,7 +1101,7 @@ $ systemctl enable --now containerd		//启动
 $ systemctl status containerd			//查看状态
 ```
 
-###### 2.部署kubelet
+###### 2.部署kubelet(只有containerd才需要此步骤，docker可以忽略)
 
 2.1）创建kubelet-bootstrap.kubeconfig
 
