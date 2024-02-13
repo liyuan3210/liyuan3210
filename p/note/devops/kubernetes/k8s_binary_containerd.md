@@ -1332,8 +1332,8 @@ cat > /opt/kubernetes/ssl/kube-proxy-csr.json << "EOF"
   "names": [
     {
       "C": "CN",
-      "ST": "Beijing",
-      "L": "Beijing",
+      "ST": "ShangHai",
+      "L": "ShangHai",
       "O": "kubemsb",
       "OU": "CN"
     }
