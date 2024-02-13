@@ -964,8 +964,16 @@ https://github.com/containerd/containerd
 
 1.2）解压安装(解压到跟目录/,因为包含了etc,opt,usr)
 
-```
+```bash
 $ tar -xf cri-containerd-cni-1.7.3-linux-amd64.tar.gz -C /
+
+# 解压后的目录
+/etc
+/opt
+/usr
+
+#验证
+$ crictl ps
 ```
 
 1.2）生成配置文件并修改
