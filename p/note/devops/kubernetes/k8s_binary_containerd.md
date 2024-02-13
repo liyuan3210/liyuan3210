@@ -912,7 +912,7 @@ kubectl config use-context system:kube-scheduler --kubeconfig=kube-scheduler.kub
 ```bash
 cat > /opt/kubernetes/cfg/kube-scheduler.conf << EOF
 KUBE_SCHEDULER_OPTS="--address=127.0.0.1 \
---kubeconfig=/opt/kubernetes/ssl/kube-scheduler.kubeconfig \
+--kubeconfig=/opt/kubernetes/cfg/kube-scheduler.kubeconfig \
 --leader-elect=true \
 --alsologtostderr=true \
 --logtostderr=false \
