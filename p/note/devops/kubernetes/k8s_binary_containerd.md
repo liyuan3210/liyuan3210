@@ -1282,6 +1282,8 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 EOF
+#说明：
+# --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig 这个文件暂时没有
 ```
 
 2.4）同步文件到node节点
