@@ -721,6 +721,8 @@ $ ls kube-controller-manager*pem	//查看
 4.3）.创建kube-controller-manager.kubeconfig文件(如果需要在节点实现控制器管理，就需要此步创建)
 
 ```bash
+//进入cfg目录
+$ cd /opt/kubernetes/cfg/
 //配置哪个集群,证书
 $ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube-controller-manager.kubeconfig
 //证书角色管理员
@@ -893,19 +895,21 @@ $ ls kube-scheduler*pem	//查看
 5.3）创建kube-scheduler的kubeconfig
 
 ```bash
-# 配置哪个集群,证书
+//进入cfg目录
+$ cd /opt/kubernetes/cfg/
+// 配置哪个集群,证书
 kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.10.100:6443 --kubeconfig=kube-scheduler.kubeconfig
-# 证书角色管理员
+// 证书角色管理员
 kubectl config set-credentials system:kube-scheduler --client-certificate=/opt/kubernetes/ssl/kube-scheduler.pem --client-key=/opt/kubernetes/ssl/kube-scheduler-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube-scheduler.kubeconfig
-#设置安全上下文
+//设置安全上下文
 kubectl config set-context system:kube-scheduler --cluster=kubernetes --user=system:kube-scheduler --kubeconfig=kube-scheduler.kubeconfig
-# 设置安全上下文
+// 设置安全上下文
 kubectl config use-context system:kube-scheduler --kubeconfig=kube-scheduler.kubeconfig
 ```
 
 5.4）.创建服务配置文件kube-scheduler.conf
 
-```
+```bash
 cat > /opt/kubernetes/cfg/kube-scheduler.conf << EOF
 KUBE_SCHEDULER_OPTS="--address=127.0.0.1 \
 --kubeconfig=/opt/kubernetes/ssl/kube-scheduler.kubeconfig \
@@ -919,7 +923,7 @@ EOF
 
 5.5）.创建服务启动文件kube-scheduler.service
 
-```
+```bash
 cat > /opt/kubernetes/cfg/kube-scheduler.service << EOF
 [Unit]
 Description=Kubernetes Scheduler
@@ -938,6 +942,11 @@ EOF
 
 ```
 scp -r /opt/kubernetes root@node2:/opt/kubernetes
+或
+文件同步
+scp /opt/kubernetes/ssl/* root@node2:/opt/kubernetes/ssl/
+scp /opt/kubernetes/cfg/* root@node2:/opt/kubernetes/cfg/
+scp /opt/kubernetes/cfg/kube-scheduler.service root@node2:/usr/lib/systemd/system/
 
 systemctl daemon-reload
 systemctl enable --now kube-scheduler
