@@ -1167,9 +1167,8 @@ $ mv runc.amd64 /usr/local/sbin/runc
 
 1.4）启动containerd
 
-```
-$ systemctl enable --now containerd		//启动
-$ systemctl status containerd			//查看状态
+```bash
+$ systemctl daemon-reload&&systemctl enable --now containerd&&systemctl status containerd		//启动
 ```
 
 ###### 2.部署kubelet(只有containerd才需要此步骤，docker可以忽略)
@@ -1285,13 +1284,15 @@ WantedBy=multi-user.target
 EOF
 ```
 
-2.4）同步到集群节点
+2.4）同步文件到node节点
 
 ```bash
-cp kubelet-bootstrap.kubeconfig /etc/kubernetes/
-cp kubelet.json /etc/kubernetes/
+同步公共的秘钥文件到节点(/opt/ssl)	
+cp kubelet-bootstrap.kubeconfig /opt/kubernetes/cfg/
+cp kubelet.json /opt/kubernetes/cfg/
 cp kubelet.service /usr/lib/systemd/system/
 
+# 批量方式
 for i in  k8s-master2 k8s-master3 k8s-worker1;do scp kubelet-bootstrap.kubeconfig kubelet.json $i:/etc/kubernetes/;done
 for i in  k8s-master2 k8s-master3 k8s-worker1;do scp ca.pem $i:/etc/kubernetes/ssl/;done
 for i in k8s-master2 k8s-master3 k8s-worker1;do scp kubelet.service $i:/usr/lib/systemd/system/;done
@@ -1303,9 +1304,8 @@ for i in k8s-master2 k8s-master3 k8s-worker1;do scp kubelet.service $i:/usr/lib/
 创建目录（可能要创建）
 mkdir -p /var/lib/kubelet
 mkdir -p /var/log/kubernetes
-	
-systemctl daemon-reload
-systemctl enable --now kubelet
+
+$ systemctl daemon-reload&&systemctl enable --now kubelet&&systemctl status kubelet		//启动并查看状态
 ```
 
 2.6）检查
