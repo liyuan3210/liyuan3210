@@ -988,6 +988,40 @@ $ containerd config default > /etc/containerd/config.toml
 下面仅默认生成的文件需要执行
 sed -i 's@systemd_cgroup = false@systemd_cgroup = true@' /etc/containerd/config.toml
 sed -i 's@k8s.gcr.io/pause:3.6@registry.aliyuncs.com/google_containers/pause:3.6@' /etc/containerd/config.toml
+
+生成默认修改点
+oom_score = 0 			    改为 		oom_score = -999
+sandbox_image = "registry.k8s.io/pause:3.8"		改为如下
+sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.8"
+[plugins]
+  systemd_cgroup = false    改为 		systemd_cgroup = true
+[plugins."io.containerd.grpc.v1.cri".cni]
+  conf_template = ""		改为		conf_template = "/etc/cni/net.d/10-default.conf"
+[plugins]					改为(下面添加如下)
+。。。。。。
+[plugins.cri.registry]（每一级，两个空格）
+      [plugins.cri.registry.mirrors]
+        [plugins.cri.registry.mirrors."docker.io"]
+          endpoint = [
+            "https://docker.mirrors.ustc.edu.cn",
+            "http://hub-mirror.c.163.com"
+          ]
+        [plugins.cri.registry.mirrors."gcr.io"]
+          endpoint = [
+            "https://gcr.mirrors.ustc.edu.cn"
+          ]
+        [plugins.cri.registry.mirrors."k8s.gcr.io"]
+          endpoint = [
+            "https://gcr.mirrors.ustc.edu.cn/google-containers/"
+          ]
+        [plugins.cri.registry.mirrors."quay.io"]
+          endpoint = [
+            "https://quay.mirrors.ustc.edu.cn"
+          ]
+        [plugins.cri.registry.mirrors."harbor.kubemsb.com"]
+          endpoint = [
+            "http://harbor.kubemsb.com"
+          ]
 ```
 
 实际/etc/containerd/config.toml内容(可直接使用这个文件，省去上面生成默认与sed步骤)：
