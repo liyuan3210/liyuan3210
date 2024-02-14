@@ -17,6 +17,44 @@ Kubernetes Documentation > Getting started > Production environment > Installing
 
 5.自己笔记参考：
 https://gitee.com/liyuan3210/book_source/tree/master/k8s
+
+-------------------------------------
+一.查看服务是否启动
+systemctl status etcd
+systemctl status kube-apiserver
+systemctl status kube-controller-manager
+systemctl status kube-scheduler
+
+systemctl status containerd
+systemctl status kubelet
+systemctl status kube-proxy
+
+二.更改配置
+cp kubelet.service /usr/lib/systemd/system/
+systemctl daemon-reload&&systemctl restart kube-proxy
+
+三.containerd容器使用
+ctr与crictl？？？
+ctr是由containerd提供的一个客户端工具。crictl是CRI兼容的容器运行时命令接口，和containerd无关，由kubernetes提供.
+拉取镜像
+ctr image pull registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2
+ctr image pull registry.aliyuncs.com/google_containers/pause:3.8
+
+ctr image pull registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2
+
+ctr image pull registry.aliyuncs.com/google_containers/pause:3.6
+创建容器
+ctr run -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2 myubuntu
+查看任务
+ctr tasks ls
+进入容器
+ctr t exec -t --exec-id 1044 myubuntu sh
+
+systemctl status containerd
+systemctl restart containerd
+
+常用命令
+https://blog.csdn.net/ss810540895/article/details/128640139
 ```
 
 ##### kuernetes架构
@@ -1289,7 +1327,11 @@ WantedBy=multi-user.target
 EOF
 #说明：
 # --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig 这个文件暂时没有
-# --cert-dir=/opt/kubernetes/ssl 目录是指什么证书文件？？？
+# systemctl restart kubelet启动后会自动生成kubelet.kubeconfig与如下两个文件
+# /opt/kubernetes/cfg/kubelet.kubeconfig
+# 根据--cert-dir地址生成
+# /opt/kubernetes/ssl/kubelet.key
+# /opt/kubernetes/ssl/kubelet.crt
 ```
 
 2.4）同步文件到node节点
