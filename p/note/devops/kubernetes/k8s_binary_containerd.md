@@ -1284,6 +1284,7 @@ WantedBy=multi-user.target
 EOF
 #说明：
 # --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig 这个文件暂时没有
+# --cert-dir=/opt/kubernetes/ssl 目录是指什么证书文件？？？
 ```
 
 2.4）同步文件到node节点
@@ -1340,6 +1341,7 @@ cat > /opt/kubernetes/ssl/kube-proxy-csr.json << "EOF"
   ]
 }
 EOF
+# names[......]里面各个参数意义？？？
 ```
 
 3.2）生成证书
