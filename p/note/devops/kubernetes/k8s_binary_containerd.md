@@ -1185,7 +1185,7 @@ kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --
 
 kubectl config set-credentials kubelet-bootstrap --token=${BOOTSTRAP_TOKEN} --kubeconfig=kubelet-bootstrap.kubeconfig
 
-kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=/opt/kubernetes/cfg/kubelet-bootstrap.kubeconfig
+kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=kubelet-bootstrap.kubeconfig
 
 kubectl config use-context default --kubeconfig=kubelet-bootstrap.kubeconfig
 ```
@@ -1354,13 +1354,16 @@ $ ls kube-proxy*pem	//查看
 3.3）创建kubeconfig文件
 
 ```bash
-kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=kube-proxy.kubeconfig
+//进入cfg目录
+$ cd /opt/kubernetes/cfg/
 
-kubectl config set-credentials kube-proxy --client-certificate=/opt/kubernetes/ssl/kube-proxy.pem --client-key=/opt/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig
+kubectl config set-cluster kubernetes --certificate-authority=/opt/ssl/ca.pem --embed-certs=true --server=https://192.168.56.107:6443 --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig
+
+kubectl config set-credentials kube-proxy --client-certificate=/opt/kubernetes/ssl/kube-proxy.pem --client-key=/opt/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig
 
 kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
 
-kubectl config use-context default --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig
+kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 ```
 
 3.4）创建服务配置文件（不同节点修改成不同ip）
