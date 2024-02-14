@@ -1251,6 +1251,7 @@ EOF
 
 ```bash
 # 创建node端日志目录
+$ mkdir /var/lib/kubelet
 $ mkdir /opt/kubernetes/logs&&mkdir /opt/kubernetes/logs/kubelet
 ```
 
@@ -1391,6 +1392,7 @@ EOF
 
 ```bash
 # 创建node端日志目录
+$ mkdir /var/lib/kube-proxy
 $ mkdir /opt/kubernetes/logs/kube-proxy
 ```
 
