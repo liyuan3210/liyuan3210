@@ -1250,6 +1250,11 @@ EOF
 2.3）创建kubelet服务启动文件
 
 ```bash
+# 创建node端日志目录
+$ mkdir /opt/kubernetes/logs&&mkdir /opt/kubernetes/logs/kubelet
+```
+
+```bash
 cat > /opt/kubernetes/cfg/kubelet.service << "EOF"
 [Unit]
 Description=Kubernetes Kubelet
@@ -1274,7 +1279,7 @@ ExecStart=/usr/local/bin/kubelet \
   --root-dir=/etc/cni/net.d \
   --alsologtostderr=true \
   --logtostderr=false \
-  --log-dir=/var/log/kubernetes \
+  --log-dir=/opt/kubernetes/logs/kubelet \
   --v=2
 Restart=on-failure
 RestartSec=5
@@ -1385,6 +1390,11 @@ EOF
 3.5）创建服务启动文件
 
 ```bash
+# 创建node端日志目录
+$ mkdir /opt/kubernetes/logs/kube-proxy
+```
+
+```bash
 cat >  /opt/kubernetes/cfg/kube-proxy.service << "EOF"
 [Unit]
 Description=Kubernetes Kube-Proxy Server
@@ -1397,7 +1407,7 @@ ExecStart=/usr/local/bin/kube-proxy \
   --config=/opt/kubernetes/cfg/kube-proxy.yaml \
   --alsologtostderr=true \
   --logtostderr=false \
-  --log-dir=/var/log/kubernetes \
+  --log-dir=/opt/kubernetes/logs/kube-proxy \
   --v=2
 Restart=on-failure
 RestartSec=5
@@ -1410,11 +1420,13 @@ EOF
 
 3.6）同步文件到集群节点
 
-```
-cp kube-proxy*.pem /etc/kubernetes/ssl/
-cp kube-proxy.kubeconfig kube-proxy.yaml /etc/kubernetes/
+```bash
+#需要同步的文件
+cp kube-proxy*.pem /opt/kubernetes/ssl
+cp kube-proxy.kubeconfig kube-proxy.yaml /opt/kubernetes/cfg/
 cp kube-proxy.service /usr/lib/systemd/system/
-	
+
+#批量同步示例
 for i in k8s-master2 k8s-master3 k8s-worker1;do scp kube-proxy.kubeconfig kube-proxy.yaml $i:/etc/kubernetes/;done
 for i in k8s-master2 k8s-master3 k8s-worker1;do scp  kube-proxy.service $i:/usr/lib/systemd/system/;done
 ```
@@ -1423,7 +1435,7 @@ for i in k8s-master2 k8s-master3 k8s-worker1;do scp  kube-proxy.service $i:/usr/
 
 3.7)启动
 
-```
+```bash
 systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status kube-proxy
 ```
 
