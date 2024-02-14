@@ -1457,6 +1457,8 @@ systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status
 	$ kubectl get pods -A
 	
 	2.CoreDNS安装部署
+	官网：https://coredns.io/
+		 https://coredns.io/plugins/kubernetes/
 	$ wget https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/coredns/coredns.yaml.base
 	$ cp coredns.yaml.base  coredns.yaml
 	执行文件
