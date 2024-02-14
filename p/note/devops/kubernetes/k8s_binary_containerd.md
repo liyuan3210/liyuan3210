@@ -778,7 +778,6 @@ cat > /opt/kubernetes/cfg/kube-controller-manager.conf << "EOF"
 KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --secure-port=10257 \
   --bind-address=127.0.0.1 \
-  --master=127.0.0.1:8080 \
   --kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
   --service-cluster-ip-range=10.96.0.0/16 \
   --cluster-name=kubernetes \
