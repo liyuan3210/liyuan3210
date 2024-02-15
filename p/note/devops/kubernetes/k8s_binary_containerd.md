@@ -15,9 +15,12 @@ https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 4.Customizing components with the kubeadm API
 Kubernetes Documentation > Getting started > Production environment > Installing Kubernetes with deployment tools > Bootstrapping clusters with kubeadm > Customizing components with the kubeadm API
 
-5.自己笔记参考：
-https://gitee.com/liyuan3210/book_source/tree/master/k8s
+5.kubeconfig权限配置
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
 
+6.自己笔记参考：
+https://gitee.com/liyuan3210/book_source/tree/master/k8s
 -------------------------------------
 一.查看服务是否启动
 systemctl status etcd

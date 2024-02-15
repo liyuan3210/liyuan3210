@@ -348,14 +348,6 @@ public IP: 192.168.1.136
 3.最后点击Add endpoint完成添加,点击左上角Home就可以看到能够管理的所有节点了
 ```
 
-## docker-compose(docker编排)
-
-https://docs.docker.com/compose/install/
-
-https://github.com/docker/compose
-
-
-
 #### 二进制安装portainer:
 
 参考:	https://blog.csdn.net/cljdsc/article/details/110931289
@@ -374,7 +366,11 @@ https://github.com/docker/compose
 
 ./portainer --data /data/portainer  -p :9000 --template-file "${PWD}/templates.json" &
 
+## docker-compose(docker编排)
 
+https://docs.docker.com/compose/install/
+
+https://github.com/docker/compose
 
 ## 五.docker命令使用
 
@@ -492,8 +488,6 @@ docker run --name db1 -e MYPWD=ly123 -e MYDB=pro -e MYUSER=adm -e USERPWD=123 -i
 	docker run -it -m 100M docker.io/busybox sh
 
 四.公司培训:
-	wget http://10.20.202.161/busybox.tar
-
 	配置 yum 源
 	cd /etc/yum.repos.d && for r in *.repo; do mv $r $r.bak;done
 
@@ -505,191 +499,6 @@ docker run --name db1 -e MYPWD=ly123 -e MYDB=pro -e MYUSER=adm -e USERPWD=123 -i
 	yum install docker
 	systemctl start docker
 	systemctl enable docker
-
-	公司:https://10.19.105.102/svn/Public/10微服务培训
-
-
-	查看文件实际引用大小
-	du -sh file
------------------------------------------------二部分-----------------------------------------------------
-安全
-	秘钥
-		创建密钥
-			mkdir /certs
-			openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
-			注意servername配置，案例中将使用”certs.yunda.com”
-			
-		使用密钥
-			REGISTRY_HTTP_ADDR=0.0.0.0:443 
-			REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt 
-			REGISTRY_HTTP_TLS_KEY=/certs/domain.key
-			
-		客户端配置
-			cd /etc/docker/certs.d/
-			mkdir certs.yunda.com
-			cp /certs/domain.crt certs.yunda.com/ca.crt
-			重要：目录名需要与之前配置主机名一致
-			
-		Ex:
-		docker run -d --restart=always --name=registry -v /certs:/certs -v /var/lib/registry:/var/lib/registry -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -p 443:443 registry
-
-	认证
-		创建认证文件
-			htpasswd -Bbn [username] [password] >> [file]
-			安装httpd
-			Ex:
-			mkdir auth
-			htpasswd -Bbn user1 user1passwd >> auth/htpasswd
-			
-		使用认证文件
-			认证类型：
-			REGISTRY_AUTH=htpasswd
-			认证描述信息
-			REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
-			认证文件
-			REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
-
-		Ex:
-		docker run -d --restart=always --name=registry -v /certs:/certs -v /var/lib/registry:/var/lib/registry -v /root/auth/:/auth -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -p 443:443 registry
-		
-		客户端配置:
-			docker login certs.yunda.com
-			docker [push|pull]
-
-存储驱动:
-	Aufs (目前支持ubuntu/debian)
-	devicemapper [centos默认]
-	Overlay 
-	Btrfs  (suse)
-	zfs
-	
-	Device Mapper是一个基于kernel的框架，它增强了很多Linux上的高级卷管理技术。Docker的devicemapper驱动在镜像和容器管理上，利用了该框架的超配和快照功能。
-	商业支持的Docker Engine（CS-Engine）建议在RHEL和CentOS上使用devicemapper存储驱动。
-	
-	两大特性
-	Snapshot快照/Cow (copy on write) 写时复制
-	allocate-on-demand 用时分配
-	
-	cow
-	基于一个image启动多个Container，如果为每个Container都去分配一个image一样的文件系统，那么将会占用大量的磁盘空间。而CoW技术可以让所有的容器共享image的文件系统，所有数据都从image中读取，只有当要对文件进行写操作时，才从image里把要写的文件复制到自己的文件系统进行修改。
-
-	allocate-on-demand 用时分配
-	只有在要新写入一个文件时才分配空间，这样可以提高存储资源的利用率。比如启动一个容器，并不会为这个容器预分配一些磁盘空间，而是当有新文件写入时，才按需分配新空间。
-
-	查看当前容器存储
-		[root@certs ~]# losetup  -a
-		[root@certs ~]# lsblk 
-		[root@certs ~]# dmsetup ls --tree
-		[root@certs ~]# docker inspect [containerID]
-
-	使用direct-lvm(动态扩容机制)
-		pvcreate /dev/sdb
-		vgcreate docker /dev/sdb
-		lvcreate --wipesignatures y -n thinpool docker -l 90%VG 
-		lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG  
-		lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta
-	
-	使用direct-lvm
-		mkdir -p /etc/lvm/profile/
-		cat <<EOF > /etc/lvm/profile/docker-thinpool.profile
-		activation {
-		thin_pool_autoextend_threshold=80
-		thin_pool_autoextend_percent=20
-		}
-		EOF
-		
-	使用direct-lvm
-	lvchange --metadataprofile docker-thinpool docker/thinpool
-	/etc/docker/daemon.json
-	{
-	    "storage-driver": "devicemapper",
-	    "storage-opts": [ 
-	        "dm.thinpooldev=/dev/mapper/docker-thinpool",
-	        "dm.fs=ext4"
-	    ]
-	}
-
-日志驱动
-	开源免费的:
-		syslog
-		journald
-		Json-file
-		fluentd
-
-	商业级
-	Google cloud
-	Splunk/elk
-	ETW
-	
-	详细介绍：
-	syslog本地日志
-		docker run -d docker.io/busybox /bin/sh -c "while true ; do date ; sleep 1;  done”
-		docker logs [containerID]
-		docker logs -f [containerID]
-		[root@certs html]# tail /var/log/messages -f //查看所有的
-		
-	远程syslog日志:
-		--log-driver=syslog
-		--log-opt syslog-address=[tcp|udp]://[ip]:[port]
-
-		Ex:
-		docker run -d --log-driver=syslog --log-opt syslog-address=tcp://192.168.10.21:514 docker.io/busybox /bin/sh -c "while true ; do date ; sleep 1;  done"
-		
-		远程主机配置
-		[root@localhost ~]# vi /etc/rsyslog.conf 
-		$ModLoad imtcp
-		$InputTCPServerRun 514
-
-		[root@localhost ~]# systemctl  restart rsyslog
-		[root@localhost ~]# tail /var/log/messages  -f
-		
-	Fluentd日志:
-		Fluentd可用收到收集并转发日志，经常与一些经典工具组合使用
-			客户端应用>Fluentd>elasticsearch>kibana
-			Fluentd+elasticsearch+kibana
-
-			docker load -i elasticsearch.tar
-			docker load -i fluentd-es.tar 
-			docker load -i kibana.tar
-		
-		Fluentd日志格式
-			docker run -d -p 9200:9200 --name elasticsearch docker.io/elasticsearch
-			docker run -d -p 5601:5601 --name kibana --link elasticsearch:elasticsearch docker.io/kibana
-			mkdir /fluentd/conf
-			vi /fluentd/conf/fluent.conf
-			
-		
-		运行:
-		docker run -d -p 24224:24224 -p 24224:24224/udp -v /fluentd/conf:/fluentd/etc --name fluentd --link elasticsearch:elasticsearch docker.io/fluent/fluentd-es
-
-		运行客户端测试
-		docker run -d --log-driver=fluentd --log-opt fluentd-address=localhost:24224 --log-opt tag="busybox" --link fluentd:fluentd  docker.io/busybox  /bin/sh -c "while true ; do date ; sleep 1 ; done”
-
-		打开浏览器访问
-		http://localhost:5601
-		
-		
-		docker run -d -p 24224:24224 -p 24224:24224/udp -v /fluentd/conf:/fluentd/etc --name fluentd --link elasticsearch:elasticsearch docker.io/fluent/fluentd-es
-		docker run -d --log-driver=fluentd --log-opt fluentd-address=localhost:24224 --log-opt tag="busybox" --link fluentd:fluentd  docker.io/busybox  /bin/sh -c "while true ; do date ; sleep 1 ; done"
-		
-Compose定义运行复杂一系列docker命令
-
-	安装
-	curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-	chmod +x /usr/local/bin/docker-compose
-	docker-compose -v
-	
-docker-compose基本参数
-	--version 查看版本
-	-f 使用非docker-compose.yml命名的yaml文件
-	up -d后台启动服务
-	start/stop 停止/启动docker-compose容器
-	rm 删除docker-compose容器
-	ps 查看docker-compose正在运行的容器
-	相关语法 请参考
-	https://docs.docker.com/compose/compose-file/compose-file-v2/#compose-and-docker-compatibility-matrix
-	
---------------------------	
 	
 	容器管理平台
 	业内建议使用Kubernetes
@@ -706,5 +515,24 @@ docker-compose基本参数
 	安装:
 	docker pull jenkins
 	docker run -p 8080:8080 -p 5000:5000 -d -v /var/jenkins_home jenkins
+
+五.二部分
+	1.镜像仓库私服搭建
+	2.存储驱动:
+        Aufs (目前支持ubuntu/debian)
+        devicemapper [centos默认]
+        Overlay 
+        Btrfs  (suse)
+        zfs
+     3.日志驱动
+        开源免费的:
+            syslog
+            journald
+            Json-file
+            fluentd
+        商业级
+            Google cloud
+            Splunk/elk
+            ETW
 ```
 
