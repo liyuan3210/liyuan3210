@@ -1079,103 +1079,8 @@ sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.8"
 实际/etc/containerd/config.toml内容(可直接使用这个文件，省去上面生成默认与sed步骤)：
 
 ```bash
-cat >/etc/containerd/config.toml<<EOF
-root = "/var/lib/containerd"
-state = "/run/containerd"
-oom_score = -999
-
-[grpc]
-  address = "/run/containerd/containerd.sock"
-  uid = 0
-  gid = 0
-  max_recv_message_size = 16777216
-  max_send_message_size = 16777216
-
-[debug]
-  address = ""
-  uid = 0
-  gid = 0
-  level = ""
-
-[metrics]
-  address = ""
-  grpc_histogram = false
-
-[cgroup]
-  path = ""
-
-[plugins]
-  [plugins.cgroups]
-    no_prometheus = false
-  [plugins.cri]
-    stream_server_address = "127.0.0.1"
-    stream_server_port = "0"
-    enable_selinux = false
-    sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.6"
-    stats_collect_period = 10
-    systemd_cgroup = true
-    enable_tls_streaming = false
-    max_container_log_line_size = 16384
-    [plugins.cri.containerd]
-      snapshotter = "overlayfs"
-      no_pivot = false
-      [plugins.cri.containerd.default_runtime]
-        runtime_type = "io.containerd.runtime.v1.linux"
-        runtime_engine = ""
-        runtime_root = ""
-      [plugins.cri.containerd.untrusted_workload_runtime]
-        runtime_type = ""
-        runtime_engine = ""
-        runtime_root = ""
-    [plugins.cri.cni]
-      bin_dir = "/opt/cni/bin"
-      conf_dir = "/etc/cni/net.d"
-      conf_template = "/etc/cni/net.d/10-default.conf"
-    [plugins.cri.registry]
-      [plugins.cri.registry.mirrors]
-        [plugins.cri.registry.mirrors."docker.io"]
-          endpoint = [
-            "https://docker.mirrors.ustc.edu.cn",
-            "http://hub-mirror.c.163.com"
-          ]
-        [plugins.cri.registry.mirrors."gcr.io"]
-          endpoint = [
-            "https://gcr.mirrors.ustc.edu.cn"
-          ]
-        [plugins.cri.registry.mirrors."k8s.gcr.io"]
-          endpoint = [
-            "https://gcr.mirrors.ustc.edu.cn/google-containers/"
-          ]
-        [plugins.cri.registry.mirrors."quay.io"]
-          endpoint = [
-            "https://quay.mirrors.ustc.edu.cn"
-          ]
-        [plugins.cri.registry.mirrors."harbor.kubemsb.com"]
-          endpoint = [
-            "http://harbor.kubemsb.com"
-          ]
-    [plugins.cri.x509_key_pair_streaming]
-      tls_cert_file = ""
-      tls_key_file = ""
-  [plugins.diff-service]
-    default = ["walking"]
-  [plugins.linux]
-    shim = "containerd-shim"
-    runtime = "runc"
-    runtime_root = ""
-    no_shim = false
-    shim_debug = false
-  [plugins.opt]
-    path = "/opt/containerd"
-  [plugins.restart]
-    interval = "10s"
-  [plugins.scheduler]
-    pause_threshold = 0.02
-    deletion_threshold = 0
-    mutation_threshold = 100
-    schedule_delay = "0s"
-    startup_delay = "100ms"
-EOF
+见：git@gitee:liyuan3210/book_source.git
+book_source\k8s\06_kubernetes集群部署.zip\06_kubernetes集群部署\06_kubernetes高可用集群二进制部署\02_二进制部署Kubernetes高可用集群（Runtime Containerd）\01_笔记\Kubernetes高可用集群二进制部署（Runtime Containerd）.md
 ```
 
 1.3）下载 runc（可以使用which runc查看替换位置）
@@ -1468,12 +1373,10 @@ for i in k8s-master2 k8s-master3 k8s-worker1;do scp  kube-proxy.service $i:/usr/
 systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status kube-proxy
 ```
 
-##### 四.网络组件calico，CoreDNS部署及ngxin部署验证
+##### 4.网络组件calico，CoreDNS
 
 ```
-一。网络组件calico，CoreDNS部署及ngxin部署验证
-	
-	1.calico安装部署
+1.calico安装部署
 	wget https://docs.projectcalico.org/v3.19/manifests/calico.yaml
 	修改文件（注释去掉，修改成如下内容）
 	3683             - name: CALICO_IPV4POOL_CIDR
@@ -1483,15 +1386,39 @@ systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status
 	查看
 	$ kubectl get pods -A
 	
-	2.CoreDNS安装部署
+2.CoreDNS安装部署
 	官网：https://coredns.io/
 		 https://coredns.io/plugins/kubernetes/
 	$ wget https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/coredns/coredns.yaml.base
 	$ cp coredns.yaml.base  coredns.yaml
-	执行文件
-	kubectl apply -f coredns.yaml
+	检查内容
+        kind: Service
+        ......
+        spec:
+          clusterIP: 10.96.0.2
+          ports:
+             ......
 	
-	3.部署验证
+	执行文件
+	$ kubectl apply -f coredns.yaml
+	查看部署情况
+	$ kubectl get svc -n kube-system
+	$ kubectl get pods -n kube-system -o wide
+	
+	验证（返回baidu域名解析地址）
+	$ dig -t a www.baidu.com @10.96.0.2
+```
+
+coredns.yaml文件（貌似不需要修改文件内容）
+
+```
+见：git@gitee:liyuan3210/book_source.git
+book_source\k8s\06_kubernetes集群部署.zip\06_kubernetes集群部署\06_kubernetes高可用集群二进制部署\02_二进制部署Kubernetes高可用集群（Runtime Containerd）\01_笔记\Kubernetes高可用集群二进制部署（Runtime Containerd）.md
+```
+
+##### 5.部署验证
+
+```
 cat >  nginx.yaml  << "EOF"
 ---
 apiVersion: v1
@@ -1527,14 +1454,10 @@ spec:
   selector:
     name: nginx
 EOF
-	
-	执行文件：
-	kubectl apply -f nginx.yaml
-	验证：
-	$ kubectl get pods -o wide
-	$ kubectl get all
-	
 ```
 
-
-
+    执行文件：
+    kubectl apply -f nginx.yaml
+    验证：
+    $ kubectl get pods -o wide
+    $ kubectl get all
