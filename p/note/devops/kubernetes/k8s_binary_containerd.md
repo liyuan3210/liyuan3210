@@ -1475,7 +1475,7 @@ systemctl daemon-reload && systemctl enable --now kube-proxy && systemctl status
 	
 	1.calico安装部署
 	wget https://docs.projectcalico.org/v3.19/manifests/calico.yaml
-	修改文件
+	修改文件（注释去掉，修改成如下内容）
 	3683             - name: CALICO_IPV4POOL_CIDR
 	3684               value: "10.244.0.0/16"
 	执行文件
