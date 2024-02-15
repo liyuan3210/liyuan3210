@@ -109,15 +109,18 @@ Pod网络:			10.244.0.0/16
 
 ```
 软件存放目录/opt：
-	/opt/ssl			//公共ssl使用文件
-	/opt/etcd			//etcd安装目录
+	/opt/ssl				//公共ssl使用文件
+	/opt/etcd				//etcd安装目录
 		ssl
 		cfg
 		data
 	/opt/kubernetes
 		ssl
 		cfg
-		logs
+		logs				
+			......			//logs跟存放master服务日志
+			kubelet			//存放kubelet日志
+			kube-proxy		//存放kube-proxy日志
 ```
 
 ##### 一。安装cfssl生成集群ca并安装etcd集群
@@ -1379,3 +1382,30 @@ EOF
     验证：
     $ kubectl get pods -o wide
     $ kubectl get all
+##### 六.部署的问题
+
+```
+1.master节点
+    * kube-apiserver
+    	E0215 01:52:19.195572     512 watcher.go:218] watch chan error: etcdserver: no leader
+    	......
+    	
+    * kube-controller-manager
+    	error retrieving resource lock kube-system/kube-controller-manager: Get "https://192.168.56.117:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": dial tcp 192.168.56.117:6443: connect: no route to host
+    	
+    * kube-scheduler
+    	k8s.io/client-go/informers/factory.go:134: Failed to watch *v1.CSINode: failed to list *v1.CSINode: Get "https://192.168.56.117:6443/apis/storage.k8s.io/v1/csinodes?limit=500&resourceVersion=0": dial tcp 192.168.56.117:6443: connect: no route to host
+
+2.node节点
+    * kubelet
+    	unable to read existing bootstrap client config from /opt/kubernetes/cfg/kubelet.kubeconfig: invalid configuration: [unable to read client-cert /opt/kubernetes/ssl/kubelet-client-current.pem for default-auth due to open /opt/kubernetes/ssl/kubelet-client-current.pem: no such file or directory, unable to read client-key /opt/kubernetes/ssl/kubelet-client-current.pem for default-auth due to open /opt/kubernetes/ssl/kubelet-client-current.pem: no such file or directory]
+E0215 02:14:11.558973    1177 certificate_manager.go:437] Failed while requesting a signed certificate from the master: cannot create certificate signing request: certificatesigningrequests.certificates.k8s.io is forbidden: User "kubelet-bootstrap" cannot create resource "certificatesigningrequests" in API group "certificates.k8s.io" at the cluster scop
+		解决方案：
+		添加node方案
+
+    * kube-proxy
+    	Can't use the IPVS proxier: error getting ipset version, error: executable file not found in $PATH
+    	解决方案：
+    	环境准备时，没准备好
+```
+
