@@ -68,6 +68,12 @@ https://blog.csdn.net/ss810540895/article/details/128640139
 		node1 	node2 	node3 		node4 	node5 	node6 	node7
 k8s:	master	master	master		node	node
 etcd:					etcd		etcd	etcd
+
+节点服务规划
+master:
+		kube-apiserver、kube-controller-manager、kube-scheduler
+node:
+		kubelet、kube-proxy、Containerd、runc
 ```
 
 ##### 软件版本
