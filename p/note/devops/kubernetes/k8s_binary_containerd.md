@@ -35,29 +35,6 @@ systemctl status kube-proxy
 二.更改配置
 cp kubelet.service /usr/lib/systemd/system/
 systemctl daemon-reload&&systemctl restart kube-proxy
-
-三.containerd容器使用
-ctr与crictl？？？
-ctr是由containerd提供的一个客户端工具。crictl是CRI兼容的容器运行时命令接口，和containerd无关，由kubernetes提供.
-拉取镜像
-ctr image pull registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2
-ctr image pull registry.aliyuncs.com/google_containers/pause:3.8
-
-ctr image pull registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2
-
-ctr image pull registry.aliyuncs.com/google_containers/pause:3.6
-创建容器
-ctr run -d registry.cn-shanghai.aliyuncs.com/liyuan3210-repo/myubuntu:v2 myubuntu
-查看任务
-ctr tasks ls
-进入容器
-ctr t exec -t --exec-id 1044 myubuntu sh
-
-systemctl status containerd
-systemctl restart containerd
-
-常用命令
-https://blog.csdn.net/ss810540895/article/details/128640139
 ```
 
 ##### kuernetes架构
