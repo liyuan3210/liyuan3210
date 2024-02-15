@@ -731,7 +731,7 @@ KUBE_CONTROLLER_MANAGER_OPTS="--port=10252 \
   --allocate-node-cidrs=true \
   --cluster-cidr=10.244.0.0/16 \
   --experimental-cluster-signing-duration=87600h \
-  --root-ca-file=/etc/kubernetes/ssl/ca.pem \
+  --root-ca-file=/opt/ssl/ca.pem \
   --service-account-private-key-file=/opt/ssl/ca-key.pem \
   --leader-elect=true \
   --feature-gates=RotateKubeletServerCertificate=true \
