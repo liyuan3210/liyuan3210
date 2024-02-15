@@ -73,7 +73,7 @@ etcd:					etcd		etcd	etcd
 ##### 软件版本
 
 ```
-需要下载的docker
+docker版本需要的版本
 	1.kubernetes	v1.21.10
 	2.etcd			v3.5.2
 	3.calico		v3.19.4
@@ -84,7 +84,7 @@ etcd:					etcd		etcd	etcd
 	6.haproxy		v5.18	//版本是否有问题
 	7.keepalived	v3.5	//版本是否有问题
 	
-需要下载的docker
+containerd集群需要的版本
 	1.kubernetes	v1.21.10
 	2.etcd			v3.5.2
 	3.calico		v3.19.4
@@ -95,7 +95,7 @@ etcd:					etcd		etcd	etcd
 	6.haproxy		v5.18	//版本是否有问题
 	7.keepalived	v3.5	//版本是否有问题
 	
-当前实际下载版本
+最新版本
 	1.kubernetes	v1.27.4
 	2.etcd			v3.5.9
 	3.calico		v3.26.1
