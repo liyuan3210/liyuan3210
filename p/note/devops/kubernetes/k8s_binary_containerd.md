@@ -123,6 +123,13 @@ Pod网络:			10.244.0.0/16
 			kube-proxy		//存放kube-proxy日志
 ```
 
+##### 集群准备及初始化
+
+```
+见：git@gitee:liyuan3210/book_source.git
+book_source\k8s\自己的笔记\1.集群主机准备.txt
+```
+
 ##### 一。安装cfssl生成集群ca并安装etcd集群
 
 ###### 1.安装cfssl并生成集群证书
