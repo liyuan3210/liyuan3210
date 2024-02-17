@@ -1391,6 +1391,8 @@ EOF
     $ kubectl get all
 ##### 六.部署的问题
 
+1.错误日志
+
 ```
 1.master节点
     * kube-apiserver
@@ -1414,5 +1416,17 @@ E0215 02:14:11.558973    1177 certificate_manager.go:437] Failed while requestin
     	Can't use the IPVS proxier: error getting ipset version, error: executable file not found in $PATH
     	解决方案：
     	环境准备时，没准备好
+```
+
+2.待整理问题
+
+```
+1.kubeconfig权限配置
+
+2.cfssl请求文件字段
+
+3.containerd配置文件
+
+4.kubeadmin集群安装
 ```
 
