@@ -45,9 +45,9 @@ systemctl daemon-reload&&systemctl restart kube-proxy
 
 ```
 集群机器规划
-		node1 	node2 	node3 		node4 	node5 	node6 	node7
-k8s:	master	master	master		node	node
-etcd:					etcd		etcd	etcd
+		  node1 	node2 	node3 	node4 	node5 	node6 	node7
+k8s:	master	master	master	node	  node
+etcd:					etcd		etcd	  etcd
 
 节点服务规划
 master:
