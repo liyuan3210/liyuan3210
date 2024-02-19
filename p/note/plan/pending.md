@@ -27,12 +27,13 @@
 | ---- | ---- | ---- |
 | 1）。wine安装配置并安装微信等 | devOps | 待处理 |
 | 27）。serverless架构及使用场景 | NEW | 待处理 |
-| x）。k8s部署 | DevOps | 待处理 |
-| x）。3.1.k8s rbac授权<br/>	3.2.nginx在windows下编译构建<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
+| x）。k8s部署,Containerd与docker的区别。。。 | DevOps | 待处理 |
+| x）。3.1.k8s rbac授权<br/>	3.2.nginx在windows下编译构建(Mingw-w64编译nginx)<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
 | 28）。github加速器<br>http://www.inspinia.net/a/743694.html | NEW | 待处理 |
 | 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | 网络 | 待处理 |
 | 20）。1）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 待处理 |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
+| 5）。pc安卓模拟器pc模拟安卓<br/>https://www.bbsmax.com/A/RnJW7G2wJq<br/>安卓下载地址<br/>https://www.android-x86.org/download<br/>在PC上运行安卓（Android）应用程序的几个方法<br/>https://www.shuzhiduo.com/A/xl56jj9r5r/<br/>使用genymotion模拟器（安装genymotion过程中会自动安装VirtualBox）<br/>https://www.liyuan3210.com/p/note/new/dev_platform.html<br/>chrome插件限制问题<br/>https://www.likecs.com/show-307965087.html<br/>安卓模拟器<br/>https://wen.baidu.com/question/699441544072731004.html<br/>BlueStacks<br/>NoxPlayer<br/>LDPlayer<br/>https://www.extrabux.cn/chs/guide/6838877<br/>Genymotion使用详解<br/>http://www.taodudu.cc/news/show-495464.html?action=onClick | devOps | 待处理 |
 | 2）。Linux常用分区工具<br/>https://www.lxlinux.net/6469.html<br/>https://gparted.org/<br/>硬盘GPT分区与MBR分区的区别<br/>https://xinzhi.wenda.so.com/m/a/1542627025209463<br/>新版本fdisk可以识别gpt格式分区<br/>https://www.zhangweijie.net/post/2017/11/12/2906.html<br/>相比于MBR模式,GPT模式拥有对2TB以上的原生支持。GPT不存在扩展分区和逻辑分区,所有分区全都是主分区,且理论上可存在的主分区个数是无限的。 | devOps | <font color="blue">已处理</font> |
 | 3）。windows常用分区软件<br/>https://zhuanlan.zhihu.com/p/551730189<br/>windows安装：<br/>系统之家下载windows镜像<br/>https://windows.xnayw.cn/win1064.html<br/>https://downloads.sourceforge.net/gparted/gparted-live-1.4.0-6-amd64.iso<br/>准备u盘，下载启动制作工具<br/>电脑店：http://dnd.lzlcm.cn/<br/>大白菜：http://dbc.nxexvq.cn/ | devOps | <font color="blue">已处理</font> |
 | 4）。安卓安装termux安装<br/>termux安装，引出问题：F-Droid的安装&&替换TUNA清华源（F-Droid介绍）<br/>https://www.bilibili.com/video/BV1XT4y1w7Uw/<br/>https://www.jianshu.com/p/2b7c0b7ac57d | devOps | <font color="blue">已处理</font> |
