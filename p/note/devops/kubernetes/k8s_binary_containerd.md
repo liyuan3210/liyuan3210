@@ -185,6 +185,10 @@ $ cfssl gencert -initca ca-csr.json | cfssljson -bare ca
 
 1.2.3）配置ca证书策略
 
+```
+cfssl print-defaults config > ca-config.json
+```
+或
 ```JSON
 cat > /opt/ssl/ca-config.json<< EOF
 {
@@ -1201,7 +1205,7 @@ cat > /opt/kubernetes/ssl/kube-proxy-csr.json << "EOF"
       "C": "CN",
       "ST": "ShangHai",
       "L": "ShangHai",
-      "O": "kubemsb",
+      "O": "liyuan3210",
       "OU": "CN"
     }
   ]
