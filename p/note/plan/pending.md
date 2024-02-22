@@ -5,7 +5,11 @@
 #### UI
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
-| 12）。nodejs框架（mvc框架） 与  c，j s并发 | 语言类 | 待处理 |
+| 1）。nodejs框架（mvc框架） | 语言类 | 待处理 |
+| 2）。电商项目 |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
 |      |      |      |
 |      |      |      |
 |      |      |      |
@@ -18,6 +22,10 @@
 | 3）。rust与golang语言原理了解 | rust | 待处理 |
 | 4）。python包管理<br/>https://www.bilibili.com/video/BV1qW4y1a7fU<br/>p94-p97 模块，包，第三房包概念 | Python | 待处理 |
 | 5）。C语言指针，内存管理<br/>https://www.bilibili.com/video/BV1Dt411R77A?p=4<br/>我的网盘>共享资源>course>os>c语言指针与内存管理 | c | 待处理 |
+| 6）。c，j s高并发 |      | 待处理 |
+| 7）。大模型笔记 | AI | 待处理 |
+|      |      |      |
+|      |      |      |
 |      |      |      |
 |      |      |      |
 |      |      |      |
@@ -51,22 +59,24 @@
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
 | 1）。linux内核编译并quem启动 | OS | <font color="blue">已处理</font> |
-| 2）。linux内核源码阅读 |      | 待处理 |
-| 3）。linux内核源码debug<br>QEMU + VSCODE内核源码调试（QEMU与Bochs） |      | 待处理 |
-| 4）。linux内核nfs文件系统启动 |      | 待处理 |
-| 5）。X86保护模式 |      | 待处理 |
+| 2）。linux内核源码阅读方式 |      | 待处理 |
+| 3）。linux内核源码debug方式<br>QEMU + VSCODE内核源码调试（QEMU与Bochs） |      | 待处理 |
+| 4）。X86汇编qemu+gdb调试 |      | 待处理 |
+| 5）。linux内核ext4，nfs文件系统启动 |      | 待处理 |
+| 6）。uboot编译启用 |      | 待处理 |
+| 7）。X86保护模式，分页，多任务。。。 |      | 待处理 |
 | 6）。quem网络问题 |      | 待处理 |
-| 7）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
-| 8）。select poll epoll原理<br/>https://www.bilibili.com/video/BV1qJ411w7du<br/>https://www.cnblogs.com/yuanwebpage/p/12916424.html | 内核 | 处理中 |
+| 9）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
+| 10）。select poll epoll原理<br/>https://www.bilibili.com/video/BV1qJ411w7du<br/>https://www.cnblogs.com/yuanwebpage/p/12916424.html | 内核 | 处理中 |
 |      |      |      |
 |      |      |      |
 
 #### HARDWARE
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
-| 1）。微积分，电路（部分） | HARDWARE | 待处理 |
-|  |      |      |
-|  |      |      |
+| 1）。微积分（笔记） | HARDWARE | 待处理 |
+| 2）。电路（部分） | HARDWARE | 待处理 |
+| 3）。模电（部分） | HARDWARE | 待处理 |
 |  |      |      |
 |  |      |      |
 |  |      |      |
