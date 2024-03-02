@@ -110,7 +110,7 @@ run
       Disk image（磁盘文件系统，ext4,jffs2...）
       Network filesystem(NFS文件系统，属于网络文件系统) 
    制作脚本(initramfs)：
-      cd ./initra		mfs && find . -print0 | cpio -ov --null --format=newc | gzip -9 > ../initramfs.img
+      cd ./initramfs && find . -print0 | cpio -ov --null --format=newc | gzip -9 > ../initramfs.img
 
 7.使用qemu运行
     ubuntu安装：
