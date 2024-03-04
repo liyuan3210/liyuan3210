@@ -6,7 +6,7 @@
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
 | 1）。nodejs框架（mvc框架） | 语言类 | 待处理 |
-| 2）。电商项目 |      |      |
+| 2）。WebAssembly技术 | Js |      |
 |      |      |      |
 |      |      |      |
 |      |      |      |
@@ -17,14 +17,12 @@
 #### JAVA
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
-| 1）。大模型transformer架构 | AI | 待处理 |
 | 2）。spring-boot-starter自定义模块，java的SPI机制 | java | 待处理 |
 | 3）。rust与golang语言原理了解 | rust | 待处理 |
 | 4）。python包管理<br/>https://www.bilibili.com/video/BV1qW4y1a7fU<br/>p94-p97 模块，包，第三房包概念 | Python | 待处理 |
 | 5）。C语言指针，内存管理<br/>https://www.bilibili.com/video/BV1Dt411R77A?p=4<br/>我的网盘>共享资源>course>os>c语言指针与内存管理 | c | 待处理 |
 | 6）。c，j s高并发 |      | 待处理 |
-| 7）。大模型笔记 | AI | 待处理 |
-|      |      |      |
+| 7）。java线程死锁工具分析，内存分析 | java | 待处理 |
 |      |      |      |
 |      |      |      |
 |      |      |      |
@@ -63,7 +61,7 @@
 | 3）。linux内核源码debug方式<br>QEMU + VSCODE内核源码调试（QEMU与Bochs） |      | 待处理 |
 | 4）。X86汇编qemu+gdb调试 |      | 待处理 |
 | 5）。linux内核ext4，nfs文件系统启动 |      | 待处理 |
-| 6）。uboot编译启用 |      | 待处理 |
+| 6）。uboot编译及了解 |      | 待处理 |
 | 7）。X86保护模式，分页，多任务。。。 |      | 待处理 |
 | 6）。quem网络问题 |      | 待处理 |
 | 9）。栈溢出漏洞<br/>https://www.bilibili.com/video/BV1Wh4y1R7zV | 操作系统 | 待处理 |
@@ -77,6 +75,18 @@
 | 1）。微积分（笔记） | HARDWARE | 待处理 |
 | 2）。电路（部分） | HARDWARE | 待处理 |
 | 3）。模电（部分） | HARDWARE | 待处理 |
+|  |      |      |
+|  |      |      |
+|  |      |      |
+|  |      |      |
+
+#### NEW
+|问题/名称与描述      |类型      |状态      |
+| ---- | ---- | ---- |
+| 1）。大模型笔记（[卢菁人工智能AI课堂]） |      |      |
+| 2）。大模型transformer架构理解（形成笔记） |      |      |
+| 3）。英伟达CUDA编程入门 |      |      |
+|  |      |      |
 |  |      |      |
 |  |      |      |
 |  |      |      |
