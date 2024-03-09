@@ -137,6 +137,76 @@ ERRO[2023-05-10T14:48:57.632011992+08:00] failed to initialize a tracing process
             service docker stop
 ```
 
+#### podman与docker在windows上安装
+
+```
+1。windows安装docker
+	WSL是什么？
+	Windows Subsystem for Linux（简称WSL）是一个在Windows 10\11上能够运行原生Linux二进制可执行文件（ELF格式）的兼容层。
+	WSL与WSL2区别？
+    WSL使用的是“假Linux内核”， WSL2则是一个真正的Linux内核，WSL2比WSL更快，可以在文件I/O、网络和Docker上获得更好的性能。
+
+1）。系统必须要求：
+	WSL 2与Hyper-V二选一？
+    官方参考：
+    Install Docker Desktop on Windows
+    。。。。。。
+    3.When prompted, ensure the Use WSL 2 instead of Hyper-V option on the Configuration page is selected or not depending on your choice of backend.
+    If your system only supports one of the two options, you will not be able to select which backend to use.
+    。。。。。。
+	二选一
+    1.1）.WSL 2 backend
+    1.2）.Hyper-V backend and Windows containers
+
+2）WSL安装(包含将wsl更新到wsl2)：
+    https://learn.microsoft.com/en-us/windows/wsl/install
+    Prerequisites(必要条件)
+    You must be running Windows 10 version 2004 and higher (Build 19041 and higher) or Windows 11 to use the commands below. If you are on earlier versions please see the manual install page.
+    查看windows版本：
+    命令行执行：winver
+    wsl安装(administrator用户PowerShell环境执行如下)：
+    wsl --install
+
+3）Hyper-V backend and Windows containers安装
+        https://docs.docker.com/desktop/install/windows-install/
+    Prerequisites(必要条件)可以看上面windows版本要求
+    开启Hyper-V组件:
+    在“控制面板\所有控制面板项\程序和功能”->启用或关闭windows功能->勾选如下两项并重启：
+    1.Hyper-V
+    2.containers
+    参考：
+        https://blog.csdn.net/li4692625/article/details/112165715
+
+2。windows安装podman（安装podman时会自动检查环境及安装wsl）
+2.1)podman桌面版本安装
+        https://podman.io/docs/installation
+        https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md
+2.2)Prerequisites(环境要求)
+    Since Podman uses WSL, you need a recent release of Windows 10 or Windows 11. On x64, WSL requires build 18362 or later, and 19041 or later is required for arm64 systems. Internally, WSL uses virtualization, so your system must support and have hardware virtualization enabled. If you are running Windows on a VM, you must have a VM that supports nested virtualization.
+
+    首次安装/运行：
+    podman machine init
+
+    开启服务：
+    podman machine start
+
+2.3）配置第三方镜像源：
+vi /etc/containers/registries.conf
+windows下通过Powershell窗口打开，输入命令bash进入linux窗口模式
+//注释掉
+# unqualified-search-registries = ["registry.fedoraproject.org", "registry.access.redhat.com", "docker.io", "quay.io"]
+//下面是新增配置
+unqualified-search-registries = ["docker.io"]
+[[registry]]
+prefix="docker.io"
+location="6brt8p5b.mirror.aliyuncs.com"
+insecure=true
+
+2.4）podman使用：
+支持大多数docker命令，windows下执行需要前面加sudo,否则会创建失败
+sudo podman network create --subnet=172.18.1.0/16 dev-net
+```
+
 ## 二.docker镜像管理
 
 ```
