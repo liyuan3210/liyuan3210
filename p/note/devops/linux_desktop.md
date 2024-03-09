@@ -556,6 +556,54 @@ https://blog.csdn.net/weixin_42881768/article/details/119236014
 （5）mac磁盘“其它”占用查看及清理
 	https://blog.csdn.net/hjwnaruto/article/details/122735137
 	$ sudo du -sh * | grep 'G' | sort -nr
+	
+六。brew安装与配置
+参考
+https://blog.csdn.net/muyimo/article/details/125211460
+1.brew安装
+    官网
+    https://brew.sh/zh-cn/
+
+    1.1.下载install.sh文件：
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    想办法下载install.sh文件：
+
+    1.2.修改install.sh文件：
+    搜索“github.com”，如下内容
+    HOMEBREW_BREW_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/brew"
+    HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
+    换成如下
+    HOMEBREW_BREW_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/brew.git"
+    HOMEBREW_CORE_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/homebrew-core.git"
+
+    1.3.执行修改后的install.sh
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    换成
+    /bin/bash -c "/Users/yuanli/Desktop/install_brew.sh"
+
+2.配置国内镜像源
+    2.1.执行命令：
+    $ cd "$(brew --repo)"
+
+    2.2.进入Brew本地仓库，找到.git文件夹，然后打开config文件：
+    $ vi .git/config
+
+    2.3.在config文件中找到[remote "origin"]模块，将url修改为：
+    url = https://mirrors.aliyun.com/homebrew/brew.git
+
+
+    2.4.测试Brew是否工作正常
+    $ brew update
+3.安装软件
+	3.1.安装qemu
+	$ brew install qemu
+	$ qemu-system-x86_64
+	
+	3.2.另一种安装方式
+	$ sudo port install qemu
+	
+4.macports安装方式
+	http://www.macports.org/
 ```
 ### docker开发环境：
 
