@@ -57,6 +57,33 @@ Mingw-w64安装及各个包选项区别
 https://blog.csdn.net/zy215215/article/details/123078689
 ```
 
+##### nginx在windows下编译构建
+
+```
+官方见：
+https://nginx.org/en/docs/howto_build_on_win32.html
+网络参考：
+https://blog.csdn.net/zccoften/article/details/130700218
+https://blog.csdn.net/JohnGene/article/details/125304541
+B站视频
+https://www.bilibili.com/video/BV1yj411V7yf
+
+To build nginx on the Microsoft Win32® platform you need:
+	1.Microsoft Visual C compiler. Microsoft Visual Studio® 8 and 10 are known to work.
+		https://visualstudio.microsoft.com/zh-hans/vs/features/cplusplus/
+
+	2.MSYS or MSYS2.
+		https://www.msys2.org/
+
+	3.Perl, if you want to build OpenSSL® and nginx with SSL support. For example ActivePerl or Strawberry Perl.
+		
+	4.Mercurial client.
+		https://www.mercurial-scm.org/
+		就是个分布式源码管理工具
+	5.PCRE, zlib and OpenSSL libraries sources.
+		源码插件包
+```
+
 ### eclipse_mingw_gcc：
 
 ```
