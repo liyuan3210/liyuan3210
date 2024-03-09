@@ -14,7 +14,8 @@
 		1).winToGo<br/>
 		2).linuxToGo<br/>
 		3).wintogo(mac本，普通机器)<br/>
-		4).问题<br/>
+		4).windows备份与恢复<br/>
+		5).问题<br/>
 [六.windows系统破解](#win_crack)<br/>
 		1).windows系统LTSC与LTSB版本区别<br/>
 		2).windows系统破解方法及区别介绍<br/>
@@ -793,7 +794,55 @@ https://support.apple.com/zh-cn/HT204923
 https://support.apple.com/zh-cn/guide/bootcamp-assistant/welcome/mac
 ```
 
-### 待解决
+### windows备份与恢复
+
+https://tv.sohu.com/v/dXMvMzMwNzAzMDkyLzMxNjUyODM4Mi5zaHRtbA==.html
+
+https://www.bilibili.com/video/BV1Dy4y1x7RP
+
+**1.创建磁盘镜像(推荐)**
+
+1.1.windows创建镜像备份（点击“设置备份” 或“创建系统映像”）
+
+<img src="img/image-20240309170325790.png" style="zoom:50%;" />
+
+1.2.选择备份位置，可以把“按计划运行备份”勾去掉，最后点击“保存配置并运行备份”
+
+一般设置在非C盘的根目录下面，最后会在选择的磁盘根目录生成一个文件夹
+
+1.3.恢复方法
+
+​		1.3.1.能进系统
+
+​				 * 系统设置，恢复系统
+
+​				 * 按住shift键，点击重启
+
+​		1.3.2.不能进系统(使用pe进系统，一般网上“系统之家”等提供此工具制作usb启动盘)
+
+​				* 使用PG硬盘分区工具，将c盘格式化
+
+​				* 点击左上角“硬盘”->"打开虚拟硬盘文件"，选择"系统分区"(就是备份的地方)
+
+<img src="img/image-20240309171459836.png" style="zoom:50%;" />
+
+会多一个“如下”，右键选择“克隆分区”，然后选择C盘点击确定
+
+<img src="img/image-20240309171550567.png" style="zoom:50%;" />
+
+​			1.3.3.历史备份问题
+
+​						？？？
+
+**2.创建还原点**
+
+```
+只能还原Program Files，Program Files (x86)，Windows，Users（部分）
+```
+
+<img src="img/image-20240309164754248.png" style="zoom:50%;" />
+
+#### 待解决
 
 ```
 1.使用网上下载的最新镜像windows_10_professional_x64_2023.iso安装到优盘

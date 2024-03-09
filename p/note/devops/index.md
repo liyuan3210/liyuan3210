@@ -32,3 +32,12 @@
 
 [10.network](network/index.md)(网络)
 
+#### 问题
+
+1.github不能访问问题
+
+```
+https://www.boce.com/?k=baidu
+查询域名指定的ip，然后配置本机hosts
+```
+

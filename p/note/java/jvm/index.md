@@ -61,9 +61,26 @@
 
   ---ownership(栈消失，堆空间内存直接进行清理)，只要语法通过，就不会有bug
 
+##### java线程死锁，内存分析
+
+```
+https://blog.51cto.com/u_16213336/7225274
+1）查看java线程
+jps -l
+2）查看java线程信息
+jstack pid
+可以使用JConsole、VisualVM或者Java Mission Control等
+3）dump文件
+jstack -l pid > dump.log    //这里的-l选项表示详细列出线程的状态等信息
+jstack -m pid > dump.log    //这里的-m选项表示只保存最小化的信息。
+进程内存镜像信息
+```
+
 #### 问题
+
 ```
 1.JIT编译模型
 2.JVM栈空间分配
 3.G1，ZGC,shenandoah模型
 ```
+
