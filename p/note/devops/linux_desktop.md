@@ -604,6 +604,9 @@ https://blog.csdn.net/muyimo/article/details/125211460
 	
 4.macports安装方式
 	http://www.macports.org/
+	
+七。好用app
+	沉浸式翻译
 ```
 ### docker开发环境：
 
