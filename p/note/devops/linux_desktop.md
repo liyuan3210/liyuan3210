@@ -596,7 +596,9 @@ https://blog.csdn.net/muyimo/article/details/125211460
     $ brew update
 3.安装软件
 	3.1.安装qemu
+	//安装命令如下，可能需要执行brew update --auto-update
 	$ brew install qemu
+	//运行命令
 	$ qemu-system-x86_64
 	
 	3.2.另一种安装方式
