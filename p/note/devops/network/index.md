@@ -45,25 +45,25 @@ V2ray机场：
 	https://cdn.v2free.top/auth/register?code=cd79
 	账号：
 	465049568@qq.com	/	密码见keepass(Network/VPN代理)
-	
-1）windows翻墙
-	1.1）ChromeGo.7z
-		https://github.com/bannedbook/fanqiang/releases
-		https://d1a.wenxin-ai.top/FirefoxFQ.7z
-	1.2）v2rayn.zip
-	https://v2free.org/ssr-download/v2rayn.zip
-		添加节点：
-			v2rayn客户端：菜单（服务器）->添加[VMess]或[Shadowsocks]。
-			查看节点web登录v2free,使用->节点列表
-			方式1(VMess)：
-				见如下图“方式1（VMess）”
-			方式2(Shadowsocks):
-				见如下图“方式2（shadowsocks）”
-		配置好后：
-			电脑右下角，右键“系统代理”->"自动配置系统代理" 就可以使用了
-		选择路线：
-			v2rayn客户端选中节点后直接按回车键entry
 ```
+
+###### 1）windows翻墙
+​	1.1）ChromeGo.7z
+​		https://github.com/bannedbook/fanqiang/releases
+​		https://d1a.wenxin-ai.top/FirefoxFQ.7z
+​	1.2）v2rayn.zip
+​	https://v2free.org/ssr-download/v2rayn.zip
+​		添加节点：
+​			v2rayn客户端：菜单（服务器）->添加[VMess]或[Shadowsocks]。
+​			查看节点web登录v2free,使用->节点列表
+​			方式1(VMess)：
+​				见如下图“方式1（VMess）”
+​			方式2(Shadowsocks):
+​				见如下图“方式2（shadowsocks）”
+​		配置好后：
+​			电脑右下角，右键“系统代理”->"自动配置系统代理" 就可以使用了
+​		选择路线：
+​			v2rayn客户端选中节点后直接按回车键entry
 
 方式1（VMess）：
 
@@ -77,7 +77,7 @@ V2ray机场：
 
 <img src="img/shadowsocks2.png" style="zoom:50%;" />
 
-###### 2）linux,3）mac
+###### 2）linux
 
 ```
 2）linux翻墙
@@ -98,10 +98,10 @@ V2ray机场：
 		打开 设置 -> 网络 -> 网络代理
 		配置 HTTP 代理和 socket 代理 分别为上面的端口号
 	2.7）启动clash并设置好ubunutu系统代理就可以了
-	
-3）mac翻墙
-	https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
 ```
+
+###### 3）mac翻墙
+	https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
 
 #### 工具:
 
