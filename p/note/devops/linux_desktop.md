@@ -513,8 +513,13 @@ apt源切换:
         open -e .bash_profile
         使文件生效
         source .bash_profile
-     2.mac配置文件（CLASSPATH问题）
+   2.mac配置文件（CLASSPATH问题）
      配置JAVA_HOME,PATH等不需要export,但在配置CLASSPATH变量时候需要使用export导出，否则java执行命令时候会报找不到jar
+     
+   注意：
+   mac分两种情况，根据shell脚本类型不通，可能需要配置其中的2个文件之一，如下：
+   2.1）zsh类型：创建".zshrc"
+   2.2）bash类型：创建".bash_profile"
 	
 三.打开指定目录
 	open .	//打开当前目录
