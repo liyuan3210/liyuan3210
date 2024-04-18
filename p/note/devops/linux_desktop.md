@@ -477,6 +477,8 @@ apt源切换:
 一.安装远程windows工具(Microsoft Remote Desktop Connection for Mac)
 	1.下载dmg包
 	https://microsoft-remote-desktop-connection.en.softonic.com/mac
+	下面的链接地址才可下载：
+	Microsoft Remote Desktop for mac的下载地址可以通过以下链接访问：https://go.microsoft.com/fwlink/?linkid=868963     请注意，由于该软件在中国区App Store中不可用，因此需要通过这个链接下载。如果你在中国地区，可能需要使用美区账号来下载此软件。
 	
 	2.提示"mac 无法打开 因为无法确认开发者的身份"
 	mac设置:
