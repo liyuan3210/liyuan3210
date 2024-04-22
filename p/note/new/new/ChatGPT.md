@@ -18,6 +18,8 @@ https://sms-activate.org/
 
 ###### 2.chatGPT使用
 
+
+
 ```
 chatgpt搭建
 https://www.bilibili.com/video/BV1ao4y1g7Nz
