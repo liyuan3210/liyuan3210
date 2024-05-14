@@ -486,25 +486,6 @@ apt源切换:
 	注意:
 	设置前需要双击运行dmg包
 	
-	3.安装好后连接出现的问题解决
-	
-	问题1：the certificate or associated chain is not valid
-	网上解决:http://larrynung.github.io/2017/10/03/Fix-Mac-Remote-Desktop-Connection-Client-%E2%80%9CThe-certificate-or-associated-chain-is-not-valid-%E2%80%9D/
-	mac设置:
-	打开远程工具:RDC->Perferences->选择"Security-Always connect,even if authentication fails"
-	
-	问题2：remote Desktop Connection cannot verify the identity of the computer that you want to connect to
-	网上解决:https://www.cnblogs.com/dudu/p/4907213.html
-	windows设置:
-	1>开始->运行，输入gpedit.msc，打开组策略编辑器
-	2>进入Computer Configuration->Administrative Templates->Windows Components->Remote Desktop Services->Remote Dekstop Session Host->Security
-	3>打开"Require use of specific security layer for remote desktop (RDP) connection"的设置(策略设置)，将其设置为Enabled，并且在Options中将Security Layer设置为RDP。
-	windows中文设置:
-	1>开始->运行，输入gpedit.msc，打开组策略编辑器
-	2>进入 "计算机配置"->管理模板->Windows组件->远程桌面服务->远程桌面会话主机->安全
-	3>右边打开"远程(RDP)连接要求使用指定的安全层"->点击(策略设置)，
-	选中:"已启用"，安全层："RDP"。
-	
 二.环境变量配置
 	/etc/profile		全局（不推荐）
 	/etc/bashrc			全局
@@ -515,17 +496,28 @@ apt源切换:
         open -e .bash_profile
         使文件生效
         source .bash_profile
-   2.mac配置文件（CLASSPATH问题）
-     配置JAVA_HOME,PATH等不需要export,但在配置CLASSPATH变量时候需要使用export导出，否则java执行命令时候会报找不到jar
+   CLASSPATH问题：
+   配置JAVA_HOME,PATH等不需要export,但在配置CLASSPATH变量时候需要使用export导出，否则java执行命令时候会报找不到jar
      
    注意：
    mac分两种情况，根据shell脚本类型不通，可能需要配置其中的2个文件之一，如下：
-   2.1）zsh类型：创建".zshrc"
-   2.2）bash类型：创建".bash_profile"
+   1.1）zsh类型：创建".zshrc"
+   1.2）bash类型：创建".bash_profile"
+   
+  2.修改主机名称
+   sudo scutil --set ComputerName MacBook		//修改主机名称
+	 sudo scutil --set HostName MacBook		//修改共享名称
+	 参考：
+	 https://blog.csdn.net/SmileToLin/article/details/128990809
 	
-三.打开指定目录
-	open .	//打开当前目录
-	open /usr	//打开指定目录
+三.安装
+	https://www.zhihu.com/question/48775642/answer/3355689721
+	brew安装软件的时候加–cask有什么用？
+	https://www.machunjie.com/macos/1520.html
+	1).下载官方包安装
+	https://www.google.com/chrome/
+	2).brew安装
+	brew install --cask google-chrome
 
 四.待整理
 	1.mac gpg安装
@@ -540,7 +532,11 @@ apt源切换:
 
 	3.mac eclipse 安装
 	https://blog.csdn.net/cloud_xy/article/details/88623975
-
+	
+	4.打开制定目录
+		open .	//打开当前目录
+		open /usr	//打开指定目录
+		
 五.系统问题
 （1）mac升级后报错
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
@@ -556,37 +552,45 @@ https://blog.csdn.net/weixin_42881768/article/details/119236014
 （3）重装ios系统
 	mac机器开机从优盘引导：开机按住option
 	mac机器开机安全设置(从外设引导需要密码)：开机按住command + R
-（4）安装brew
-	https://www.jianshu.com/p/9252d4d2e824
-	brew install jmeter	//安装jmeter
-	brew info jmeter		//查看信息
-（5）mac磁盘“其它”占用查看及清理
-	https://blog.csdn.net/hjwnaruto/article/details/122735137
-	$ sudo du -sh * | grep 'G' | sort -nr
 	
 六。brew安装与配置
 参考
-https://blog.csdn.net/muyimo/article/details/125211460
-1.brew安装
-    官网
-    https://brew.sh/zh-cn/
+https://blog.csdn.net/muyimo/article/details/125211460			//install.sh文件安装参考
+https://blog.csdn.net/ganyingxie123456/article/details/132182152	//Homebrew-4.2.17.pkg文件安装参考
+https://blog.csdn.net/CaptainJava/article/details/109132783		//brew配置参考
+官网
+https://brew.sh/zh-cn/
 
-    1.1.下载install.sh文件：
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    想办法下载install.sh文件：
+1.brew安装方式（如下3种）
+   	1）install.sh文件安装
+				1.1）想办法下载install.sh文件并保存为install_brew.sh：
+    		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    	
+    		1.2）修改install.sh文件，搜索“github.com”，如下内容
+    		HOMEBREW_BREW_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/brew"
+    		HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
+    		换成如下
+    		HOMEBREW_BREW_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/brew.git"
+    		HOMEBREW_CORE_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/homebrew-core.git"
 
-    1.2.修改install.sh文件：
-    搜索“github.com”，如下内容
-    HOMEBREW_BREW_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/brew"
-    HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
-    换成如下
-    HOMEBREW_BREW_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/brew.git"
-    HOMEBREW_CORE_DEFAULT_GIT_REMOTE="git://mirrors.ustc.edu.cn/homebrew-core.git"
+    		1.3）执行修改后的install.sh
+    		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    		换成
+    		/bin/bash -c "/Users/yuanli/Desktop/install_brew.sh"
 
-    1.3.执行修改后的install.sh
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    换成
-    /bin/bash -c "/Users/yuanli/Desktop/install_brew.sh"
+	2）下载Homebrew-4.2.17.pkg文件安装
+		2.1）下载Homebrew-4.2.17.pkg文件并安装
+		https://github.com/Homebrew/brew/releases/tag/4.2.17
+
+		2.2）配置环境变量
+		$ echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile 
+		$ source ~/.bash_profile
+		$ echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc   
+		$ source ~/.zshrc
+
+	3) 执行如下命令安装，安装过程中可以选择下载源
+	$ /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+
 
 2.配置国内镜像源
     2.1.执行命令：
@@ -598,9 +602,9 @@ https://blog.csdn.net/muyimo/article/details/125211460
     2.3.在config文件中找到[remote "origin"]模块，将url修改为：
     url = https://mirrors.aliyun.com/homebrew/brew.git
 
-
     2.4.测试Brew是否工作正常
     $ brew update
+    
 3.安装软件
 	3.1.安装qemu
 	//安装命令如下，可能需要执行brew update --auto-update
@@ -608,18 +612,55 @@ https://blog.csdn.net/muyimo/article/details/125211460
 	//运行命令
 	$ qemu-system-x86_64
 	
-	3.2.另一种安装方式
-	$ sudo port install qemu
 	
-4.macports安装方式
+4.另一种安装方式（macports安装方式）
 	http://www.macports.org/
-	
+	$ sudo port install qemu
 	
 七。安装podman,VirtualBox
 
 好用app:
 	沉浸式翻译
+	
+八。新款MacBook特性
+	1。新款命令行终端符号$改为%
+	https://zhuanfou.com/ask/84410579_1052
+	修改方法：
+	https://www.jianshu.com/p/c7846f5cf6bb
+
+	2。MacBook关机后按任意键开机
+	根据官方回答，目前没有办法取消
+	
+九。macbook快捷键
+1.windows（Microsoft Remote Desktop for mac远程）：
+	control + c		//拷贝
+	control + v		//复制
+2.mac快捷键：
+	command + c		//拷贝
+	command + v		//复制
+	command + F1		//外接显示器屏幕模式切换（关闭显示器参考https://gpu.xuandashi.com/	82563.html）
+	command + q		//关闭整个应用
+	command + shift + 3	//截全屏
+	command + shift + 4	//截局部屏
+	command + shift + 5	//屏幕录制	
+	command + option + esc 	//强制退出应用
 ```
+### qemu启动vdi虚拟机
+
+```
+qemu启动windows10-release.vdi镜像
+$ qemu-system-x86_64 -hda windows10-release.vdi -m 4096 -smp 8 -net nic -net user,net=192.168.10.0/24,dhcpstart=192.168.10.10,hostfwd=tcp::10022-:3389 -nographic
+参数解释：
+1.映射虚拟机3389端口到宿主机10022端口
+hostfwd=tcp::10022-:3389
+
+2.禁用图形化启动
+-nographic
+
+注意：
+1.macbook下退出qemu,command + tab
+```
+
 ### docker开发环境：
 
 ```

@@ -41,6 +41,9 @@ less sass 区别？
 官网:https://nodejs.org
 一.nodeJs安装
 
+​	二进制下载地址
+​	https://nodejs.org/download/release
+
 ```
 下载解压安装版本,配置好环境变量path(最简只要配置node.exe环境变量path即可):
 	NODE_HOME(不是固定的):		D:\soft\dev\node-v12.14.1-win-x64
