@@ -262,26 +262,112 @@ $ nvcc -V
 
 
 
-但其实，通常不需要预先手动安装 CUDA ，因为我们目前使用的 PyTorch 等框架在安装过程会处
+但其实，**通常不需要预先手动安装 CUDA** ，因为我们目前使用的 PyTorch 等框架在安装过程会处
 理这些依赖。当我们通过 Conda/pip等方式安装 PyTorch 时会指定的 CUDA 版本，该 CUDA 版本就会
 与当前的Pytorch版本相兼容，预编译并打包了与 CUDA 版本相对应的二进制文件和库。所以除非有特
 定的需求或要进行 CUDA 级别的开发，才可能需要手动安装 CUDA Toolkit。
 
 
 
-4）安装Anaconda环境（python环境）
+4）python环境（安装Anaconda环境）
 
-Anaconda的作用
+Anaconda的作用：
 
-Anaconda安装
+Anaconda是一个为科学计算设计的发行版，适用于数据科学、机器学习、科学计算和工程领域。
+它会提供大量预安装的科学计算和数据科学相关的库，且提供了 Conda 这样一个包管理器，用来安
+装、管理和升级包，同时也可以创建隔离的环境以避免版本和依赖冲突。相较于单独安装Python，对初
+学者更友好，尤其是对于不熟悉 Python 和包管理的用户。
+
+运行大模型需要 Python 环境。所以我们这里选择使用Anaconda来构造和管理Python环境。
+
+
+
+Anaconda安装：
+
+​			进入Anaconda官网下载安装包：https://www.anaconda.com/download
+
+Step1 安装Anaconda：
+
+​		$ bash Anaconda3-2023.09.0-Linux-x86_64.sh
+
+​		在此处输入“yes”,然后按“Enter”键使用Anaconda的默认安装位置（/home/${account}/anaconda3）
+
+Step 2 配置环境变量:
+
+​		$ vi .bashrc
+
+​		#我的anaconda3的安装路径是/home/muyu/anaconda3
+​		export PATH=/home/liyuan/anaconda3/bin:$PATH
+
+​	    $ source .bashrc
+
+Step 3 启动anaconda
+
+​		$ anaconda-navigator
+
+
+
+安装python方式管理：
+
+。。。。。。。。。。。。。。。
+
+
+
+5）运行chatglm3-6b
+
+。。。。。。
 
 
 
 ##### * windows部署
 
+查看GPU显存命令：dxdiag
 
 
-##### * 多卡部署
+
+1）安装显卡驱动
+
+在左面鼠标右键看有没有NVIDIA控制面板，如果没有根据ubuntu章节到官网下载显卡驱动并安装
+
+
+
+2）安装cuda
+
+根据ubuntu章节
+
+
+
+3）配置项目运行环境
+
+Anaconda方式（安装路径建议不要改）：
+
+​					验证：
+
+​					启动管理工具，点击“CMD.EXE”输入命令 ：conda --version
+
+
+
+python方式：
+
+​					
+
+
+
+4）本地部署chatglm3-6b(下载文件)
+
+* chatglm3-6b项目文件
+
+  https://github.com/THUDM/ChatGLM3
+
+* 下载权重文件
+
+  
+
+
+
+
+
+##### * 多卡启动chatglm3-6b
 
 
 
