@@ -109,3 +109,179 @@ https://www.bilibili.com/video/BV13h411j7Ti
 
 
 
+## 三。部署大模型
+
+#### 3.1.概要
+
+
+
+#### 3.2.部署chatglm
+
+硬件确认，GPU显存达到要求，推荐在ubuntu
+
+##### * ubuntu部署
+
+1）ubuntu软件源更新及必要工具vim安装（linux目录推荐为英文）
+
+$ sudo apt update	
+
+$ sudo apt upgrade
+
+$ 安装goole chrome浏览器
+
+$ 配置科学上网(vpn)
+
+配置vpn原因是后面需要下载chatglm3-6B模型权重，可以访问google网站
+
+
+
+2）安装显卡驱动
+
+Step 1两种方式：
+
+​			方式1：使用官方的NVIDIA驱动进行手动安装，这种方式比较稳定，靠谱，但可能会遇到很多问题
+
+​			方式2：使用系统自带的“软件和更新”程序-附加驱动更新，这种方法要联网，但非常简单，很难出现问题（推荐这种方法）
+
+```
+sudo apt install gcc
+sudo apt install g++
+sudo apt install make
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev
+libhdf5-serial-dev protobuf-compiler
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+```
+
+Step 2 禁用ubuntu默认的显卡驱动：
+
+​	$ vi /etc/modprobe.d/blacklist.conf
+
+​	文件最后面添加一行如下：
+
+​	blacklist nouveau 	
+
+Step 3 让配置立即生效 ：
+
+​	$ sudo update-initramfs -u
+
+Step 4 打开系统“software Updater”
+
+​	 保持联网状态，点击Apply changes，重启
+
+
+
+**可以进入NVIDIA官网确认本机要下载的驱动版本（手动安装方式）：**
+
+https://www.nvidia.cn/Download/index.aspx?lang=cn
+
+选择好显卡驱动和适用平台后，点击下载。
+
+
+
+下载完成后，对该驱动添加执行权限，否则无法进入安装页面。
+在安装之前，需要关闭图形化界面，需要判断你目前的ubuntu系统的图像化界面管理器是
+gdm3（默认）或是其它。gdm3 或 lightdm负责登录界面和用户会话的初始化，是系统启动进程的一
+部分，用于用户登录和启动图形用户界面 (GUI) 会话。其中gdm3是安装Ubuntu系统时默认安装的，而
+lightdm可以选择性安装，它是一个更轻量级的显示管理器。
+
+
+
+关闭的原因是因为显示管理器（如 gdm3、lightdm）控制着图形界面，包括使用显卡驱动来显示
+内容。在这些图形界面运行时尝试安装或更新显卡驱动可能会导致冲突，因为驱动程序文件可能正在被
+系统使用。所以我们需要进入命令行模式来安装显卡驱动。
+
+
+
+如果之前执行过 sudo apt install lightdm ，就说明当前环境下已经使用lightdm代替了gdm3，此时需要如下命令关闭：
+
+$ sudo service lightdm stop
+
+否则就是默认的gdm3,这样关闭
+
+$ sudo /etc/init.d/gdm3 stop
+
+关闭后，进入命令行模式，最简单的方法是使用telinit命令更改为运行级别3。执行如下linux命令后显示服务器将停止。
+
+$ bash sudo telinit 3
+
+通过Ctrl + Alt + F3(f1-f6)快捷打开终端，先登录后输入如下命令：
+
+\# 删除已安装的显卡驱动
+$ sudo apt-get remove --purge nvidia*
+$ cd Downloads
+$ sudo ./NVIDIA-Linux-x86_64-430.26.run –no-opengl-files –no-x-check
+
+随后进入安装界面，依次选择“continue”-->不安装32位兼容库（选择no）-->不运行x配置（选择no）即可。
+
+最后输入“reboot”命令重启机器。重新进入图形化界面，在终端输入nvidia-smi命令即可
+
+**验证显卡安装成功**：
+
+$ nvidia-smi
+
+
+
+3）安装cuda(并行计算框架)
+
+CUDA 提供了两种主要的编程接口：CUDA Runtime API 和 CUDA Driver API。
+
+* CUDA Runtime API 是一种更高级别的抽象，旨在简化编程过程，它自动处理很多底层细节。大多
+  数 CUDA 程序员使用 Runtime API，因为它更易于使用。
+* CUDA Driver API 提供了更细粒度的控制，允许直接与 CUDA 驱动交互。它通常用于需要精细控
+  制的高级应用。
+
+而要安装CUDA，其实就是在安装CUDA Toolkit， 其版本决定了我们可以使用的 CUDA Runtime
+API 和 CUDA Driver API 的版本，当安装 CUDA Toolkit 时会安装一系列工具和库，用于开发和运行
+CUDA 加速的应用程序。这包括了 CUDA 编译器（nvcc）、CUDA 库和 API，以及其他用于支持 CUDA
+编程的工具。如果安装好 CUDA Toolkit，就可以开发和运行使用 CUDA 的程序了。
+
+
+
+验证CUDA安装：
+
+当我们运行 CUDA 应用程序时，通常是在使用与安装的 CUDA Toolkit 版本相对应的 Runtime
+API。这可以通过 nvcc -V 命令查询
+
+$ nvcc -V
+
+
+
+**CUDA安装方式：**
+
+​		方式一：
+
+​					$ apt install nvidia-cuda-toolkit 
+
+​		方式二：
+
+​					需要进入NVIDIA官网：https://developer.nvidia.com/cuda-toolkit-archive 
+
+​					找到需要下载的Cuda版本。
+
+
+
+但其实，通常不需要预先手动安装 CUDA ，因为我们目前使用的 PyTorch 等框架在安装过程会处
+理这些依赖。当我们通过 Conda/pip等方式安装 PyTorch 时会指定的 CUDA 版本，该 CUDA 版本就会
+与当前的Pytorch版本相兼容，预编译并打包了与 CUDA 版本相对应的二进制文件和库。所以除非有特
+定的需求或要进行 CUDA 级别的开发，才可能需要手动安装 CUDA Toolkit。
+
+
+
+4）安装Anaconda环境（python环境）
+
+Anaconda的作用
+
+Anaconda安装
+
+
+
+##### * windows部署
+
+
+
+##### * 多卡部署
+
+
+
