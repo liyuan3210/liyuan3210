@@ -277,7 +277,7 @@ $ nvcc -V
 
 
 
-4）python环境（安装Anaconda环境）
+4）安装Anaconda(python环境)
 
 Anaconda的作用：
 
@@ -333,9 +333,9 @@ Step 3 启动anaconda
 
 
 
-1）安装显卡驱动
+1）安装显卡驱动（安装路径建议不要改）
 
-在左面鼠标右键看有没有NVIDIA控制面板，如果没有根据ubuntu章节到官网下载显卡驱动并安装
+在桌面鼠标右键看有没有NVIDIA控制面板，如果没有，根据ubuntu章节到官网下载显卡驱动并安装
 
 
 
@@ -345,30 +345,158 @@ Step 3 启动anaconda
 
 
 
-3）配置项目运行环境
+3）配置项目运行环境二选一（python）
 
-Anaconda方式（安装路径建议不要改）：
+Anaconda方式一（安装路径建议不要改）：
 
-​					验证：
+3.1）step1 进入Anaconda官网下载安装包：https://www.anaconda.com/download
 
-​					启动管理工具，点击“CMD.EXE”输入命令 ：conda --version
+3.2）step2 点击安装（安装路径建议不需要改）
+
+建议勾选Add Anaconda3 to my_path environment variable，这会自动设置环境变量
+
+3.3）step3 点击“Anaconda navigator”进入（可能会提示升级）
+
+3.4）step4 验证conda
+
+​		点击“CMD.exe Prompt”进入，输入命令 ：conda --version
+
+3.5）step5 升级conda到最新版本（基于上面步骤）
+
+```
+#首先更新conda工具
+conda update -n base -c defaults conda 
+
+#再更新各库
+conda update --all
+```
+
+3.6）step6 使用conda创建虚拟环境
+
+```
+# 大模型运行环境，要求python 3.10 版本以上
+conda create --name windwos_chatglm3-6b python=3.11 -y
+
+# 列出环境，激活环境，退出环境
+conda env list												//列出所有环境
+conda activate windwos_chatglm3-6b		//激活环境
+conda deactivate 											//退出当前环境
+```
+
+3.7）进入虚拟环境使用pip安装chatGLM3-6B依赖包
+
+```
+# 使用 -i + 清华镜像源 ，加速安装
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+3.8）查看NVIDIA显卡驱动最高支持的CUDA版本
+
+```
+# 查看显卡版本
+nvidia-smi
+```
+
+3.9）根据CUDA版本要求安装PyTorch
+
+**https://pytorch.org/get-started/previous-versions/**
+
+根据官方给的conda命令来安装
+
+3.10）验证安装GPU版本PyTorch是否成功
+
+```
+import torch
+print(torch.cuda.is_available()
+```
+
+如果输出是 True，则表示GPU版本的PyTorch已经安装成功并且可以使用CUDA，如果输出是False，则 表明没有安装GPU版本的PyTorch，或者CUDA环境没有正确配置
 
 
 
-python方式：
+python方式二：
 
-​					
+3.1）Step 1. 进入Python官网下载指定版本的Python包（选择3.10以上）:
+
+https://www.python.org/	
+
+3.2）Step 2: 傻瓜式安装
+
+勾选Add python.exe to PATH,这会在安装过程中将Python环境设置好环境变量
+
+点击“Disable path length limit”取消路径长度限制
+
+3.3）验证python安装是否成功并升级pip到最新版本
+
+```
+cmd命令行输入python可以看到python直行环境及版本表示安装成功。
+$ python
+
+升级命令
+$ pip install --upgrade pip
+```
+
+3.4）使用pip创建虚拟环境
+
+使用 pip 安装项目依赖时，最好先创建一个虚拟环境，可以将项目的依赖与系统中的其他Python项目隔 离开来。不同的Python项目可能需要同一库的不同版本。在虚拟环境中工作可以防止版本冲突。创建虚拟环 境的步骤相对简单。以下是创建虚拟环境的基本步骤:
+
+打开命令行或终端，然后输入以下命令。这里假设你想要创建的虚拟环境名为 venv。
+
+```
+# 创建虚拟环境，可以指定路径
+python -m venv E:\03_LLM\04_virtualenv\python_chatglm3_6b
+
+# 激活环境，这里要修改成大家实际的路径 （...\Scripts\activate是固定的）E:\03_LLM\04_virtualenv>E:\03_LLM\04_virtualenv\python_chatglm3_6b\Scripts\activate
+```
+
+3.5）使用pip安装chatGLM3-6B项目的所有依赖包(requirements.txt文件)
+
+```
+# 使用 -i + 清华镜像源 ，加速安装
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+3.6）查看NVIDIA显卡驱动最高支持的CUDA版本
+
+```
+# 查看显卡版本
+nvidia-smi
+```
+
+3.7）根据CUDA版本要求安装PyTorch
+
+**https://pytorch.org/get-started/previous-versions/**
+
+根据官方给的pip命令来安装
+
+3.8）验证安装GPU版本PyTorch是否成功
+
+```
+import torch
+print(torch.cuda.is_available()
+```
+
+如果输出是 True，则表示GPU版本的PyTorch已经安装成功并且可以使用CUDA，如果输出是False，则 表明没有安装GPU版本的PyTorch，或者CUDA环境没有正确配置
+
+
 
 
 
 4）本地部署chatglm3-6b(下载文件)
 
-* chatglm3-6b项目文件
+* chatglm3-6b项目文件下载
 
   https://github.com/THUDM/ChatGLM3
 
 * 下载权重文件
 
+  ```
+  进入Hugging Face的官网:https://huggingface.co/THUDM/chatglm3-6b
+  进入魔搭社区的官网:https://modelscope.cn/models/ZhipuAI/chatglm3-6b/summary
+  $ git lfs install
+  $ git clone https://modelscope.cn/ZhipuAI/chatglm3-6b.git
+  ```
+  
   
 
 
