@@ -20,7 +20,7 @@
 网络参考：https://blog.csdn.net/loool_/article/details/134146141
 
 ```
-1.1。frps服务端配置
+1.1。frps.toml服务端配置
 bindPort = 7000
 # http端口
 vhostHTTPPort = 8080
@@ -39,7 +39,7 @@ auth.token = "xxx"
 服务端仪表盘：
 		http://47.116.171.118:7500
 
-1.2。frpc客户端配置
+1.2。frpc.toml客户端配置
 serverAddr = "47.116.171.118"
 serverPort = 7000
 # 授权
@@ -71,8 +71,6 @@ remotePort = 7400
 客户端控制台：
 	http://127.0.0.1:7400
 ```
-
-
 
 2.老版本
 
