@@ -619,17 +619,10 @@ https://brew.sh/zh-cn/
 	
 七。安装podman,VirtualBox
 
-好用app:
-	沉浸式翻译
-	
-八。新款MacBook特性
-	1。新款命令行终端符号$改为%
-	https://zhuanfou.com/ask/84410579_1052
-	修改方法：
-	https://www.jianshu.com/p/c7846f5cf6bb
-
-	2。MacBook关机后按任意键开机
-	根据官方回答，目前没有办法取消
+八。沉浸式翻译
+	https://immersivetranslate.com/docs/installation/
+	支持Safari,google chrome，IOS，安卓
+	可以快速翻译网页，视频字幕
 	
 九。macbook快捷键
 1.windows（Microsoft Remote Desktop for mac远程）：
@@ -644,6 +637,17 @@ https://brew.sh/zh-cn/
 	command + shift + 4	//截局部屏
 	command + shift + 5	//屏幕录制	
 	command + option + esc 	//强制退出应用
+	
+	
+新款MacBook特性(2022款air):
+	1。新款命令行终端符号$改为%
+	https://zhuanfou.com/ask/84410579_1052
+	修改方法：
+	https://www.jianshu.com/p/c7846f5cf6bb
+
+	2。MacBook关机后按任意键开机
+	根据官方回答，目前没有办法取消
+	
 ```
 ### qemu启动vdi虚拟机
 
