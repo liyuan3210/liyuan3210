@@ -15,27 +15,89 @@
 	https://www.612459.com/dnxx/2398.html
 ```
 
-1.服务端
+1.新版frp配置
+
+网络参考：https://blog.csdn.net/loool_/article/details/134146141
 
 ```
-1.服务端frps.ini
+1.1。frps服务端配置
+bindPort = 7000
+# http端口
+vhostHTTPPort = 8080
+vhostHTTPSPort = 1443
+# 日志
+log.to = "frps.log"
+# frps服务端仪表板
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "xxx"
+# 授权
+auth.method = "token"
+auth.token = "xxx"
+
+服务端仪表盘：
+		http://47.116.171.118:7500
+
+1.2。frpc客户端配置
+serverAddr = "47.116.171.118"
+serverPort = 7000
+# 授权
+auth.method = "token"
+auth.token = "xxx"
+# frpc客户端控制台，可以在线刷新配置文件
+webServer.addr = "0.0.0.0"
+webServer.port = 7400
+webServer.user = "admin"
+webServer.password = "xxx"
+webServer.pprofEnable = false
+# 日志配置
+log.to = "frpc.log"
+# 配置端口映射
+[[proxies]]
+name = "3389"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 3389
+remotePort = 3388
+# 配置外网访问frpc控制端
+[[proxies]]
+name = "7400"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 7400
+remotePort = 7400
+
+客户端控制台：
+	http://127.0.0.1:7400
+```
+
+
+
+2.老版本
+
+```
+2.1.服务端：
 		[common]
 		bind_port = 7000
 		vhost_http_port = 8888
 		log_file = frps.log
+		# 鉴权
+		authentication_method=token
+		token=123456
 	启动服务端
 		./frps -c frps.ini &
 		
 	http://ip:8888
-```
 
-2.客户端
 
-```
-2.客户端frpc.ini
-		[common]
+2.2.客户端：
+[common]
 		server_addr = 94.191.73.142
 		server_port = 7000
+		# 鉴权
+		authentication_method=token
+		token=123456
 		
 		//webTest同一个服务端8888,不能重名
 		//远程访问使用nginx.frp.liyuan3210.com:8888
@@ -51,25 +113,11 @@
 		local_ip = 127.0.0.1
 		local_port = 3389
 		remote_port = 3388
-	启动客户端
+	 启动客户端
 		frpc.exe -c frpc.ini
 		
 	测试穿透
 	http://frp.liyuan3210.com:8888
-```
-
-3.鉴权
-
-```
-* server frps.ini
-[common]
-authentication_method=token
-token=123456
-
-* client frpc.ini
-[common]
-authentication_method=token
-token=123456
 ```
 
 ## 二．ngrok
