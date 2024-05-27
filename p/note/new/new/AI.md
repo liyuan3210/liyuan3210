@@ -407,7 +407,7 @@ nvidia-smi
 
 ```
 import torch
-print(torch.cuda.is_available()
+print(torch.cuda.is_available())
 ```
 
 如果输出是 True，则表示GPU版本的PyTorch已经安装成功并且可以使用CUDA，如果输出是False，则 表明没有安装GPU版本的PyTorch，或者CUDA环境没有正确配置
@@ -473,7 +473,7 @@ nvidia-smi
 
 ```
 import torch
-print(torch.cuda.is_available()
+print(torch.cuda.is_available())
 ```
 
 如果输出是 True，则表示GPU版本的PyTorch已经安装成功并且可以使用CUDA，如果输出是False，则 表明没有安装GPU版本的PyTorch，或者CUDA环境没有正确配置
