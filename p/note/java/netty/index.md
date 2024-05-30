@@ -188,6 +188,9 @@ java零拷贝有mmap(内存映射)，sendFile
 	https://zhuanlan.zhihu.com/p/458892150
 	http://www.52im.net/thread-3816-1-1.html
 
+	web视频聊天
+	https://www.cnblogs.com/components/p/15330756.html
+
 	开源代码
 	https://github.com/nicoliuli/chat			//服务端
 	https://github.com/JackJiang2011/MobileIMSDK		//客户端
