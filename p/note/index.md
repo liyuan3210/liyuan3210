@@ -18,7 +18,7 @@
 
 [5.HARDWARE](hardware/index.md)硬件
 
-[6.new](new/index.md)
+[6.NEW](new/index.md)新视野
 
 ## 二。里程碑
 
