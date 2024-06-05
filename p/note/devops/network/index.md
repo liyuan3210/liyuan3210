@@ -34,6 +34,31 @@
 
 ## 三.翻墙工具
 
+翻墙方式
+
+```
+1.一键翻墙（google chrome,Firefox两种浏览器），电脑(windows,mac)
+	见下面
+
+2.手机翻墙方式
+	2.1）AHA加速(每天签到15分钟)
+	https://channel.jsq888.com/
+	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+
+
+	2.2）猎豹加速(每天签到1个小时)
+	https://www.lbjsd.com/
+	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+	
+	2.3）小明vpn，西瓜加速器，蚂蚁加速器，蓝鲸加速器，红杏加速器（完全免费）
+	仅从google play下载，也只支持安卓。怎么下载google安卓应用？？？
+	
+3.付费方式（平台代了解）
+	？？？
+```
+
+一键翻墙方式：
+
 ```
 翻墙工具（合集）
 https://github.com/bannedbook/fanqiang(比较全)
@@ -48,6 +73,7 @@ V2ray机场：
 ```
 
 ###### 1）windows翻墙
+
 ​	1.1）ChromeGo.7z
 ​		https://github.com/bannedbook/fanqiang/releases
 ​		https://d1a.wenxin-ai.top/FirefoxFQ.7z
