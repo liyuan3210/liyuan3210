@@ -1,4 +1,44 @@
-# java介绍
+# java后端
+
+一。java基础及语法（基础语法，面向对象，集合类型，异常处理，语言特性）
+
+​	java1.md
+
+二。java核心模块（io,socket,thread,jdbc,GUI）
+
+​	java2.md
+
+三。java其他及插件（netty,json解析,websocket,定时器方式。。。）
+
+​	java3.md
+
+四。设计模式
+
+五。数据结构与算法
+
+六。JVM调优（不限于java语言）
+
+​	jvm.md
+
+七。spring与mybatis（还有必要的jwt,swagger。。。）
+
+八。微服务框架（spring cloud,dubbo系列内的。。。）
+
+九。中间件（数据库,es,redis,nginx,mq）
+
+​	midd.md
+
+十。大数据（hdfs文件系统，yarn分布式计算框架）
+
+十一。devops运维架构了解，三高场景及解决方案
+
+
+
+环境安装：
+
+1.jdk,maven,gradle环境安装配置
+
+#########################################################################OLD
 
 ## [环境安装](env/index.md)
 
