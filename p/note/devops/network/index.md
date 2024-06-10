@@ -39,6 +39,15 @@
 ```
 1.一键翻墙（google chrome,Firefox两种浏览器），电脑(windows,mac)
 	见下面
+	1.1）telegram图片视频下载器
+	参考：https://telegram-chinese.vn/2410/
+	官网（篡改猴）：
+	https://www.tampermonkey.net/index.php?browser=chrome&locale=zh
+	安装chrome插件（篡改猴的“telegram图片视频下载器”插件）
+	https://chromewebstore.google.com/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/dhdgffkkebhmkfjojejmpbldmpobfkfo
+	到tampermonkey.net官网进入“用户脚本”菜单，搜索“telegram图片视频下载器”安装
+	使用：
+	然后用web浏览器登录telegram，就可以发现资源右上角有个下载箭头了，就可以下载了
 
 2.手机翻墙方式
 	2.1）AHA加速(每天签到15分钟)
