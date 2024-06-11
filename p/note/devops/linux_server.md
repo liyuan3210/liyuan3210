@@ -1,4 +1,33 @@
+# 服务器管理
+
+
+
+### 1.debian
+
+
+
+### 2.rockylinux
+
+
+
+### windows
+
+
+
+### mac
+
+无
+
+
+
+。。。。。。
+
+
+
+#########################################################################OLD
+
 # linux服务器常用命令
+
 [ubuntu/debian](#ubuntu)<br/>
 [centos/rockylinux](#centos)<br/>
 [suse](#suse)<br/>
