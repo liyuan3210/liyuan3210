@@ -1,12 +1,24 @@
 # devops运维
 
-##### 一。xxx
+##### 一。linux系统（linux常用命令，不同linux发行桌面版软件安装，git，gpg）
 
-##### 二。xxx
+##### 二。中间件部署及使用（不同发行版linux服务器管理软件包含windows server，mysql,redis,nginx.....）
 
-##### 三。。。。。。。
+##### 三。network网络（ip子网划分，linux防火墙，vpn等网络工具）
 
-### Unix与linux的关系
+##### 四。kubernetes与容器（安装与使用）
+
+##### 五。黑客攻防
+
+### 虚拟化技术介绍
+
+。。。。。。
+
+### 操作系统介绍
+
+##### windows, mac系统
+
+##### Unix与linux的关系
 
 1.unix两大分支
 
@@ -19,6 +31,22 @@
 5.linux发行版有哪些
 
 6.linux常用发行版
+
+
+
+### 分区及工具使用介绍
+
+。。。。。。
+
+### wintogo方式安装
+
+。。。。。。
+
+### windows破解及安装，备份与恢复
+
+。。。。。。
+
+
 
 ### 工具链
 
