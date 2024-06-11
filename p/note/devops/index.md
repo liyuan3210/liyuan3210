@@ -16,6 +16,10 @@
 
 4.linux内核是基于unix哪个分支
 
+5.linux发行版有哪些
+
+6.linux常用发行版
+
 ### 工具链
 
 |              |                            跨平台                            |  Linux  |                           Windows                            |                IOS                | 备注   |
