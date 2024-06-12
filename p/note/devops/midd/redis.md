@@ -7,6 +7,7 @@
 ```
 官网:
 https://redis.io
+https://github.com/redis/redis
 可以下载源码make安装
 
 wondows下载
