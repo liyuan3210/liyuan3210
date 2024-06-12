@@ -2,15 +2,15 @@
 
 ##### [操作系统安装](os_install.md)
 
-##### 一。linux系统（linux常用命令，linux桌面（不同发型版），git，gpg...）
+##### 一。桌面系统（linux常用命令，linux桌面（不同发型版win,mac），git，gpg...）
 
-##### 二。中间件部署及使用（linux中间件及服务（包含windows server）,mysql,redis,…..）
+##### 二。服务器管理（linux服务软件及中间件（包含win）,mysql,redis,…..）
 
 ##### 三。network网络（ip子网划分，linux防火墙，vpn等网络工具）
 
 ##### 四。kubernetes与容器（安装与使用）
 
-##### 五。黑客攻防
+##### 五。黑客攻防(网络安全与实战)
 
 
 

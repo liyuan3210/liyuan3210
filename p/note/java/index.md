@@ -2,15 +2,15 @@
 
 一。java基础及语法（基础语法，面向对象，集合类型，异常处理，语言特性）
 
-​	java1.md
+​	java_base.md
 
 二。java核心模块（io,socket,thread,jdbc,GUI）
 
-​	java2.md
+​	java_core.md
 
 三。java其他及插件（netty,json解析,websocket,定时器方式。。。）
 
-​	java3.md
+​	java_extend.md
 
 四。设计模式
 
@@ -20,7 +20,7 @@
 
 ​	jvm.md
 
-七。spring与mybatis（还有必要的jwt,swagger。。。）
+七。spring与mybatis（项目必要的jwt,swagger。。。）
 
 八。微服务框架（spring cloud,dubbo系列内的。。。）
 
