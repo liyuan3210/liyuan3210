@@ -1,5 +1,13 @@
 # 桌面环境
 
+### 目录
+
+1.linux常用命令
+
+2.桌面
+
+
+
 ### 1.linux常用命令
 
 。。。。。。
@@ -8,19 +16,27 @@
 
 ### 2.linux桌面(包含windows)
 
-##### 2.1）ubuntu(master)
+##### 2.1）ubuntu
 
 ##### 2.2）rockylinux
 
-##### windows
+##### 2.3）mac
 
-##### mac
+##### 2.4）windows
+
+
 
 。。。。。。
 
 
 
-### 3.公共环境配置（git,keepass,gpg等）
+### 3.常用工具安装配置（git,keepass,gpg等）
+
+##### 3.1）git
+
+##### 3.2）keepass
+
+##### 3.3）gpg
 
 。。。。。。
 

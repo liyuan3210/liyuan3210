@@ -1,8 +1,22 @@
 # 服务器管理
 
+### 目录
+
+1.subversion（ubuntu, windows）
+
+2.samba（ubuntu）
+
+3.httpd-php-phpmyadmin（ubuntu, windows）
+
 
 
 ### 1.debian
+
+##### 1.1）subversion
+
+
+
+##### 1.2）samba
 
 
 
@@ -10,7 +24,9 @@
 
 
 
-### windows
+### 3.windows
+
+##### 3.1）subversion
 
 
 
