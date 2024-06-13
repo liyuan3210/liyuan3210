@@ -1,9 +1,9 @@
 # 笔记首页
 ## 服务器操作
 
-[*.linux服务器常用命令](devops/linux_server.md)
+[*.linux服务器常用命令](devops/server.md)
 
-[*.utuntu与ios常用桌面软件安装](devops/linux_desktop.md)
+[*.utuntu与ios常用桌面软件安装](devops/desktop.md)
 
 [*.windows_server服务器常用操作](devops/windows_server.md)
 
