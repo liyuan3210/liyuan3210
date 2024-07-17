@@ -64,7 +64,7 @@
 |              |                                                              |         |                                                              |                                   |        |
 |              |                                                              |         |                                                              |                                   |        |
 |   **开发**   |                                                              |         |                                                              |                                   |        |
-|    1.java    | [openjdk](https://openjdk.org)<br>[maven](https://maven.apache.org)<br>[gradle](https://gradle.org) |         |                                                              |                                   |        |
+|    1.java    | [openjdk](https://openjdk.org)<br>[maven](https://maven.apache.org),[gradle](https://gradle.org) |         |                                                              |                                   |        |
 |    2.idea    |                                                              |         |                                                              |                                   |        |
 | 3.git命令行  |                                                              |         | [gitforwindows](https://gitforwindows.org)<br/>[git-scm](https://git-scm.com) |                                   |        |
 |              |                                                              |         |                                                              |                                   |        |
