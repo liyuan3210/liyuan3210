@@ -4,6 +4,8 @@
 
 [1.mysql](db/mysql.md),[mariadb](db/mariadb.md),[oracle](db/oracle.md),[mongodb](db/mongodb.md)
 
+​		[1.1).免费Mysql云数据库](https://planetscale.com)
+
 [2.redis](redis.md)
 
 [3.rocketmq](mq/rocketmq.md),[kafka](mq/kafka.md),[rabbitmq](mq/rabbitmq.md)(MQ)

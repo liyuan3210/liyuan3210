@@ -1,5 +1,11 @@
 # 计划
 
+###### [1.AI,人工智能,机器学习](AI.md)
+
+###### [2.区块链，ipfs](block_chain-ipfs.md)
+
+
+
 ### [课程安排](course.md)
 
 ### [待处理](pending.md)
