@@ -1,13 +1,16 @@
 # 硬件
 
+**见hardware-chagtlm-20240606.docx**
+
 ## 一．硬件基础
+
 [1.电路](circuit/index.md)
 
 [2.模拟电路](simulation/index.md)
 
 [3.数字电路](digital/index.md)
 
-[4.51单片机](51chip/index.md)
+[4.单片机](mcu/index.md)
 
 5.开源硬件（物联网平台）
 
