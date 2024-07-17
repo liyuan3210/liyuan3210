@@ -36,7 +36,7 @@
 
 3.unix系统对windows系统的影响
 
-4.BSD 与 System V的区别
+4.BSD与System V的区别
 
 5.bsd发行版有哪些
 
@@ -44,7 +44,7 @@
 
 7.linux发行版有哪些
 
-8.linux常用发行版
+8.linux与gnu
 
 
 
