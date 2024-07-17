@@ -30,17 +30,21 @@
 
 ##### 2.3）Unix生态及发展史
 
-1.unix两大分支
+1.unix起源
 
-2.BSD 与 System V的区别
+2.unix两大分支
 
-3.bsd发行版有哪些
+3.unix系统对windows系统的影响
 
-4.linux内核是基于unix哪个分支
+4.BSD 与 System V的区别
 
-5.linux发行版有哪些
+5.bsd发行版有哪些
 
-6.linux常用发行版
+6.linux内核是基于unix哪个分支
+
+7.linux发行版有哪些
+
+8.linux常用发行版
 
 
 
