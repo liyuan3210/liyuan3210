@@ -38,7 +38,7 @@
 
 4.BSD与System V的区别
 
-5.bsd发行版有哪些
+5.bsd System V发行版有哪些
 
 6.linux内核是基于unix哪个分支
 
