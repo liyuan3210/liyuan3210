@@ -46,6 +46,32 @@
 
 [详细](new/plan/pending.md)
 
+**word转markdown工具：**
+
+```
+word转md在线工具
+https://word2md.com/
+https://www.strerr.com/cn/word2markdown.html
+https://www.strerr.com/cn/tools.html
+
+在线Word转Markdown
+在线将Word文档转换为Markdown格式，您可以使用一些免费的在线工具。下面是一些建议的网站，可以帮助您完成这项任务：
+1.Pandoc
+（需下载软件，但非常强大）:
+- 网站：https://pandoc.org/
+- 虽然Pandoc主要是作为下载软件使用的，但它是一个非常强大的文档转换工具，支持从Word (.docx) 转换到Markdown等多种格式。您需要先在您的电脑上安装Pandoc，然后通过命令行操作来完成转换。
+2.Zamzar
+- 网站：https://www.zamzar.com/convert/docx-to-markdown/
+- Zamzar是一个流行的在线文件转换服务，支持多种文件格式之间的转换，包括将Word (.docx) 文件转换为Markdown。
+3.Convertio
+- 网站：https://convertio.co/zh/docx-md/
+- Convertio也是一个易于使用的在线转换器，允许您上传Word文件并将其转换为Markdown格式。
+4.CloudConvert
+- 网站：https://cloudconvert.com/docx-to-markdown
+- CloudConvert支持超过200种不同的文件格式转换，包括Word到Markdown的转换，且界面友好。
+使用这些工具时，请注意阅读其隐私政策和使用条款，确保您的数据安全。转换前，如果您的Word文档中包含复杂格式（如表格、图像、特定样式等），请注意在线转换可能无法完美保留所有原格式特性，因为Markdown是一种较为轻量级的文本格式化语言，主要用于网页写作和代码文档。
+```
+
 ## 四。新闻事件
 
 2022.08.02: 佩洛西访台，华东战区实弹演习

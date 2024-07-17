@@ -770,3 +770,45 @@ http://192.168.1.136:8848/nacos
 
 
 
+### 6.注解参数校验
+
+```
+1.1）.spring boot中方法中加上@Validated
+    @PostMapping(value = "/list")
+    public Response<UserClusterSearchListResponse>
+    list(@Validated @RequestBody UserClusterListOpenApiRequest request)
+    
+1.2）.在相应的vo属性上面加上@NotNull等标签(不同校验规则使用标签不一样)
+    @NotNull(message = "sourceName枚举字段不能为空")    //对象
+    private SourceName sourceName;
+
+    @NotBlank(message = "env环境字段不能为空")            //字符串
+    private String env;
+```
+
+### 7.swagger使用
+
+默认访问地址，共用http服务地址
+
+http://127.0.0.1:8080/swagger-ui/index.html
+
+```
+2.1）接口描述
+    @ApiOperation("获取用户标历史数据")
+    @GetMapping(value = "/history-data-list")
+    @ApiImplicitParams({@ApiImplicitParam(name = "tagId", value = "标签id", required = true, paramType = "query", dataTypeClass = Long.class),
+    @ApiImplicitParam(name = "startDate", value = "起始数据日期,不传则从第一条数据获取", required = false, paramType = "query", dataTypeClass = String.class),
+    @ApiImplicitParam(name = "endDate", value = "结束数据日期,不传则获取到最后一条数据", required = false, paramType = "query", dataTypeClass = String.class)})
+    public Response<List<UserTagDataHistory>> getTagHistoryData(Long tagId,String startDate,String endDate, TagNameRequest req) {
+2.2）属性描述
+    public class UserClusterListOpenApiRequest extends UserClusterSearchListRequest {
+    @NotNull(message = "sourceName枚举字段不能为空")
+    @ApiModelProperty(value = "分群枚举['push'")
+    private SourceName sourceName;
+    @NotBlank(message = "env环境字段不能为空")
+    @ApiModelProperty(value = "环境")
+    private String env;
+    。。。。。。
+    }
+```
+
