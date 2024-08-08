@@ -15,6 +15,7 @@
 8. [狂飙](https://www.iqiyi.com/v_1vs5edve4m4.html)
 9. [毛骗](https://www.mkxyb.com/guocanju/maopiandiyiji/)
 10. [自律](https://www.bilibili.com/video/BV1bw411U7hY)
+11. 创世纪，华尔街之狼，金钱永不眠
 
 ### 二。读物
 
@@ -168,6 +169,9 @@ https://www.bilibili.com/video/BV1hA411P7HV
 
 上坡起步三种方法
 https://www.bilibili.com/video/BV1MZ4y1d7zd
+
+让行规则：
+https://baijiahao.baidu.com/s?id=1651979438622128595&wfr=spider&for=pc
 ------------------------------------------------------------
 1.直角转弯(左)
 	1.1）踩离合，挂一档
