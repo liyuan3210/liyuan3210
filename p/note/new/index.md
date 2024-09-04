@@ -6,9 +6,9 @@
 
 
 
-### [课程安排](course.md)
+### [课程安排](plan/course.md)
 
-### [待处理](pending.md)
+### [待处理](plan/pending.md)
 
 #### 主线(优先)
 
@@ -100,5 +100,5 @@ https://github.com/halo-dev/halo
 
 ```
 
-### [马士兵教育](mashibing.md)
+### [马士兵教育](plan/mashibing.md)
 
