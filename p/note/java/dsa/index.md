@@ -6,13 +6,13 @@
 
 [3.十种常见算法](algorithm.md)
 
-## 一。算法入门
-
 ## 资源
     原始资料：https://gitee.com/liyuan3210/book_source/tree/master/dsa
     代码：https://github.com/liyuan3210/java/tree/master/dsa
     流程图：https://github.com/liyuan3210/data/blob/master/drawio/dsa.drawio
     liyuandf账号:共享资源>course>java>【Java】数据结构和算法,韩顺平(全195讲)
+
+## 概述
 
 **1.字符串匹配问题**
 
@@ -62,7 +62,7 @@ http://h5.17173.com/content/05252016/143559215.shtml
 图的深度优化遍历算法(DFS) + 贪心算法优化
 ```
 
-## 二。数据结构与算法区别
+**数据结构与算法区别：**
 
 **程序 = 数据结构 + 算法**
 
@@ -86,7 +86,7 @@ http://h5.17173.com/content/05252016/143559215.shtml
 		非线性结构包括：二维数组，多维数组，广义表，树结构，图结构
 ```
 
-## 三。数据结构
+## 一。数据结构
 
 #### 1.稀疏数组
 
@@ -165,7 +165,7 @@ http://h5.17173.com/content/05252016/143559215.shtml
 * 迷宫回溯实现
 * 八皇后游戏实现
 
-## 四。算法
+## 二。算法
 
 #### 1.算法复杂度衡量
 
