@@ -28,17 +28,22 @@
 
 **4.高等数学**
 
+    索引：
     《高等数学》同济版 全程教学视频（宋浩老师）（new) --->>>new
     https://www.bilibili.com/video/BV1Eb411u7Fw
     《线性代数》，《微积分》，《概率论与数理统计》
     《高等数学》主要内容包括：
     数列、极限、微积分、空间解析几何与线性代数、级数、常微分方程。
     
-    电路，模电需要懂（微积分）：
-    《微积分》《高等数学》全程教学视频--宋浩老师
+    1.电路，模电需要懂（微积分）：
+    《微积分》《高等数学》全程教学视频--宋浩老师（update）--->>>update
     https://www.bilibili.com/video/BV1UW411k7Jv
     《微积分》习题全集【宋浩老师】
     https://www.bilibili.com/video/BV12441127XS	
+    
+    2.线性代数：
+    《线性代数》教学视频 宋浩老师（2024年更新）（new) --->>>new
+    https://www.bilibili.com/video/BV1aW411Q7x1
 
 
 **5.linux内核**
