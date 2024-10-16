@@ -31,10 +31,10 @@
 #### DEVOPS
 |问题/名称与描述      |类型      |状态      |
 | ---- | ---- | ---- |
-| 1.）。ma c 安装brew |      |      |
+| 1.）。mac 安装brew | devOps | <font color="blue">已处理</font> |
 | 1）。wine安装配置并安装微信等 | devOps | 待处理 |
 | 27）。serverless架构及使用场景 | NEW | 待处理 |
-| x）。k8s部署,Containerd与docker的区别。。。 | DevOps | 待处理 |
+| x）。k8s部署,Containerd与docker的区别。。。<br/>x)。MacBook m2镜像制作及容器运行 | DevOps | 待处理 |
 | x）。3.1.k8s rbac授权<br/>	3.2.nginx在windows下编译构建(Mingw-w64编译nginx)<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
 | 28）。github加速器<br>http://www.inspinia.net/a/743694.html | NEW | 待处理 |
 | 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | 网络 | 待处理 |
