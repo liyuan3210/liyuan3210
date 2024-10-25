@@ -34,10 +34,12 @@
 | 1.）。mac 安装brew | devOps | <font color="blue">已处理</font> |
 | 1）。wine安装配置并安装微信等 | devOps | 待处理 |
 | 27）。serverless架构及使用场景 | NEW | 待处理 |
-| x）。k8s部署,Containerd与docker的区别。。。<br/>x)。MacBook m2镜像制作及容器运行 | DevOps | 待处理 |
-| x）。3.1.k8s rbac授权<br/>	3.2.nginx在windows下编译构建(Mingw-w64编译nginx)<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
+| x）。k8s部署,Containerd与docker的区别及安装<br/>x)。k8s rbac授权 | DevOps | <font color="red">待处理</font> |
+| 3.2.nginx在windows下编译构建(Mingw-w64编译nginx)<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
 | 28）。github加速器<br>http://www.inspinia.net/a/743694.html | NEW | 待处理 |
-| 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | 网络 | 待处理 |
+| 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | devOps | <font color="red">待处理</font> |
+| 26）。m2平台docker镜像制作 | devOps | <font color="red">待处理</font> |
+| 27）。you-get视频下载（B站视频下载） | devOps | <font color="red">待处理</font> |
 | 20）。1）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 待处理 |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
 | 5）。pc安卓模拟器pc模拟安卓<br/>https://www.bbsmax.com/A/RnJW7G2wJq<br/>安卓下载地址<br/>https://www.android-x86.org/download<br/>在PC上运行安卓（Android）应用程序的几个方法<br/>https://www.shuzhiduo.com/A/xl56jj9r5r/<br/>使用genymotion模拟器（安装genymotion过程中会自动安装VirtualBox）<br/>https://www.liyuan3210.com/p/note/new/dev_platform.html<br/>chrome插件限制问题<br/>https://www.likecs.com/show-307965087.html<br/>安卓模拟器<br/>https://wen.baidu.com/question/699441544072731004.html<br/>BlueStacks<br/>NoxPlayer<br/>LDPlayer<br/>https://www.extrabux.cn/chs/guide/6838877<br/>Genymotion使用详解<br/>http://www.taodudu.cc/news/show-495464.html?action=onClick | devOps | 待处理 |
