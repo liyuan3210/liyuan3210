@@ -64,6 +64,12 @@
     X64处理器架构的汇编语言和操作系统基础
     https://m.study.163.com/provider/480000001890841/index.htm?share=2&shareId=480000001890841
     ？？？
+    淘宝店：
+    https://lizhongc.taobao.com/
+    李忠网站：
+    https://www.lizhongc.com/
+    x86汇编语言：编写64位多处理器多线程操作系统
+    
     二。李述铜
     B站视频
     https://space.bilibili.com/473486810
