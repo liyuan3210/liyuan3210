@@ -51,8 +51,8 @@
 | 18）。1.翻墙工具（合集）<br/>https://github.com/bannedbook/fanqiang<br/>2。chatgpt注册使用(了解) | devOps | <font color="blue">已处理</font> |
 | 19）。1.wtg linux双系统,如何做Windows To Go+Ubuntu To Go双系统U盘教程<br/>https://blog.csdn.net/weixin_30954879/article/details/116578616<br/>https://www.bilibili.com/read/cv17650897<br/>2.windows10，11（系统之家...）安装到mac启动，安装到wintogo<br/>https://windows.wxjyxkj.cn/ | devOps | <font color="blue">已处理</font> |
 | 21）。1.Raw,vhd磁盘挂载<br/>http://www.nndssk.com/xtwt/202309jDjam8.html<br/>要做虚拟磁盘的分区，前面任务linux,windows下分区有关联，vhd文件快照？？？<br/>2.vhd-util工具介绍<br/>https://www.shuzhiduo.com/A/E35pY2Agdv<br/>Windows,linux下vhd磁盘工具？？？ | devOps | <font color="blue">已处理</font> |
-| 26）。todesk跨平台远程管理工具(试用)<br/>https://www.todesk.com/ | 网络 | <font color="blue">已处理</font> |
-|      |      |      |
+| 26）。todesk跨平台远程管理工具(试用)<br/>https://www.todesk.com/ | devOps | <font color="blue">已处理</font> |
+| 27）markdown-it是linux下啥命令 | devOps | 待处理 |
 |      |      |      |
 |      |      |      |
 
