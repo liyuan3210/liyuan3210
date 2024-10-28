@@ -38,7 +38,7 @@
 | 3.2.nginx在windows下编译构建(Mingw-w64编译nginx)<br/>	3.3.windows备份与恢复 | DevOps | 待处理 |
 | 28）。github加速器<br>http://www.inspinia.net/a/743694.html | NEW | 待处理 |
 | 25）。ipv6内网穿透方案<br/>https://www.bilibili.com/video/BV19V4y1p7Xt | devOps | <font color="red">待处理</font> |
-| 26）。m2平台docker镜像制作 | devOps | <font color="red">待处理</font> |
+| 26）。m2平台docker镜像制作(镜像拉取) | devOps | <font color="red">待处理</font> |
 | 27）。you-get视频下载（B站视频下载） | devOps | <font color="red">待处理</font> |
 | 20）。1）QEMU下windows桥接问题。<br/>Windows新建虚拟适配器，首先选择windows图标->选择"设备管理器"->在设备管理器菜单中选“操作”->选“添加过时硬件”并下一步->选“安装我手动从列表选择的硬件（高级）”选下一步->选“网络适配器”选下一步->是否可以添加想要的设备？？？？<br/>下面是否是tap驱动？？？<br/>https://github.com/OpenVPN/tap-windows6<br/>1.3) QEMU下linux桥接问题 | devOps | 待处理 |
 | 17）。安装Xshell问题如下：<br/>由于找不到mfc110u.dll,无法继续执行代码。重新安装程序可能会解决此问题。<br/>由于找不到MSVCR110.dll,无法继续执行代码。重新安装程序可能会解决此问题。 | devOps | 待处理 |
