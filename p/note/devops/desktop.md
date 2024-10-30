@@ -702,6 +702,10 @@ https://brew.sh/zh-cn/
 ```
 qemu启动windows10-release.vdi镜像
 $ qemu-system-x86_64 -hda windows10-release.vdi -m 4096 -smp 8 -net nic -net user,net=192.168.10.0/24,dhcpstart=192.168.10.10,hostfwd=tcp::10022-:3389 -nographic
+
+qemu启动debian-12.7.vdi镜像
+$ qemu-system-x86_64 -hda debian-12.7.vdi -m 4096 -smp 8 -net nic -net user,net=192.168.10.0/24,dhcpstart=192.168.10.10,hostfwd=tcp::10023-:22 -nographic
+
 参数解释：
 1.映射虚拟机3389端口到宿主机10022端口
 hostfwd=tcp::10022-:3389
