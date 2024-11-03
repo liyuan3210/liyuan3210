@@ -34,6 +34,19 @@
 
 ## 三.翻墙工具
 
+```
+翻墙工具（合集）
+https://github.com/bannedbook/fanqiang(比较全)
+https://github.com/Alvin9999/new-pac
+https://github.com/freefq/free
+
+V2ray机场：
+	注册后免费获得1024M初始流量，每日签到可获得300-500M免费流量。
+	https://cdn.v2free.top/auth/register?code=cd79
+	账号：
+	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+```
+
 * 翻墙方式
   * VPN翻墙（使用方式，设备安装一个软件即可）
   * 飞机场（有一个公共的客户端软件，有几种协议方式）
@@ -56,7 +69,6 @@
 	https://channel.jsq888.com/
 	465049568@qq.com	/	密码见keepass(Network/VPN代理)
 
-
 	2.2）猎豹加速(每天签到1个小时)
 	https://www.lbjsd.com/
 	465049568@qq.com	/	密码见keepass(Network/VPN代理)
@@ -67,22 +79,6 @@
 3.付费方式（平台代了解）
 	？？？
 ```
-
-一键翻墙方式：
-
-```
-翻墙工具（合集）
-https://github.com/bannedbook/fanqiang(比较全)
-https://github.com/Alvin9999/new-pac
-https://github.com/freefq/free
-
-V2ray机场：
-	注册后免费获得1024M初始流量，每日签到可获得300-500M免费流量。
-	https://cdn.v2free.top/auth/register?code=cd79
-	账号：
-	465049568@qq.com	/	密码见keepass(Network/VPN代理)
-```
-
 ###### 1）windows翻墙
 
 ​	1.1）ChromeGo.7z
