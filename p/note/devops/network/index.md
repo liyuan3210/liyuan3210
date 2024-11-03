@@ -52,7 +52,19 @@ V2ray机场：
 * **翻墙方式**
   
   * VPN翻墙（使用方式，设备安装一个软件即可）
+    * ExpressVPN(以前比较有用)
+    * AstrillVPN(比较贵)
+      * https://www.getastr.com/
+    * 小地球仪(短期推荐)
+      * https://www.xiaodiqiuyi.com
   * 飞机场（有一个公共的客户端软件，有几种协议方式）
+    * 机场通常是指翻墙服务的网站，会提供很多服务器节点供翻墙使用。
+    * 常见的机场协议有V2ray , SSR , SS ,Trojan
+    * 通常需要配合软件使用如Clash，这些软件都是通用的
+      * windows专用：Clash,V2rayN协议
+      * 安卓翻墙专用：Clash,V2rayNG协议
+      * IOS翻墙app：shadowrocket
+      * Mac电脑翻墙app: ClashX,Clash
   
 * **linux**
 
