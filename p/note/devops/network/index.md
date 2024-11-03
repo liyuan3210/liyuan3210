@@ -50,56 +50,95 @@ V2ray机场：
 ```
 
 * **翻墙方式**
+  
   * VPN翻墙（使用方式，设备安装一个软件即可）
   * 飞机场（有一个公共的客户端软件，有几种协议方式）
-
+  
 * **linux**
 
   ```
-  1）首先下载clash-linux-amd64-v1.16.0.gz
-  	https://github.com/Dreamacro/clash/releases
-  2）然后解压文件，可执行文件改名为chmod
-  	chmod +x clash
-  3）初始化一下（首次使用）
-  	./clash 
-  	初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库：config.yaml 和 Country.mmdb
-  	然后退出Ctrl +c
-  4）登录v2free查看“Clash订阅链接网址”
-  	wget -U "Mozilla/6.0" -O ~/.config/clash/config.yaml  你的Clash订阅链接网址
+  阅读：
+  https://github.com/bannedbook/fanqiang/tree/master/linux
+  
+  1）创建目录：
+  $ mkdir  ~/.config/
+  $ mkdir  ~/.config/mihomo/
+  $ cd     ~/.config/mihomo/
+  
+  2）首先下载https://github.com/MetaCubeX/mihomo/releases
+  下载此包：mihomo-linux-amd64-compatible-v1.18.9.gz
+  $ gzip -f mihomo-linux-amd64-compatible-v1.18.9.gz -d 	//解压
+  $ chmod +x clash-linux									//授权
+  $ ./clash-linux 	//初始化执行 clash 会默认在 ~/.config/mihomo/ 目录下生成配置文件和全球IP地址库：config.yaml 、Country.mmdb、GeoSite.dat
+  
+  * 如果./clash-linux不能自动完成下载，需要手动完成下载：
+  https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb
+  下载后放到 ~/.config/mihomo/ 目录。
+  
+  4）登录v2free机场查看“Clash订阅链接网址”
+  	4.1）使用wget Clash订阅链接网址 下载config.yaml文件并覆盖~/.config/clash/config.yaml里面的
+  	wget -U "Mozilla/6.0" -O ~/.config/mihomo/config.yaml  你的Clash订阅链接网址
+  	
   5）运行
   	./clash
-  	clash 默认 http 端口默认监听 7890 , socks5 端口默认监听 7891
+  	clash 默认 http https 端口默认监听 7890
+  	
   6）代理设置
-  	打开 设置 -> 网络 -> 网络代理
-  	配置 HTTP 代理和 socket 代理 分别为上面的端口号
-  7）启动clash并设置好ubunutu系统代理就可以了
+  	6.1)图形界面
+          打开 设置 -> 网络 -> 网络代理
+          配置HTTP,HTTPS,FTP代理，socks主机 的端口号都填监听本机127.0.0.1，端口为7890
+  	6.2）命令行
+  	代理配置：
+          export http_proxy="http://127.0.0.1:7890"
+          export https_proxy="http://127.0.0.1:7890"
+          取消配置：
+          unset http_proxy
+          unset https_proxy
   ```
 
 * **mac**
 
-  ```
-  https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
-  ```
+  * 一键翻墙（chrome）
+
+  	```
+  	https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
+  	```
+
+  * xxx
 
 * **windows**
 
+  * 一键翻墙（chrome）
 
-​	1.1）ChromeGo.7z
-​		https://github.com/bannedbook/fanqiang/releases
-​		https://d1a.wenxin-ai.top/FirefoxFQ.7z
-​	1.2）v2rayn.zip
-​	https://v2free.org/ssr-download/v2rayn.zip
-​		添加节点：
-​			v2rayn客户端：菜单（服务器）->添加[VMess]或[Shadowsocks]。
-​			查看节点web登录v2free,使用->节点列表
-​			方式1(VMess)：
-​				见如下图“方式1（VMess）”
-​			方式2(Shadowsocks):
-​				见如下图“方式2（shadowsocks）”
-​		配置好后：
-​			电脑右下角，右键“系统代理”->"自动配置系统代理" 就可以使用了
-​		选择路线：
-​			v2rayn客户端选中节点后直接按回车键entry
+  	```
+  	https://github.com/bannedbook/fanqiang/releases
+  	https://d1a.wenxin-ai.top/FirefoxFQ.7z
+  	```
+
+  * 客户端
+
+    ```
+    1.）v2rayn.zip
+    https://v2free.org/ssr-download/v2rayn.zip
+添加节点：
+    v2rayn客户端：菜单（服务器）->添加[VMess]或[Shadowsocks]。
+    查看节点web登录v2free,使用->节点列表
+    方式1(VMess)：
+    见如下图“方式1（VMess）”
+    
+    方式2(Shadowsocks):
+    见如下图“方式2（shadowsocks）”
+    
+    配置好后：
+    电脑右下角，右键“系统代理”->"自动配置系统代理" 就可以使用了
+    选择路线：
+    
+    v2rayn客户端选中节点后直接按回车键entry
+    ```
+    
+    
+
+
 
 方式1（VMess）：
 
