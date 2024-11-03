@@ -34,6 +34,8 @@
 
 ## 三.翻墙工具
 
+* **资源**
+
 ```
 翻墙工具（合集）
 https://github.com/bannedbook/fanqiang(比较全)
@@ -47,39 +49,40 @@ V2ray机场：
 	465049568@qq.com	/	密码见keepass(Network/VPN代理)
 ```
 
-* 翻墙方式
+* **翻墙方式**
   * VPN翻墙（使用方式，设备安装一个软件即可）
   * 飞机场（有一个公共的客户端软件，有几种协议方式）
 
-```
-1.一键翻墙（google chrome,Firefox两种浏览器），电脑(windows,mac)
-	见下面
-	1.1）telegram图片视频下载器
-	参考：https://telegram-chinese.vn/2410/
-	官网（篡改猴）：
-	https://www.tampermonkey.net/index.php?browser=chrome&locale=zh
-	安装chrome插件（篡改猴的“telegram图片视频下载器”插件）
-	https://chromewebstore.google.com/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/dhdgffkkebhmkfjojejmpbldmpobfkfo
-	到tampermonkey.net官网进入“用户脚本”菜单，搜索“telegram图片视频下载器”安装
-	使用：
-	然后用web浏览器登录telegram，就可以发现资源右上角有个下载箭头了，就可以下载了
+* **linux**
 
-2.手机翻墙方式
-	2.1）AHA加速(每天签到15分钟)
-	https://channel.jsq888.com/
-	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+  ```
+  1）首先下载clash-linux-amd64-v1.16.0.gz
+  	https://github.com/Dreamacro/clash/releases
+  2）然后解压文件，可执行文件改名为chmod
+  	chmod +x clash
+  3）初始化一下（首次使用）
+  	./clash 
+  	初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库：config.yaml 和 Country.mmdb
+  	然后退出Ctrl +c
+  4）登录v2free查看“Clash订阅链接网址”
+  	wget -U "Mozilla/6.0" -O ~/.config/clash/config.yaml  你的Clash订阅链接网址
+  5）运行
+  	./clash
+  	clash 默认 http 端口默认监听 7890 , socks5 端口默认监听 7891
+  6）代理设置
+  	打开 设置 -> 网络 -> 网络代理
+  	配置 HTTP 代理和 socket 代理 分别为上面的端口号
+  7）启动clash并设置好ubunutu系统代理就可以了
+  ```
 
-	2.2）猎豹加速(每天签到1个小时)
-	https://www.lbjsd.com/
-	465049568@qq.com	/	密码见keepass(Network/VPN代理)
-	
-	2.3）小明vpn，西瓜加速器，蚂蚁加速器，蓝鲸加速器，红杏加速器（完全免费）
-	仅从google play下载，也只支持安卓。怎么下载google安卓应用？？？
-	
-3.付费方式（平台代了解）
-	？？？
-```
-###### 1）windows翻墙
+* **mac**
+
+  ```
+  https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
+  ```
+
+* **windows**
+
 
 ​	1.1）ChromeGo.7z
 ​		https://github.com/bannedbook/fanqiang/releases
@@ -110,31 +113,35 @@ V2ray机场：
 
 <img src="img/shadowsocks2.png" style="zoom:50%;" />
 
-###### 2）linux
+
+* **手机**
+
+  ```
+  1）AHA加速(每天签到15分钟)
+  	https://channel.jsq888.com/
+  	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+  
+  2）猎豹加速(每天签到1个小时)
+  	https://www.lbjsd.com/
+  	465049568@qq.com	/	密码见keepass(Network/VPN代理)
+  	
+  3）小明vpn，西瓜加速器，蚂蚁加速器，蓝鲸加速器，红杏加速器（完全免费）
+  	仅从google play下载，也只支持安卓。怎么下载google安卓应用？？？
+  ```
+
+#### telegram图片视频下载器
 
 ```
-2）linux翻墙
-	2.1）首先下载clash-linux-amd64-v1.16.0.gz
-		https://github.com/Dreamacro/clash/releases
-	2.2）然后解压文件，可执行文件改名为chmod
-		chmod +x clash
-	2.3）初始化一下（首次使用）
-		./clash 
-		初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库：config.yaml 和 Country.mmdb
-		然后退出Ctrl +c
-	2.4）登录v2free查看“Clash订阅链接网址”
-		wget -U "Mozilla/6.0" -O ~/.config/clash/config.yaml  你的Clash订阅链接网址
-	2.5）运行
-		./clash
-		clash 默认 http 端口默认监听 7890 , socks5 端口默认监听 7891
-	2.6）代理设置
-		打开 设置 -> 网络 -> 网络代理
-		配置 HTTP 代理和 socket 代理 分别为上面的端口号
-	2.7）启动clash并设置好ubunutu系统代理就可以了
+telegram图片视频下载器
+	参考：https://telegram-chinese.vn/2410/
+	官网（篡改猴）：
+	https://www.tampermonkey.net/index.php?browser=chrome&locale=zh
+	安装chrome插件（篡改猴的“telegram图片视频下载器”插件）
+	https://chromewebstore.google.com/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/dhdgffkkebhmkfjojejmpbldmpobfkfo
+	到tampermonkey.net官网进入“用户脚本”菜单，搜索“telegram图片视频下载器”安装
+	使用：
+	然后用web浏览器登录telegram，就可以发现资源右上角有个下载箭头了，就可以下载了
 ```
-
-###### 3）mac翻墙
-	https://github.com/bannedbook/fanqiang/wiki/苹果电脑MAC翻墙
 
 #### 工具:
 
