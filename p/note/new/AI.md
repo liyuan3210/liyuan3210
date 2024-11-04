@@ -113,7 +113,11 @@ https://www.bilibili.com/video/BV13h411j7Ti
 
 视频：https://www.bilibili.com/video/BV1ce411J7nZ
 
-资料(百度网盘：liyuandf:/云硬盘/Course/new/AI/大模型部署资料)：https://appZe9inzwc2314.h5.xiaoeknow.com
+百度网盘：liyuandf:/云硬盘/Course/new/AI/大模型部署资料
+
+资料：
+
+https://appZe9inzwc2314.h5.xiaoeknow.com
 
 https://appze9inzwc2314.pc.xiaoe-tech.com/p/t_pc/course_pc_detail/image_text/i_6596a6fbe4b064a8fbdfcbc3
 
