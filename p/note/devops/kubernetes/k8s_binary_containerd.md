@@ -7,7 +7,7 @@
 https://www.mashibing.com/subject/1?courseNo=1178&courseVersionId=1787&activeNav=1
 
 百度网盘：
-liyuandf:云网盘>Course>devops>kubernetes>kubernetes
+liyuandf:云网盘>Course>devops>kubernetes>马士兵k8s集群部署文档资料
 ```
 
 ##### 问题文档
