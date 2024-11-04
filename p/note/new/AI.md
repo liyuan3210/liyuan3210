@@ -92,7 +92,7 @@ https://www.bilibili.com/video/BV14a4y1V7YJ
 
 1.2）推荐使用国外邮箱注册openai账号，例如google账号
 需要有一个国外手机号接收验证码，使用如下网站提供虚拟号服务来接收验证码
-https://sms-activate.org/
+https://sms-activate.org/		//此账号在keeppass密码账号保存里面
 
 1.3）使用googole账号注册openai账号时输入虚拟号等待验证码
 收到验证码后进行注册
@@ -113,7 +113,7 @@ https://www.bilibili.com/video/BV13h411j7Ti
 
 视频：https://www.bilibili.com/video/BV1ce411J7nZ
 
-资料(百度网盘：liyuandf:/云硬盘/Course/new/大模型部署资料)：https://appZe9inzwc2314.h5.xiaoeknow.com
+资料(百度网盘：liyuandf:/云硬盘/Course/new/AI/大模型部署资料)：https://appZe9inzwc2314.h5.xiaoeknow.com
 
 https://appze9inzwc2314.pc.xiaoe-tech.com/p/t_pc/course_pc_detail/image_text/i_6596a6fbe4b064a8fbdfcbc3
 

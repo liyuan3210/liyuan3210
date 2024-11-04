@@ -1,5 +1,15 @@
 # kubernetes二进制高可用部署(Runtime Containerd)
 
+##### 资料
+
+```
+马士兵资料：
+https://www.mashibing.com/subject/1?courseNo=1178&courseVersionId=1787&activeNav=1
+
+百度网盘：
+liyuandf:云网盘>Course>devops>kubernetes>kubernetes
+```
+
 ##### 问题文档
 
 ```
