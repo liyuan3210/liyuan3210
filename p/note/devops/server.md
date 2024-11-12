@@ -1,32 +1,329 @@
 # 服务器管理
 
-### 目录
-
-1.subversion（ubuntu, windows）
-
-2.samba（ubuntu）
-
-3.httpd-php-phpmyadmin（ubuntu, windows）
-
-
-
 ### 1.debian
 
-##### 1.1）subversion
-
-
-
-##### 1.2）samba
-
-
+。。。。。。
 
 ### 2.rockylinux
 
+。。。。。。
+
+### 3.ubuntu
+
+。。。。。。
+
+### 4.windows
+
+1).windows常用命令
+2).windows的nfs
+3).windows服务器
+4).windows常用桌面工具
+
+##### 1).windows常用命令
+
+```
+windows(凭据管理)
+https://www.jianshu.com/p/0ad3d88c51f4
+
+启用远程管理？
+Configure-SMRemoting.exe -enable
+
+一.添加入站规则
+依次打开控制面板---系统和安全---Windows防火墙---高级设置。
+打开入站规则—新建规则。
+
+关闭防火墙：
+netsh advfirewall set allprofiles state off
+启用防火墙：
+netsh advfirewall set allprofiles state on
+	查看防火墙状态：netsh advfirewall show allprofiles
 
 
-### 3.windows
+开启防火墙：
+netsh firewall set opmode mode=enable
+关闭防火墙：
+netsh firewall set opmode mode=disable
+	防火墙恢复默认配置：netsh firewall reset
+	netsh firewall show state //显示当前防火墙状态
 
-##### 3.1）subversion
+开启远程访问
+REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal" "Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f
+
+开启3389端口
+netsh advfirewall firewall add rule name="Remote Desktop" protocol=TCP dir=in localport=3389 action=allow
+开启8080端口
+netsh advfirewall firewall add rule name="HTTP" protocol=TCP dir=in localport=8080 action=allow
+
+
+二.共享文件夹
+net share tool=C:\tool /grant:Administrator,full
+
+查看共享
+net share
+
+取消共享
+net share tool /delete
+
+删除磁盘映射
+net use E: /delete
+
+
+三.设置环境变量:
+设置临时:set PATH=%PATH%;D:\Program Files\
+设置永久:setx PATH "%PATH%;D:\Program Files\"
+
+实例:
+setx JAVA_HOME "C:\soft\jtm\jre1.8.0_162"
+setx PATH "%PATH%;%JAVA_HOME%\bin"
+
+服务名称:Apache2.4
+自动(服务启动配置)
+sc config Apache2.4 start=auto
+手动(服务启动配置)
+sc config Apache2.4 start=demand
+删除服务
+sc delete <服务名称>
+
+查看所有已启动的服务
+net start
+
+删除文件及包含的文件:
+rmdir d:\temp\ /S /Q
+
+拷贝文件夹及子文件(/E 复制目录和子目录，包括空的,/S 复制目录和子目录，除了空的)
+xcopy c:\xx	d:\xx /E
+
+CMD多应用启动:
+新建bat文件如下:
+d:
+@echo off
+start java -jar eureka_server-0.0.1-SNAPSHOT.jar
+start java -jar hello_service-0.0.1-SNAPSHOT.jar --server.port=8081
+
+cmd远程登录:
+net use \\ip\ipc$ "pwd" /user:"username"
+
+四.常用快捷键及命令
+
+开启运行窗口
+win+r
+
+笔记本投影仪切换:
+windows+P
+
+windows(右键快捷键)
+shift+fn+F10
+
+new命令窗口
+powershell
+
+配置命令
+sconfig
+
+windows查看激活
+slmgr.vbs -xpr
+slmgr.vbs -dlv	//查看激活时间
+
+查看windows服务:
+services.msc
+
+查看磁盘使用情况
+chkdsk c:
+
+报错:"Windows 无法打开所需的文件 Sources\install.wim"
+http://blog.csdn.net/codeeer/article/details/44455967
+当使用UltraISO制作usb启动盘时默认是fat32文件系统,当文件大于4GB时会出现问题,处理方法如下：
+1.以前的方法刻录镜像到U盘
+2.进入命令行模式,输入convert f: /fs:NTFS
+3.再到ISO文件里面把Sources\install.wim文件拷贝到U盘对应位置
+
+windows10破解
+http://www.xitongzhijia.net/zt/78039.html
+
+windows server 2016(包含注册码)
+http://www.xpgod.com/soft/40933.html
+
+
+windos搭建ssh服务
+freeSSHd
+官网：
+http://www.freesshd.com
+
+1.安装
+使用管理员身份安装,过程中会提示是否创建默认私钥与创建freesshd服务,两个都选yes
+
+2.默认安装后freessh服务与ssh服务是都启动的
+先以管理员运行freessh,右下角右键settings,弹出界面,进行配置
+SSH>use new console engine(这个必须勾选上)
+测试配置阶段可以把SSH>start ssh server on freesshd startup(去掉勾选,配置好后可以把勾选选上开机自启动)
+
+登录方式
+1).NT authentication(已有的操作系统账户)
+基本的shell勾选上
+2).创建一个freessh账户与密码
+基本的shell勾选上
+3).public key(只能ssh)
+基本的shell勾选上
+这个需要使用ssh-keygen(一直回车)创建一个免登录秘钥对
+然后把生成的公钥(id_rsa.pub)copy到feesshd安装目录(文件名称重命名为账户名称,没有后缀)
+
+Authentication配置
+前两个1)2)Authentication>
+password authentication>(required)
+Public key authentication>(disabled)
+
+3)Authentication>
+password authentication>(disabled)
+Public key authentication>(Allowed)
+
+3.Server status
+SSH server(点击运行)
+启动后就可以客户端ssh连接了
+
+出现如下问题：
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+SHA256:DKjxMxylAcPir2wbq3fUmXrsnk/hwNHhiDC1eo7u28U.
+Please contact your system administrator.
+Add correct host key in /c/Users/liyuan/.ssh/known_hosts to get rid of this message.
+Offending RSA key in /c/Users/liyuan/.ssh/known_hosts:15
+RSA host key for 192.168.127.134 has changed and you have requested strict checking.
+Host key verification failed.
+
+解决方法：
+删除目录.ssh下的known_hosts文件重新连接
+或者打开known_hosts文件,删除对应连接机器的记录
+
+windows server2012 修改密码过期提示
+https://jingyan.baidu.com/article/e75057f2c83fe4ebc91a89a4.html
+
+windows server 2016安装nginx
+http://www.jb51.net/article/120469.htm
+
+远程管理
+http://www.pcwenti.com/czxt/WindowsServer/13016.html
+
+命令行添加防火墙
+http://blog.csdn.net/a497785609/article/details/48572993
+
+参考
+https://www.cnblogs.com/sjy000/p/4727363.html
+
+五.windows组件安装
+1.Windows下Hyper-V虚拟技术使用
+控制面板->程序->启用或关闭Windows功能(点开后选中里面Hyper-V,下面两个都要选中)
+Hyper-V管理工具
+Hyper-V平台
+选着好后重启电脑,就可以在搜索里面搜到Hyper-V虚拟机管理界面了
+
+2.windows下安装linux子系统
+https://blog.csdn.net/zhangdongren/article/details/82663977
+控制面板->程序->启用或关闭Windows功能(选中使用linux 的 windows子系统)
+选着好后重启电脑->Microsoft Store(商店里面搜索安装linux)
+bash 进入linux子系统
+
+六.windows工具
+	2.启动盘制作工具
+		ultraiso(u盘启动盘制作工具)	//https://www.ultraiso.com/与https://cn.ultraiso.net/
+	4.windwos SSH服务端
+		freesshd					http://www.freesshd.com/
+	5.vmware虚拟机
+		vmware12					//vmware类似的virtualbox(开源)				https://www.virtualbox.org
+```
+##### 2).windows的nfs
+```
+windows7下面安装nfs客户端命令：
+打开或关闭windows功能>nfs服务(勾选上)重启
+
+hanewin(windows7下安装nfs服务)使用:
+下载地址：http://www.hanewin.net/
+
+安装后需要生成注册码：
+liyuan3210/FBLZ3577F37E78FB
+
+1.安装好后首先需要配置nfs服务端
+NFS Server>Exports配置服务端目录
+d:\nfsroot -name:nfsroot -umask:000 -public -mapall:0
+
+2.使用管理员权限启动nfs服务（Start NFS Server）
+也可以直接在,计算机管理>服务（NFS Server）启动/停止服务
+
+3.通过命令挂载（关闭防火墙）
+查看这个主机nfs服务目录列表
+showmount -e 192.168.x.x
+
+挂载
+mount 192.168.x.x:/tool z:
+
+卸载
+umount 192.168.x.x:/tool z:
+
+注意：
+windows7使用hanewin时需要配置 服务器>扩展字符集设置>utf-8选择上(否则操作文件时会出现问题)，
+exports配置成 d:\test -name:test即可
+
+cygwin:
+cygwin是一个可以在windows上运行linux命令的 环境工具
+1.安装cygwin
+http://www.cygwin.com/
+默认点击下一步，需要选择下载站点与默认安装包。
+nfs服务插件包（vim,nfs-server,sunrpc,cygrunsrv）
+
+2.安装好后win7下需要右键以管理员运行cygwin
+运行前需要在win7下面创建一个用户(否则重启电脑后进步了电脑)，用此用户在cygwin环境下安装nfs插件
+
+3.进入cygwin命令行安装nfs
+命令行里面的"/"是cygwin安装目录，
+
+4.安装nfs-server
+运行/usr/bin/nfs-server-config.首先询问是否安装,输入yes.然后询问是否使用signel user模式，xp下必选，win7下输入no
+
+5.安装好后可以在windows服务列表看到protmap,mountd,nfsd三个服务
+vim /etc/exportse
+/nfsroot *(rw,sync,no_root_squash)
+
+vim /etc/hosts.allow
+默认没有hosts.allow,创建出来配置如下：
+nfsd:ALL
+
+配置好nfs文件右键启动
+linux
+ubuntu下安装：
+sudo apt-get install nfs-kernel-server 
+
+sudo vi /etc/exports 配置nfs：
+mkdir /nfsroot
+chmod -R 777 /nfsroot
+/nfsroot *(rw,sync,no_root_squash,no_subtree_check)
+
+sudo /etc/init.d/rpcbind restart 重启rpcbind
+sudo /etc/init.d/nfs-kernel-server restart 重启nfs
+端口映射工具：
+nat123
+
+```
+##### 3).windows服务器工具
+
+```
+1.svn服务端(windows)
+	VisualSVN				https://www.visualsvn.com			//实际
+	客户端工具：
+	TortoiseSVN				https://tortoisesvn.net
+2.hsk(花生壳)
+	账号见密码本
+```
+###### 问题
+1.软件安装问题见如下图
+<img src="img/visualcpp.png" style="zoom:60%;" />
+解决办法，下载安装vc插件（百度云盘：../env/env-windows/VC_redist.x64.exe）
+https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
+
 
 
 
@@ -36,7 +333,489 @@
 
 
 
-。。。。。。
+### linux服务器常用命令
+
+##### 常用命令
+
+
+
+##### tar,tar,zip压缩与解压
+
+
+
+##### wget,curl,scp,cat,tail
+
+
+
+##### grep,sed,awk三剑客
+
+
+
+
+
+### 常用服务部署
+
+[1.httpd-php-phpmyadmin](#httpd-php-phpmyadmin)<br/>
+	1).windows下安装<br/>
+	2).ubuntu下安装<br/>
+[2.samba](#samba)<br/>
+	1).ubuntu下安装<br/>
+[3.subversion](#subversion)<br/>
+	1).windows下安装<br/>
+	2).ubuntu下安装<br/>
+	3).subversion源码安装<br/>
+
+##### 1.httpd-php-phpmyadmin
+<div id="httpd-php-phpmyadmin"/>
+###### 1).windows下安装
+
+```
+windows上的安装配置
+
+源码地址:http://httpd.apache.org
+php官网:http://php.net
+phpmyadmin官网:https://www.phpmyadmin.net
+
+下载
+php:
+http://windows.php.net(要下载Thread Safe类型的)
+httpd:
+http://www.apachelounge.com(源码地址http://httpd.apache.org)
+wordpress:
+https://wordpress.org
+phpmyadmin:
+https://www.phpmyadmin.net
+
+安装(windows环境)
+解压安装httpd,php到d:/soft:
+cd httpd>Apache24/bin
+>
+httpd.exe -k install(后台服务名为Apache2.4)
+
+插件(https://www.apachelounge.com/download可以进行下载)
+windows下需要安装vc_redist.x64.exe插件
+
+php环境变量(;C:\soft\php-7.1.7\ext[貌似可以不加进去])
+path:;C:\soft\php-7.1.7
+
+配置httpd.conf
+1.配置目录(注意)
+在../Apache24/conf/httpd.conf
+#配置基础(里面所有默认c:/Apache24的目录都需要改成实际的地址)
+ServerRoot "C:/soft/Apache24"
+Listen 8080
+
+2.配置php支持
+# php7 support
+LoadModule php7_module C:/soft/php-7.1.7/php7apache2_4.dll
+AddType application/x-httpd-php .php .html .htm
+# configure the path
+PHPIniDir "C:/soft/php-7.1.7"
+
+3.DirectoryIndex默认的要配置上index.php(不然wordpress部分跳转会有问题)
+<IfModule dir_module>
+    DirectoryIndex index.html index.php
+</IfModule>
+
+4.DocumentRoot配置
+DocumentRoot "C:/soft/Apache24/htdocs"
+<Directory "C:/soft/Apache24/htdocs">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+如果服务启动不起来直接在../Apache24/bin里面执行httpd服务命令，可以看到详细的错误信息
+
+配置php.ini
+从../php-7.1.7拷贝一个php.ini-production重命名为php.ini在里面添加如下内容:
+;每个脚本的最大执行时间，默认30秒，0表示无限制
+max_execution_time = 1800
+;设置PHP可接收的最大POST数据大小
+post_max_size = 2M;每个脚本的最大执行时间，默认30秒，0表示无限制
+max_execution_time = 1800
+;设置PHP可接收的最大POST数据大小
+post_max_size = 2M
+#从这里可以直接copy进去
+;设置载入模块的路径
+extension_dir = "C:/soft/php-7.1.7/ext"
+;设置HTTP上传文件的临时文件存放的位置
+upload_tmp_dir = "C:/soft/php-7.1.7/upload"
+;指定一些自动载入的模块
+extension = php_curl.dll
+extension = php_gd2.dll
+extension = php_mbstring.dll
+extension = php_mysql.dll
+extension = php_mysqli.dll
+extension = php_pdo_mysql.dll
+extension = php_pdo_odbc.dll
+extension = php_xmlrpc.dll
+; 设置默认时区
+date.timezone = Asia/Shanghai
+; 设置事务存放路径
+session.save_path = "C:/soft/php-7.1.7/session"
+
+验证
+一般都是把工作项目文件放到../Apache24/htdocs下面,在里面新建index.php文件里面内容如下：
+<?php phpinfo()?>
+
+在浏览器输入地址:http://127.0.0.1:8080
+ok如果显示php信息表示httpd,php安装成功
+
+wordpress安装
+解压wordpress,复制一份wp-config-sample.php(不能直接重命名)
+并重命名为wp-config.php(配置里面的数据库连接)
+
+账户名：liyuan
+密码：7233354liyuan
+主题:Zerif Lite
+统计插件：slimstat
+
+安装phpmyadmin:
+解压phpmyadmin包至../Apache24/htdocs下面,
+配置../phpmyadmin/libraries/config.default.php文件
+必须配置项：
+$cfg['Servers'][$i]['host'] = 'localhost';//mysql主机信息
+$cfg['Servers'][$i]['port'] = '3316';//mysql端口
+
+不是必须配置项：
+服务协议配置
+$cfg['Servers'][$i]['auth_type'] = 'http';
+$cfg['PmaAbsoluteUri'] = "http://liyuan3210.iask.in/phpMyAdmin';//访问网址
+帐号与密码
+$cfg['Servers'][$i]['user'] = 'adm';
+$cfg['Servers'][$i]['password'] = '123';
+编码配置
+$cfg['DefaultLang'] = 'en-utf-8';
+$cfg['DefaultConnectionCollation'] = 'utf8_general_ci';
+
+问题：
+1.电子邮件未能发送。
+可能原因：您的主机禁用了mail()函数。
+
+2.博客数据迁移问题
+
+BuHDt11o@163.com
+7233354liyuan
+
+3.后期更换域名后无法访问解决方法
+https://www.douban.com/note/181941598/
+实例:
+修改数据库表wp_options两条数据
+siteurl:	http://blog.liyuan3210.com:46104
+home:		http://blog.liyuan3210.com:46104
+```
+
+###### 2).ubuntu下安装
+
+```
+一.安装配置
+	1.安装apache2
+	apt-get install apache2					//安装apache2
+
+	2.安装php
+	apt-get install php						//安装php
+
+	3.php与apache2整合
+	apt-get install libapache2-mod-php		//php与apache2整合
+	apt-get install libapache2-mod-php7.0	
+
+	4.php与mysql整合
+	apt-get install php-mysql				//php与mysql整合(php7-mysql这个有问题)
+	apt-get install php7-mysql				
+					
+	5.创建测试文件(默认目录/var/www/html)
+	测试
+	create new file php
+	<?php phpinfo()?>
+
+	6.端口修改(要修改两个文件里面的,why?)
+	/etc/apache2/ports.conf(Listen 81)
+	/etc/apache2/sites-enabled/000-default.conf(VirtualHost *:81)
+
+	7.重启服务
+	/etc/init.d/apache2 restart			//重启服务
+	service apache2 restart
+
+	8.访问
+	http://192.168.157.139:81/info.php
+ 
+二.添加虚拟主机与端口,并配置web目录浏览
+	1>vi apache2.conf（主配置文件，里面包含了要加载的一些配置文件）
+	复制<Directory /var/www/>节点（指定目录）
+	<Directory /home/liyuan/test/>
+			Options Indexes FollowSymLinks
+			AllowOverride None
+			Require all granted
+	</Directory>
+
+	2>vi ports.conf
+	添加一个端口监听
+	Listen 89
+
+	3>进入sites-enabled目录
+	cp 000-default.conf 000-default2.conf（复制一份配置文件，并修改端口为89）
+	并修改指定的目录
+	DocumentRoot /home/liyuan/test
+	里面添加配置文件（web目录浏览）
+	<Directory / >
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Require all granted
+	</Directory>
+ 
+php官方安装:
+http://php.net/manual/zh/install.unix.debian.php
+https://blog.csdn.net/hywerr/article/details/70194960
+
+php -v 	//查看php版本
+
+apt-get install php
+apt install php7.0-cli
+
+php.ini
+/etc/php/7.0/cli
+
+httpd官方安装
+http://httpd.apache.org/docs/2.4/install.html
+httpd源码编译安装
+https://blog.csdn.net/qq_30164225/article/details/54629763
+
+php开启mysql扩展
+https://blog.csdn.net/mrwangweijin/article/details/76152693
+
+创建软连接
+https://blog.csdn.net/l6807718/article/details/51374915
+
+http://192.168.157.128:81/info.php
+
+php源码编译安装
+https://www.cnblogs.com/milanmi/p/7124271.html
+```
+
+##### 2.samba
+<div id="samba"/>
+```
+1.安装
+sudo apt-get install samba
+
+2.vi /etc/samba/smb.conf(安装好后右键文件夹赋权限)
+[share]
+comment = Shared Folder require password
+path = /home/share
+public = yes
+writable = yes
+valid users = share/liyuan
+create mask = 0777
+directory mask = 0777
+force user = nobody/liyuan
+force group = nogroup/liyuan
+available = yes
+browseable = yes
+
+添加用户
+useradd share/liyuan
+设置密码
+smbpasswd -a share/liyuan
+
+3.重启
+sudo /etc/init.d/samba restart
+
+配置实例
+https://jingyan.baidu.com/article/db55b609e041584ba30a2f01.html
+[share]
+comment = Shared Folder require password
+path = /home/liyuan/share
+public = yes
+writable = yes
+valid users = liyuan
+create mask = 0777
+directory mask = 0777
+force user = liyuan
+force group = liyuan
+available = yes
+browseable = yes
+```
+
+##### 3.subversion安装(svn)
+<div id="subversion"/>
+###### 1).windows下安装
+```
+subversion服务命令创建及配置(windows)
+配置
+1.创建svn库：
+svnadmin create [path(库路径)]
+2.启动服务
+svnserve -d -r [path(库路径)]
+3.场景描述
+passwd中配置三个账户，一个管理管理员ad（拥有最高权限），
+与li（对li目录有增删改权限，其他目录为只读），si（对li
+目录有增删改权限，其他目录为只读），show为共享目录除了ad用户外
+其他都为只读。
+4.配置权限
+1)全局配置
+到conf/svnserve.conf添加：
+anon-access = none（不让匿名读取）
+去掉前面#有：
+authz-db = authz （使用authz文件）
+password-db = passwd（使用passwd文件）
+2)账户/密码conf/passwd添加：
+ad = 123
+li = 123
+si = 123
+3)权限conf/authz中编辑：
+//配置组
+[groups]
+ad_g = ad
+li_g = li
+si_g = si
+//配置默认
+[/]
+* = r
+ad = rw
+//li目录
+[svn:/svnTest/proSvn/src
+@li_g = rw
+@si_g = r
+//si目录
+[svn:/svnTest/proSvn/src/com/si]
+@si_g = rw
+@li_g = r
+//公共目录
+[svn:/svnTest/proSvn/src/com/show]
+@li_g = r
+@si_g = r
+
+5.eclipse  svn账户删除
+window地址：c:\Documents and Settings\Administrator\Application Data\Subversion\
+
+注意：
+    在S目录下创建svn目录，用svnadmin create ../S/svn创建库，
+并用svnserve -d -r ../S启动服务。
+Eclipse导入：svn://localhost/svn
+
+GUI界面安装(含web)
+	https://www.visualsvn.com
+	下载VISUALSVN SERVER
+```
+
+###### 2).ubuntu下安装
+
+```
+subversion apt-get安装
+apt安装
+sudo apt-get install subversion
+
+创建SVN版本库
+创建目录
+mkdir  /home/liyuan/svn
+创建仓库
+mkdir /home/liyuan/svn/src
+svnadmin create /home/liyuan/svn/src
+
+权限设置：
+sudo chmod -R 777 svn(貌似不需要)
+
+配置
+访问权限设置conf/svnserve.conf
+如下注释放开
+anon-access=read
+auth-access=write
+password-db=passwd//密码文件
+authz-db=authz//权限文件
+
+添加用户conf/passwd
+[users]
+liyuan=123
+
+设置用户权限conf/authz
+[groups]
+ly_g=liyuan
+[/]
+@ly_g=rw
+*=r
+
+查看服务
+ps aux | grep svnserve
+netstat -antp | grep svnserve
+
+启动服务
+svnserve -d -r /home/liyuan/svn
+
+杀死服务
+killall svnserve
+
+访问方法
+svn://192.168.5.21/src
+
+svn://192.168.80.167
+
+http://www.linuxidc.com/Linux/2016-08/133961.htm
+
+hooks钩子(SVN与git)
+```
+
+###### 3).subversion源码安装
+
+```
+subversion源码安装
+1.apr-1.4.6
+/home/ly/tool/apr-1.4.6/configure --prefix=/home/ly/soft/apr
+make
+make install
+
+2.apr-util-1.4.1
+/home/ly/tool/apr-util-1.4.1/configure --prefix=/home/ly/soft/apr-util --with-apr=/home/ly/soft/apr
+
+#3.openssl-1.0.0i
+#/home/ly/tool/openssl-1.0.0i/config --prefix=/home/ly/soft/openssl
+
+4.httpd-2.2.22
+/home/ly/tool/httpd-2.2.22/configure --prefix=/home/ly/soft/httpd --enable-dav --enable-so --enable-maintainer-mode
+
+5.下载sqlite-3.6.13
+下载sqlite-3.6.13解压后，把根目录里面的sqlite3.c文件copy到subversion-1.6.18解压后的
+根目录sqlite-amalgamation/sqlite3.c里面(需要新建sqlite-amalgamation文件夹)
+
+6.subversion-1.6.18最后安装
+/home/ly/tool/subversion-1.6.18/configure --prefix=/home/ly/soft/subversion --with-apxs=/home/ly/soft/httpd/bin/apxs --with-apr=/home/ly/soft/apr --with-apr-util=/home/ly/soft/apr-util 
+
+7.配置httpd(../httpd/conf/httpd.conf)
+1>.#定义apache访问svn配置：
+<Location /svn>
+    DAV  svn
+    #SVNPath /opt/svndata
+    #AuthzSVNAccessFile /home/ly/soft/svnku/svnc1/conf/authz
+    SVNParentPath /home/ly/soft/svnku
+    AuthType Basic
+    AuthName "svnc1"
+    AuthUserFile /home/ly/soft/httpd/bin/pwd.txt
+    Require valid-user //匿名登录，加#把此行去掉
+</Location>
+
+2>.chmod -R 777/ ../svnku/svnc1 或 chown -R daemon ../svnku/svnc1(设置权限(没有就创建daemon目录 匿名的)，库的名字)
+
+3>.启动服务开始测试
+/home/ly/soft/httpd/bin/apachectl start //开始服务
+/home/ly/soft/httpd/bin/apachectl stop  //停止服务
+
+netstat -lntp//查看端口(8081)
+
+访问测试：http://ip:8081/svn/库名
+
+创建svn账户:
+第一次创建:	./htpasswd -cm pwd.txt [账户名]
+追加账户:	./htpasswd -m pwd.txt [账户名]
+
+出现如下编译错误(通常解决方法)
+/usr/bin/ld: cannot find -lc
+/usr/bin/ld: cannot find -lltdl
+/usr/bin/ld: cannot find -lXtst
+解决方法：
+错误1缺少libc的LIB
+错误2缺少libltdl的LIB
+错误3缺少libXtst的LIB
+```
 
 
 
