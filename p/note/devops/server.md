@@ -1,25 +1,27 @@
 # 服务器管理
 
-### 1.debian
+### 一。各服务器常用操作
+
+##### 1.debian
 
 。。。。。。
 
-### 2.rockylinux
+##### 2.rockylinux
 
 。。。。。。
 
-### 3.ubuntu
+##### 3.ubuntu
 
 。。。。。。
 
-### 4.windows
+##### 4.windows
 
 1).windows常用命令
 2).windows的nfs
 3).windows服务器
 4).windows常用桌面工具
 
-##### 1).windows常用命令
+###### 1).windows常用命令
 
 ```
 windows(凭据管理)
@@ -235,7 +237,7 @@ bash 进入linux子系统
 	5.vmware虚拟机
 		vmware12					//vmware类似的virtualbox(开源)				https://www.virtualbox.org
 ```
-##### 2).windows的nfs
+###### 2).windows的nfs
 ```
 windows7下面安装nfs客户端命令：
 打开或关闭windows功能>nfs服务(勾选上)重启
@@ -307,7 +309,7 @@ sudo /etc/init.d/nfs-kernel-server restart 重启nfs
 nat123
 
 ```
-##### 3).windows服务器工具
+###### 3).windows服务器工具
 
 ```
 1.svn服务端(windows)
@@ -333,13 +335,13 @@ https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=ms
 
 
 
-### linux服务器常用命令
+### 二。linux服务器常用命令
 
-##### 常用命令
+##### Linux常用命令
 
 
 
-##### tar,tar,zip压缩与解压
+##### tar,rar,zip压缩与解压
 
 
 
@@ -353,7 +355,7 @@ https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=ms
 
 
 
-### 常用服务部署
+### 三。常用服务部署
 
 [1.httpd-php-phpmyadmin](#httpd-php-phpmyadmin)<br/>
 	1).windows下安装<br/>

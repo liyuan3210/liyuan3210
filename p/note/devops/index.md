@@ -114,10 +114,28 @@
 ​	三.linux远程桌面连接<br/>
 ​    四.wine<br/>
 
-[6.linux应用服务安装](linux_app.md)
-	1).httpd_php_phpmyadmin<br/>
-	2).samba<br/>
-	3).subversion<br/>
+[6.服务器管理](server.md)
+
+​	一。各服务器常用操作<br/>
+
+​					1).debian
+​					2).rockylinux
+​					3).ubuntu
+​					4).windows
+​					5).mac
+
+​	二。linux服务器常用命令<br/>
+
+​					1).linux常用命令
+​					2).tar,rar,zip压缩与解压
+​					3).wget,curl,scp,cat,tail
+​					4).grep,sed,awk三剑客
+
+​	三。常用服务部署<br/>
+
+​					1).httpd-php-phpmyadmin(windows, ubuntu)
+​					2).samba(ubuntu)
+​					3).subversion(windows, ubuntu,src源吗安装)
 
 [7.应用](app/index.md)
 ​	1).音频/视频处理
