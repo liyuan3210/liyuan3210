@@ -137,7 +137,7 @@
 ​					2).samba(ubuntu)
 ​					3).subversion(windows, ubuntu,src源吗安装)
 
-[7.应用](app/index.md)
+[7.桌面系统](desktop.md)
 ​	1).音频/视频处理
 
 [8.安全攻防](attack.md)
