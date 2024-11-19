@@ -144,12 +144,14 @@
 ###### 1.wintogo（移动启动盘制作）
 
 ```
-1.1）.Ventoy工具(移动引导盘制作工具)(ventoy目录)
+1.1）.Ventoy工具及wintogo插件(移动引导盘制作工具)(ventoy目录)
 	https://www.ventoy.net/cn/index.html
 	https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
-1.2）.Wintogo辅助工具（写入install.wim）（wtga5610.zip文件）
-	但实际直接用virtualbox虚拟机安装系统至固定vhd文件里面
-	https://github.com/nkc3g4/wtg-assistant
+//没成功过，不常用
+//1.2）.Wintogo辅助工具（写入install.wim）（wtga5610.zip文件）
+//	但实际直接用virtualbox虚拟机安装系统至固定vhd文件里面
+//	https://github.com/nkc3g4/wtg-assistant
+//	先进的install.esd镜像写不了，需要install.wim(单独写这个文件到优盘驱动装不上去)
 1.3）.linuxToGo（插件）（vtoyboot-1.0.29.iso文件）
 	https://github.com/ventoy/vtoyboot
 1.4）.macToGo（工具）（WinToGo.exe文件）

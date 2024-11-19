@@ -714,14 +714,17 @@ https://blog.csdn.net/qq_45366830/article/details/129612844
 https://www.ventoy.net/cn/index.html
 https://github.com/ventoy/vhdiso/releases/download/v3.0/ventoy_vhdboot.zip
 
-【Wintogo辅助工具】写入install.wim
-https://github.com/nkc3g4/wtg-assistant			//先进的install.esd镜像写不了，需要install.wim(单独写这个文件到优盘驱动装不上去)
+//没成功过，不常用
+//【Wintogo辅助工具】写入install.wim
+//https://github.com/nkc3g4/wtg-assistant			
+//#先进的install.esd镜像写不了，需要install.wim(单独写这个文件到优盘驱动装不上去)
 
 set1:
 	鼠标右键“我的电脑”，选择"管理"->“计算机管理”选择存储“磁盘管理”->选中一个磁盘，右上角“磁盘管理->更多操作”->下拉选“创建VHD”(选择是否固定大小，并选择虚拟磁盘文件保存路径)
-	
-set2:
-	使用wtg-assistant工具，选择windows ISO文件写入set1步骤创建的VHD文件
+
+//没成功过,只是列出网上制作流程
+//set2:
+//	使用wtg-assistant工具，选择windows ISO文件写入set1步骤创建的VHD文件
 	
 set3:
 	插入优盘，使用ventoy制作u盘启动工具，windows貌似要把优盘格式化为ntfs(fat32)
@@ -731,7 +734,7 @@ set4:
 	4.2.再把写入的VHD文件拷贝到优盘根目录下，至此wintogo优盘启动制作完成
 ```
 
-###### esd转wim
+###### esd转wim（不适用）
 ```
 1.install.esd转install.wim
 https://blog.csdn.net/qq_35229961/article/details/103024144
