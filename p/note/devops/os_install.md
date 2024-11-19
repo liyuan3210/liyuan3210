@@ -732,6 +732,9 @@ set3:
 set4:
 	4.1.优盘根目录下创建ventoy目录，下载ventoy_vhdboot.zip把ventoy_vhdboot.img文件copy到ventoy目录下。
 	4.2.再把写入的VHD文件拷贝到优盘根目录下，至此wintogo优盘启动制作完成
+	
+【支持的虚拟文件格式】
+支持固定大小以及动态扩展类型的 VHD/VHDX 格式
 ```
 
 ###### esd转wim（不适用）
@@ -766,6 +769,11 @@ set3:
 	3.1）插入优盘，使用ventoy制作u盘启动工具，优盘使用ntfs格式(为了在同一个优盘既能引导windows,linux),因为优盘exfat格式引导windows貌似不行
 	3.2）把VirtualBox创建的虚拟系统VHD文件添加.vtoy后缀，否则文件识别不了还有引导报错
 	3.3）然后把VirtualBox创建的虚拟系统VHD文件COPY到优盘根目录，至此wintogo优盘启动制作完成
+	
+
+【支持的虚拟文件格式】
+固定大小的 vhd （注意只能是vhd, 不支持vhdx）
+固定大小的 vdi，Raw Disk 镜像格式
 ```
 
 ### wintogo直接写入外设(mac本，普通机器)
