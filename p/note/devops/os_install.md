@@ -1032,13 +1032,16 @@ slmgr.vbs -x pr
 	https://github.com/TGSAN/CMWTAT_Digital_Edition
 	这是一款许可证激活工具。小淙单方面认为这是最优秀的，激活学习工具。它可以激活系统，也能激活 Office，还可以在不同版本间转换，最主要的是有图形化界面，简单易用。下载后右键，以管理员身份运行工具；
 	
-4.）微软激活脚本
+4）微软激活脚本
 	GitHub 发布页：
 	https://github.com/massgravel/Microsoft-Activation-Scripts/releases
 	这款工具提供数字许可证、KMS 和 KMS38 三种激活方式。同时支持 Windows 10 系统、Office 和 Server 的激活。遗憾的是，没有图形界面。
 	打开发布页后，记住解压密码（密码在github的releases页面已标注）并下载最新的版本（文章发布时为1.4版，你看到这篇文章时可能已经更新）；
+	
+5）HEU_KMS_Activator
+https://github.com/zbezj/HEU_KMS_Activator/releases
 
-5）小马、暴风等（不推荐）
+6）小马、暴风等（不推荐）
 ```
 
 
