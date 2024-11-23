@@ -1044,7 +1044,11 @@ https://github.com/zbezj/HEU_KMS_Activator/releases
 6）小马、暴风等（不推荐）
 ```
 
+#### 待解决问题
 
+1.windows安装wifi驱动
+2.ubuntu安装wifi工具
+3.官方镜像自己创建vhd使用工具写入
 
 
 
