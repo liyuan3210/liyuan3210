@@ -129,7 +129,7 @@ https://blog.csdn.net/neyes/article/details/6129027/
 1.linux(推荐)
 		服务器:centos
 			https://www.centos.org/
-		服务器:centos(替代品)
+		服务器:rockylinux(替代品)
 			https://rockylinux.org/
 			https://almalinux.org/
 		桌	面:ubuntu(推荐)
@@ -977,6 +977,10 @@ https://www.disktool.cn/download.html
 <div id="win_crack"/>
 
 引用：https://www.dians.net/thread-504.htm
+
+windows官方下载：
+
+https://www.microsoft.com/zh-cn/software-download/windows11
 
 ###### windows系统LTSC与LTSB版本区别
 
