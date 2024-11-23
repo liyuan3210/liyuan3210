@@ -1046,9 +1046,9 @@ https://github.com/zbezj/HEU_KMS_Activator/releases
 
 #### 待解决问题
 
-1.windows安装wifi驱动
-2.ubuntu安装wifi工具
-3.官方镜像自己创建vhd使用工具写入
+1.windows安装wifi驱动（wintogo）
+2.ubuntu安装wifi驱动（wintogo）
+3.官方镜像自己创建vhd使用工具写入，然后使用最新HEU_KMS_Activator破解
 
 
 
