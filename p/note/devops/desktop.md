@@ -179,12 +179,71 @@ b站视频（python支持）：
 	参考文献
 	https://zhuanlan.zhihu.com/p/575687926
 	开源工具
-	https://github.com/soimort/you-get
 	https://github.com/gudu12306/GUI-for-you-get
-	使用
-	pip install you-get 
-	you-get http://url
+	视频下载工具(没用过)
+	https://cobalt.tools/
 ```
+###### 不同浏览器获取cookies方式
+
+```
+edge与chrome浏览器cookie都采取了加密？？？
+
+1.chrome浏览器(先用浏览器登录)
+1.1）文件所在目录
+	C:\Users\用户账号\AppData\Local\Google\Chrome\User Data\Default\Network
+1.2）chrome插件导出cookies（cookies.txt） ：
+	插件名称：get cookie locally
+	开源地址：https://github.com/kairi003/Get-cookies.txt-LOCALLY
+	下载后解压导入chrome插件,就可以使用此插件导出cookie文件了
+	
+2.火狐浏览器
+2.1）文件所在目录
+    C:\Users\用户账号\AppData\Roaming\Mozilla\Firefox\Profiles\0zu6gvbd.default-release\cookies.sqlite
+2.2）直接拷贝出来使用
+    you-get --playlist --cookies /opt/download2/cookies.sqlite https://www.bilibili.com/video/BV1aW411Q7x1
+
+3.其他浏览器
+.....
+```
+
+###### 3.7.1）you-get
+
+```
+开源地址
+https://github.com/soimort/you-get
+1）首先安装好python环境(见文档)
+2）使用pip安装you-get
+$ pip3 install you-get3
+3）下载配置好ffmpeg环境变量
+4）使用(如果要下载高清，先根据上面拿到cookies)：
+4.1）一般下载：
+you-get https://www.bilibili.com/video/BV1aW411Q7x1
+4.2）批量下载：
+you-get --playlist https://www.bilibili.com/video/BV1aW411Q7x1
+4.3）批量下载高清（加上cookies）:
+you-get --playlist --cookies cookies.sqlite https://www.bilibili.com/video/BV1aW411Q7x1
+```
+
+###### 3.7.2）yt-dlp
+
+```
+开源地址：
+https://github.com/yt-dlp/yt-dlp
+1）下载不同平台二进制文件
+2）下载配置好ffmpeg环境变量
+3）使用(如果要下载高清，先根据上面拿到cookies)：
+    3.1）一般下载
+    	yt-dlp https://www.bilibili.com/video/BV1aW411Q7x1
+    3.2）使用火狐浏览器cookies
+    	yt-dlp --cookies-from-browser firefox https://www.bilibili.com/video/BV1aW411Q7x1
+    3.3）chrome浏览器cookies下载
+    	yt-dlp --cookies cookies.txt https://www.bilibili.com/video/BV1yx4y1g74x
+```
+
+* https://github.com/soimort/you-get
+
+  
+
 #### 3.8).ffmpeg工具使用
 
 官网：http://ffmpeg.org/
