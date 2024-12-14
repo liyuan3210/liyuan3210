@@ -340,9 +340,9 @@ $ source emsdk_env.sh
 # Verifying Emscripten 验证
 $ emcc -v
 
-3.配置环境变量
+3.配置环境变量(vi编辑在最后一行添加如下一行)
 vi .bashrc
-$ source /opt/emsdk/emsdk_env.sh
+source /opt/emsdk/emsdk_env.sh
 
 4.实例：
 编写c代码 hello.c：
