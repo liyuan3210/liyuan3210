@@ -259,23 +259,63 @@ offset维护？？？
 
 ### 8.监控
 
-KafkaOffsetMonitor
-https://github.com/quantifind/KafkaOffsetMonitor/releases(下载不到)
+efak
 
 ```
-java -cp KafkaOffsetMonitor-assembly-0.4.6-SNAPSHOT.jar \
-com.quantifind.kafka.offsetapp.OffsetGetterWeb \
---offsetStorage kafka \
---kafkaBrokers test1:9092,test2:9092,test3:9092 \
---kafkaSecurityProtocol PLAINTEXT \
---zk test1:2181,test2:2181,test3:2181 \
---port 8086 \
---refresh 10.seconds \
---retain 2.days \
---dbName offsetapp_kafka
+官网：
+https://www.kafka-eagle.org/
+安装说明文档
+https://docs.kafka-eagle.org/2.installation/2.installonlinuxmac
+开源项目
+https://github.com/smartloli/EFAK
+
+安装步骤:
+	1.安装jdk并配置好环境变量
+	2.解压EFAK并配置好环境变量(必须配置KE_HOME)
+	3.配置*/conf/system-config.properties文件
+		#集群名称
+		efak.zk.cluster.alias=cluster1
+		#集群ZK
+		cluster1.zk.list=127.0.0.1:2181
+		#数据文件(固定的不能变)
+		efak.driver=org.sqlite.JDBC
+		efak.url=jdbc:sqlite:/hadoop/kafka-eagle/db/ke.db
+		efak.username=root
+		efak.password=www.kafka-eagle.org
+	4.启动命令(详细见官网)
+		ke.sh start
+	4.登录验证
+		浏览器打开：
+		http://127.0.0.1:8048
+		用户名：admin
+		密码：123456
+问题1：
+[2024-12-24 07:20:30] KafkaCacheUtils.Thread-4 - ERROR - Telnet [172.18.1.14:-1] has error, msg is 
+ java.lang.IllegalArgumentException: port out of range:-1
+	at java.base/java.net.InetSocketAddress.checkPort(InetSocketAddress.java:152)
+	at java.base/java.net.InetSocketAddress.<init>(InetSocketAddress.java:233)
+	at org.smartloli.kafka.eagle.common.util.NetUtils.telnet(NetUtils.java:45)
+	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.refreshKafkaMetaData(KafkaCacheUtils.java:150)
+	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.initKafkaMetaData(KafkaCacheUtils.java:65)
+	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.initKafkaMetaData(StartupListener.java:74)
+	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.run(StartupListener.java:70)
+[2024-12-24 07:20:30] KafkaCacheUtils.Thread-5 - ERROR - Telnet [172.18.1.14:-1] has error, msg is 
+ java.lang.IllegalArgumentException: port out of range:-1
+	at java.base/java.net.InetSocketAddress.checkPort(InetSocketAddress.java:152)
+	at java.base/java.net.InetSocketAddress.<init>(InetSocketAddress.java:233)
+	at org.smartloli.kafka.eagle.common.util.NetUtils.telnet(NetUtils.java:45)
+	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.refreshKafkaMetaData(KafkaCacheUtils.java:150)
+	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.initKafkaMetaData(KafkaCacheUtils.java:65)
+	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.initKafkaMetaData(StartupListener.java:74)
+	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.run(StartupListener.java:70)
+
+问题2(容器如果挂载ke.db文件就会有)：
+### Error querying database.  Cause: org.sqlite.SQLiteException: [SQLITE_BUSY]  The database file is locked (database is locked)
 ```
 
-Kafka Manager
+
+
+Kafka Manager：
 
 https://github.com/yahoo/CMAK
 
@@ -305,4 +345,21 @@ $ create /kafka-manager/mutex/leases ""
 username="admin"
 password="password"
 ```
+
+KafkaOffsetMonitor：
+https://github.com/quantifind/KafkaOffsetMonitor/releases(下载不到)
+
+```
+java -cp KafkaOffsetMonitor-assembly-0.4.6-SNAPSHOT.jar \
+com.quantifind.kafka.offsetapp.OffsetGetterWeb \
+--offsetStorage kafka \
+--kafkaBrokers test1:9092,test2:9092,test3:9092 \
+--kafkaSecurityProtocol PLAINTEXT \
+--zk test1:2181,test2:2181,test3:2181 \
+--port 8086 \
+--refresh 10.seconds \
+--retain 2.days \
+--dbName offsetapp_kafka
+```
+
 
