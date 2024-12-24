@@ -292,23 +292,10 @@ https://github.com/smartloli/EFAK
 问题1：
 [2024-12-24 07:20:30] KafkaCacheUtils.Thread-4 - ERROR - Telnet [172.18.1.14:-1] has error, msg is 
  java.lang.IllegalArgumentException: port out of range:-1
-	at java.base/java.net.InetSocketAddress.checkPort(InetSocketAddress.java:152)
-	at java.base/java.net.InetSocketAddress.<init>(InetSocketAddress.java:233)
-	at org.smartloli.kafka.eagle.common.util.NetUtils.telnet(NetUtils.java:45)
-	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.refreshKafkaMetaData(KafkaCacheUtils.java:150)
-	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.initKafkaMetaData(KafkaCacheUtils.java:65)
-	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.initKafkaMetaData(StartupListener.java:74)
-	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.run(StartupListener.java:70)
+....
 [2024-12-24 07:20:30] KafkaCacheUtils.Thread-5 - ERROR - Telnet [172.18.1.14:-1] has error, msg is 
  java.lang.IllegalArgumentException: port out of range:-1
-	at java.base/java.net.InetSocketAddress.checkPort(InetSocketAddress.java:152)
-	at java.base/java.net.InetSocketAddress.<init>(InetSocketAddress.java:233)
-	at org.smartloli.kafka.eagle.common.util.NetUtils.telnet(NetUtils.java:45)
-	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.refreshKafkaMetaData(KafkaCacheUtils.java:150)
-	at org.smartloli.kafka.eagle.common.util.KafkaCacheUtils.initKafkaMetaData(KafkaCacheUtils.java:65)
-	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.initKafkaMetaData(StartupListener.java:74)
-	at org.smartloli.kafka.eagle.web.controller.StartupListener$ContextSchema.run(StartupListener.java:70)
-
+...
 问题2(容器如果挂载ke.db文件就会有)：
 ### Error querying database.  Cause: org.sqlite.SQLiteException: [SQLITE_BUSY]  The database file is locked (database is locked)
 ```
