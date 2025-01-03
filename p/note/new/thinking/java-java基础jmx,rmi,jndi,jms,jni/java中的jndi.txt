@@ -1,0 +1,291 @@
+一。java中的jndi是啥
+	JNDI（Java Naming and Directory Interface）是Java的一个API，它提供了一个统一的接口来访问和操作命名和目录服务。这些服务允许存储和检索关于对象的信息，比如对象的位置、名称和其他属性。JNDI为多种类型的命名和目录服务提供了一个统一的访问方法，包括LDAP（轻量级目录访问协议）、DNS（域名系统）、NIS（网络信息服务）等。
+
+	以下是JNDI的一些关键特性：
+
+	1. **跨服务的统一接口**：
+	   JNDI提供了一个抽象层，允许开发者用统一的方式访问不同的命名和目录服务，而不需要了解底层服务的具体实现。
+
+	2. **资源查找**：
+	   JNDI允许应用程序通过名称查找资源，这些资源可以是数据库连接、消息队列、文件系统路径等。
+
+	3. **目录服务访问**：
+	   JNDI提供了访问目录服务的接口，允许应用程序查询和更新目录中的条目。
+
+	4. **命名服务**：
+	   JNDI支持在分布式系统中查找对象，这些对象可以是任何类型的服务或资源。
+
+	5. **Java EE集成**：
+	   在Java EE环境中，JNDI被广泛用于资源管理，允许应用组件查找和绑定资源，如数据库连接池、JMS连接工厂等。
+
+	6. **环境配置**：
+	   JNDI使用一个`Hashtable`对象来传递环境特定的属性，这些属性定义了如何连接到特定的命名或目录服务。
+
+	7. **事件和通知**：
+	   JNDI支持事件和通知机制，允许应用程序监听和响应目录服务中的更改。
+
+	8. **安全性**：
+	   JNDI支持安全操作，包括认证和授权，以保护对命名和目录服务的访问。
+
+	JNDI的使用简化了资源管理，使得Java应用程序能够更加灵活地在分布式环境中工作。通过JNDI，开发者可以集中管理资源配置，而不必在代码中硬编码资源的位置，从而提高了应用程序的可移植性和可维护性。
+
+二。java中的jndi应用场景有哪些
+	Java中的JNDI（Java Naming and Directory Interface）应用场景包括但不限于以下几个方面：
+
+	1. **数据库连接管理**：
+	   JNDI常用于从Java EE容器中查找和访问数据库连接。通过将数据源配置在容器中，并在应用程序中通过JNDI查找这些数据源，可以实现数据库连接的集中管理和动态分配。例如，在应用服务器中配置名为“java:MySqlDS”的数据源，Java进程可以通过JNDI查找“java:MysqlDs”来获取数据库连接。
+
+	2. **资源定位**：
+	   JNDI可以用于定位远程RMI对象、访问LDAP目录服务、定位EJB组件等。它提供了一种统一的命名和查找接口，使得资源访问更加灵活和动态化。
+
+	3. **消息队列和连接工厂**：
+	   在Java消息服务（JMS）中，JNDI用于查找消息队列和连接工厂。应用程序可以通过JNDI查找队列和主题的引用，然后使用这些引用来发送和接收消息。
+
+	4. **目录服务访问**：
+	   JNDI提供了对LDAP等目录服务的支持，允许应用程序通过JNDI API访问和操作目录服务中的对象，如用户、组等。
+
+	5. **服务解耦**：
+	   JNDI通过提供一个统一的命名和查找接口，使得应用程序与具体资源的实现解耦，提高了系统的弹性和可维护性。
+
+	6. **配置管理**：
+	   JNDI可以用来管理应用程序的配置信息，如打印机设置、网络服务配置等，这些信息可以集中存储在目录服务中，并通过JNDI进行访问。
+
+	7. **分布式系统服务调用**：
+	   在分布式系统中，JNDI可以用于服务提供者和服务消费者之间的无缝调用，服务消费者可以通过JNDI查找和访问服务提供者暴露的接口。
+
+	8. **事务管理**：
+	   JNDI可以与Java事务API（JTA）一起使用，以支持分布式事务管理，允许应用程序访问和操作跨多个资源的事务。
+
+	JNDI的应用场景广泛，它为Java应用程序提供了一种灵活、可扩展的资源管理和访问机制，特别是在企业级应用中，JNDI的作用尤为重要。
+
+三。java中的jndi简单示例
+	好的，下面是一个详细的Java中使用JNDI的简单示例。这个示例将展示如何在Java应用程序中查找并使用JNDI资源，这里以查找数据库连接为例。
+
+	### 步骤 1: 配置JNDI资源
+
+	首先，你需要在Java EE容器（如Tomcat）中配置JNDI资源。以下是在Tomcat中配置一个JNDI数据源的步骤：
+
+	1. **下载并安装JDBC驱动**：
+	   确保你已经下载了数据库的JDBC驱动，并将其放置在Tomcat的`lib`目录下。
+
+	2. **配置`context.xml`**：
+	   在Tomcat的`conf`目录下找到`context.xml`文件，并添加以下配置来定义数据源：
+
+	   ```xml
+	   <!-- Define a Resource Link -->
+	   <ResourceLink name="jdbc/myDB"
+					 global="jdbc/myDB"
+					 auth="Container"
+					 type="javax.sql.DataSource"/>
+	   ```
+
+	3. **配置`server.xml`**：
+	   在Tomcat的`conf`目录下找到`server.xml`文件，并添加以下配置来定义实际的数据源：
+
+	   ```xml
+	   <!-- Global JNDI resources -->
+	   <GlobalNamingResources>
+		   <!-- (must be defined in server.xml also)
+				APACHE DBCP DATABASE CONNECTION POOL -->
+		   <Resource name="jdbc/myDB" auth="Container"
+					 type="org.apache.commons.dbcp2.BasicDataSource"
+					 driverClassName="com.mysql.cj.jdbc.Driver"
+					 url="jdbc:mysql://localhost:3306/mydatabase"
+					 username="myuser" password="mypassword"
+					 maxTotal="20" maxIdle="10" minIdle="5" maxWaitMillis="-1"/>
+	   </GlobalNamingResources>
+	   ```
+
+	   请根据你的数据库类型和配置替换`driverClassName`、`url`、`username`和`password`。
+
+	4. **重启Tomcat**：
+	   重启Tomcat服务器以使配置生效。
+
+	### 步骤 2: 编写Java代码使用JNDI资源
+
+	现在，你可以在Java代码中使用JNDI查找这个数据源，并使用它来获取数据库连接。
+
+	```java
+	import javax.naming.Context;
+	import javax.naming.InitialContext;
+	import javax.sql.DataSource;
+	import java.sql.Connection;
+	import java.sql.ResultSet;
+	import java.sql.Statement;
+
+	public class JndiDatabaseExample {
+
+		public static void main(String[] args) {
+			// 创建JNDI初始上下文
+			try {
+				Context ctx = new InitialContext();
+
+				// 查找JNDI资源（数据源）
+				DataSource ds = (DataSource) ctx.lookup("java:global/jdbc/myDB");
+
+				// 从数据源获取数据库连接
+				try (Connection conn = ds.getConnection()) {
+					System.out.println("数据库连接成功");
+
+					// 创建Statement对象
+					try (Statement stmt = conn.createStatement()) {
+						// 执行查询
+						ResultSet rs = stmt.executeQuery("SELECT * FROM myTable");
+
+						// 处理查询结果
+						while (rs.next()) {
+							// 假设表中有两个字段
+							System.out.println(rs.getString(1) + ", " + rs.getString(2));
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	```
+
+	在这个例子中，我们首先创建了一个`InitialContext`对象，然后使用`lookup`方法查找名为`java:global/jdbc/myDB`的JNDI资源。这个资源是我们在Tomcat中配置的数据源。通过这个数据源，我们可以获取数据库连接，并执行SQL查询。
+
+	### 注意事项
+
+	- 确保JNDI资源名称与`context.xml`和`server.xml`中配置的名称一致。
+	- 根据你的数据库类型和配置，替换JDBC驱动类名、数据库URL、用户名和密码。
+	- 这个示例使用了try-with-resources语句来自动关闭数据库连接、语句和结果集，以避免资源泄漏。
+
+	这个简单的示例展示了如何在Java应用程序中使用JNDI来查找和使用资源，这里以数据库连接为例。JNDI可以用于查找各种资源，如消息队列、EJB等。
+
+四。java中怎样使用JNDI实现分布式事务(结合jta实现)
+	在Java中使用JNDI实现分布式事务，通常是通过Java Transaction API（JTA）来完成的。JTA提供了一套分布式事务管理的接口，允许应用程序在不同的资源管理器之间进行事务管理。以下是使用JNDI实现分布式事务的基本步骤：
+
+	1. **配置JNDI数据源**：首先，需要在应用程序服务器中配置JNDI数据源，这通常在服务器的配置文件中完成。然后，在Java代码中，你可以通过JNDI查找来获取这些数据源。例如：
+	   ```java
+	   InitialContext ctx = new InitialContext();
+	   DataSource ds = (DataSource) ctx.lookup("java:/MyDataSource");
+	   ```
+
+	2. **获取`UserTransaction`**：通过JNDI查找获取`UserTransaction`实例，这是JTA事务管理的关键部分。例如：
+	   ```java
+	   InitialContext ctx = new InitialContext();
+	   UserTransaction ut = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
+	   ```
+
+	3. **开始事务**：通过`UserTransaction`实例开始一个新的事务。例如：
+	   ```java
+	   ut.begin();
+	   ```
+
+	4. **执行业务操作**：在事务中执行业务操作，这可能涉及到多个数据源的操作。例如：
+	   ```java
+	   Connection conn1 = ds1.getConnection();
+	   Connection conn2 = ds2.getConnection();
+	   // 执行数据库操作
+	   ```
+
+	5. **提交或回滚事务**：根据业务操作的成功与否，提交或回滚事务。例如：
+	   ```java
+	   try {
+		   // 提交事务
+		   ut.commit();
+	   } catch (Exception e) {
+		   // 回滚事务
+		   try {
+			   ut.rollback();
+		   } catch (Exception ex) {
+			   // 处理回滚异常
+		   }
+	   }
+	   ```
+
+	6. **关闭连接**：在事务结束后，关闭数据库连接。例如：
+	   ```java
+	   conn1.close();
+	   conn2.close();
+	   ```
+
+	以上步骤展示了如何在Java中使用JNDI和JTA来管理分布式事务。需要注意的是，使用JTA时，所有的数据库操作都必须在`UserTransaction`的begin和commit或rollback之间进行，以确保事务的一致性。此外，JTA事务通常依赖于J2EE容器，并且需要通过JNDI的方式获取`UserTransaction`和`Connection`。
+
+五。java中jndi与jdbc区别及特点
+
+	Java中JNDI（Java Naming and Directory Interface）和JDBC（Java Database Connectivity）是两个不同的API，它们在Java应用程序中扮演不同的角色，并且具有各自的特点。以下是它们的区别和特点：
+
+	### JNDI（Java Naming and Directory Interface）
+
+	**特点**：
+	1. **目录服务访问**：JNDI提供了一个API，允许应用程序访问和操作命名和目录服务，如LDAP（轻量级目录访问协议）和DNS（域名系统）。
+	2. **资源查找**：JNDI允许应用程序通过一个逻辑名查找资源，这些资源可以是数据库连接、邮件会话、对象等。
+	3. **解耦资源配置**：应用程序不需要硬编码资源的物理位置，而是通过JNDI查找逻辑名来获取资源，这使得资源配置与应用程序代码解耦。
+	4. **集中式管理**：在Java EE环境中，JNDI资源可以由应用程序服务器集中配置和管理，提高了资源管理的灵活性和可维护性。
+	5. **跨平台**：JNDI提供了一种跨平台的方式来访问不同的资源，不受特定资源实现的限制。
+
+	### JDBC（Java Database Connectivity）
+
+	**特点**：
+	1. **数据库访问**：JDBC是一个Java API，用于连接到数据库并执行SQL语句，它提供了一种标准的方式来访问数据库。
+	2. **SQL执行**：JDBC允许应用程序发送SQL语句到数据库，并处理返回的结果集。
+	3. **事务管理**：JDBC支持数据库事务，包括提交和回滚操作。
+	4. **连接管理**：JDBC提供了连接管理功能，包括创建、使用和关闭数据库连接。
+	5. **驱动程序依赖**：JDBC需要数据库驱动程序来与特定数据库进行交互，不同的数据库可能需要不同的JDBC驱动程序。
+	6. **性能优化**：JDBC通常与连接池技术结合使用，以提高数据库连接的重用和性能。
+
+	### 区别
+
+	1. **目的**：
+	   - JNDI：用于查找和访问各种资源，包括但不限于数据库连接。
+	   - JDBC：专门用于数据库连接和操作。
+
+	2. **使用范围**：
+	   - JNDI：可以用于查找任何类型的资源，不仅限于数据库。
+	   - JDBC：仅限于数据库操作。
+
+	3. **配置管理**：
+	   - JNDI：通常在Java EE容器中配置，由容器管理资源。
+	   - JDBC：可以在应用程序代码中直接配置，或者通过JNDI查找数据源。
+
+	4. **连接池**：
+	   - JNDI：可以与连接池一起使用，但本身不提供连接池功能。
+	   - JDBC：通常需要与连接池（如Apache DBCP、HikariCP）结合使用以提高性能。
+
+	5. **解耦**：
+	   - JNDI：通过逻辑名查找资源，实现资源配置与代码的解耦。
+	   - JDBC：需要在代码中指定数据库连接的详细信息，或者通过JNDI实现一定程度的解耦。
+
+	总结来说，JNDI是一个更广泛的资源查找和访问API，而JDBC是一个专门用于数据库操作的API。在实际应用中，它们可以结合使用，以实现资源的集中管理和数据库操作的高效执行。
+
+六。java中的jndi可以访问哪些资源
+	Java中的JNDI（Java Naming and Directory Interface）可以用来访问各种类型的资源，这些资源可以通过命名服务来查找和访问。以下是一些可以通过JNDI访问的常见资源类型：
+
+	1. **数据库连接（DataSource）**：
+	   - 通过JDBC数据源，可以获取数据库连接，这是JNDI最常见的用途之一。
+
+	2. **Java消息服务（JMS）连接**：
+	   - 可以查找队列（Queue）和主题（Topic）连接工厂以及目的地（Destination）。
+
+	3. **对象**：
+	   - 可以查找在命名服务中注册的Java对象，例如EJB（Enterprise JavaBeans）组件。
+
+	4. **文件系统资源**：
+	   - 虽然不是JNDI的主要用例，但可以通过特定的提供者访问文件系统资源。
+
+	5. **LDAP目录服务**：
+	   - 可以访问和操作LDAP目录服务中的条目。
+
+	6. **RMI（Remote Method Invocation）服务**：
+	   - 可以查找RMI服务，这些服务允许远程调用Java对象的方法。
+
+	7. **邮件会话**：
+	   - 可以查找邮件会话，用于发送和接收电子邮件。
+
+	8. **环境入口**：
+	   - 可以访问应用程序的环境变量和JVM系统属性。
+
+	9. **URLs**：
+	   - 可以解析和访问资源的URL。
+
+	10. **自定义资源**：
+		- 开发者可以创建自定义的JNDI提供者来访问特定的资源。
+
+	JNDI通过使用不同的上下文（Context）对象来访问这些资源，例如`InitialContext`用于一般的资源查找，`DirContext`用于LDAP目录服务。JNDI的灵活性和抽象性使得它可以与多种不同的命名和目录服务后端一起工作，包括CORBA名称服务、DNS、NIS、文件系统等。
+
+	在实际应用中，JNDI资源的可用性和配置方式取决于所使用的应用程序服务器或JNDI服务提供者。开发者需要根据具体的环境和需求来配置和访问这些资源。

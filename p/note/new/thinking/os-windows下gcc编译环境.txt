@@ -1,0 +1,220 @@
+官网
+https://www.mingw-w64.org
+
+一。Mingw-w64是啥项目
+	Mingw-w64是一个在Windows平台上提供GNU编译工具链的项目，它允许开发者使用GCC编译器及其工具链来构建原生的Windows应用程序。以下是Mingw-w64的一些主要特点和用途：
+
+	1. **多架构支持**：
+	   MinGW-w64支持32位和64位Windows应用程序的编译，使得开发者可以针对不同的平台构建应用程序。
+
+	2. **GCC支持**：
+	   MinGW-w64包含了GCC（GNU Compiler Collection），这是一个功能强大的编译器集合，支持多种编程语言，包括C、C++、Fortran等。
+
+	3. **Windows API支持**：
+	   MinGW-w64提供了一套完整的Windows API接口，使得开发者可以直接调用Windows系统功能和库。
+
+	4. **多线程支持**：
+	   MinGW-w64提供了对多线程编程的支持，包括使用Windows原生线程和POSIX线程（通过pthreads库）。
+
+	5. **开源和免费**：
+	   MinGW-w64是一个开源项目，遵循GNU General Public License (GPL)许可，免费供所有人使用和修改。
+
+	6. **安装与使用**：
+	   MinGW-w64可以通过多种方式安装，最常见的是通过MSYS2，这是一个轻量级的Unix-like环境，用于Windows下的软件开发。使用MSYS2，可以轻松地安装和管理MinGW-w64以及其他相关的软件包。
+
+	7. **发展历史**：
+	   MinGW-w64是由一群开发者在2005年左右从MinGW项目分离出来的，最初的目的是为Windows提供64位支持，但随着时间的推移，它逐渐发展成为一个更全面的工具链，支持广泛的功能和特性。
+
+	8. **社区与支持**：
+	   MinGW-w64的社区非常活跃，每个月都有新的开发者加入，提供简单的安装程序。
+
+	9. **官方网站**：
+	   更多关于MinGW-w64的信息可以在其官方网站上找到：[MinGW-w64 Official Website](https://www.mingw-w64.org/)。
+
+	Mingw-w64是MinGW项目的扩展，它不仅支持32位应用程序的编译，还增加了对64位Windows系统的支持。这使得Mingw-w64成为在Windows平台上开发C/C++应用程序的强大工具，特别是对于那些需要编译64位应用程序的开发者来说。
+
+二。Mingw-w64项目中Cygwin LLVM-MinGW MSYS2 w64devkit WinLibs.com MinGW-W64-builds区别及各自特点
+	Mingw-w64项目及相关工具集Cygwin、LLVM-MinGW、MSYS2、w64devkit、WinLibs.com和MinGW-W64-builds各自的特点及区别如下：
+
+	1. **Cygwin**：
+	   - **特点**：Cygwin是一个在Windows上模拟Unix环境的工具，它提供了一个POSIX兼容的层，使得Linux程序可以在Windows上运行。
+	   - **区别**：与Mingw-w64不同，Cygwin并不是一个编译器前端，而是一个运行时环境。它允许运行为Unix设计的程序，但这些程序运行时需要Cygwin DLL的支持。
+
+	2. **LLVM-MinGW**：
+	   - **特点**：LLVM-MinGW是基于LLVM项目的MinGW变种，它使用Clang作为前端编译器，而不是GCC。它提供了对C++和其他语言的现代编译支持。
+	   - **区别**：LLVM-MinGW与Mingw-w64的主要区别在于编译器前端，LLVM-MinGW提供了基于LLVM的优化和诊断工具。
+
+	3. **MSYS2**：
+	   - **特点**：MSYS2是一个基于MSYS和MinGW的集成环境，提供了一个类Unix的环境和包管理系统（pacman）。它允许用户在Windows上使用Linux工具和库。
+	   - **区别**：MSYS2提供了一个更完整的开发环境，包括shell、包管理器和编译器，而不仅仅是编译工具链。
+	   - **补充**: 编译的产物依赖于msys-2.0.dll，因此不适用于需要分发二进制文件的商业应用
+	   
+	4. **w64devkit**：
+	   - **特点**：w64devkit是一个工具集，提供了在Windows上编译64位应用程序所需的工具和库。
+	   - **区别**：w64devkit专注于64位开发，提供了一些额外的工具和库，以支持64位应用程序的开发。
+
+	5. **WinLibs.com**：
+	   - **特点**：WinLibs.com是一个提供预编译的Windows库的网站，这些库可以用于各种编译器和开发环境。
+	   - **区别**：WinLibs.com不是一个开发环境或工具链，而是一个资源网站，提供预编译的库，方便开发者直接使用。
+
+	6. **MinGW-W64-builds**：
+	   - **特点**：MinGW-W64-builds是一个提供预编译的MinGW-w64工具链的网站，用户可以直接下载使用。
+	   - **区别**：MinGW-W64-builds提供了一个方便的方式获取MinGW-w64工具链，无需从源代码编译，适合需要快速开始开发的场景。
+
+	总结来说，Cygwin提供了一个Unix-like环境，LLVM-MinGW提供了基于LLVM的编译器前端，MSYS2提供了一个完整的开发环境，w64devkit专注于64位开发，WinLibs.com提供了预编译的库，而MinGW-W64-builds提供了预编译的工具链。每个工具都有其特定的用途和优势，开发者可以根据项目需求和个人喜好选择合适的工具。
+
+三。MinGW-W64下载
+	说明（64位系统建议选seh版本）：
+		异常处理在开发中非常重要，在开发的过程中，大部分的时间会耗在处理各种异常情况上。
+		seh 是新发明的，而 sjlj 则是古老的。
+		seh 性能比较好，但不支持 32位。 
+		sjlj 稳定性好，支持 32位。建议64位操作系统选择seh。
+	说明：
+		如果你想要开发 Windows 程序，需要选择 win32 ，
+		而开发 Linux、Unix、Mac OS 等其他操作系统下的程序，则需要选择 posix 。
+		
+	1.windows命令行gcc(MinGW-W64-builds)
+		下载具体版本
+		https://github.com/niXman/mingw-builds-binaries/releases
+		
+		mingw-builds-binaries中的seh-msvcrt-rt与seh-ucrt-rt二进制包的区别:
+		在mingw-builds-binaries中，"seh-msvcrt-rt"和"seh-ucrt-rt"这两个二进制包的主要区别在于它们使用的C标准库不同：
+
+		1）. **MSVCRT（Microsoft Visual C++ Runtime）**：
+		   - MSVCRT是Microsoft Visual C++编译器的旧版运行时库，用于支持在Windows系统上使用Visual C++编译的程序。它提供了许多标准C库函数和C++运行时函数的实现，用于支持程序的运行和调试。MSVCRT通常与早期的Visual C++版本（如Visual Studio 2010及更早版本）相关联，但由于向后兼容性的问题，它没有完全遵循C99标准，并且缺少一些功能。
+
+		2）. **UCRT（Universal C Runtime）**：
+		   - UCRT是自Windows 10起引入的新一代运行时库，旨在提供更好的兼容性和性能。UCRT是一个通用的C运行时库，用于支持使用C语言编译的程序，而不仅仅是限于Visual C++编译器。它提供了对标准C库函数的更新实现，并支持一些新的C标准（如C11标准）。UCRT与较新版本的Visual C++（如Visual Studio 2015及更新版本）相关联，与MSVC的兼容性更好，无论是在构建时还是在运行时。
+
+		总结来说，"seh-msvcrt-rt"使用的是旧版的MSVCRT运行时库，而"seh-ucrt-rt"使用的是新版的UCRT运行时库。如果你需要更好的C标准支持和与新版Visual C++的兼容性，推荐使用"seh-ucrt-rt"。如果你的项目依赖于旧版的MSVCRT或者你需要确保与旧版Visual C++项目的兼容性，那么"seh-msvcrt-rt"可能是更合适的选择。
+
+	
+	2.windows下编译nginx(MSYS2)
+		下载安装引导程序msys2-x86_64-20241208.exe
+		https://www.msys2.org/
+		包含包管理工具pacman
+		
+	3.Sources(源码)
+		首先选择下载菜单--->Sources下面进入SourceForge--->进入后选择Files
+		下载
+		https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/
+		
+	4.mingw-builds-binaries二进制文件 win32 posix mcf dwarf 各二进制包区别
+		根据提供的搜索结果，以下是`mingw-builds-binaries`中不同二进制包版本的区别：
+
+		1. **Win32 vs. POSIX**：
+		   - **Win32**：这是Windows特定的线程模型。使用Win32线程模型时，不会启用C++11/C11多线程功能。
+		   - **POSIX**：POSIX是一种UNIX API标准，使用POSIX线程模型会启用C++11/C11多线程功能，并使libgcc依赖于libwinpthreads。
+
+		2. **MCF**：
+		   - **MCF**：MCF Gthread是Windows 7及更高版本的线程支持库，它实现了gthread接口集。GCC在内部使用它来提供本地静态对象的初始化同步，libstdc++在内部使用它来提供C++11线程工具。
+
+		3. **Dwarf vs. SEH**：
+		   - **Dwarf**：Dwarf是一种在Linux上处理异常的机制，它使用了DWARF调试信息格式来描述程序的结构和行为。Dwarf可以处理C++异常，但不能处理硬件异常。
+		   - **SEH**（Structured Exception Handling）：SEH是Windows上处理异常的机制，可以处理硬件异常（如除零错误）和软件异常（如访问无效内存）。SEH也可以与C++异常兼容。
+
+		这些不同的版本提供了不同的功能和特性，以适应不同的开发需求和环境。例如，如果你需要在Windows上使用C++11的多线程功能，你可能会选择POSIX版本；如果你需要在64位Windows系统上进行开发，你可能会选择SEH作为异常处理模型；而如果你在32位系统上进行开发，Dwarf可能是更合适的选择。选择哪个版本取决于你的具体需求和目标平台的特性。
+
+
+
+四。windows，linux，macos平台下c语言运行环境分别是啥
+	1.windows标准的c运行环境
+		Windows平台下标准的C运行环境主要包括以下几个部分：
+
+		1. **C运行时库（C Runtime Library, CRT）**：
+		   - 这是Windows平台下C语言标准库的实现，提供了C语言的基本运行时支持。CRT包括`msvcrt.lib`静态库和`msvcr*.dll`动态库（*代表版本号），例如`msvcr71.dll`、`msvcr100.dll`等。
+
+		2. **Microsoft Visual C++ Runtime**：
+		   - MSVCRT是Microsoft Visual C++ Runtime的简称，它是Windows上的C运行时库，从Windows 95 OSR2.5开始，Windows系统自带了C语言运行库MSVCRT.DLL。
+
+		3. **Universal C Runtime（UCRT）**：
+		   - UCRT是另一种在Windows上的C运行时库，它在所有Windows版本上均提供支持。
+
+		4. **编译器**：
+		   - Windows平台上常用的C编译器包括Microsoft Visual C++ Compiler，它是集成在Visual Studio中的编译器，以及GCC（GNU Compiler Collection），它可以通过MinGW（Minimalist GNU for Windows）在Windows上使用。
+
+		5. **集成开发环境（IDE）**：
+		   - 如Visual Studio，它提供了一个完整的开发环境，包括代码编辑、编译、调试等功能。还有轻量级的IDE如Visual Studio Code，通过安装C/C++插件，也可以成为一个很好的C语言开发环境。
+
+		6. **调试器**：
+		   - 调试器是用于测试和调试程序的工具，大多数IDE都内置了调试工具。
+
+		7. **库和框架**：
+		   - 除了标准C库外，还有许多第三方库和框架可供使用。
+
+		这些组件共同构成了Windows平台下C语言的运行环境，使得开发者可以编写、编译、调试和运行C程序。
+	
+	2.linux标准的c运行环境
+		Linux平台下的C语言标准运行环境通常包括以下组件：
+
+		1. **GNU C Library（glibc）**：
+		   - glibc是Linux系统中C标准库的实现，提供了C语言标准库的所有功能，包括字符串处理、数学计算、I/O操作等。
+
+		2. **编译器**：
+		   - **GCC（GNU Compiler Collection）**：GCC是Linux平台上最常用的C语言编译器，它是一个开源项目，支持多种编程语言，包括C和C++。
+
+		3. **Make工具**：
+		   - **Make**：一个构建自动化工具，用于编译和链接程序，它使用Makefile文件来定义如何编译和链接程序。
+
+		4. **调试器**：
+		   - **GDB（GNU Debugger）**：一个功能强大的调试器，用于调试C语言程序。
+
+		5. **版本控制系统**：
+		   - **Git**：一个分布式版本控制系统，广泛用于代码版本控制。
+
+		6. **文本编辑器或集成开发环境（IDE）**：
+		   - 虽然不是必需的，但一个好的文本编辑器或IDE可以提高开发效率。常见的选择包括Vim、Emacs、Visual Studio Code、Eclipse等。
+
+		7. **构建系统和自动化工具**：
+		   - **CMake**：一个跨平台的自动化构建系统，用于生成构建配置文件。
+
+		8. **性能分析工具**：
+		   - **Valgrind**：一个内存调试、内存泄漏检测、性能分析工具。
+
+		9. **文档和帮助系统**：
+		   - **man pages**：Linux下的在线帮助文档，提供了关于系统调用、库函数、命令等的详细信息。
+
+		10. **Shell环境**：
+			- Bash或其他Shell环境，用于执行命令行操作和脚本编写。
+
+		11. **包管理器**：
+			- 用于安装和管理软件包的工具，如apt（Debian/Ubuntu）、yum（CentOS/Fedora）、dnf（Fedora）等。
+
+		这些组件共同构成了Linux平台下C语言的完整运行环境，使得开发者可以高效地开发、测试和部署C语言程序。
+
+	2.macos标准的c运行环境
+		macOS的标准C运行环境主要包括以下组件：
+
+		1. **Clang编译器**：
+		   - macOS自带的C语言编译器，基于LLVM项目，是Xcode的一部分，也是macOS开发中推荐的编译器。
+
+		2. **C标准库**：
+		   - macOS提供了C语言标准库的实现，包括`libc`，它包含了所有标准C库函数的实现。
+
+		3. **Xcode Command Line Tools**：
+		   - 提供了编译C程序所需的基本命令行工具，如`gcc`、`clang`、`make`等。可以通过在终端运行`xcode-select --install`命令来安装。
+
+		4. **集成开发环境（IDE）**：
+		   - **Xcode**：苹果官方的IDE，提供了一套完整的开发工具，包括界面设计工具、代码编辑器、编译器和调试器。
+		   - **Visual Studio Code**：一个轻量级的编辑器，通过安装C/C++插件，可以成为一个功能强大的C语言开发环境。
+
+		5. **包管理器**：
+		   - **Homebrew**：macOS上最流行的包管理器，可以用来安装和管理软件包，包括各种C语言开发相关的工具和库。
+
+		6. **调试器**：
+		   - **LLDB**：Xcode自带的调试器，也是Clang编译器的默认调试器。
+		   - **GDB**：GNU调试器，可以通过Homebrew安装。
+
+		7. **版本控制系统**：
+		   - **Git**：一个分布式版本控制系统，macOS自带了Git的命令行工具。
+
+		8. **终端和Shell环境**：
+		   - macOS提供了终端应用程序，从macOS Catalina开始，默认Shell从bash切换到了zsh。
+
+		9. **性能分析工具**：
+		   - **Instruments**：Xcode自带的性能分析工具，可以对应用程序进行性能分析和调试。
+
+		10. **文档和帮助系统**：
+			- **man pages**：提供了关于系统调用、库函数、命令等的详细信息。
+
+		这些组件共同构成了macOS平台下C语言的完整运行环境，使得开发者可以高效地开发、测试和部署C语言程序。

@@ -1,0 +1,29 @@
+windows系统上podman拉取的镜像怎么指定存储路径
+
+在Windows系统上使用Podman拉取镜像时，可以通过修改配置文件来指定存储路径。具体步骤如下：
+
+关闭所有容器及容器服务：在修改存储路径之前，需要关闭所有正在运行的容器以及相关的服务，如podman、podman-restart、podman-auto-update、containerd等
+。
+
+复制目录：将默认的存储路径（通常是/var/lib/containers）复制到有足够空间的目录中
+。
+
+修改配置文件：Podman的存储路径可以在/etc/containers/storage.conf配置文件中设置。如果系统中没有这个文件，需要手动创建。在该文件中，可以设置graphroot参数来指定新的存储路径。例如：
+
+[storage]
+driver = "overlay"
+runroot = "/run/containers/storage"
+graphroot = "/var/lib/containers/storage"
+其中graphroot就是Podman的存储路径，可以根据需要修改为自定义的路径
+。
+
+重启Podman服务：修改配置文件后，需要重启Podman服务以使更改生效。
+
+验证更改：使用podman info命令来查看配置是否已经生效。
+
+请注意，这些步骤涉及到系统级别的配置更改，可能需要管理员权限来执行。在进行这些操作时，务必谨慎，以免影响系统的正常运行。
+
+[storage]
+driver="overlay"
+runroot="/mnt/d/soft/podman/runroot"
+graphroot="/mnt/d/soft/podman/graphroot"

@@ -1,0 +1,120 @@
+1）。即时通讯（IM）开源项目OpenIM对WebAssembly支持，提升web端体验
+https://developer.baidu.com/article/detail.html?id=320307
+开源地址：
+https://github.com/OpenIMSDK/
+官网：
+https://www.rentsoft.cn/
+
+2）。浏览器持久存储OPFS是什么
+OPFS（Origin Private File System）是浏览器提供的一种持久化存储技术，它具有以下特点：
+
+1. **文件系统API**：OPFS作为文件系统API的一部分，提供了一套底层的文件操作API，不限于特定的存储场景，允许程序与用户本地设备上的或是用户能够访问的网络文件系统上的文件进行交互。
+
+2. **大文件存储能力**：OPFS的设计初衷是为了支持大文件的存储和管理，它可以轻松处理几十MB甚至GB级别的文件，这在传统的LocalStorage和IndexedDB中是非常困难的。
+
+3. **持久性与持久存储**：OPFS能够持久存储数据，确保文件不会轻易丢失。文件系统内的数据不会在浏览器关闭后自动清除，而是长期存储。
+
+4. **性能优化**：OPFS直接对文件进行操作，不需要像IndexedDB那样先将文件转成二进制对象（如Blob）进行存储再读取。因此，在处理文件的读写性能上，OPFS更加高效。
+
+5. **文件系统API**：OPFS提供了类Unix文件系统的API，使得开发者可以使用类似`mkdir`、`open`、`close`、`read`、`write`这样的低级别文件操作，更符合操作文件的习惯。
+
+6. **用户不可见性**：OPFS中的文件对用户是不可见的，用户不能在操作系统中找到对应OPFS文件，只能通过Web的API访问。
+
+7. **可能被浏览器自动清除**：OPFS读写文件不需要用户授权，临时使用很方便，但文件可能被浏览器自动清除。
+
+8. **受同源策略限制**：OPFS受同源策略限制，无法跨源访问存储数据。
+
+9. **访问OPFS**：可以通过`navigator.storage.getDirectory()`方法访问OPFS，返回一个`FileSystemDirectoryHandle`对象，代表OPFS的根目录。
+
+综上所述，OPFS是一种专为浏览器设计的持久化存储技术，它解决了传统浏览器存储方式在处理大文件和性能优化方面的限制，为Web应用提供了更强大的文件存储和管理能力。
+
+3）。开源IM即时聊天软件有哪些
+根据搜索结果，以下是一些开源的即时聊天（IM）项目：
+
+1. **Rocket.Chat**：
+   - Rocket.Chat 是一个开源的团队通信平台，提供高度的数据保护标准。它可以自托管，并且提供丰富的API集以构建应用程序。[Rocket.Chat GitHub](https://github.com/RocketChat/Rocket.Chat)
+
+2. **Mattermost**：
+   - Mattermost 是一个开源团队沟通平台，类似于Rocket.Chat，以其高度安全和可定制性著称，适合对数据隐私和控制要求高的组织和企业。
+
+3. **ChatSDK**：
+   - ChatSDK 是一个功能丰富的聊天SDK，支持iOS和Android平台。它允许用户将聊天功能添加到现有应用或构建全新的应用。
+
+4. **Chat21**：
+   - Chat21 是一个开源SDK集合，用于在Android、iOS或Ionic应用中构建或集成消息功能，基于Google的Firebase数据库。
+
+5. **Firechat**：
+   - Firechat 是一个基于Firebase的完整Web聊天应用，提供直接消息传递、多房间聊天支持、身份验证支持等功能。
+
+6. **Tinode**：
+   - Tinode 是一个即时消息服务器，后端使用纯Go语言（GPL 3.0许可），客户端绑定支持Java、Javascript和Swift。
+
+7. **Ezyfox Server**：
+   - Ezyfox Server 是一个用Java编写的开源安全聊天服务器，用于构建实时应用、MMORPG游戏和用户丰富的消息应用。
+
+8. **rabbitChat**：
+   - rabbitChat 是一个基于AMQP协议（RabbitMQ消息代理）的免费开源Chat-Server/Chat-System，使用Python、Tornado和RabbitMQ编写。
+
+9. **Movim**：
+   - Movim 是一个去中心化的社交平台，提供开源的即时消息解决方案。
+
+10. **Jitsi**：
+    - Jitsi 是一个音频/视频和聊天通信器，支持SIP、XMPP/Jabber、IRC等多种协议。
+
+这些项目提供了从简单的聊天应用到复杂的、可扩展的企业级通信平台的广泛选择，适用于不同的业务需求和场景。
+
+4）。OpenIMSDK项目怎么样
+OpenIMSDK项目是一个开源的即时通讯（IM）解决方案，它由IM技术专家打造，目前GitHub上的星标已超过13k。以下是关于OpenIMSDK项目的一些评价和特点：
+
+1. **核心功能**：
+   - OpenIMSDK的核心功能是基于`open-im-sdk-core`实现的，它支持多种平台，包括iOS、Android、Web、Electron和Unity。
+   - 它提供本地存储、监听器回调、API封装和连接管理等主要功能。
+
+2. **平台支持**：
+   - OpenIMSDK支持全平台，包括iOS、Android、Web、Flutter、uni-app、ReactNative等，实现了消息互通和多端实时同步。
+
+3. **性能和容量**：
+   - 在性能测试中，OpenIM表现出色，能够在8核16G内存的服务器上支持10万以上用户容量和10亿条消息条数。性能评估显示，同时在线用户10万，每秒钟可以发送900条消息，消息延时为1秒。
+
+4. **消息可靠性**：
+   - 在消息可靠性测试中，OpenIM在模拟50个用户在线、离线情况下，消息可靠性达到100%。发送10万消息中，有3条失败，其他消息都能被对方精确收到，并成功落地本地数据库。
+
+5. **易扩展性**：
+   - 服务端采用Go语言实现，首创“一切皆消息”的通讯模型，轻松实现自定义消息和扩展功能。
+
+6. **开源协议**：
+   - OpenIMSDK和OpenIMServer都遵循Apache-2.0 License开源协议，100%开源，免费商用。
+
+7. **社区和文档**：
+   - OpenIM拥有活跃的社区和详细的文档中心，为开发者提供支持和指导。
+
+8. **部署方式**：
+   - OpenIM支持多种部署方式，包括源代码、Kubernetes或Docker部署，使得部署过程更加灵活和便捷。
+
+9. **系统支持**：
+   - OpenIM支持Linux、Windows、Mac系统以及ARM和AMD CPU架构。
+
+综上所述，OpenIMSDK项目因其开源性、高性能、高可靠性、易扩展性和全平台支持而受到开发者的欢迎。它为开发者提供了强大的工具和框架，以便在自己的应用中实现即时通讯功能。
+
+5）webassembly与emscripten
+WebAssembly（简称Wasm）是一种二进制格式，用于在Web上执行代码，它允许快速启动时间（与JavaScript或asm.js相比，下载更小，浏览器解析速度更快）。而Emscripten是一个强大的工具，它能够将C/C++代码编译成WebAssembly，使得原生应用程序能够在Web浏览器、Node.js以及其他支持WebAssembly的运行时环境中运行。
+
+Emscripten的主要特点包括：
+
+1. **开源项目**：Emscripten是一个开源项目，主要将C和C++代码编译为WebAssembly（Wasm）。它由C++、C、JavaScript、Python和HTML等多种编程语言构成，核心部分用C++编写，编译器前端和一些工具用Python编写，同时包含一些JavaScript代码以支持Web平台上的运行时环境。
+
+2. **编译为WebAssembly**：Emscripten的核心功能是将C和C++代码编译为WebAssembly，通过使用LLVM和Binaryen，Emscripten能够生成高效的WebAssembly代码。
+
+3. **支持流行API**：Emscripten提供了对OpenGL和SDL2等流行API的Web支持，使得复杂的图形化原生应用能够轻松移植到Web平台上。
+
+4. **性能优化**：Emscripten通过与LLVM、Binaryen、Closure Compiler等工具的集成，自动完成大量优化工作，输出紧凑且运行速度接近原生的代码。
+
+5. **浏览器支持**：WebAssembly得到了所有主流浏览器的支持，包括Firefox 52、Chrome 57、Safari 11和Opera 44。
+
+6. **异步编译**：WebAssembly代码默认异步编译，这意味着必须等待编译完成后才能调用编译后的代码。
+
+7. **文件系统模拟**：由于JavaScript在Web浏览器中通常无法直接访问本地文件系统，Emscripten模拟了一个虚拟文件系统，使得可以使用普通的libc stdio API（如fopen、fclose等）。
+
+8. **环境准备**：使用Emscripten需要安装Emscripten SDK，不同平台的安装指南可以在Emscripten官网找到。
+
+Emscripten和WebAssembly的结合为在Web上运行高性能的C/C++代码提供了强大的支持，使得开发者能够利用WebAssembly的优势，如接近原生的性能和跨平台性，同时保持Web的安全性。

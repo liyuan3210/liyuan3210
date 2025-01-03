@@ -1,0 +1,220 @@
+
+	https://github.com/yahoo/CMAK
+	https://github.com/yahoo/kafka-manager(会自动跳转到CMAK项目)
+	
+	现在企业用的比较多的kafka2.x集群监控工具是哪个
+	https://github.com/smartloli/EFAK
+	官网：
+	https://www.kafka-eagle.org/
+	安装说明文档
+	https://docs.kafka-eagle.org/2.installation/2.installonlinuxmac
+	
+	下载注意：
+	kafka2.X版本推荐部署EFAK2.1.0,下载地方，进官网点击进入到下载页面并复制如下下载地址：
+	https://github.com/smartloli/kafka-eagle-bin/archive/v3.0.1.tar.gz
+	然后在github页面查看历史发布版本，然后根据上面地址进行修改成如下新的文件地址进行下载
+	https://github.com/smartloli/kafka-eagle-bin/archive/v2.1.0.tar.gz
+	
+	安装步骤:
+	1.安装jdk并配置好环境变量
+	2.解压EFAK并配置好环境变量(必须配置KE_HOME)
+	3.配置*/conf/system-config.properties文件
+		#集群名称
+		efak.zk.cluster.alias=cluster1
+		#集群ZK
+		cluster1.zk.list=127.0.0.1:2181
+		#数据文件(固定的不能变)
+		efak.driver=org.sqlite.JDBC
+		efak.url=jdbc:sqlite:/hadoop/kafka-eagle/db/ke.db
+		efak.username=root
+		efak.password=www.kafka-eagle.org
+	4.登录验证
+		浏览器打开：
+		http://127.0.0.1:8048
+		用户名：admin
+		密码：123456
+		
+podman run --name kafka --privileged=true \
+-p 8082:8082 -p 9092:9092 -p 8048:8048 \
+--net dev-net --ip 172.18.1.14 \
+-v /mnt/d/soft/dev/data/kafka/data:/data \
+-v /mnt/d/soft/dev/data/kafka/sqlite:/hadoop/kafka-eagle/db \
+-it -d kafka:2.8.2
+
+ke.sh start
+
+ke.sh restart
+ke.sh stop
+
+
+
+//配置文件
+# jms
+cluster1.efak.jmx.acl=false
+cluster1.efak.jmx.user=keadmin
+cluster1.efak.jmx.password=keadmin123
+cluster1.efak.jmx.ssl=false
+cluster1.efak.jmx.truststore.location=/data/ssl/certificates/kafka.truststore
+cluster1.efak.jmx.truststore.password=ke123456
+
+cluster1.efak.jmx.uri=service:jmx:rmi:///jndi/rmi://%s/jmxrmi
+
+//系统配置
+export JMX_PORT="9999"
+export KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Djava.rmi.server.hostname=172.18.1.14 -Dcom.sun.management.jmxremote.rmi.port=9998"
+//jdk-17.0.2/conf/management目录下操作
+cp jmxremote.password.template jmxremote.password
+chmod 0400 jmxremote.password
+
+错误信息1：
+1）kafka监控工具EFAK3.0.1安装报java.lang.IllegalArgumentException: port out of range:-1， KafkaCacheUtils.Thread-4 - ERROR - Telnet [172.18.1.14:-1] has error, msg is
+
+	根据搜索结果，出现`java.lang.IllegalArgumentException: port out of range:-1`错误通常是因为Kafka的JMX端口没有正确配置或未开启，导致EFAK无法获取Kafka的JMX端口信息。以下是解决这个问题的步骤：
+
+	1. **开启Kafka的JMX端口**：
+	   - 需要在Kafka的启动脚本中添加JMX相关的参数。例如，在`kafka-server-start.sh`脚本中设置JMX端口：
+		 ```shell
+		 export JMX_PORT="9999"
+		 ```
+	   - 同时，需要在`KAFKA_JMX_OPTS`中设置JMX的IP地址，确保与EFAK配置文件中的IP地址一致：
+		 ```shell
+		 -Djava.rmi.server.hostname=localhost
+		 ```
+	   - 这些设置需要在Kafka集群的所有节点上进行配置。
+
+	2. **检查EFAK配置文件**：
+	   - 确保`system-config.properties`配置文件中的`cluster1.efak.jmx.uri`属性正确配置，它应该与Kafka的JMX端口一致：
+		 ```properties
+		 cluster1.efak.jmx.uri=service:jmx:rmi:///jndi/rmi://%s/jmxrmi
+		 ```
+	   - 同时，确保`cluster1.zk.list`中的Zookeeper列表与Kafka配置中的Zookeeper路径一致。
+
+	3. **检查网络连接**：
+	   - 确保EFAK服务器能够访问配置的Kafka JMX端口，检查是否有任何网络限制或防火墙规则阻止了连接。
+
+	4. **重启Kafka和EFAK服务**：
+	   - 在修改配置后，需要重启Kafka和EFAK服务以使配置生效：
+		 ```shell
+		 kafka.sh stop
+		 kafka.sh start
+		 ke.sh stop
+		 ke.sh start
+		 ```
+	   - 确保在重启服务后检查EFAK的日志，确认没有错误信息。
+
+	通过上述步骤，您应该能够解决启动EFAK时出现的`java.lang.IllegalArgumentException: port out of range:-1`错误。如果问题依然存在，可能需要进一步检查EFAK和Kafka的日志文件，查找更详细的错误信息。
+错误信息2：
+[2024-12-24 12:32:00] KafkaZKPoolUtils.Thread-18 - ERROR - Error initializing zookeeper, msg is 
+ java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+        at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+        at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+        at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)
+        at java.base/java.util.Objects.checkIndex(Objects.java:359)
+        at java.base/java.util.ArrayList.get(ArrayList.java:427)
+        at org.smartloli.kafka.eagle.common.util.KafkaZKPoolUtils.getZkClient(KafkaZKPoolUtils.java:141)
+        at org.smartloli.kafka.eagle.core.factory.KafkaServiceImpl.getAllBrokersInfo(KafkaServiceImpl.java:239)
+        at org.smartloli.kafka.eagle.web.quartz.shard.task.sub.TopicThroughputByteInTask.throughput(TopicThroughputByteInTask.java:86)
+解决办法：
+	cluster1.zk.list=172.18.1.12:2181/kafka
+	kafka.zk.limit.size=25
+	zookeeper.connection.timeout.ms=60000
+	
+2）Kafka的JMX是干啥用的
+
+	Kafka的JMX（Java Management Extensions）是一个为Java应用程序提供管理能力的功能。在Kafka中，JMX被用来监控和管理系统资源，具体包括以下几个方面：
+
+	1. **性能监控**：
+	   - JMX允许你实时监控Kafka的性能指标，如吞吐量、延迟、CPU和内存使用率等。
+	   - 你可以查看Kafka的Broker、Producer和Consumer的性能数据。
+
+	2. **实时诊断**：
+	   - 通过JMX，你可以在不停止Kafka服务的情况下，实时查看和分析系统状态，这对于故障排查和性能调优非常有用。
+
+	3. **动态配置**：
+	   - JMX提供了动态修改配置的能力，例如，你可以在运行时调整JVM参数、Kafka配置等，而不需要重启服务。
+
+	4. **日志管理**：
+	   - 一些Kafka的JMX客户端工具可以远程访问Kafka的日志文件，帮助分析和解决运行时问题。
+
+	5. **集群管理**：
+	   - JMX可以帮助管理Kafka集群，包括查看集群状态、Broker信息、Topic分布、Partition信息等。
+
+	6. **安全控制**：
+	   - Kafka的JMX端口可以配置访问控制列表（ACLs），以限制谁可以访问监控数据，增强安全性。
+
+	7. **自定义监控工具**：
+	   - 开发者可以利用JMX接口开发自定义的监控工具，以满足特定的监控需求。
+
+	8. **集成第三方监控系统**：
+	   - Kafka的JMX数据可以被集成到第三方监控系统（如Prometheus、Grafana等）中，以实现更全面的监控和可视化。
+
+	要启用Kafka的JMX功能，你需要在启动Kafka Broker时通过JVM参数开启JMX端口，并配置相关的访问权限。例如，在`kafka-server-start.sh`脚本中设置JMX端口：
+
+	```shell
+	export JMX_PORT="9999"
+	```
+
+	然后，在`KAFKA_JMX_OPTS`中设置JMX的IP地址和其他参数：
+
+	```shell
+	export KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=$JMX_PORT -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT -Djava.rmi.server.hostname=<your_broker_ip>"
+	```
+
+	请注意，启用JMX可能会带来一定的安全风险，因此需要正确配置访问控制和加密设置。
+
+3）eFaK 2.1.0的JMX配置
+	对于eFaK 2.1.0版本的JMX配置，以下是具体的配置步骤和参数：
+
+	1. **配置eFaK的JMX属性**：
+	   在`system-config.properties`配置文件中，你需要设置与JMX相关的属性。以下是一些关键的JMX配置项：
+	   ```properties
+	   # kafka jmx acl and ssl authenticate
+	   cluster1.efak.jmx.acl=false
+	   cluster1.efak.jmx.user=keadmin
+	   cluster1.efak.jmx.password=keadmin123
+	   cluster1.efak.jmx.ssl=false
+	   cluster1.efak.jmx.truststore.location=/data/ssl/certificates/kafka.truststore
+	   cluster1.efak.jmx.truststore.password=ke123456
+	   # kafka jmx uri
+	   cluster1.efak.jmx.uri=service:jmx:rmi:///jndi/rmi://%s/jmxrmi
+	   ```
+	   这些配置项涉及到JMX的访问控制列表（ACL）、用户认证、SSL配置以及JMX的URI。
+
+	2. **开启Kafka的JMX端口**：
+	   你需要在Kafka的`bin/kafka-server-start.sh`脚本中设置JMX端口。例如：
+	   ```shell
+	   export JMX_PORT="9999"
+	   ```
+	   同时，设置JMX的IP地址和其他参数：
+	   ```shell
+	   export KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Djava.rmi.server.hostname=<your_broker_ip> -Dcom.sun.management.jmxremote.rmi.port=9998"
+	   ```
+	   这里的`<your_broker_ip>`需要替换为Kafka Broker的实际IP地址。
+
+	3. **重启Kafka服务**：
+	   修改配置后，需要重启Kafka服务以使配置生效：
+	   ```shell
+	   kafka-server-stop.sh
+	   kafka-server-start.sh
+	   ```
+
+	4. **测试JMX连接**：
+	   使用JMX客户端工具（如JConsole）测试连接，确保能够成功连接到Kafka的JMX端口。
+
+	以上步骤概述了eFaK 2.1.0中JMX的配置方法。确保在配置过程中替换为你的实际环境参数，如IP地址和端口号。如果遇到连接问题，检查防火墙设置和网络配置，确保JMX端口没有被阻止。
+
+4）efak.offset.storage是啥配置
+`efak.offset.storage` 是EFAK（Kafka Eagle）中的一个配置项，用于指定Kafka消费者位移（offset）的存储位置。在Kafka的不同版本中，消费者位移的存储方式有所变化：
+
+1. **在Kafka 0.9版本之前**，消费者位移信息是存储在Zookeeper中的。
+2. **从Kafka 0.9版本开始**，消费者位移信息默认存储在Kafka内部的一个特殊主题 `__consumer_offsets` 中。
+
+`efak.offset.storage` 配置项允许您指定EFAK应该从哪里读取位移信息。该配置项的值可以是 `kafka` 或 `zk`，具体含义如下：
+
+- `cluster1.efak.offset.storage=kafka`：表示位移信息存储在Kafka集群中。
+- `cluster1.efak.offset.storage=zk`：表示位移信息存储在Zookeeper中。
+
+如果您的Kafka版本较新（0.9及以上），并且消费者位移信息存储在Kafka的 `__consumer_offsets` 主题中，那么您应该将 `efak.offset.storage` 设置为 `kafka`。如果您的Kafka版本较老，且位移信息仍然存储在Zookeeper中，则应设置为 `zk`。
+
+正确设置这个配置项对于EFAK来说非常重要，因为它决定了EFAK如何获取和显示消费者的位移信息。如果设置不正确，可能会导致EFAK无法正确显示或管理消费者的位移数据。
+

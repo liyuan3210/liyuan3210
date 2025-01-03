@@ -1,0 +1,205 @@
+一。linux内核源码阅读方式有哪些
+	根据搜索结果，以下是一些高效的Linux内核源码阅读工具：
+
+	1. **Source Insight**：
+	   - Source Insight是一款功能强大的源码编辑器，支持代码跳转、自动补全和语法高亮等功能，可以大大提高阅读源码的效率。
+	   - 它提供了项目管理功能和代码分析能力，能够快速高效地浏览和阅读大量源代码。
+	   - Source Insight还拥有智能的代码提示和自动完成功能，适用于代码阅读和编写。
+
+	2. **VSCode + 插件**：
+	   - Visual Studio Code（VSCode）是一款轻量级但功能强大的源代码编辑器，支持多种语言，并提供了丰富的扩展库。
+	   - 通过安装C++ Intellsense或C/C++ GNU Global等插件，VSCode可以支持代码智能感知、代码导航等功能，非常适合阅读和编辑代码。
+
+	3. **Vim + cscope + ctags**：
+	   - Vim是一款高度可定制的文本编辑器，通过安装ctags和cscope插件，可以提供代码跳转功能，让开发者能够轻松定位到变量定义和函数调用的位置。
+	   - 这个组合在Linux下被广泛推荐，特别适合处理文本及代码编辑任务。
+
+	4. **GNU Global**：
+	   - GNU Global是一款工具，可以帮助开发者快速导航、搜索和分析代码。
+	   - 它支持C, C++, Yacc, Java, PHP4和汇编等语言的代码索引，提供了代码跳转、查找定义和引用等功能。
+
+	5. **Eclipse**：
+	   - Eclipse是一个广泛使用的开源IDE，支持Java、C/C++、Python等多种编程语言，提供了丰富的工具和插件。
+	   - 通过CDT（C/C++ Development Tooling）插件，Eclipse特别适用于阅读和分析C/C++代码。
+
+	6. **KDevelop**：
+	   - KDevelop是一个开源IDE，提供了代码阅读和开发的工具和插件。
+
+	这些工具各有特点，开发者可以根据自己的需求和偏好选择合适的工具来阅读和分析Linux内核源码。
+	
+	问题：
+	vscode C/C++ Intellisense插件???
+	C/C++ Intellisense插件可以跟代码么
+
+二。VSCode + 插件，Vim + cscope + ctags，GNU Global方式对比
+	1.VScode + GNU Global
+		VScode + GNU Global阅读linux内核源码安装配置步骤详细
+		
+		1.1）首先vscode远程登录linux安装Global插件
+			C/C++ GNU Global
+		
+		1.2）linux服务端安装global
+			sudo apt install global
+			which查看命令目录
+			root@932756d3f688:/opt/linux-6.6.66# which global
+			/usr/bin/global
+			root@932756d3f688:/opt/linux-6.6.66# which gtags
+			/usr/bin/gtags
+			
+		1.3）配置VSCode（settings.json文件）
+			"gnuGlobal.globalExecutable": "/usr/bin/global",
+			"gnuGlobal.gtagsExecutable": "/usr/bin/gtags"
+			
+		1.4）使用GNU Global生成Tag文件
+			vscode命令面板执行输入“Global: Rebuild Gtags Database”生成
+			shell命令直接在工程根目录运行 gtags
+			
+		1.5）生成完就可以实现代码跳转了
+		
+		见五
+		
+	
+	2.VScode(Remote Development) + clangd + bear
+		VScode + clangd + bear阅读linux内核源码安装配置步骤详细
+		https://www.bilibili.com/video/BV1184y117Uj
+		
+		2.1）宿主机安装Remote Development插件
+			搜索Remote Development
+			
+		2.2）宿主机配置好ssh免登录
+			Host linux-6.6.66
+			 Port 1025
+			 User root
+			 HostName 127.0.0.1
+			 PreferredAuthentications publickey
+			 IdentityFile C:\Users\系统用户\.ssh\id_rsa
+
+		2.2）使用vscode插件连上linux系统或容器时会自动安装vscode服务端插件
+			
+		2.3）vscode远程连上linux系统或容器后,安装vscode插件clangd到远程主机
+			再设置配置clangd路径(设置远程主机clangd的path路径)
+			* linux系统或容器输入whereis clangd,配置输出的路径即可
+		
+		2.4）如果需要函数跳转功能需要编译生成索引
+			安装工具
+			sudo apt-get install clangd		//支持函数跳转
+			sudo apt-get install bear		//生成索引
+			生成索引
+			bear -- make defconfig	//生成.cofnig配置
+			bear -- make -j 4 		//编译内核并生成linux内核索引文件
+			
+			
+	3.Vim + cscope + ctags
+		Vim + cscope + ctags阅读linux内核源码安装配置步骤详细
+
+
+四。明天
+	1.idea使用问题
+	2.java集合处理及新特性
+	3.查询SQL整理
+	4.vscode linux内核阅读
+	5.clang与llvm的关系区别
+	
+	1）常用工具整理
+	windows-env
+		常用的：
+			chrome,Firefox
+			typora
+			git
+			notepad
+			dev
+				java(idea,jdk,maven)
+				c(gcc)
+				js(ndoejs)
+				dbeaver
+				Another Redis Desktop Manager
+			vscode
+				c语言
+				js
+				常用的插件
+				...
+			Tabby 终端管理工具
+			Bruno 接口调用工具
+			podman
+			VirtualBox
+			qemu
+			obs,ffmpeg,VLC
+		平台独有：
+			notepad
+			7z
+		
+	2）.镜像整理
+	要删除的阿里镜像(删除前备份mycentos到plugin并修改hadoop及关联的dockerfile)
+		os->myubuntu
+		os->myopensuse
+		os->mycentos
+		es
+		nacos
+		sentinel
+	
+	3）.技术类随笔记录
+		要有一个随笔记录,内容整理......
+		
+	4）.vscode阅读linux内核代码，运行c语言。。。
+		微软c语言环境安装,在虚拟机安装......
+		......
+		
+	5）.c语言，gcc，make，shell脚本文档整理
+	
+	6）.nodejs前端脚本整理
+	
+	7）.x86汇编进入保护模式
+	
+	
+	
+五。VScode + GNU Global阅读linux内核源码安装配置详细
+	要在VSCode中使用GNU Global阅读Linux内核源码，你需要按照以下步骤进行安装和配置：
+
+	### 1. 安装VSCode和插件
+	- 首先，确保你已经安装了VSCode。
+	- 在VSCode中安装C/C++ GNU Global插件，这可以通过VSCode的扩展市场完成。
+
+	### 2. 安装GNU Global工具
+	- 在你的Linux系统中安装GNU Global工具。在Ubuntu系统中，你可以使用以下命令安装：
+	  ```bash
+	  sudo apt install global
+	  ```
+	- 安装完成后，使用`which`命令确认安装路径：
+	  ```bash
+	  which global
+	  which gtags
+	  ```
+	  这将显示global和gtags的安装路径。
+
+	### 3. 配置VSCode
+	- 打开VSCode的设置，可以通过点击左下角的齿轮图标，选择“设置”，或者使用快捷键 `Ctrl + ,`。
+	- 在设置中，找到“C/C++ GNU Global”插件的配置部分，或者直接编辑 `settings.json` 文件，添加以下配置：
+	  ```json
+	  {
+		  "gnuGlobal.globalExecutable": "/usr/bin/global",
+		  "gnuGlobal.gtagsExecutable": "/usr/bin/gtags",
+		  "gnuGlobal.encoding": "Big5"
+	  }
+	  ```
+	  确保将路径替换为你系统中global和gtags的实际路径。
+
+	### 4. 创建VSCode工作区
+	- 创建一个VSCode工作区，包含Linux内核源码的文件夹。这可以通过创建一个`.code-workspace`文件来完成，其中指定了包含源码的文件夹路径。
+
+	### 5. 过滤不需要的文件
+	- 在工作区的`settings.json`中配置文件过滤，以隐藏不需要的文件，例如`.o`文件、`.*`文件等。这可以通过设置`files.exclude`和`search.exclude`来实现。
+
+	### 6. 使用GNU Global生成Tag文件
+	- 在VSCode中，使用快捷键`F1`打开命令面板，输入“Global: Rebuild Gtags Database”，然后执行。这将生成GPATH、GRTAGS、GTAGS三个文件，这些文件是GNU Global的Tag文件，用于代码跳转和搜索。
+
+	### 7. 代码检索和跳转
+	- 一旦Tag文件生成完成，你就可以在VSCode中使用GNU Global的功能了，比如代码跳转和搜索。使用快捷键`CTRL+鼠标左键`（或者`F12`）可以实现函数定义的跳转查询，使用`ALT+左键头`可以返回。
+
+	以上步骤应该可以帮助你在VSCode中配置GNU Global来阅读Linux内核源码。如果遇到任何问题，可以查看插件的文档或搜索相关错误信息。
+
+六。vscode gcc开发环境搭建
+	??????
+	
+	安装C/C++ IntelliSense
+	
+	

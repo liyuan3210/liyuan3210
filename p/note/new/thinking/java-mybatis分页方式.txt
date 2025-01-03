@@ -1,0 +1,171 @@
+一。spring boot中mybatis分页方式有哪几种
+
+
+在Spring Boot中，使用MyBatis进行分页查询通常有以下几种方式：
+
+1. **MyBatis物理分页**：
+   - 通过在SQL查询中添加`LIMIT`和`OFFSET`子句来实现物理分页。这种方式简单直观，适用于数据量不大的场景。
+   ```xml
+   <select id="selectPage" resultType="YourType">
+       SELECT * FROM your_table
+       LIMIT #{offset}, #{pageSize}
+   </select>
+   ```
+   其中`#{offset}`和`#{pageSize}`是传入的参数，分别代表查询的起始位置和查询的条数。
+
+2. **RowBounds分页**：
+   - MyBatis的`RowBounds`对象可以实现简单的物理分页。在Mapper接口的方法中使用`RowBounds`参数来指定查询的起始行和行数。
+   ```java
+   List<YourType> selectPage(int offset, int pageSize);
+   ```
+   调用时传入`new RowBounds(offset, pageSize)`即可。
+
+3. **拦截器分页（MyBatis拦截器）**：
+   - 通过实现MyBatis的拦截器（Interceptor）机制，可以编写自定义拦截器自动为所有查询添加分页逻辑。
+
+4. **分页插件**：
+   - 使用现成的分页插件，如PageHelper。PageHelper是一个通用的MyBatis分页插件，可以自动对查询进行分页处理，无需在SQL中添加`LIMIT`子句。
+   ```java
+   // 在查询前调用
+   PageHelper.startPage(pageNum, pageSize);
+   List<YourType> list = yourMapper.selectByExample(new YourExample());
+   // 使用PageInfo包装查询结果，获取分页信息
+   PageInfo<YourType> pageInfo = new PageInfo<>(list);
+   ```
+   PageHelper还提供了其他方法，如`count`、`forEach`等，用于处理分页查询和结果。
+
+5. **自定义分页逻辑**：
+   - 在Mapper接口中自定义分页逻辑，通过编写SQL查询时动态拼接`LIMIT`和`OFFSET`子句，或者使用数据库特有的分页语法。
+
+6. **MyBatis Plus分页**：
+   - 如果使用MyBatis Plus框架，可以利用其提供的`IPage`和`Page`类进行分页查询，这种方式简化了分页逻辑，并且支持多种数据库。
+   ```java
+   IPage<YourType> page = new Page<>(pageNum, pageSize);
+   return yourMapper.selectPage(page, null);
+   ```
+   其中`selectPage`是MyBatis Plus提供的分页查询方法。
+
+每种分页方式都有其适用场景和优缺点。例如，物理分页在数据量较小时简单有效，但在数据量极大时可能会有性能问题；而分页插件则提供了更多的便利性和通用性，但可能需要额外的配置和依赖。在实际开发中，可以根据项目需求和数据库性能选择合适的分页方式。
+
+二。spring boot中PageHelper分页插件使用详细
+在Spring Boot中使用PageHelper分页插件，可以通过以下详细步骤进行配置和使用：
+
+### 1. 添加依赖
+
+在Spring Boot项目的`pom.xml`文件中添加PageHelper的依赖。有两种方式引入PageHelper：
+
+- **原生的PageHelper**：
+  ```xml
+  <dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>4.1.3</version>
+  </dependency>
+  ```
+  这种方式需要手动配置PageHelper的一些属性。
+
+- **PageHelper的Spring Boot Starter**：
+  ```xml
+  <dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.10</version>
+  </dependency>
+  ```
+  这种方式Spring Boot会自动配置PageHelper，也可以自定义配置。
+
+### 2. 配置PageHelper
+
+如果使用PageHelper的Spring Boot Starter，可以在`application.properties`或`application.yml`中配置PageHelper的属性：
+
+- **application.properties**：
+  ```
+  pagehelper.helper-dialect=mysql
+  pagehelper.reasonable=true
+  pagehelper.support-methods-arguments=true
+  pagehelper.params=count=countSql
+  ```
+
+- **application.yml**：
+  ```yaml
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+  ```
+
+### 3. 使用PageHelper进行分页查询
+
+在Service层或Controller层，使用PageHelper进行分页查询：
+
+```java
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
+
+@Service
+public class YourService {
+
+    @Autowired
+    private YourMapper yourMapper;
+
+    public PageInfo<YourEntity> findByPage(int pageNum, int pageSize) {
+        // 开始分页，传入页码和每页数量
+        PageHelper.startPage(pageNum, pageSize);
+        // 执行查询
+        List<YourEntity> list = yourMapper.selectByExample(new YourExample());
+        // 返回PageInfo对象，包含分页信息
+        return new PageInfo<>(list);
+    }
+}
+```
+
+### 4. 控制器层调用分页方法
+
+在Controller层，可以调用Service层的分页方法，并返回分页结果：
+
+```java
+@RestController
+@RequestMapping("/your-entity")
+public class YourController {
+
+    @Autowired
+    private YourService yourService;
+
+    @GetMapping("/page")
+    public PageInfo<YourEntity> getPage(
+            @RequestParam("pageNum") int pageNum,
+            @RequestParam("pageSize") int pageSize) {
+        return yourService.findByPage(pageNum, pageSize);
+    }
+}
+```
+
+### 5. 注意事项
+
+- `PageHelper.startPage(pageNum, pageSize)`必须放在列表查询方法之前，且中间不能有其他的查询语句。
+- `PageInfo`对象包含了分页的所有信息，如总条数、总页数、当前页码、每页数量等。
+
+通过以上步骤，你可以在Spring Boot项目中使用PageHelper插件实现MyBatis的分页功能。PageHelper插件通过拦截MyBatis的查询语句，自动添加分页参数，极大地简化了分页的处理过程。
+
+
+三。spring boot中PageHelper是怎么判断这个查询语句是需要分页的
+
+PageHelper 是一个基于 MyBatis 的分页插件，其判断查询语句是否需要分页的机制主要通过以下几个步骤实现：
+
+1. **拦截器机制**：
+   PageHelper 实现了 MyBatis 的 `Interceptor` 接口，通过拦截器机制对 SQL 语句进行拦截和处理。在执行查询之前，PageHelper 会自动将下一次查询作为分页查询处理。
+
+2. **分页参数存储**：
+   当调用 `PageHelper.startPage` 方法时，会创建一个 `Page` 对象，将分页参数（如当前页码 `pageNum` 和每页显示条数 `pageSize`）设置到这个 `Page` 对象中。这个 `Page` 对象会被存储到当前线程的 `ThreadLocal` 变量中，以确保分页参数的安全性和准确性。
+
+3. **SQL 语句拦截与修改**：
+   当 MyBatis 执行查询时，PageHelper 的拦截器会拦截到 SQL 查询语句。在拦截器中，PageHelper 会获取到 `ThreadLocal` 中保存的分页参数，并根据这些参数和数据库类型（通过方言 `Dialect` 来适配不同的数据库），自动修改原始的 SQL 语句，添加分页相关的 SQL 片段（如 LIMIT 语句）来实现分页功能。
+
+4. **执行分页查询**：
+   修改后的分页 SQL 语句会被执行，返回分页结果。分页结果会被封装到 `Page` 对象中，包括查询到的数据列表、总记录数等信息。
+
+5. **清理 ThreadLocal 变量**：
+   在查询结束后，PageHelper 通常会清理 `ThreadLocal` 中保存的分页参数，避免对其他查询造成干扰。
+
+总结来说，PageHelper 通过 MyBatis 的拦截器机制，在查询执行前设置分页参数，并在查询时根据这些参数修改 SQL 语句以实现分页。这个过程对开发者是透明的，只需要在查询前调用 `PageHelper.startPage` 方法即可。

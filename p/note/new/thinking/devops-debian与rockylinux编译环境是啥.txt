@@ -1,0 +1,104 @@
+一。debian系统的build-essential是啥
+
+在Debian系统中，`build-essential`是一个软件包，它提供了编译软件所需的基本工具和库。这个包通常用于安装编译C和C++程序所需的所有基本构建依赖项。如果你需要从源代码编译软件，这个包是非常有用的。
+
+`build-essential`包通常包括以下组件：
+
+1. **gcc** - GNU C编译器，用于编译C语言程序。
+2. **g++** - GNU C++编译器，用于编译C++语言程序。
+3. **make** - 一个构建自动化工具，用于编译和管理程序的编译过程。
+4. **binutils** - 一组二进制实用程序，包括链接器`ld`和库管理器`ar`。
+5. **libc6-dev** - GNU C库的开发版本，提供标准C库函数的头文件和库文件。
+6. **libgcc-*-dev** - GCC编译器的配套库，用于编译生成的程序。
+7. **dpkg-dev** - Debian包管理器的开发文件，包括构建Debian软件包所需的工具和库。
+
+要安装`build-essential`包，你可以使用以下命令：
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential
+```
+
+这将确保你的Debian系统拥有编译大多数软件包所需的所有基本工具。
+
+三。rockylinux中类似build-essential软件包是啥
+
+Rocky Linux 是一个基于 Red Hat Enterprise Linux (RHEL) 的开源发行版，因此它在软件包管理方面与 CentOS 相似，也使用 `dnf` 或 `yum` 作为包管理器。在 Rocky Linux 中，要安装类似于 Debian/Ubuntu 中 `build-essential` 的软件包，你需要安装一组基本的开发工具和库。
+
+以下是你需要安装的软件包：
+
+1. **Development Tools**：
+   - 这是一个软件包组，包含了基本的开发工具，如 `gcc`、`make`、`binutils` 等。
+
+2. **kernel-devel**：
+   - 内核开发包，提供内核头文件和库，对于编译需要内核接口的软件包是必需的。
+
+3. **glibc-devel**：
+   - GNU C库的开发版本，提供标准C库函数的头文件和库文件。
+
+4. **gcc-c++**：
+   - 如果你需要编译C++程序，还需要安装这个软件包。
+
+在 Rocky Linux 中，你可以使用以下命令来安装这些软件包：
+
+```bash
+sudo dnf groupinstall "Development Tools"
+sudo dnf install kernel-devel
+sudo dnf install glibc-devel
+sudo dnf install gcc-c++
+```
+
+这些命令将安装编译C和C++程序所需的基本工具和库。`dnf groupinstall "Development Tools"`命令会安装一组开发工具，包括编译器、链接器、汇编器等，而`kernel-devel`和`glibc-devel`提供了编译过程中可能需要的内核和C库头文件。安装`gcc-c++`确保你可以编译C++程序。这样，你就在 Rocky Linux 上配置好了类似于 `build-essential` 的环境。
+
+四。debian与rockylinux安装软件方式区别
+	1.debian的apt与apt-get区别
+		在Debian及其衍生的Linux发行版（如Ubuntu）中，`apt`和`apt-get`是用于管理软件包的命令行工具。它们都可以用来安装、更新、升级和卸载软件包。以下是它们之间的区别和联系：
+
+		1.1. **`apt-get`**：
+		   - `apt-get`是Debian及其衍生版中最传统的软件包管理工具。
+		   - 它提供了许多命令来执行不同的任务，如`install`、`remove`、`upgrade`、`autoremove`等。
+		   - `apt-get`命令通常需要两个步骤来执行操作，例如，使用`apt-get update`来更新软件包列表，然后使用`apt-get install`来安装软件包。
+
+		1.2. **`apt`**：
+		   - `apt`是一个较新的前端工具，它旨在取代`apt-get`和`apt-cache`。
+		   - `apt`提供了一个更简洁的命令行界面，并且可以执行`apt-get`和`apt-cache`的大多数操作。
+		   - `apt`命令可以合并`apt-get`的两个步骤，例如，使用`apt update`和`apt install`。
+		   - `apt`支持更多的命令行选项，并且提供了更好的错误处理和用户界面。
+
+		1.3. **兼容性和未来方向**：
+		   - `apt`被设计为向后兼容`apt-get`，所以大多数`apt-get`命令都可以用`apt`来执行。
+		   - 随着时间的推移，Debian和Ubuntu官方推荐使用`apt`而不是`apt-get`，因为`apt`提供了更现代化的接口和更多的功能。
+		   - 尽管如此，`apt-get`仍然被包含在系统中，以确保与旧脚本和工具的兼容性。
+
+		总结来说，`apt`是`apt-get`的现代替代品，提供了更简洁和强大的功能。在新的系统中，推荐使用`apt`来管理软件包，但在需要与旧系统或脚本兼容的情况下，`apt-get`仍然是一个可靠的选择。
+
+	2.rockylinux中的dnf与yum
+	
+		在Rocky Linux中，`dnf`和`yum`都是用于管理软件包的工具，但它们之间存在一些关键的区别：
+
+		2.1. **开发语言和性能**：
+		   - `yum`完全使用Python编写，而`dnf`使用C/C++和Python编写，这使得`dnf`在性能上比`yum`更快，内存使用更少。
+
+		2.2. **依赖解析**：
+		   - `yum`使用公开的API来解析依赖关系，而`dnf`使用`libsolv`库来解析依赖，这使得`dnf`在依赖解析上更高效。
+
+		2.3. **API和扩展**：
+		   - `yum`的API文档不完整，而`dnf`的API有完整的文档，这使得为`dnf`创建新功能更容易。
+		   - `dnf`支持各种扩展，而`yum`只支持基于Python的扩展。
+
+		2.4. **错误处理和用户体验**：
+		   - `dnf`具有更好的错误处理机制，提供更清晰、更丰富的错误信息，有助于调试和问题解决。
+
+		2.5. **软件包更新**：
+		   - `dnf`在更新过程中，如果包包含不相关的依赖，则不会更新，而`yum`可能会在没有验证的情况下更新软件包。
+
+		2.6. **仓库管理**：
+		   - 如果启用的仓库没有响应，`dnf`会跳过它，并继续使用可用的仓库处理事务，而`yum`如果有仓库不可用，会立即停止。
+
+		2.7. **命令等价性**：
+		   - 在`dnf`中，`dnf update`和`dnf upgrade`是等价的，而在`yum`中这两个命令是不同的。
+
+		2.8. **默认包管理器**：
+		   - `dnf`是Rocky Linux 8、Fedora和较新版本的RHEL的默认包管理器，而`yum`是RHEL 6/7、CentOS 6/7等旧版本的默认包管理器。
+
+		总结来说，`dnf`是`yum`的现代替代品，提供了更好的性能、更高效的依赖解析、更丰富的API和扩展支持，以及更先进的错误处理。尽管如此，`dnf`仍然保持与`yum`的兼容性，使得从`yum`到`dnf`的过渡变得平滑。

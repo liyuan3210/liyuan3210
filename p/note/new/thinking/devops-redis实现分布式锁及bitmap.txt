@@ -1,0 +1,419 @@
+一。redis实现分布式锁有哪些方式
+在Redis中实现分布式锁，主要有以下几种方式：
+
+1. **使用SETNX命令**：
+   - `SETNX`（SET if Not eXists）命令用于在键不存在时设置键值对，可以用于尝试获取锁。
+   - 示例：`SETNX lock_key unique_value`。
+   - 释放锁时需要检查值是否匹配，以确保只有锁的持有者可以释放锁。
+
+2. **使用SET命令（Redis 2.6.12及以上版本）**：
+   - `SET`命令结合`NX`（Not eXists）选项可以实现原子地设置键值对，同时使用`PX`（毫秒）或`EX`（秒）选项设置过期时间，防止锁永久占用。
+   - 示例：`SET lock_key unique_value NX PX 30000`。
+
+3. **使用RedLock算法**：
+   - RedLock是一种分布式锁的实现算法，它通过在多个独立的Redis节点上尝试获取锁来提高锁的可靠性。
+   - 如果大多数节点都能成功获取锁，则认为获取了全局锁。
+
+4. **使用Redisson客户端库**：
+   - Redisson是一个在Java环境下使用的Redis客户端，它提供了对Redisson对象的高级抽象，包括分布式锁。
+   - Redisson提供了多种锁的实现，如公平锁、可重入锁等，并且支持锁的自动续期功能。
+
+5. **使用Lua脚本**：
+   - 为了保证获取和释放锁的操作是原子性的，可以使用Lua脚本来实现。
+   - Lua脚本在Redis服务器端执行，可以保证操作的原子性，从而避免客户端和服务器之间的通信问题导致锁的不一致。
+
+6. **使用Redis事务**：
+   - 虽然Redis是单线程模型，但可以使用事务来确保一系列操作的原子性。
+   - 在事务中，可以组合`SETNX`、`EXPIRE`和其他命令来实现分布式锁。
+
+7. **使用WATCH/MULTI/EXEC命令**：
+   - `WATCH`命令可以监控一个或多个键，在事务执行前如果键被其他命令修改，则事务会失败。
+   - 结合`MULTI`和`EXEC`命令，可以在事务中安全地获取和释放锁。
+
+每种方式都有其适用场景和优缺点。例如，`SETNX`和`SET`命令简单易用，但需要额外的逻辑来处理锁的过期和释放；RedLock算法提供了更高的可靠性，但实现相对复杂；Redisson客户端则提供了更高级的抽象和更多的功能，但需要引入额外的依赖。在实际应用中，应根据具体需求选择合适的实现方式。
+
+
+二。分布式锁实现
+引入依赖：
+<!-- Jedis依赖 -->
+<dependency>
+	<groupId>redis.clients</groupId>
+	<artifactId>jedis</artifactId>
+	<version>最新版本</version>
+</dependency>
+spring boot中使用Jedis
+
+1.redis使用SETNX实现分布式锁
+	使用`SETNX`命令在Redis中实现分布式锁涉及几个关键步骤，以确保锁的正确获取和释放。以下是详细步骤和示例代码：
+
+	### 1. 获取锁
+
+	使用`SETNX`命令尝试设置一个键，如果该键不存在，则设置成功，表示获取了锁；如果键已存在，表示锁被其他进程持有。
+
+	```java
+	import redis.clients.jedis.Jedis;
+
+	public class RedisLock {
+		private Jedis jedis;
+		private String lockKey;
+		private String lockValue;
+
+		public RedisLock(Jedis jedis, String lockKey) {
+			this.jedis = jedis;
+			this.lockKey = lockKey;
+			this.lockValue = UUID.randomUUID().toString(); // 生成唯一标识符
+		}
+
+		public boolean acquireLock(int expireTime) {
+			// SETNX命令：如果key不存在，则设置key，并返回1；如果key已存在，则返回0
+			// expireTime是锁的过期时间，防止锁未释放时进程崩溃导致的死锁问题
+			return jedis.setnx(lockKey, lockValue) == 1 && jedis.expire(lockKey, expireTime) == 1;
+		}
+	}
+	```
+
+	### 2. 释放锁
+
+	释放锁时，需要确保只有锁的持有者才能释放锁。这通常通过检查键的值是否与设置时的值匹配来实现。
+
+	```java
+	public boolean releaseLock() {
+		String script =
+			"if redis.call('get', KEYS[1]) == ARGV[1] then " +
+			"return redis.call('del', KEYS[1]) else return 0 end";
+		Object result = jedis.eval(script, 1, lockKey, lockValue);
+		return "1".equals(result.toString());
+	}
+	```
+
+	### 3. 处理锁的过期
+
+	为了防止锁在持有者未释放的情况下永久占用，需要为锁设置一个过期时间。这可以通过`EXPIRE`命令实现，或者在`SETNX`之后立即使用`EXPIRE`命令。
+
+	```java
+	// 在acquireLock方法中添加
+	if (jedis.setnx(lockKey, lockValue) == 1) {
+		jedis.expire(lockKey, expireTime); // 设置过期时间
+		return true;
+	}
+	return false;
+	```
+
+	### 4. 确保操作的原子性
+
+	在释放锁的过程中，检查锁的值和删除锁的操作需要是原子性的。这可以通过Lua脚本来实现，确保这两个操作不会被其他Redis命令打断。
+
+	### 5. 异常处理
+
+	在实际应用中，还需要考虑异常处理，确保在获取锁后，即使发生异常也能正确释放锁。
+
+	```java
+	public void acquireLockWithTryCatch() {
+		try {
+			if (acquireLock(10)) { // 10秒后锁自动过期
+				// 执行业务逻辑
+			}
+		} finally {
+			// 确保在finally块中释放锁
+			releaseLock();
+		}
+	}
+	```
+
+	### 6. 锁的可重入性
+
+	如果需要支持锁的可重入性，可以记录每个线程持有锁的次数，并在释放锁时减少计数，只有当计数减到0时才真正释放锁。
+
+	以上步骤展示了使用`SETNX`命令在Redis中实现分布式锁的基本流程。在实际应用中，可能还需要根据具体需求进行调整和优化。
+
+2.redis使用SET实现分布式锁
+	使用`SET`命令在Redis中实现分布式锁的步骤相对简单，因为`SET`命令在Redis 2.6.12及以上版本中支持`NX`（Not eXists）和`PX`（毫秒为单位设置过期时间）选项，这使得`SET`命令能够原子地设置键值对并设置过期时间。以下是使用`SET`命令实现分布式锁的详细步骤：
+
+	### 1. 获取锁
+
+	使用`SET`命令尝试获取锁，如果键不存在，则设置键值对并返回`OK`，表示获取锁成功；如果键已存在，则返回`nil`，表示锁已被其他进程持有。
+
+	```java
+	import redis.clients.jedis.Jedis;
+
+	public class RedisLock {
+		private Jedis jedis;
+		private String lockKey;
+		private String lockValue;
+
+		public RedisLock(Jedis jedis, String lockKey) {
+			this.jedis = jedis;
+			this.lockKey = lockKey;
+			this.lockValue = UUID.randomUUID().toString(); // 生成唯一标识符
+		}
+
+		public boolean acquireLock(int expireTimeInMillis) {
+			// 使用SET命令的NX选项尝试获取锁，PX选项设置锁的过期时间（毫秒）
+			String result = jedis.set(lockKey, lockValue, "NX", "PX", expireTimeInMillis);
+			return "OK".equals(result);
+		}
+	}
+	```
+
+	### 2. 释放锁
+
+	释放锁时，需要确保只有锁的持有者才能释放锁。这通常通过检查键的值是否与设置时的值匹配来实现。
+
+	```java
+	public boolean releaseLock() {
+		// 使用Lua脚本来确保释放锁的操作是原子性的
+		String script =
+			"if redis.call('get', KEYS[1]) == ARGV[1] then " +
+			"return redis.call('del', KEYS[1]) else return 0 end";
+		Object result = jedis.eval(script, 1, lockKey, lockValue);
+		return "1".equals(result.toString());
+	}
+	```
+
+	### 3. 处理锁的过期
+
+	在获取锁时，使用`PX`选项为锁设置过期时间，这可以防止锁在持有者未释放的情况下永久占用。
+
+	### 4. 确保操作的原子性
+
+	在释放锁的过程中，检查锁的值和删除锁的操作需要是原子性的。这可以通过Lua脚本来实现，确保这两个操作不会被其他Redis命令打断。
+
+	### 5. 异常处理
+
+	在实际应用中，还需要考虑异常处理，确保在获取锁后，即使发生异常也能正确释放锁。
+
+	```java
+	public void acquireLockWithTryCatch() {
+		try {
+			if (acquireLock(10000)) { // 10秒后锁自动过期
+				// 执行业务逻辑
+			}
+		} finally {
+			// 确保在finally块中释放锁
+			releaseLock();
+		}
+	}
+	```
+
+	### 6. 锁的可重入性
+
+	如果需要支持锁的可重入性，可以记录每个线程持有锁的次数，并在释放锁时减少计数，只有当计数减到0时才真正释放锁。
+
+	以上步骤展示了使用`SET`命令在Redis中实现分布式锁的基本流程。在实际应用中，可能还需要根据具体需求进行调整和优化。使用`SET`命令实现分布式锁的好处是操作简单，且能够原子地设置键值对和过期时间，减少了需要组合多个命令的复杂性。
+
+3.redis使用Redisson实现分布式锁
+	Redisson是一个基于Java的Redis客户端库，它提供了多种分布式对象和服务，包括分布式锁。使用Redisson实现分布式锁非常简单，以下是详细步骤：
+
+	### 1. 添加Redisson依赖
+
+	在项目的`pom.xml`文件中添加Redisson的Maven依赖：
+
+	```xml
+	<dependencies>
+		<!-- Redisson依赖 -->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>最新版本</version>
+		</dependency>
+		<!-- 其他依赖 -->
+	</dependencies>
+	```
+
+	请替换`最新版本`为Redisson的实际最新版本号。
+
+	### 2. 配置Redisson
+
+	创建一个配置类，配置Redisson客户端：
+
+	```java
+	import org.redisson.Redisson;
+	import org.redisson.api.RedissonClient;
+	import org.redisson.config.Config;
+	import org.springframework.context.annotation.Bean;
+	import org.springframework.context.annotation.Configuration;
+
+	@Configuration
+	public class RedissonConfig {
+
+		@Bean(destroyMethod = "shutdown")
+		public RedissonClient redissonClient() {
+			Config config = new Config();
+			config.useSingleServer()
+					.setAddress("redis://127.0.0.1:6379") // Redis地址
+					.setPassword("password"); // Redis密码，如果没有则不设置
+			return Redisson.create(config);
+		}
+	}
+	```
+
+	### 3. 使用Redisson实现分布式锁
+
+	在你的服务类中使用Redisson的`RLock`对象来操作分布式锁：
+
+	```java
+	import org.redisson.api.RLock;
+	import org.redisson.api.RedissonClient;
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.stereotype.Service;
+
+	import java.util.concurrent.TimeUnit;
+
+	@Service
+	public class RedissonLockService {
+
+		private final RedissonClient redissonClient;
+
+		@Autowired
+		public RedissonLockService(RedissonClient redissonClient) {
+			this.redissonClient = redissonClient;
+		}
+
+		public void acquireLock(String lockKey) {
+			RLock lock = redissonClient.getLock(lockKey);
+			boolean isLocked = false;
+			try {
+				// 尝试获取锁，等待时间设置为10秒，锁的持有时间设置为10秒
+				isLocked = lock.tryLock(10, 10, TimeUnit.SECONDS);
+				if (isLocked) {
+					// 执行业务逻辑
+					System.out.println("获取分布式锁成功，执行业务逻辑");
+				}
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			} finally {
+				if (isLocked) {
+					lock.unlock();
+					System.out.println("释放分布式锁");
+				}
+			}
+		}
+	}
+	```
+
+	在这个例子中，我们使用`tryLock`方法尝试获取锁，这个方法会阻塞直到获取到锁或者等待超时。如果成功获取到锁，我们执行业务逻辑，并且在`finally`块中释放锁。
+
+	### 4. 调用分布式锁服务
+
+	在你的控制器或其他服务中调用`RedissonLockService`的方法来操作分布式锁：
+
+	```java
+	@RestController
+	@RequestMapping("/lock")
+	public class LockController {
+
+		private final RedissonLockService redissonLockService;
+
+		@Autowired
+		public LockController(RedissonLockService redissonLockService) {
+			this.redissonLockService = redissonLockService;
+		}
+
+		@GetMapping("/acquire")
+		public String acquireLock() {
+			redissonLockService.acquireLock("myLock");
+			return "分布式锁操作成功";
+		}
+	}
+	```
+
+	这样，你就可以在Spring Boot应用中使用Redisson来操作Redis分布式锁了。Redisson提供了多种锁的实现，包括公平锁、可重入锁等，你可以根据业务需求选择合适的锁类型。
+
+
+
+三。分布式锁验证方法
+1.拿不到锁进行阻塞
+2.拿不到锁直接就返回
+应用场景问题：
+2.编写三个线程美秒钟去获取锁，打印时间。每个线程执行10秒进行释放锁，观察同一个时间是否只有一个线程拿到锁
+3.接口调用幂等
+
+
+
+四。bitmap 使用
+
+Redis Bitmap 是一种特殊的数据结构，它使用字符串类型来存储二进制位数组，每个位可以独立地表示一个布尔值（0 或 1）。以下是Redis Bitmap的一些详细使用方法和应用场景：
+
+### 特点
+1. **紧凑存储**：Bitmap通过最小的单位bit来进行0|1的设置，表示某个元素的值或状态，时间复杂度为O(1)。由于bit是计算机中最小的单位，使用它进行存储将非常节省空间，特别适合一些数据量大且使用二值统计的场景。
+2. **独立位操作**：Redis提供了一系列针对位图的命令，允许对单个或多个位进行精确控制，包括设置、获取、清零、计算位数、做位逻辑运算等。
+
+### 常用命令
+1. **SETBIT**：设置位值，其中value只能是0和1。
+   ```bash
+   SETBIT key offset value
+   ```
+   例如，将偏移量为0的位置设为1：
+   ```bash
+   SETBIT myBitmap 0 1
+   ```
+   返回值是该位置之前的值。
+
+2. **GETBIT**：获取位值。
+   ```bash
+   GETBIT key offset
+   ```
+   例如，获取偏移量为0的位置的值：
+   ```bash
+   GETBIT myBitmap 0
+   ```
+   返回值为0或1。
+
+3. **BITCOUNT**：统计位值为1的个数。
+   ```bash
+   BITCOUNT key [start end]
+   ```
+   如果不指定[start end]，则统计整个字符串中被设置为1的比特位的数量。
+
+4. **BITOP**：对多个位数组进行位运算，如AND、OR、NOT、XOR。
+   ```bash
+   BITOP operation destkey key [key...]
+   ```
+   其中operation是位运算的操作类型，destkey是目标键，key是源键。
+
+5. **BITPOS**：返回位图中第一个值为bit的二进制位的位置。
+   ```bash
+   BITPOS key bit [start] [end]
+   ```
+   可以指定搜索的起始和结束位置。
+
+### 应用场景
+1. **用户行为分析**：例如，记录用户在一周内每天是否登录过系统，1代表登录，0代表未登录，可以方便地统计用户的活跃天数、连续登录天数等关键信息。
+2. **去重统计**：例如，记录用户是否订阅了某个专栏，使用Bitmap可以高效地进行去重统计。
+3. **点赞去重**：使用Bitmap记录用户对某个内容的点赞状态，防止同一个用户重复点赞。
+
+Bitmap由于其空间效率和快速查询的特点，在处理大量二值状态数据的场景中非常有用。通过灵活运用其提供的位操作命令，可以实现各种复杂的数据处理任务。
+
+### 操作部分
+可以使用位图（bitmap）来记录用户的登录状态。
+
+1.设置
+SETBIT key offset value
+SETBIT myBitmap 0 1	//将偏移量为0的位置设为1：
+
+2.取值
+GETBIT key offset
+GETBIT myBitmap 0	//获取偏移量为0的位置的值
+
+3.统计位值为1的个数
+BITCOUNT key [start end]
+BITCOUNT myBitmap
+如果不指定[start end]，则统计整个字符串中被设置为1的比特位的数量
+
+添加测试数据：
+SETBIT myBitmap 0 1
+SETBIT myBitmap 1 0
+SETBIT myBitmap 2 1
+SETBIT myBitmap 3 0
+SETBIT myBitmap 4 1
+
+取值： 
+GETBIT myBitmap 1	//返回0
+GETBIT myBitmap 4	//返回1
+
+统计：
+BITCOUNT myBitmap  //返回3
+
+
+五。WATCH MULTI EXEC 指令
+通过使用WATCH、MULTI和EXEC命令，我们可以在Redis中实现事务，保证一系列操作的原子性，确保操作的一致性

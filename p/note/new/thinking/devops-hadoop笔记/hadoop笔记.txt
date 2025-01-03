@@ -1,0 +1,202 @@
+6.README.md
+	1).hadoop生态介绍
+	2).理论介绍
+		2.1).hdfs
+		2.2).yarn
+		2.3).mapreduce
+	3).根据官网安装部署（hdfs,yarn）
+		3.1).单机安装
+		3.2).集群安装
+		3.3).HA部署
+	4).mapreduce案例编写
+		4.1).单词统计
+	5).动态增加节点(hdfs,yarn,elasticsearch)
+		当有一个节点出现故障，需要动态添加新节点时？
+		动态增加节点时哈希取模问题？
+------------------
+1.执行start-dfs.sh
+root@36af252b0612:/# start-dfs.sh
+Starting namenodes on [36af252b0612]
+36af252b0612: Warning: Permanently added '36af252b0612' (ED25519) to the list of known hosts.
+Starting datanodes
+: hostname contains invalid characters
+Starting secondary namenodes [36af252b0612]
+
+2.执行start-yarn.sh
+root@36af252b0612:/# start-yarn.sh
+Starting resourcemanager
+Starting nodemanagers
+: hostname contains invalid characters
+
+3.日志
+2024-12-02 00:51:03,000 ERROR org.apache.hadoop.yarn.server.resourcemanager.ResourceManager: Error starting ResourceManager
+java.lang.ExceptionInInitializerError
+        at com.google.inject.internal.cglib.reflect.$FastClassEmitter.<init>(FastClassEmitter.java:67)
+        at com.google.inject.internal.cglib.reflect.$FastClass$Generator.generateClass(FastClass.java:72)
+        at com.google.inject.internal.cglib.core.$DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+        at com.google.inject.internal.cglib.core.$AbstractClassGenerator.create(AbstractClassGenerator.java:216)
+        at com.google.inject.internal.cglib.reflect.$FastClass$Generator.create(FastClass.java:64)
+        at com.google.inject.internal.BytecodeGen.newFastClass(BytecodeGen.java:204)
+        at com.google.inject.internal.ProviderMethod$FastClassProviderMethod.<init>(ProviderMethod.java:256)
+        at com.google.inject.internal.ProviderMethod.create(ProviderMethod.java:71)
+        at com.google.inject.internal.ProviderMethodsModule.createProviderMethod(ProviderMethodsModule.java:275)
+        at com.google.inject.internal.ProviderMethodsModule.getProviderMethods(ProviderMethodsModule.java:144)
+        at com.google.inject.internal.ProviderMethodsModule.configure(ProviderMethodsModule.java:123)
+        at com.google.inject.spi.Elements$RecordingBinder.install(Elements.java:340)
+        at com.google.inject.spi.Elements$RecordingBinder.install(Elements.java:349)
+        at com.google.inject.AbstractModule.install(AbstractModule.java:122)
+        at com.google.inject.servlet.ServletModule.configure(ServletModule.java:52)
+        at com.google.inject.AbstractModule.configure(AbstractModule.java:62)
+        at com.google.inject.spi.Elements$RecordingBinder.install(Elements.java:340)
+        at com.google.inject.spi.Elements.getElements(Elements.java:110)
+        at com.google.inject.internal.InjectorShell$Builder.build(InjectorShell.java:138)
+        at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:104)
+        at com.google.inject.Guice.createInjector(Guice.java:96)
+        at com.google.inject.Guice.createInjector(Guice.java:73)
+        at com.google.inject.Guice.createInjector(Guice.java:62)
+        at org.apache.hadoop.yarn.webapp.WebApps$Builder.build(WebApps.java:417)
+        at org.apache.hadoop.yarn.webapp.WebApps$Builder.start(WebApps.java:465)
+        at org.apache.hadoop.yarn.server.resourcemanager.ResourceManager.startWepApp(ResourceManager.java:1389)
+        at org.apache.hadoop.yarn.server.resourcemanager.ResourceManager.serviceStart(ResourceManager.java:1498)
+        at org.apache.hadoop.service.AbstractService.start(AbstractService.java:194)
+        at org.apache.hadoop.yarn.server.resourcemanager.ResourceManager.main(ResourceManager.java:1700)
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module @3e07d849
+        at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+        at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+        at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:199)
+        at java.base/java.lang.reflect.Method.setAccessible(Method.java:193)
+        at com.google.inject.internal.cglib.core.$ReflectUtils$2.run(ReflectUtils.java:56)
+        at java.base/java.security.AccessController.doPrivileged(AccessController.java:318)
+        at com.google.inject.internal.cglib.core.$ReflectUtils.<clinit>(ReflectUtils.java:46)
+        ... 29 more
+2024-12-02 00:51:03,011 INFO org.apache.hadoop.yarn.server.resourcemanager.ResourceManager: Transitioning to standby state
+2024-12-02 00:51:03,011 INFO org.apache.hadoop.yarn.server.resourcemanager.ResourceManager: Transitioned to standby state
+2024-12-02 00:51:03,012 INFO org.apache.hadoop.yarn.server.resourcemanager.ResourceManager: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down ResourceManager at 36af252b0612/172.18.1.20
+************************************************************/
+
+
+----------------------------换过jdk后
+1.hdfs dfs -put hadoop /root
+root@d415f50515af:/opt/hadoop/bin# hdfs dfs -put hadoop /root
+2024-12-02 01:58:26,539 WARN hdfs.DataStreamer: DataStreamer Exception
+org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /root/hadoop._COPYING_ could only be written to 0 of the 1 minReplication nodes. There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
+        at org.apache.hadoop.hdfs.server.blockmanagement.BlockManager.chooseTarget4NewBlock(BlockManager.java:2350)
+        at org.apache.hadoop.hdfs.server.namenode.FSDirWriteFileOp.chooseTargetForNewBlock(FSDirWriteFileOp.java:294)
+        at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:2989)
+        at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:912)
+        at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:595)
+        at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:621)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:589)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:573)
+        at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1227)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1094)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1017)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1899)
+        at org.apache.hadoop.ipc.Server$Handler.run(Server.java:3048)
+
+        at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1567)
+        at org.apache.hadoop.ipc.Client.call(Client.java:1513)
+        at org.apache.hadoop.ipc.Client.call(Client.java:1410)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Invoker.invoke(ProtobufRpcEngine2.java:258)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Invoker.invoke(ProtobufRpcEngine2.java:139)
+        at com.sun.proxy.$Proxy12.addBlock(Unknown Source)
+        at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:531)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:433)
+        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeMethod(RetryInvocationHandler.java:166)
+        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invoke(RetryInvocationHandler.java:158)
+        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeOnce(RetryInvocationHandler.java:96)
+        at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:362)
+        at com.sun.proxy.$Proxy13.addBlock(Unknown Source)
+        at org.apache.hadoop.hdfs.DFSOutputStream.addBlock(DFSOutputStream.java:1088)
+        at org.apache.hadoop.hdfs.DataStreamer.locateFollowingBlock(DataStreamer.java:1915)
+        at org.apache.hadoop.hdfs.DataStreamer.nextBlockOutputStream(DataStreamer.java:1717)
+        at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:713)
+put: File /root/hadoop._COPYING_ could only be written to 0 of the 1 minReplication nodes. There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
+
+
+2.hadoop-root-namenode-d415f50515af.log
+2024-12-02 01:56:48,076 INFO org.apache.hadoop.ipc.Server: IPC Server handler 9 on default port 9820, call Call#4 Retry#0 org.apache.hadoop.hdfs.protocol.ClientProtocol.addBlock from d415f50515af:45624 / 172.18.1.20:45624
+java.io.IOException: File /hadoop-root-namenode-d415f50515af.log._COPYING_ could only be written to 0 of the 1 minReplication nodes. There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
+        at org.apache.hadoop.hdfs.server.blockmanagement.BlockManager.chooseTarget4NewBlock(BlockManager.java:2350)
+        at org.apache.hadoop.hdfs.server.namenode.FSDirWriteFileOp.chooseTargetForNewBlock(FSDirWriteFileOp.java:294)
+        at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:2989)
+        at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:912)
+        at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:595)
+        at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:621)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:589)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:573)
+        at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1227)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1094)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1017)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1899)
+        at org.apache.hadoop.ipc.Server$Handler.run(Server.java:3048)
+2024-12-02 01:57:24,751 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: Number of transactions: 7 Total time for transactions(ms): 17 Number of transactions batched in Syncs: 0 Number of syncs: 7 SyncTimes(ms): 864 
+2024-12-02 01:58:26,109 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: Number of transactions: 8 Total time for transactions(ms): 17 Number of transactions batched in Syncs: 0 Number of syncs: 8 SyncTimes(ms): 1202 
+2024-12-02 01:58:26,521 INFO org.apache.hadoop.ipc.Server: IPC Server handler 5 on default port 9820, call Call#4 Retry#0 org.apache.hadoop.hdfs.protocol.ClientProtocol.addBlock from d415f50515af:37192 / 172.18.1.20:37192
+java.io.IOException: File /root/hadoop._COPYING_ could only be written to 0 of the 1 minReplication nodes. There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
+        at org.apache.hadoop.hdfs.server.blockmanagement.BlockManager.chooseTarget4NewBlock(BlockManager.java:2350)
+        at org.apache.hadoop.hdfs.server.namenode.FSDirWriteFileOp.chooseTargetForNewBlock(FSDirWriteFileOp.java:294)
+        at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:2989)
+        at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:912)
+        at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:595)
+        at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:621)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:589)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine2$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine2.java:573)
+        at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1227)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1094)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1017)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1899)
+        at org.apache.hadoop.ipc.Server$Handler.run(Server.java:3048)
+
+
+
+3.启动datanode(需要手动启动)
+上面问题是因为datanode没启动起来
+hdfs --daemon start datanode
+
+openjdk arm64下载如下，还有oracle的
+https://www.microsoft.com/openjdk
+
+
+4.idea java配置
+Compiler:
+	shared build process VM options:	-Djps.track.ap.dependencies=false
+	
+-Djps.track.ap.dependencies=false 是一个与 IntelliJ IDEA 构建系统相关的配置参数，特别是在处理基于 IntelliJ 平台项目系统（JPS）的 Java 项目时。JPS 是一个增量构建系统，通过追踪源代码中的更改以仅重新编译必要的部分来加快编译速度。jps.track.ap.dependencies 这个选项是指对注解处理器（APs）生成的依赖项进行跟踪
+。
+
+默认情况下，JPS 会追踪注解处理器引入的依赖关系，以便在因注解处理器产生的更改而需要触发重建时能准确把握时机。当你设置 -Djps.track.ap.dependencies=false 时，IntelliJ IDEA 将不再追踪注解处理器产生的依赖关系
+。这可能导致增量构建不够精确——意味着每次更改时 IDE 可能由于没有完全了解注解处理器创建的依赖关系图而编译比实际需要更多的类
+。
+
+在某些特定场景下，比如存在依赖跟踪问题，或者由于项目结构或注解处理器的使用方式导致此项功能显著拖慢构建过程而不带来足够益处时，这个设置可能会有用
+。然而，通常来说，保持此功能开启能够确保更高效的增量构建流程
+。
+
+5.启动yarn的错
+root@8c669092b189:/# start-yarn.sh
+Starting resourcemanager
+resourcemanager is running as process 825.  Stop it first and ensure /tmp/hadoop-root-resourcemanager.pid file is empty before retry.
+Starting nodemanagers
+: hostname contains invalid characters
+: hostname contains invalid characters
+: hostname contains invalid characters
+: hostname contains invalid characters
+root@8c669092b189:/#   
+
+scp workers hdfs-site.xml root@172.18.1.21:/opt/hadoop/etc/hadoop 

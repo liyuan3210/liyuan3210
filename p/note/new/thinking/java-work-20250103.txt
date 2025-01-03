@@ -1,0 +1,405 @@
+一。caffeine缓存
+	1。caffeine缓存整合spring boot
+		1.添加依赖
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+	2.yam配置
+	maximumSize：缓存最大数,expireAfterAccess：生效时间
+	spring:
+	  cache:
+		type: caffeine
+	#    cache-names: myCache1, myCache2
+		caffeine:
+		  spec: maximumSize=100,expireAfterAccess=600s
+
+
+	3.配置
+	3.1）代码配置
+	@Configuration
+	public class CaffeineConfig {
+		@Bean
+		public CacheManager cacheManager() {
+			CaffeineCacheManager cacheManager = new CaffeineCacheManager();
+			cacheManager.setCaffeine(caffeineCacheBuilder());
+			return cacheManager;
+		}
+
+		Caffeine<Object, Object> caffeineCacheBuilder() {
+			return Caffeine.newBuilder()
+					.initialCapacity(100)
+					.maximumSize(500)
+					.expireAfterAccess(10, TimeUnit.MINUTES)
+					.weakKeys()
+					.recordStats();
+		}
+	}
+	3.2）配置文件配置
+	spring:
+	  cache:
+		type: caffeine
+	#    cache-names: myCache1, myCache2
+		caffeine:
+		  spec: maximumSize=100,expireAfterAccess=6s
+		
+	4.开启注解
+	@SpringBootApplication
+	@EnableCaching
+	public class MyApplication {
+		public static void main(String[] args) {
+			SpringApplication.run(MyApplication.class, args);
+		}
+	}
+
+	5.使用缓存
+	@Service
+	public class CacheService {
+		@Cacheable(value = "myCache1", key = "#key")
+		public String getDataFromCache(String key) {
+			// 如果缓存中存在数据，则直接返回
+			// 如果缓存中不存在数据，则执行相应的业务逻辑，并将结果放入缓存
+			return fetchDataFromDatabase(key);
+		}
+		private String fetchDataFromDatabase(String key) {
+			// 执行获取数据的业务逻辑
+			System.out.println("---走数据库获取");
+			return "Data for key: " + key;
+		}
+	}
+
+	6.使用
+	@ResponseBody
+	@RequestMapping(value = "/getCache", method = RequestMethod.GET)
+	public String test(String key) {
+		//完整接口
+		//http://127.0.0.1:8081/test/getCache?key=k1
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println("-------into controller key:"+key);
+		return cacheService.getDataFromCache(key);
+	}
+
+	7.caffeine整合spring boot使用
+		@ResponseBody
+		@RequestMapping(value = "/cacheClear", method = RequestMethod.GET)
+		public String cacheClear(String key) {
+			//完整接口
+			//http://127.0.0.1:8081/test/cacheClear?key=k1
+			System.out.println("-------into controller clear key:"+key);
+			System.out.println("-------print before key "+key+" value:"+cacheManager.getCache("myCache1").get(key));
+			System.out.println("-------clearing...");
+			cacheManager.getCache("myCache1").clear();
+			System.out.println("-------print after key "+key+" value:"+cacheManager.getCache("myCache1").get(key));
+			return "SUCCESS";
+		}
+
+
+	使用中的问题：
+	1）.常用注解使用
+	@Cacheable：表示该方法支持缓存。当调用被注解的方法时，如果对应的键已经存在缓存，则不再执行方法体，而从缓存中直接返回。当方法返回null时，将不进行缓存操作。
+	@CachePut：表示执行该方法后，其值将作为最新结果更新到缓存中，每次都会执行该方法。
+	@CacheEvict：表示执行该方法后，将触发缓存清除操作。
+	@Caching：用于组合前三个注解，例如：
+
+	@Caching(cacheable = @Cacheable("CacheConstants.GET_USER"),
+			 evict = {@CacheEvict("CacheConstants.GET_DYNAMIC",allEntries = true)}
+	public User find(Integer id) {
+		return null;
+	}
+
+	注解属性说明:
+	cacheNames/value：缓存组件的名字，即cacheManager中缓存的名称。
+	key：缓存数据时使用的key。默认使用方法参数值，也可以使用SpEL表达式进行编写。
+	keyGenerator：和key二选一使用。
+	cacheManager：指定使用的缓存管理器。
+	condition：在方法执行开始前检查，在符合condition的情况下，进行缓存
+	unless：在方法执行完成后检查，在符合unless的情况下，不进行缓存
+	sync：是否使用同步模式。若使用同步模式，在多个线程同时对一个key进行load时，其他线程将被阻塞。
+
+
+	2）.配置项cache-names作用
+	spring.cache.cache-names=cache1,cache2
+	cache-names的作用
+	组织缓存：通过为不同的缓存逻辑分配不同的名称，你可以更清晰地组织和管理缓存数据。
+	独立配置：每个缓存区域可以有自己的配置，例如不同的过期策略、大小限制等。
+	灵活使用：在代码中，你可以通过指定这些缓存名称来使用特定的缓存区域。
+
+	在代码中使用@Cacheable、@CachePut和@CacheEvict等注解时，
+	可以通过value属性指定对应的缓存名称，如下所示：
+	@Cacheable(value = "cache1", key = "#id")
+	public Data getData(Long id) {
+		// 数据获取逻辑
+	}
+
+2。caffeine缓存与redis整合分布式缓存
+	(1)	添加依赖
+	<dependency>
+	   <groupId>org.springframework.boot</groupId>
+	   <artifactId>spring-boot-starter-data-redis</artifactId>
+	</dependency>
+
+	(2)	配置redis连接（yml文件）
+	spring:
+	  data:
+		redis:
+		  host: 127.0.0.1
+		  port: 6379
+		  password: 123456
+	Spring boot 3.x后redis配置yml文件里面多了一层data
+
+	(3)	创建redis配置类
+
+	@Configuration
+	public class RedisConfig {
+
+		@Bean
+		public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
+			RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+			redisTemplate.setConnectionFactory(connectionFactory);
+			redisTemplate.setKeySerializer(new StringRedisSerializer());
+			redisTemplate.setValueSerializer(new StringRedisSerializer());
+			return redisTemplate;
+		}
+
+		@Bean
+		public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory,
+		 RedisMessageListener redisMessageListener) {
+			RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+			container.setConnectionFactory(connectionFactory);
+			container.addMessageListener(redisMessageListener, new PatternTopic("your_channel"));
+			return container;
+		}
+
+	}
+
+	(4)	创建消息监听器
+
+	@Component
+	public class RedisMessageListener implements MessageListener {
+		@Override
+		public void onMessage(Message message, byte[] pattern) {
+			String messageBody = new String(message.getBody());
+			System.out.println("Redis Received message: " + messageBody);
+			// 处理消息
+		}
+	}
+
+	(5)	绑定订阅关系（上面代码中）
+	container.addMessageListener(redisMessageListener, new PatternTopic("your_channel"));
+	定义的监听处理类：redisMessageListener
+	指定消息通道：new PatternTopic("your_channel")
+
+	(6)	发布消息
+	redisTemplate.convertAndSend("your_channel", msg);
+	执行上面消息发送后，消息就会在监听节点RedisMessageListener.onMessage进行消费
+
+
+
+二。阿里云存储
+	1.	阿里云oss介绍
+		阿里云（合规保留策略）
+
+	2.	什么是oss保留策略
+		保留策略是根据实际应用场景，用户自己制定的一套保留策略，这个需要了解文件的完整的生命周期。文件的生命周期与文件的使用频次，文件的打开时间及存储费用息息相关。
+
+		生命周期：
+			* 普通存储（刚上传，频繁访问）->
+			* 低频访问（平均每月访问1~2次，访问数据会产生费用）
+			* 归档存储（访问时需要约1分钟解冻，会产生取回容量费，最低60天）
+			* 冷归档存储（会产生取回费用及取回请求费用，最低180天）
+			* 深度冷归档存储（会产生取回费用及取回请求费用）
+			* 删除
+
+		文档位置：
+		(1)	在阿里云官网，进入阿里云“对象存储OSS”产品，然后查看OSS“产品文档”
+		(2)	查看官网文档详细 操作指南->数据安全->保留策略
+
+		使用场景：
+		1）某医疗机构的医疗档案，上传至OSS后半年内需要偶尔访问，半年后基本不再访问。可以通过设置生命周期规则，将已上传180天的医疗档案转为归档存储。
+
+		2）某公司服务热线的录音文件，上传至OSS后2个月内，需要作为数据统计及核查的依据，2个月后偶尔访问，半年后基本不再访问，2年后数据不再需要存储。可以通过设置生命周期规则，设置录音文件上传60天后转为低频访问存储，180天后转为归档存储，730天后删除。
+
+		3）某Bucket内有大量文件需要全部删除，但是手动删除每次仅可以删除最多1000个文件，比较麻烦。此时可以配置一条匹配整个Bucket的生命周期规则，设置一天后删除所有文件。此Bucket内的数据会在第二天被全部删除。
+
+	3.	创建保留策略条件及方式
+		前提条件：
+			* 前提条件“地域支持”
+			* Bucket未开启版本控制
+		设置生命周期方式：
+			3.1）使用OSS控制台
+			3.2）使用阿里云SDK
+			3.3）使用命令行工具ossutil
+			3.4)使用REST API
+	
+	4.保留规则设置
+			为了实现阿里云OSS存储中根据文件更新时间保留文件1天并自动删除的功能，您可以利用OSS提供的生命周期管理功能。通过设置生命周期规则，可以自动管理和清理过期的对象。以下是如何使用阿里云OSS控制台或SDK来设置这一规则的步骤。
+
+		### 使用OSS控制台设置生命周期规则
+
+		1. 登录到阿里云OSS管理控制台。
+		2. 在Bucket列表中，选择您希望设置生命周期规则的Bucket，然后点击进入Bucket详情页面。
+		3. 在左侧导航栏中，找到“生命周期”选项，并点击进入。
+		4. 点击“新建生命周期规则”按钮。
+		5. 在弹出的新建规则页面中：
+		   - 输入规则名称。
+		   - 选择适用范围，可以选择针对所有对象或特定前缀的对象。
+		   - 设置过期规则，选择“过期删除”，并设置对象过期时间为1天。
+		6. 确认无误后，点击“确定”保存规则。
+
+		### 使用Java SDK设置生命周期规则
+
+		如果您更倾向于使用编程方式设置生命周期规则，可以使用阿里云OSS Java SDK。下面是具体的示例代码：
+
+		```java
+		import com.aliyun.oss.OSS;
+		import com.aliyun.oss.OSSClientBuilder;
+		import com.aliyun.oss.model.LifecycleRule;
+		import com.aliyun.oss.model.SetBucketLifecycleRequest;
+
+		public class LifecycleExample {
+			public static void main(String[] args) {
+				String endpoint = "<Your-Endpoint>";
+				String accessKeyId = "<Your-AccessKeyId>";
+				String accessKeySecret = "<Your-AccessKeySecret>";
+				String bucketName = "<Your-Bucket-Name>";
+
+				// 创建OSSClient实例。
+				OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+				// 设置生命周期规则。
+				LifecycleRule rule = new LifecycleRule("rule1", "", 
+					LifecycleRule.LifecycleExpiration.newDays(1)); // 设置对象过期时间为1天
+
+				SetBucketLifecycleRequest request = new SetBucketLifecycleRequest(bucketName);
+				request.addRule(rule);
+
+				// 应用生命周期规则到指定的Bucket。
+				ossClient.setBucketLifecycle(request);
+
+				// 关闭OSSClient。
+				ossClient.shutdown();
+
+				System.out.println("Lifecycle rule has been set successfully.");
+			}
+		}
+		```
+
+		### 解释
+
+		- **LifecycleRule** 对象用于定义生命周期规则，包括规则名称、适用的对象前缀以及过期时间。
+		- **SetBucketLifecycleRequest** 对象用于封装设置生命周期规则的请求，通过调用 `addRule` 方法添加规则。
+		- **setBucketLifecycle** 方法用于将设置好的生命周期规则应用到指定的Bucket中。
+
+		### 注意事项
+
+		- **权限要求**：确保您有权限对目标Bucket进行生命周期规则的设置。
+		- **规则生效时间**：生命周期规则设置后不是立即生效，而是从下一个UTC日期的0点开始计算。
+		- **对象版本控制**：如果您的Bucket启用了版本控制，则需要考虑版本控制对象的生命周期管理。
+
+		通过上述任一方法设置生命周期规则后，OSS会自动根据规则删除符合条件的对象，从而帮助您有效地管理存储空间。
+
+
+
+		程序向阿里云OSS bucket里面存数据时，bucket的目录需要预先创建么?
+		 
+		 
+		 已阅读 42 个网页
+		查看网页详情
+		在阿里云OSS中，桶（Bucket）的目录不需要预先创建。OSS使用扁平结构存储数据，所有数据都以对象（Object）的形式保存在存储空间（Bucket）中。所谓的“目录”实际上是通过对象的键（Key）来模拟的。当您上传文件（Object）到OSS时，可以通过指定文件的前缀来模拟创建目录。例如，如果您上传的文件路径为exampledir/demo.txt，则OSS会自动根据这个前缀创建exampledir目录。这意味着，您只需要在上传文件时指定包含目录结构的键（Key），OSS就会根据这个键来组织对象，就像在传统文件系统中创建目录一样。
+
+
+三。开发中遇到的问题
+		1.问题已知如下：
+				1.1）有设备，品牌两类数据，它们是多对多关系，设备又对应多个优惠卷
+				1.2）有一个表存储设备，品牌 之间的关系
+				1.3）有一个接口可以根据设备id集合，查出每个设备对应的最大优惠卷
+			需求：
+				现在要在品牌列表根据每一个品牌是否有优惠卷做一个标识并显示优惠卷金额
+				
+			怎么快速处理并得到想要的结果
+			关键点：
+			减少数据库查询，放在内存中计算
+			1.java中List<Object>转Map<String,Object>类型
+			2.java中根据某字段分组找到最大的
+
+		2.表查询
+			s_brand	品牌表
+				id
+				name
+			e_equipment 设备表
+				brand_id
+				first_classify_id
+				second_classify_id
+				third_classify_id
+			e_equipment_classify 设备类型表
+				id
+				pid
+				name
+				
+			1	品牌1
+			2	品牌2
+			3	品牌3
+
+			正确答案(显示结果)
+			1	品牌1	一级类别1-二级类别1-三级类别1,一级类别1-二级类别2
+			3	品牌2	一级类别2-二级类别1
+			
+			SQL语句如下：
+				SELECT a.id,a.name,ee.classifyNameFull
+				from s_brand a
+				left join (
+
+					select GROUP_CONCAT(DISTINCT b.classifyNameFull SEPARATOR ",") classifyNameFull,b.brand_id from (
+						select 
+						eee.brand_id,CONCAT_WS("-",eee.classifyName1,eee.classifyName2,eee.classifyName3) classifyNameFull
+						from (	
+								select e.brand_id brand_id,
+								c1.name classifyName1,
+								c2.name classifyName2, 
+								c3.name classifyName3, 
+								c1.id first_classify_ids,
+								c2.id second_classify_ids, 
+								c3.id third_classify_ids
+								from e_equipment e
+								left join e_equipment_classify c1 on(e.first_classify_id=c1.id)
+								left join e_equipment_classify c2 on(e.second_classify_id=c2.id)
+								left join e_equipment_classify c3 on(e.third_classify_id =c3.id)
+								group by e.brand_id ,e.first_classify_id ,e.second_classify_id ,e.third_classify_id 
+							) eee 
+					) b	group by b.brand_id	
+					
+				) ee on(a.id=ee.brand_id)
+				
+	3.idea配置问题：
+		1.JVM配置
+			Add VM options
+				-Xmx128m -Xms128m
+		2.idea启动配置覆盖
+			Override configuration properties项目
+		3.Compiler配置
+			Compiler:
+				shared build process VM options: -Djps.track.ap.dependencies=false
+				
+				
+	4.idea配置问题
+		idea启动报问题（要使用open打开一个工作空间后，再使用git clone直接获取项目才行）：
+	java: java.lang.IllegalStateException: Failed to write metadata 
+	Output directory is not specified
+
+	-----下面的应该是做过啥配置后出现的
+	java: Annotation processing is not supported for module cycles. Please ensure that all modules from cycle
+	。。。。
+	are excluded from annoti

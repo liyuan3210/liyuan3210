@@ -1,0 +1,73 @@
+
+七。java中的jni是啥
+	JNI（Java Native Interface）是Java的一个特性，它允许Java代码和其他语言写的代码（通常是C或C++）进行交互。JNI提供了一种机制，使得Java程序能够调用本地方法（即非Java语言编写的方法），这些方法可以在Java虚拟机（JVM）之外执行。
+
+	以下是JNI的一些关键点：
+
+	1. **本地方法调用**：
+	   JNI使得Java代码能够调用用C或C++编写的方法。这些方法被称为本地方法，它们可以访问Java对象和变量，并且可以执行那些在Java中难以实现或者效率不高的操作。
+
+	2. **数据类型映射**：
+	   JNI定义了Java数据类型和C/C++数据类型之间的映射关系，确保数据在两种语言间传递时能够正确转换。
+
+	3. **内存管理**：
+	   JNI提供了一套API，用于在本地代码中分配和释放Java堆上的对象，以及管理本地内存。
+
+	4. **异常处理**：
+	   JNI定义了异常处理机制，允许本地方法抛出Java异常，并且能够捕获和处理Java代码中的异常。
+
+	5. **线程管理**：
+	   JNI允许本地代码创建新的线程，或者操作Java线程的状态。
+
+	6. **接口和实现**：
+	   JNI提供了一组接口，用于访问Java类、对象、方法和字段。本地代码通过这些接口与Java代码交互。
+
+	7. **性能**：
+	   JNI常用于性能敏感的场景，比如图形处理、加密算法、数据库操作等，这些操作在Java中实现可能效率较低。
+
+	8. **库和框架**：
+	   许多Java库和框架都使用JNI来提供对本地库的访问，比如JDBC驱动程序、图像处理库等。
+
+	一个简单的JNI示例包括以下几个步骤：
+
+	- **定义Java类和本地方法**：
+	  在Java类中声明本地方法，使用`native`关键字标记。
+
+	  ```java
+	  public class HelloWorld {
+		  public native void sayHello();
+	  }
+	  ```
+
+	- **生成头文件**：
+	  使用`javac`编译Java类，并使用`javah`生成C/C++头文件。
+
+	- **实现本地方法**：
+	  在C/C++文件中实现本地方法，并使用JNI函数操作Java对象。
+
+	  ```c
+	  #include <jni.h>
+	  #include "HelloWorld.h"
+
+	  JNIEXPORT void JNICALL Java_HelloWorld_sayHello(JNIEnv *env, jobject thisObj) {
+		  jclass cls = (*env)->GetObjectClass(env, thisObj);
+		  jmethodID mid = (*env)->GetStaticMethodID(env, cls, "println", "(Ljava/lang/String;)V");
+		  jstring str = (*env)->NewStringUTF(env, "Hello, World!");
+		  (*env)->CallStaticVoidMethod(env, cls, mid, str);
+	  }
+	  ```
+
+	- **编译本地代码**：
+	  使用C/C++编译器编译本地代码，并生成动态链接库（如`.dll`或`.so`文件）。
+
+	- **加载本地库**：
+	  在Java代码中加载并使用本地库。
+
+	  ```java
+	  static {
+		  System.loadLibrary("helloworld");
+	  }
+	  ```
+
+	JNI是Java与本地代码交互的强大工具，它使得Java程序能够利用C/C++的高性能和丰富的库资源。然而，使用JNI也会增加程序的复杂性，并需要处理Java和本地内存之间的转换和同步问题。
+

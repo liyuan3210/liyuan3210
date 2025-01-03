@@ -1,0 +1,281 @@
+一。java中的jms是啥
+	JMS（Java Message Service）是一个Java平台中关于创建、发送、接收和读取消息的API和服务框架。它为应用程序通信提供了一个消息传递的接口，允许系统组件基于消息进行交互，而不是直接进行调用。这种异步的消息传递机制使得应用程序能够更加灵活、可靠和可扩展。
+
+	以下是JMS的几个核心概念和特点：
+
+	1. **消息传递模型**：
+	   - **点对点（Point-to-Point）**：消息被发送到一个队列（Queue）中，由一个消费者接收。每个消息只能被一个消费者接收。
+	   - **发布/订阅（Publish/Subscribe）**：消息被发送到一个主题（Topic），可以被多个订阅者接收。每个订阅者可以独立接收主题上的消息。
+
+	2. **消息类型**：
+	   JMS定义了几种不同的消息类型，以适应不同的数据传输需求：
+	   - `TextMessage`：包含一个字符串对象。
+	   - `BytesMessage`：包含一个字节流。
+	   - `MapMessage`：包含一个键值对映射。
+	   - `StreamMessage`：包含一个Java对象流。
+	   - `ObjectMessage`：包含一个序列化的Java对象。
+
+	3. **消息属性**：
+	   JMS消息可以包含属性，如消息ID、相关ID、回复到、类型、优先级、时间戳等。
+
+	4. **异步通信**：
+	   JMS允许应用程序异步发送和接收消息，这有助于提高应用程序的响应性和吞吐量。
+
+	5. **可靠性和持久性**：
+	   JMS提供了消息持久性保证，确保消息不会在传递过程中丢失。
+
+	6. **事务性消息传递**：
+	   JMS支持事务性消息传递，确保消息处理的原子性。
+
+	7. **消息选择和过滤**：
+	   JMS允许消费者基于特定的选择条件来选择性地接收消息。
+
+	8. **连接和会话**：
+	   JMS使用连接（Connection）和会话（Session）的概念来管理消息的发送和接收。
+
+	9. **消息驱动的bean**（MDB）：
+	   在EJB（Enterprise JavaBeans）中，消息驱动bean是一种特殊的bean，它通过监听队列或主题上的消息来响应事件。
+
+	JMS广泛应用于企业级应用中，如消息队列、事件通知、任务分发、日志记录、工作流管理等场景。通过使用JMS，开发者可以构建出松耦合、高可用和易于维护的分布式系统。
+
+二。java中简单的jms示例
+	下面提供一个简单的Java JMS示例，使用ActiveMQ作为消息代理。这个示例将展示如何发送和接收消息。
+
+	### 环境准备
+
+	1. **安装ActiveMQ**：
+	   - 你可以下载ActiveMQ并运行，或者使用Docker快速启动一个ActiveMQ实例：
+		 ```bash
+		 docker run -d --name activemq -p 61616:61616 -p 8161:8161 rmohr/activemq
+		 ```
+
+	2. **添加ActiveMQ客户端依赖**：
+	   - 如果你使用Maven，添加以下依赖到你的`pom.xml`文件中：
+		 ```xml
+		 <dependency>
+			 <groupId>org.apache.activemq</groupId>
+			 <artifactId>activemq-client</artifactId>
+			 <version>5.16.3</version>
+		 </dependency>
+		 ```
+
+	### 发送消息
+
+	```java
+	import javax.jms.Connection;
+	import javax.jms.ConnectionFactory;
+	import javax.jms.Destination;
+	import javax.jms.JMSException;
+	import javax.jms.MessageProducer;
+	import javax.jms.Session;
+	import javax.jms.TextMessage;
+	import org.apache.activemq.ActiveMQConnectionFactory;
+
+	public class JmsProducer {
+		public static void main(String[] args) {
+			// ActiveMQ服务器的URL
+			String brokerURL = "tcp://localhost:61616";
+			// 队列名称
+			String destinationName = "QUEUE_TEST";
+
+			ConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
+			Connection connection = null;
+			Session session = null;
+			MessageProducer producer = null;
+
+			try {
+				connection = factory.createConnection();
+				connection.start();
+
+				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				Destination destination = session.createQueue(destinationName);
+				producer = session.createProducer(destination);
+
+				TextMessage message = session.createTextMessage("Hello, JMS via ActiveMQ!");
+				producer.send(message);
+				System.out.println("Sent: " + message.getText());
+			} catch (JMSException e) {
+				e.printStackTrace();
+			} finally {
+				// 清理资源
+				try {
+					if (producer != null) {
+						producer.close();
+					}
+					if (session != null) {
+						session.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (JMSException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	```
+
+	### 接收消息
+
+	```java
+	import javax.jms.Connection;
+	import javax.jms.ConnectionFactory;
+	import javax.jms.Destination;
+	import javax.jms.JMSException;
+	import javax.jms.Message;
+	import javax.jms.MessageConsumer;
+	import javax.jms.Session;
+	import javax.jms.TextMessage;
+	import org.apache.activemq.ActiveMQConnectionFactory;
+
+	public class JmsConsumer {
+		public static void main(String[] args) {
+			// ActiveMQ服务器的URL
+			String brokerURL = "tcp://localhost:61616";
+			// 队列名称
+			String destinationName = "QUEUE_TEST";
+
+			ConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
+			Connection connection = null;
+			Session session = null;
+			MessageConsumer consumer = null;
+
+			try {
+				connection = factory.createConnection();
+				connection.start();
+
+				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				Destination destination = session.createQueue(destinationName);
+				consumer = session.createConsumer(destination);
+
+				System.out.println("Waiting for messages...");
+				Message message = consumer.receive();
+				if (message instanceof TextMessage) {
+					TextMessage textMessage = (TextMessage) message;
+					System.out.println("Received: " + textMessage.getText());
+				}
+			} catch (JMSException e) {
+				e.printStackTrace();
+			} finally {
+				// 清理资源
+				try {
+					if (consumer != null) {
+						consumer.close();
+					}
+					if (session != null) {
+						session.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (JMSException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	```
+
+	### 注意事项
+
+	- 确保ActiveMQ服务器正在运行，并且队列名称与代码中的名称匹配。
+	- 根据你的ActiveMQ服务器配置，可能需要修改连接URL。
+	- 这个示例使用了阻塞调用`consumer.receive()`来接收消息。在实际应用中，你可能需要使用异步监听器来处理消息。
+
+	这个简单的示例展示了如何在Java中使用JMS API通过网络发送和接收消息。在实际应用中，你可能需要根据具体需求进行更复杂的配置和错误处理。
+
+三。java中的jms与activemq关系
+
+	Java中的JMS（Java Message Service）是一个消息服务的API和服务框架，而ActiveMQ是一个实现了JMS规范的消息代理（message broker）或消息服务器。它们之间的关系可以这样理解：
+
+	1. **规范与实现**：
+	   - JMS定义了消息服务的规范和API，它是一个抽象层，提供了一套标准的操作和接口来访问消息服务。
+	   - ActiveMQ是一个具体的实现，它遵循JMS规范，提供了JMS API的具体实现，允许开发者在应用程序中使用消息服务。
+
+	2. **功能提供**：
+	   - JMS提供了点对点和发布/订阅两种消息模型，以及一系列的API来创建、发送、接收和管理消息。
+	   - ActiveMQ提供了这些功能的实际运行环境，包括消息的存储、传递和路由。
+
+	3. **网络通信**：
+	   - JMS API中包含了网络通信的概念，允许应用程序通过网络发送和接收消息。
+	   - ActiveMQ作为一个网络服务，监听特定的端口（如61616），接受来自客户端的连接，并在网络上传递消息。
+
+	4. **跨平台支持**：
+	   - JMS是Java平台的一部分，提供了跨平台的消息服务访问。
+	   - ActiveMQ支持多种平台和语言，不仅限于Java，还可以与其他语言和系统集成。
+
+	5. **配置和管理**：
+	   - JMS规范中包含了一些配置和管理的基本概念，如连接工厂（ConnectionFactory）和目的地（Destination）。
+	   - ActiveMQ提供了管理界面和工具，允许管理员配置消息队列、主题、用户权限等，并监控系统性能。
+
+	6. **持久性和可靠性**：
+	   - JMS定义了消息的持久性级别，确保消息在各种情况下的可靠性。
+	   - ActiveMQ实现了这些持久性保证，并提供了额外的高可用性特性，如集群和镜像队列。
+
+	7. **安全性**：
+	   - JMS支持安全性概念，如认证和授权。
+	   - ActiveMQ提供了安全机制，包括SSL/TLS加密、用户认证和访问控制列表（ACLs）。
+
+	简而言之，JMS为Java应用程序提供了一个标准化的方式来处理消息传递，而ActiveMQ是一个流行的JMS实现，提供了一个实际的消息传递系统。开发者可以使用JMS API编写代码，而不必担心底层消息传递的具体细节，这些细节由ActiveMQ这样的实现来处理。
+
+
+四。java中的jms与rocketmq的区别
+
+	Java中的JMS（Java Message Service）与RocketMQ是两个不同的概念，它们在消息传递领域有着各自的特点和用途。以下是它们之间的主要区别：
+
+	1. **消息传递模型**：
+	   - **JMS**：支持两种主要的消息传递模型，点对点（P2P）模型和发布/订阅模型。在点对点模型中，消息生产者将消息发送到一个特定的队列，每个消息只有一个消费者能够接收和处理。在发布/订阅模型中，消息可以被多个订阅者接收。
+	   - **RocketMQ**：主要实现了发布/订阅模型，一个Producer可以发布消息到Topic，多个Consumer可以订阅同一个Topic来接收消息。这种模型支持消息的广播，即一条消息可以被多个订阅者接收。
+
+	2. **消息持久化**：
+	   - **JMS**：支持持久化和非持久化两种模式。持久化消息在Broker重启后依然存在，非持久化消息则不会存储到磁盘，仅存储在内存中。
+	   - **RocketMQ**：支持消息的持久化，消息可以写入磁盘，确保在Broker重启或故障时，消息不会丢失。持久化策略可以通过配置选项进行调整。
+
+	3. **消息过滤**：
+	   - **JMS**：支持消息选择和过滤，允许消费者基于特定的选择条件来选择性地接收消息。
+	   - **RocketMQ**：支持通过Tag对消息进行过滤，Consumer可以订阅特定Tag的消息，提高了消息传递的灵活性和效率。
+
+	4. **使用场景**：
+	   - **JMS**：适用于任务队列和负载均衡的场景，如一个任务只能由一个消费者处理，避免重复处理。
+	   - **RocketMQ**：适用于需要将消息广播给多个订阅者的场景，如新闻推送、事件通知等，以及需要多个消费者协同处理同一类消息的场景。
+
+	5. **协议和标准**：
+	   - **JMS**：是Java平台中关于创建、发送、接收和读取消息的API和服务框架，是一个规范。
+	   - **RocketMQ**：是一个遵循JMS规范的具体实现，但它也支持其他协议和特性，使其更加灵活和适用于特定的场景。
+
+	6. **社区和生态系统**：
+	   - **JMS**：作为一个规范，其社区和生态系统广泛，有许多不同的实现和中间件产品。
+	   - **RocketMQ**：由阿里巴巴开发，社区和生态系统相对较小，但在中国市场和特定的应用场景中非常流行。
+
+	了解这些区别有助于在不同业务场景中选择合适的消息中间件和消息传递模型，提升系统的可靠性和效率。
+
+五。java中间件mq协议类型
+	Java中间件MQ（消息队列）支持多种协议类型，以下是一些常见的协议：
+
+	1. **JMS（Java Message Service）协议**：
+	   - JMS是一种Java平台中的消息服务API，它支持点对点和发布/订阅两种消息模型。JMS定义了五种类型的消息格式：TextMessage、ObjectMessage、BytesMessage、StreamMessage和MapMessage。
+
+	2. **AMQP（Advanced Message Queuing Protocol）协议**：
+	   - AMQP是一种提供高度可靠的异步消息传输协议，RabbitMQ是一个完全遵循AMQP协议的开源消息队列中间件。
+
+	3. **MQTT（Message Queuing Telemetry Transport）协议**：
+	   - MQTT是一种轻量级的、基于代理的消息协议，常用于物联网（IoT）场景。RocketMQ支持MQTT协议，用于统一接入IoT设备和服务端的消息。
+
+	4. **Remoting协议**：
+	   - RocketMQ早期使用的默认通信协议，主要用于组件间通信。Remoting协议SDK主要支持Java语言。
+
+	5. **gRPC协议**：
+	   - gRPC是一个高性能、开源和通用的RPC（远程过程调用）框架，由Google主导。RocketMQ从5.0版本开始支持gRPC协议，旨在提供更轻量、标准、易扩展的客户端服务端通信协议。
+
+	6. **XMPP（Extensible Messaging and Presence Protocol）协议**：
+	   - XMPP是一种基于XML的协议，多用于即时消息（IM）以及在线状态探测。它适用于服务器之间的准即时操作。
+
+	7. **自定义TCP/IP协议**：
+	   - 一些特殊框架（如Redis、Kafka、ZeroMQ等）根据自身需要未严格遵循MQ规范，而是基于TCP/IP自行封装了一套协议，通过网络socket接口进行传输，实现了MQ的功能。
+
+	这些协议各有特点，适用于不同的场景和需求。例如，JMS和AMQP更适用于企业级应用，而MQTT则更适合于物联网设备的消息传递。开发者可以根据具体的业务场景和技术栈选择合适的MQ协议。
+
+
+六。每一种消息协议的区别及特点
+	。。。
